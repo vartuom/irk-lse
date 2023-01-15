@@ -1,0 +1,20 @@
+.main {
+    width: 100%;
+    background-color: var(--bg-color-space-around);
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 1280px;
+    border-radius: 12px;
+    position: relative;
+    margin-top: -112px;
+    background-color: var(--bg-color-primary);
+    padding: 44px;
+    box-sizing: border-box;
+}
+
+.historyPageOverride {
+    background-color: var(--bg-color-secondary);
+}

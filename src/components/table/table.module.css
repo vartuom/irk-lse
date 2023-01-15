@@ -1,0 +1,20 @@
+.wrapper {
+    background-color: var(--bg-color-primary);
+    font: 18px/1.5 var(--font-golos-regular);
+    color: var(--bg-color-secondary);
+}
+
+.title {
+    font: 18px/1.5 var(--font-golos-bold);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    text-align: center;
+}
+
+.leadColumn {
+    text-align: left;
+}

@@ -1,0 +1,27 @@
+.navList {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    padding: 0;
+}
+
+.link {
+    font: 22px/1.5 var(--font-golos-regular);
+    transition: var(--opacity-transition);
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.link:hover {
+    opacity: 0.5;
+}
+
+.link_active {
+    font-family: var(--font-golos-bold);
+    border-bottom: 2px white solid;
+    opacity: 1;
+}
+
+.link_active:hover {
+    opacity: 1;
+}
