@@ -119,6 +119,7 @@ function MainPage() {
         </div>
         <div className={styles.buttonWrapper}>
           <button
+            type="button"
             className={`${styles.button} ${styles.button_accent}`}
             onClick={() =>
               navigate('prices', { state: { background: location } })
@@ -126,7 +127,9 @@ function MainPage() {
           >
             Открыть прейскурант
           </button>
-          <button className={styles.button}>Узнать подробнее</button>
+          <button type="button" className={styles.button}>
+            Узнать подробнее
+          </button>
         </div>
         <div className={styles.rubbleLogo} />
       </section>

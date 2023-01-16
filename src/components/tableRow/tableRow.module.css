@@ -8,6 +8,9 @@
 .row {
     padding: 8px 0;
     overflow: hidden;
+    border: none;
+    background: none;
+    text-align: left;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }

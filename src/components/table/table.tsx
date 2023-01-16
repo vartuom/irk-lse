@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './table.module.css';
-import { pricePerHour, researchServicesData } from '../../constants/prices';
+import { researchServicesData } from '../../constants/prices';
 import TableRow from '../tableRow/tableRow';
 
 function Table() {

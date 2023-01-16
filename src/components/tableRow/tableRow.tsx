@@ -12,7 +12,11 @@ function TableRow({ title, hours, tip }: ITableRowProps) {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <article className={`${styles.row}`} onClick={() => setIsActive(!isActive)}>
+    <button
+      type="button"
+      className={`${styles.row}`}
+      onClick={() => setIsActive(!isActive)}
+    >
       <ul className={styles.rowList}>
         <li className={`${styles.rowList__item} ${styles.leadColumn}`}>
           <div
@@ -37,7 +41,7 @@ function TableRow({ title, hours, tip }: ITableRowProps) {
       <p className={`${styles.row__tip} ${isActive && styles.row__tip_active}`}>
         {tip}
       </p>
-    </article>
+    </button>
   );
 }
 

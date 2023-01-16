@@ -1,11 +1,11 @@
 export const pricePerHour = 950;
 
-type dataRow = {
+type TDataRow = {
   title: string;
   hours: [number, number, number];
   tip: string;
 };
-export const researchServicesData: dataRow[] = [
+export const researchServicesData: TDataRow[] = [
   {
     title: '1.1 Исследование почерка и подписей',
     hours: [24, 54, 95],

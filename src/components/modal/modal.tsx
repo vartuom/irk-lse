@@ -8,13 +8,12 @@ const modalRoot = document.getElementById('modals') as HTMLElement;
 
 interface IPropsModal {
   children: ReactNode;
-  title?: string;
   onClose: () => void;
   isModalOpened: boolean;
 }
 
 const Modal = (props: IPropsModal) => {
-  const { children, title, onClose, isModalOpened } = props;
+  const { children, onClose, isModalOpened } = props;
   useEffect(() => {
     function closeByEscape(evt: KeyboardEvent) {
       if (evt.key === 'Escape') onClose();
@@ -25,6 +24,7 @@ const Modal = (props: IPropsModal) => {
         document.removeEventListener('keydown', closeByEscape);
       };
     }
+    return undefined;
   }, [isModalOpened, onClose]);
 
   return ReactDOM.createPortal(

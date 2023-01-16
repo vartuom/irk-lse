@@ -173,6 +173,7 @@ function ContactsPage() {
       </section>
       <div className={s.map}>
         <iframe
+          title="map"
           src="https://yandex.ru/map-widget/v1/?um=constructor%3A0b1d8c3739e7378af8b47231fe2edcd9e11e611c1b216f94e96893cefc6bbd91&amp;source=constructor"
           width="100%"
           height="540"
