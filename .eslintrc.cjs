@@ -25,5 +25,6 @@ module.exports = {
         "prettier"
     ],
     "rules": {
+        "react/require-default-props": 0
     }
 }

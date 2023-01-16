@@ -1,16 +1,12 @@
-import React, {ReactNode} from 'react';
-import styles from './scrollBox.module.css'
+import React, { ReactNode } from 'react';
+import styles from './scrollBox.module.css';
 
 interface IPropsScrollBox {
-    children: ReactNode
+  children: ReactNode;
 }
 
-const ScrollBox = (props: IPropsScrollBox) => {
-    return (
-        <div className={styles.scrollBox}>
-            {props.children}
-        </div>
-    );
-};
+function ScrollBox({ children }: IPropsScrollBox) {
+  return <div className={styles.scrollBox}>{children}</div>;
+}
 
 export default ScrollBox;
