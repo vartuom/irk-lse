@@ -1,3 +1,7 @@
 .spanAccent {
-    color: var(--text-color-accent)
+    color: var(--text-color-accent);
+}
+
+.spanBold {
+    font-family: var(--font-golos-bold);
 }

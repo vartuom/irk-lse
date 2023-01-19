@@ -47,11 +47,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: #CECECE 1px solid;
+    border-top: #cecece 1px solid;
     min-height: 48px;
 }
 .contacts__number:last-child {
-    border-bottom: #CECECE 1px solid;
+    border-bottom: #cecece 1px solid;
 }
 
 .map {

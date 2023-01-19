@@ -2,16 +2,16 @@ import React from 'react';
 import modalOverlayStyles from './modalOverlay.module.css';
 
 function ModalOverlay({
-  handleCloseAction,
+    handleCloseAction,
 }: {
-  handleCloseAction: () => void;
+    handleCloseAction: () => void;
 }) {
-  return (
-    <div
-      aria-hidden="true"
-      className={modalOverlayStyles.overlay}
-      onClick={handleCloseAction}
-    />
-  );
+    return (
+        <div
+            aria-hidden="true"
+            className={modalOverlayStyles.overlay}
+            onClick={handleCloseAction}
+        />
+    );
 }
 export default ModalOverlay;

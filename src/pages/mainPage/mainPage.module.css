@@ -46,7 +46,7 @@
     transition: var(--opacity-transition);
 }
 
-button:hover{
+button:hover {
     opacity: var(--hover-opacity);
 }
 
@@ -113,7 +113,6 @@ button:hover{
     padding-bottom: 12px;
     margin: 0;
 }
-
 
 .sidorovImg {
     background-image: url(../../images/СидоровМИ-preview.png);

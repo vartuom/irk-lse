@@ -1,10 +1,10 @@
 :root {
-    --bg-color-secondary: #010B23;
-    --bg-color-primary: #FFFFFF;
-    --bg-color-space-around: #EBF1F9;
-    --text-color-secondary: #FFFFFF;
+    --bg-color-secondary: #010b23;
+    --bg-color-primary: #ffffff;
+    --bg-color-space-around: #ebf1f9;
+    --text-color-secondary: #ffffff;
     --text-color-primary: #000000;
-    --text-color-accent: #0061D9;
+    --text-color-accent: #0061d9;
     --font-golos-regular: 'GolosTextWebRegular', Arial, sans-serif;
     --font-golos-bold: 'GolosTextWebBold', Arial, sans-serif;
     --hover-opacity: 0.8;

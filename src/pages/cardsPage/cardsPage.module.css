@@ -29,12 +29,43 @@
 }
 
 .swiper__slide {
-    max-width: 200px;
+    width: 560px;
+    padding: 16px;
+    box-sizing: border-box;
 }
 
 .swiper__card {
-    height: 300px;
-    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 400px;
+    border-radius: 12px;
+    padding: 36px;
+    box-sizing: border-box;
     box-shadow: 0px 6px 16px #5a7abe;
-    background-color: gray;
 }
+
+.card__title {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    min-height: 92px;
+}
+
+.card__heading {
+    margin: 0;
+    font: 30px/1.5 var(--font-golos-regular);
+}
+
+.card__paragraph {
+    font: 18px/1.5 var(--font-golos-regular);
+    margin: 0;
+}
+
+.card__accordionContent {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
