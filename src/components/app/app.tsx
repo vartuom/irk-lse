@@ -20,7 +20,7 @@ function App() {
                     <Route path="/" element={<MainPage />} />
                     <Route path="/history" element={<HistoryPage />} />
                     <Route path="/contacts" element={<ContactsPage />} />
-                    <Route path="/cards" element={<CardsPage />} />
+                    <Route path="/cards/*" element={<CardsPage />} />
                 </Routes>
                 {background && (
                     <Routes>
