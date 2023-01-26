@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styles from './mainPage.module.css';
 import AppAccordion from '../../components/appAccordion/appAccordion';
 
@@ -24,9 +24,9 @@ function MainPage() {
                         К этому событию мы подготовили материал о развитии
                         судебной экспертизы в России и об экспертах-основателях
                         Иркутской лаборатории.{' '}
-                        <span className="spanAccent">
+                        <Link className="link" to="history">
                             Узнать (ок. 5 минут на чтение) &#8594;
-                        </span>
+                        </Link>
                     </p>
                 </div>
                 <div

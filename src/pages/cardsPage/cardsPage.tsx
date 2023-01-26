@@ -3,10 +3,9 @@ import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { Route, Routes } from 'react-router-dom';
 import s from './cardsPage.module.css';
 import BasicsSlider from '../../components/cardSliders/basicsSlider';
-import {Route, Routes} from "react-router-dom";
-import HistoryPage from "../historyPage/historyPage";
 
 function CardsPage() {
     return (

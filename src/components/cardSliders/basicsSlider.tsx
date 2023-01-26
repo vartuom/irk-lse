@@ -5,6 +5,7 @@ import LooksOneRoundedIcon from '@mui/icons-material/LooksOneRounded';
 import LooksTwoRoundedIcon from '@mui/icons-material/LooksTwoRounded';
 import Looks3RoundedIcon from '@mui/icons-material/Looks3Rounded';
 import Looks4RoundedIcon from '@mui/icons-material/Looks4Rounded';
+import Looks5RoundedIcon from '@mui/icons-material/Looks5Rounded';
 import AppAccordion from '../appAccordion/appAccordion';
 import s from './cardSlider.module.css';
 
@@ -133,7 +134,7 @@ function BasicsSlider() {
                 <div className={s.swiper__card}>
                     <div className={s.card__title}>
                         <Looks4RoundedIcon
-                            sx={{ fontSize: '80px', color: '#BA1BEF' }}
+                            sx={{ fontSize: '80px', color: '#9e4046' }}
                         />
                         <h3 className={s.card__heading}>
                             Как поставить вопрос эксперту?
@@ -145,7 +146,7 @@ function BasicsSlider() {
                         проводится максимально быстро и эффективно.
                     </div>
                     <div className={s.card__paragraph}>
-                        Мы настоятельно рекомендуем перед назначением экспертизы
+                        Мы настоятельно рекомендуем Вам перед назначением экспертизы
                         получить консультацию от экспертов лаборатории через
                         <span className="spanAccent">
                             {' '}
@@ -171,8 +172,8 @@ function BasicsSlider() {
             <SwiperSlide className={s.swiper__slide}>
                 <div className={s.swiper__card}>
                     <div className={s.card__title}>
-                        <Looks4RoundedIcon
-                            sx={{ fontSize: '80px', color: '#BA1BEF' }}
+                        <Looks5RoundedIcon
+                            sx={{ fontSize: '80px', color: '#409E60' }}
                         />
                         <h3 className={s.card__heading}>
                             Вопросы оплаты исследований
@@ -208,7 +209,7 @@ function BasicsSlider() {
                 <div className={s.swiper__card}>
                     <div className={s.card__title}>
                         <Looks3RoundedIcon
-                            sx={{ fontSize: '80px', color: '#44DF39' }}
+                            sx={{ fontSize: '80px', color: '#404f9e' }}
                         />
                         <h3 className={s.card__heading}>
                             Дополнительные и повторные экспертизы
