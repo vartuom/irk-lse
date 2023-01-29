@@ -1,7 +1,7 @@
-import React from 'react';
-import BusinessIcon from '@mui/icons-material/Business';
-import s from './contactsPage.module.css';
-import AppAccordion from '../../components/appAccordion/appAccordion';
+import React from "react";
+import BusinessIcon from "@mui/icons-material/Business";
+import s from "./contactsPage.module.css";
+import AppAccordion from "../../components/appAccordion/appAccordion";
 
 function ContactsPage() {
     return (
@@ -21,7 +21,7 @@ function ContactsPage() {
                                 664081, г. Иркутск, ул. Красноказачья, 131
                             </p>
                             <p className={s.contacts__paragraph}>
-                                Электронная почта:{' '}
+                                Электронная почта:{" "}
                                 <span className="spanAccent">
                                     sudexpert@irk.ru
                                 </span>
@@ -61,7 +61,7 @@ function ContactsPage() {
                             Прием обращений возможен в электронной форме с
                             использованием
                             <span className="spanAccent">
-                                {' '}
+                                {" "}
                                 страницы обращений граждан
                             </span>
                             , либо на адрес электронной почты.

@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import styles from './scrollBox.module.css';
+import React, { ReactNode } from "react";
+import styles from "./scrollBox.module.css";
 
 interface IPropsScrollBox {
     children: ReactNode;

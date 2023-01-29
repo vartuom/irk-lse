@@ -1,10 +1,10 @@
-import React, { ReactNode, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React, { ReactNode, useEffect } from "react";
+import ReactDOM from "react-dom";
 
-import ModalOverlay from '../modalOverlay/modalOverlay';
-import modalStyles from './modal.module.css';
+import ModalOverlay from "../modalOverlay/modalOverlay";
+import modalStyles from "./modal.module.css";
 
-const modalRoot = document.getElementById('modals') as HTMLElement;
+const modalRoot = document.getElementById("modals") as HTMLElement;
 
 interface IPropsModal {
     children: ReactNode;
@@ -16,12 +16,12 @@ const Modal = (props: IPropsModal) => {
     const { children, onClose, isModalOpened } = props;
     useEffect(() => {
         function closeByEscape(evt: KeyboardEvent) {
-            if (evt.key === 'Escape') onClose();
+            if (evt.key === "Escape") onClose();
         }
         if (isModalOpened) {
-            document.addEventListener('keydown', closeByEscape);
+            document.addEventListener("keydown", closeByEscape);
             return () => {
-                document.removeEventListener('keydown', closeByEscape);
+                document.removeEventListener("keydown", closeByEscape);
             };
         }
         return undefined;

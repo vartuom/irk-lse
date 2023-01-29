@@ -1,8 +1,8 @@
-import React, { ReactNode, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import Header from '../header/header';
-import styles from './layout.module.css';
-import Content from '../content/content';
+import React, { ReactNode, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import Header from "../header/header";
+import styles from "./layout.module.css";
+import Content from "../content/content";
 import Footer from "../footer/footer";
 
 interface ILayoutProps {

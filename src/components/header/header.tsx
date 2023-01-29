@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from './header.module.css';
-import logo from '../../images/lse-logo.svg';
-import Navigation from '../navigation/navigation';
+import React from "react";
+import styles from "./header.module.css";
+import logo from "../../images/lse-logo.svg";
+import Navigation from "../navigation/navigation";
 
 function Header() {
     return (

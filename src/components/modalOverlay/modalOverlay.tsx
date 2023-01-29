@@ -1,5 +1,5 @@
-import React from 'react';
-import modalOverlayStyles from './modalOverlay.module.css';
+import React from "react";
+import modalOverlayStyles from "./modalOverlay.module.css";
 
 function ModalOverlay({
     handleCloseAction,

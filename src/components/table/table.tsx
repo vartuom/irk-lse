@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from './table.module.css';
-import { researchServicesData } from '../../constants/prices';
-import TableRow from '../tableRow/tableRow';
+import React from "react";
+import styles from "./table.module.css";
+import { researchServicesData } from "../../constants/prices";
+import TableRow from "../tableRow/tableRow";
 
 function Table() {
     return (

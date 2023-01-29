@@ -1,17 +1,43 @@
-import React from 'react';
-import styles from './navigation.module.css';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import s from "./navigation.module.css";
 
 function Navigation() {
     return (
         <nav>
-            <ul className={styles.navList}>
-                <li className={`${styles.link} ${styles.link_active}`}>
-                    О лаборатории
+            <ul className={s.navList}>
+                <li>
+                    <NavLink
+                        to=""
+                        className={({ isActive }) =>
+                            isActive ? `${s.link} ${s.link_active}` : s.link
+                        }
+                    >
+                        О лаборатории
+                    </NavLink>
                 </li>
-                <li className={styles.link}>Деятельность</li>
-                <li className={styles.link}>Услуги</li>
-                <li className={styles.link}>Контакты</li>
-                <li className={styles.link}>Обращения граждан</li>
+                <li>
+                    <NavLink
+                        to="cards"
+                        className={({ isActive }) =>
+                            isActive ? `${s.link} ${s.link_active}` : s.link
+                        }
+                    >
+                        Деятельность
+                    </NavLink>
+                </li>
+                <li className={s.link}>Услуги</li>
+                <li>
+                    <NavLink
+                        to="contacts"
+                        className={({ isActive }) =>
+                            isActive ? `${s.link} ${s.link_active}` : s.link
+                        }
+                    >
+                        Контакты
+                    </NavLink>
+                </li>
+                <li className={s.link}>Обращения граждан</li>
             </ul>
         </nav>
     );

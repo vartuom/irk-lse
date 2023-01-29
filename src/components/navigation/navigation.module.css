@@ -7,9 +7,13 @@
 
 .link {
     font: 22px/1.5 var(--font-golos-regular);
+    padding-bottom: 4px;
+    box-sizing: border-box;
     transition: var(--opacity-transition);
     cursor: pointer;
     opacity: 0.8;
+    text-decoration: none;
+    color: white;
 }
 
 .link:hover {

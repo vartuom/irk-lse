@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import styles from './mainPage.module.css';
-import AppAccordion from '../../components/appAccordion/appAccordion';
+import React from "react";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import styles from "./mainPage.module.css";
+import AppAccordion from "../../components/appAccordion/appAccordion";
 
 function MainPage() {
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ function MainPage() {
                     <p className={styles.section__paragraph}>
                         К этому событию мы подготовили материал о развитии
                         судебной экспертизы в России и об экспертах-основателях
-                        Иркутской лаборатории.{' '}
+                        Иркутской лаборатории.{" "}
                         <Link className="link" to="history">
                             Узнать (ок. 5 минут на чтение) &#8594;
                         </Link>
@@ -100,12 +100,12 @@ function MainPage() {
                     <p className={styles.section__paragraph}>
                         Если вы находитесь в другом регионе и не уверены в
                         возможности назначения исследования в нашу лабораторию,
-                        воспользуйтесь информацией из раздлеа{' '}
+                        воспользуйтесь информацией из раздлеа{" "}
                         <span className="spanAccent">Контакты &#8594;</span> или
-                        заполните{' '}
+                        заполните{" "}
                         <span className="spanAccent">
-                            {' '}
-                            форму для обращений граждан &#8594;{' '}
+                            {" "}
+                            форму для обращений граждан &#8594;{" "}
                         </span>
                     </p>
                 </div>
@@ -135,7 +135,7 @@ function MainPage() {
                         type="button"
                         className={`${styles.button} ${styles.button_accent}`}
                         onClick={() =>
-                            navigate('prices', {
+                            navigate("prices", {
                                 state: { background: location },
                             })
                         }
@@ -168,11 +168,11 @@ function MainPage() {
                             этим, мы рекомендуем получить от нас письменный
                             ответ о возможности и сроках производства
                             интересующего Вас исследования. Сделать это можно
-                            заполнив{' '}
+                            заполнив{" "}
                             <span className="spanAccent">
                                 форму обращений граждан &#8594;
-                            </span>{' '}
-                            на нашем сайте или отправив нам письмо с запросом по{' '}
+                            </span>{" "}
+                            на нашем сайте или отправив нам письмо с запросом по{" "}
                             <span className="spanAccent">
                                 электронной почте &#8594;
                             </span>
@@ -185,14 +185,14 @@ function MainPage() {
                             документ не носит юридического статуса экспертизы и
                             перед обращением к нам, мы рекомендуем Вам более
                             подробно изучить его особенности. В разделе справки
-                            как раз есть{' '}
+                            как раз есть{" "}
                             <span className="spanAccent">
                                 карточка, посвященная этому вопросу &#8594;
                             </span>
                             . Если вы уверены, что экспертное исследование Вам
-                            подходит, то{' '}
+                            подходит, то{" "}
                             <span className="spanAccent">
-                                {' '}
+                                {" "}
                                 вот образец заявления для физических лиц
                             </span>
                             . Ждем вас в канцелярии в рабочее время (не забудьте

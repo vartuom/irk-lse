@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
-import styles from './tableRow.module.css';
-import { pricePerHour } from '../../constants/prices';
+import React, { useState } from "react";
+import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+import styles from "./tableRow.module.css";
+import { pricePerHour } from "../../constants/prices";
 
 interface ITableRowProps {
     title: string;

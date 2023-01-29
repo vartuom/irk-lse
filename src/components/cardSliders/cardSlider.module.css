@@ -27,7 +27,7 @@
 
 .card__heading {
     margin: 0;
-    font: 30px/1.5 var(--font-golos-regular);
+    font: 28px/1.1 var(--font-golos-regular);
 }
 
 .card__paragraph {
@@ -39,4 +39,37 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+.swiper__title {
+    margin: 0;
+    font: 30px/1.5 var(--font-golos-bold);
+    text-align: center;
+}
+
+.swiper__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 64px;
+}
+
+.arrowText {
+    margin: 0;
+    font: 18px/1.5 var(--font-golos-bold);
+    border-bottom: 2px black solid;
+}
+
+.swiperLink {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--opacity-transition);
+    text-decoration: none;
+    color: black;
+}
+
+.swiperLink:hover {
+    opacity: 0.5;
 }

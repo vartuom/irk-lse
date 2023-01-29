@@ -1,17 +1,17 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { pricePerHour, researchServicesData } from '../../constants/prices';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { pricePerHour, researchServicesData } from "../../constants/prices";
 
 function createData(title: string, hours: number[], tip: string) {
     return {
@@ -29,7 +29,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 
     return (
         <>
-            <TableRow sx={{ '& > *': { borderBottom: '0' } }}>
+            <TableRow sx={{ "& > *": { borderBottom: "0" } }}>
                 <TableCell>
                     <IconButton
                         aria-label="expand row"

@@ -1,11 +1,13 @@
-import React from 'react';
-import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import { Route, Routes } from 'react-router-dom';
-import s from './cardsPage.module.css';
-import BasicsSlider from '../../components/cardSliders/basicsSlider';
+import React from "react";
+import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
+import { Route, Routes } from "react-router-dom";
+import s from "./cardsPage.module.css";
+import BasicsSlider from "../../components/cardSliders/basicsSlider";
 
 function CardsPage() {
     return (
@@ -25,9 +27,9 @@ function CardsPage() {
                         <p className={s.lead__paragraph}>
                             Что нужно знать перед обращением в лабораторию? Мы
                             подготовили небольшой набор карточек с ответами на
-                            самые важные вопросы:{' '}
+                            самые важные вопросы:{" "}
                             <span className="spanAccent">
-                                {' '}
+                                {" "}
                                 понятия, оплата исследований, виды и роды
                                 экспертиз
                             </span>
@@ -38,15 +40,14 @@ function CardsPage() {
                 <QuizOutlinedIcon
                     sx={{
                         fontSize: 240,
-                        alignSelf: 'center',
-                        justifySelf: 'center',
+                        alignSelf: "center",
+                        justifySelf: "center",
                     }}
                 />
             </div>
             <div className={s.swiper__container}>
                 <Routes>
                     <Route index element={<BasicsSlider />} />
-                    <Route path="*" element={<BasicsSlider />} />
                 </Routes>
             </div>
         </main>
