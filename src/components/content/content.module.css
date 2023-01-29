@@ -9,7 +9,7 @@
     width: 1280px;
     border-radius: 12px;
     position: relative;
-    margin-top: -112px;
+    margin: -112px 0;
     background-color: var(--bg-color-primary);
     padding: 44px;
     box-sizing: border-box;
