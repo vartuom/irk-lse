@@ -33,7 +33,7 @@ function MainPage() {
                     className={`${styles.section__image} ${styles.sidorovImg}`}
                 />
             </section>
-            <section className={styles.section_grid}>
+            <section className={`${styles.section_facts_grid}`}>
                 <div className={styles.section__heading_centered}>
                     <h2 className={styles.section__title_big}>Цифры и факты</h2>
                     <p className={styles.section__subtitle}>

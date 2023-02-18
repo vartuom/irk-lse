@@ -3,11 +3,63 @@
     flex-direction: column;
     gap: 32px;
 }
+
 .section_grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 36px;
     color: var(--text-color-primary);
+}
+
+.section_facts_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    color: var(--text-color-primary);
+}
+
+@media screen and (max-width: 1280px) {
+    .section_grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+    .section__image {
+        grid-row: 1;
+    }
+    .section_facts_grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+    }
+    .buttonWrapper {
+        gap: 32px;
+    }
+    .buttonWrapper {
+        display: flex;
+        gap: 32px;
+        padding-top: 48px;
+    }
+    .button {
+        min-width: 170px;
+        min-height: 60px;
+        border: 4px solid var(--text-color-secondary);
+        border-radius: 8px;
+        font: 18px/1.5 var(--font-golos-regular);
+        background: none;
+        color: var(--text-color-secondary);
+        cursor: pointer;
+        transition: var(--opacity-transition);
+    }
+    .rubbleLogo {
+        background-image: url(../../images/ruble-logo.svg);
+        position: absolute;
+        top: 250px;
+        left: 500px;
+        width: 340px;
+        height: 340px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
 }
 
 .section_flat {
@@ -28,22 +80,34 @@
     overflow: hidden;
 }
 
-.buttonWrapper {
-    display: flex;
-    gap: 48px;
-    padding-top: 48px;
-}
-
-.button {
-    min-width: 285px;
-    min-height: 60px;
-    border: 4px solid var(--text-color-secondary);
-    border-radius: 8px;
-    font: 18px/1.5 var(--font-golos-regular);
-    background: none;
-    color: var(--text-color-secondary);
-    cursor: pointer;
-    transition: var(--opacity-transition);
+@media screen and (min-width: 1281px) {
+    .buttonWrapper {
+        display: flex;
+        gap: 48px;
+        padding-top: 48px;
+    }
+    .button {
+        min-width: 285px;
+        min-height: 60px;
+        border: 4px solid var(--text-color-secondary);
+        border-radius: 8px;
+        font: 18px/1.5 var(--font-golos-regular);
+        background: none;
+        color: var(--text-color-secondary);
+        cursor: pointer;
+        transition: var(--opacity-transition);
+    }
+    .rubbleLogo {
+        background-image: url(../../images/ruble-logo.svg);
+        position: absolute;
+        top: 200px;
+        left: 900px;
+        width: 440px;
+        height: 440px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
 }
 
 button:hover {
@@ -53,18 +117,6 @@ button:hover {
 .button_accent {
     color: var(--text-color-primary);
     background-color: var(--bg-color-primary);
-}
-
-.rubbleLogo {
-    background-image: url(../../images/ruble-logo.svg);
-    position: absolute;
-    top: 200px;
-    left: 900px;
-    width: 440px;
-    height: 440px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
 .section__title {
@@ -79,7 +131,7 @@ button:hover {
 }
 
 .section__title_big {
-    font: 40px/1.5 var(--font-golos-bold);
+    font: 30px/1.5 var(--font-golos-bold);
     margin: 0;
     padding-bottom: 24px;
 }
