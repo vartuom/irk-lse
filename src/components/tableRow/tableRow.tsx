@@ -8,6 +8,7 @@ interface ITableRowProps {
     hours: [number, number, number];
     tip: string;
 }
+
 function TableRow({ title, hours, tip }: ITableRowProps) {
     const [isActive, setIsActive] = useState(false);
 
