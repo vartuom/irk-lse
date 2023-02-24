@@ -29,14 +29,7 @@ function TableRow({ title, hours, tip }: ITableRowProps) {
                     </div>
                     {title}
                 </li>
-                {hours.map((item) => {
-                    return (
-                        <li key="" className={styles.rowList__item}>
-                            {hours[0] * pricePerHour} &#8381;
-                        </li>
-                    );
-                })}
-                {/* <li className={styles.rowList__item}>
+                <li className={styles.rowList__item}>
                     {hours[0] * pricePerHour} &#8381;
                 </li>
                 <li className={styles.rowList__item}>
@@ -44,7 +37,7 @@ function TableRow({ title, hours, tip }: ITableRowProps) {
                 </li>
                 <li className={styles.rowList__item}>
                     {hours[2] * pricePerHour} &#8381;
-                </li> */}
+                </li>
             </ul>
             <p
                 className={`${styles.row__tip} ${
