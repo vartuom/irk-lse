@@ -5,6 +5,7 @@
     width: 860px;
     padding: 16px;
     box-sizing: border-box;
+    cursor: grab;
 }
 
 .swiper__card {
