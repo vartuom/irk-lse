@@ -3,6 +3,7 @@
 }
 
 .accordion__title {
+    padding: 16px 0 16px 0;
     border-top: 1px solid #D9D9DE;
     display: grid;
     grid-template-columns: 1fr 15px;
