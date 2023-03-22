@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import styles from "./mainPage.module.css";
 import AppAccordion from "../../components/appAccordion/appAccordion";
+import AccordionRow from "../../components/AccordionRow/AccordionRow";
 
 function MainPage() {
     const navigate = useNavigate();
@@ -151,7 +152,7 @@ function MainPage() {
             <section className={styles.section_flat}>
                 <h2 className={styles.section__title_big}>Частые вопросы</h2>
                 <div className={styles.section__container}>
-                    <AppAccordion title="Как назначить экспертизу?!">
+                    {/* <AppAccordion title="Как назначить экспертизу?!">
                         <p className={styles.section__paragraph}>
                             Для начала определимся с понятиями. Вы являетесь
                             судом, следователем или дознавателем? Если нет, то к
@@ -198,10 +199,55 @@ function MainPage() {
                             . Ждем вас в канцелярии в рабочее время (не забудьте
                             захватить паспорт!).
                         </p>
-                    </AppAccordion>
-                    <AppAccordion title="Как назначить экспертизу?">
-                        Никак
-                    </AppAccordion>
+                    </AppAccordion> */}
+                    <AccordionRow title="Как назначить экспертизу?">
+                        <p className={styles.section__paragraph}>
+                            Для начала определимся с понятиями. Вы являетесь
+                            судом, следователем или дознавателем? Если нет, то к
+                            сожалению «судебную экспертизу» назначить вы не в
+                            праве.
+                        </p>
+                        <p className={styles.section__paragraph}>
+                            Что делать в таком случае? У вас несколько
+                            вариантов:
+                        </p>
+                        <p className={styles.section__paragraph}>
+                            1. Ходатайствовать перед указанными лицами о
+                            назначении экспертизы в наше учреждение. Но перед
+                            этим, мы рекомендуем получить от нас письменный
+                            ответ о возможности и сроках производства
+                            интересующего Вас исследования. Сделать это можно
+                            заполнив{" "}
+                            <span className="spanAccent">
+                                форму обращений граждан &#8594;
+                            </span>{" "}
+                            на нашем сайте или отправив нам письмо с запросом по{" "}
+                            <span className="spanAccent">
+                                электронной почте &#8594;
+                            </span>
+                            .
+                        </p>
+                        <p className={styles.section__paragraph}>
+                            2. Вы можете самостоятельно заказать внесудебное
+                            исследование, по результатам которого, вам будет
+                            выдан «Акт экспертного исследования». Указанный
+                            документ не носит юридического статуса экспертизы и
+                            перед обращением к нам, мы рекомендуем Вам более
+                            подробно изучить его особенности. В разделе справки
+                            как раз есть{" "}
+                            <span className="spanAccent">
+                                карточка, посвященная этому вопросу &#8594;
+                            </span>
+                            . Если вы уверены, что экспертное исследование Вам
+                            подходит, то{" "}
+                            <span className="spanAccent">
+                                {" "}
+                                вот образец заявления для физических лиц
+                            </span>
+                            . Ждем вас в канцелярии в рабочее время (не забудьте
+                            захватить паспорт!).
+                        </p>
+                    </AccordionRow>
                     <AppAccordion lastRow title="Как назначить экспертизу?">
                         Никак
                     </AppAccordion>

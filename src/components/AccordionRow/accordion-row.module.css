@@ -1,0 +1,40 @@
+.accordion__row {
+    width: 100%;
+}
+
+.accordion__title {
+    border-top: 1px solid #D9D9DE;
+    display: grid;
+    grid-template-columns: 1fr 15px;
+    gap: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    text-align: left;
+  }
+
+.accordion__content {
+    max-height: 999px;
+    transition: max-height 0.5s ease-in-out;
+    overflow: hidden;
+}
+
+.accordion__content[aria-expanded="true"] {
+    padding: 16px 0 16px 0;
+}
+
+.accordion__content[aria-expanded="false"] {
+    max-height: 0px;
+    transition: max-height 0.2s cubic-bezier(0, 1, 0, 1);
+  }
+
+  .accordion__arrow_opened {
+    transform: rotate(90deg);
+  }
+  
+  .accordion__arrow {
+    background-image: url("../../images/accordion-arrow.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    transition-duration: 0.1s;
+    transition-property: transform;
+  }
