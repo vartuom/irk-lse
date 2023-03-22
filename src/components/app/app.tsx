@@ -8,6 +8,7 @@ import Table from "../table/table";
 import HistoryPage from "../../pages/historyPage/historyPage";
 import ContactsPage from "../../pages/contactsPage/contactsPage";
 import CardsPage from "../../pages/cardsPage/cardsPage";
+import PricesPage from "../../pages/pricesPage/pricesPage";
 
 function App() {
     const location = useLocation();
@@ -20,6 +21,7 @@ function App() {
                     <Route path="/" element={<MainPage />} />
                     <Route path="/history" element={<HistoryPage />} />
                     <Route path="/contacts" element={<ContactsPage />} />
+                    <Route path="/prices" element={<PricesPage />} />
                     <Route path="/cards/*" element={<CardsPage />} />
                 </Routes>
                 {background && (
