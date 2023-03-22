@@ -1,7 +1,5 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from "react";
-import styles from "./accordion-row.module.css";
+import styles from "./accordionRow.module.css";
 
 interface IAccordionProps {
     title: string;
@@ -18,24 +16,21 @@ function AccordionRow({
 
     return (
         <div className={`${styles.accordion__row}`}>
-            <div className={`${styles.accordion__title}`}>
-                <div
-                    onClick={() => {
-                        setIsActive(!isActive);
-                    }}
-                >
-                    {title}
-                </div>
+            <button
+                type="button"
+                className={`${styles.accordion__title}`}
+                onClick={() => {
+                    setIsActive(!isActive);
+                }}
+            >
+                <div>{title}</div>
                 <div
                     className={`${styles.accordion__arrow} ${
                         isActive && styles.accordion__arrow_opened
                     }`}
                 />
-            </div>
-            <div
-                className={`${styles.accordion__content}`}
-                aria-expanded={isActive}
-            >
+            </button>
+            <div className={styles.accordion__content} aria-expanded={isActive}>
                 {children}
             </div>
         </div>

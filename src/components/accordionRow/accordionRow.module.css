@@ -3,14 +3,16 @@
 }
 
 .accordion__title {
-    padding: 16px 0 16px 0;
-    border-top: 1px solid #D9D9DE;
     display: grid;
     grid-template-columns: 1fr 15px;
     gap: 12px;
-    cursor: pointer;
-    font-weight: 700;
+    border: none;
+    background: none;
     text-align: left;
+    cursor: pointer;
+    font: 18px/1.5 var(--font-golos-regular);
+    color: #0061D9;
+    padding: 12px 0;
   }
 
 .accordion__content {
