@@ -5,9 +5,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import s from "./cardsPage.module.css";
 import BasicsSlider from "../../components/cardSliders/basicsSlider";
+import PaymentSlider from "../../components/cardSliders/paymentSlider";
 
 function CardsPage() {
     return (
@@ -28,11 +29,17 @@ function CardsPage() {
                             Что нужно знать перед обращением в лабораторию? Мы
                             подготовили небольшой набор карточек с ответами на
                             самые важные вопросы:{" "}
-                            <span className="spanAccent">
-                                {" "}
-                                понятия, оплата исследований, виды и роды
-                                экспертиз
-                            </span>
+                            <Link className="link" to="/cards" state="noScroll">
+                                основные понятия
+                            </Link>
+                            {", "}
+                            <Link
+                                className="link"
+                                to="payment"
+                                state="noScroll"
+                            >
+                                оплата исследований
+                            </Link>
                             .
                         </p>
                     </div>
@@ -48,6 +55,7 @@ function CardsPage() {
             <div className={s.swiper__container}>
                 <Routes>
                     <Route index element={<BasicsSlider />} />
+                    <Route path="payment" element={<PaymentSlider />} />
                 </Routes>
             </div>
         </main>
