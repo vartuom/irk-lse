@@ -44,6 +44,7 @@ function PricesPage() {
                         fontSize: 240,
                         alignSelf: "center",
                         justifySelf: "center",
+                        color: "#ebf1f9",
                     }}
                 />
             </div>

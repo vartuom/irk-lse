@@ -26,7 +26,16 @@ function Navigation() {
                         Деятельность
                     </NavLink>
                 </li>
-                <li className={s.link}>Услуги</li>
+                <li>
+                    <NavLink
+                        to="prices"
+                        className={({ isActive }) =>
+                            isActive ? `${s.link} ${s.link_active}` : s.link
+                        }
+                    >
+                        Услуги
+                    </NavLink>
+                </li>
                 <li>
                     <NavLink
                         to="contacts"

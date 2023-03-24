@@ -4,7 +4,8 @@
 
 .accordion__title {
     display: grid;
-    grid-template-columns: 1fr 15px;
+    grid-template-columns: 1fr 24px;
+    align-items: center;
     gap: 12px;
     border: none;
     background: none;
@@ -31,11 +32,12 @@
   }
 
   .accordion__arrow_opened {
-    transform: rotate(90deg);
+    transform: rotate(180deg);
   }
   
   .accordion__arrow {
-    background-image: url("../../images/accordion-arrow.svg");
+      text-align: center;
+      font-size: 0;
     background-repeat: no-repeat;
     background-position: center;
     transition-duration: 0.1s;

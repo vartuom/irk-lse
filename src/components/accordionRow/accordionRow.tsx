@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./accordionRow.module.css";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 interface IAccordionProps {
     title: string;
@@ -28,7 +29,9 @@ function AccordionRow({
                     className={`${styles.accordion__arrow} ${
                         isActive && styles.accordion__arrow_opened
                     }`}
-                />
+                >
+                  <ExpandMoreIcon />
+                </div>
             </button>
             <div className={styles.accordion__content} aria-expanded={isActive}>
                 {children}
