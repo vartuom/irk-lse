@@ -9,6 +9,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import s from "./cardsPage.module.css";
 import BasicsSlider from "../../components/cardSliders/basicsSlider";
 import PaymentSlider from "../../components/cardSliders/paymentSlider";
+import HandwritingSlider from "../../components/cardSliders/handwritingSlider";
 
 function CardsPage() {
     return (
@@ -57,6 +58,7 @@ function CardsPage() {
                 <Routes>
                     <Route index element={<BasicsSlider />} />
                     <Route path="payment" element={<PaymentSlider />} />
+                    <Route path="handwriting" element={<HandwritingSlider />} />
                 </Routes>
             </div>
         </main>
