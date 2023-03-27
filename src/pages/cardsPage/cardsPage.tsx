@@ -41,6 +41,14 @@ function CardsPage() {
                             >
                                 оплата исследований
                             </Link>
+                            {", "}
+                            <Link
+                                className="link"
+                                to="handwriting"
+                                state="noScroll"
+                            >
+                                почерковедческие исследования
+                            </Link>
                             .
                         </p>
                     </div>
