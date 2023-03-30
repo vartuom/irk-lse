@@ -14,7 +14,7 @@ function PricesTable({ isExtended = false }: ITableProps) {
                 <main>
                     <ul className={styles.title}>
                         <li className={styles.leadColumn}>
-                            Роды (виды) судебных экспертиз
+                            Экспертные специальности
                         </li>
                         <li>1 категория</li>
                         <li>2 категория</li>
@@ -25,6 +25,7 @@ function PricesTable({ isExtended = false }: ITableProps) {
                     return (
                         <TableRow
                             key={item.title}
+                            code={item.code}
                             title={item.title}
                             hours={item.hours}
                             tip={item.tip}

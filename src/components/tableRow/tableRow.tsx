@@ -9,9 +9,10 @@ interface ITableRowProps {
     hours: [number, number, number];
     tip: string;
     isExtended: boolean;
+    code: string;
 }
 
-function TableRow({ title, hours, tip, isExtended }: ITableRowProps) {
+function TableRow({ code, title, hours, tip, isExtended }: ITableRowProps) {
     const [isActive, setIsActive] = useState(false);
 
     return (
@@ -29,7 +30,7 @@ function TableRow({ title, hours, tip, isExtended }: ITableRowProps) {
                     >
                         <ChevronRightRoundedIcon />
                     </div>
-                    {title}
+                    {`${code} ${title}`}
                 </li>
                 <li className={styles.rowList__item}>
                     {hours[2] * pricePerHour} &#8381;

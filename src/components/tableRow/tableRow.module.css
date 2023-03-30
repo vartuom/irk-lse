@@ -46,7 +46,7 @@
 
 .rowList {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 0.4fr repeat(3, 0.2fr);
     list-style: none;
     padding: 0;
     margin: 0;
