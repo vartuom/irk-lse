@@ -16,10 +16,10 @@ function AccordionRow({
     const [isActive, setIsActive] = useState(isExpanded);
 
     return (
-        <div className={`${styles.accordion__row}`}>
+        <div className={styles.accordion__row}>
             <button
                 type="button"
-                className={`${styles.accordion__title}`}
+                className={styles.accordion__title}
                 onClick={() => {
                     setIsActive(!isActive);
                 }}
