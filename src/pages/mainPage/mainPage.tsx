@@ -143,7 +143,11 @@ function MainPage() {
                     >
                         Открыть прейскурант
                     </button>
-                    <button type="button" className={styles.button}>
+                    <button
+                        type="button"
+                        className={styles.button}
+                        onClick={() => navigate("prices")}
+                    >
                         Узнать подробнее
                     </button>
                 </div>

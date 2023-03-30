@@ -8,7 +8,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import s from "./pricesPage.module.css";
 import BasicsSlider from "../../components/cardSliders/basicsSlider";
 import PaymentSlider from "../../components/cardSliders/paymentSlider";
-import Table from "../../components/table/table";
+import PricesTable from "../../components/pricesTable/pricesTable";
 
 function PricesPage() {
     return (
@@ -49,7 +49,7 @@ function PricesPage() {
                 />
             </div>
             <div>
-                <Table />
+                <PricesTable isExtended />
             </div>
         </main>
     );

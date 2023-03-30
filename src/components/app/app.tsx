@@ -4,7 +4,7 @@ import Layout from "../layout/layout";
 import MainPage from "../../pages/mainPage/mainPage";
 import Modal from "../modal/modal";
 import ScrollBox from "../scrollBox/scrollBox";
-import Table from "../table/table";
+import PricesTable from "../pricesTable/pricesTable";
 import HistoryPage from "../../pages/historyPage/historyPage";
 import ContactsPage from "../../pages/contactsPage/contactsPage";
 import CardsPage from "../../pages/cardsPage/cardsPage";
@@ -34,7 +34,7 @@ function App() {
                                     isModalOpened
                                 >
                                     <ScrollBox>
-                                        <Table />
+                                        <PricesTable />
                                     </ScrollBox>
                                 </Modal>
                             }

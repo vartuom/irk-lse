@@ -1,9 +1,13 @@
 import React from "react";
-import styles from "./table.module.css";
+import styles from "./pricesTable.module.css";
 import { researchServicesData } from "../../constants/prices";
 import TableRow from "../tableRow/tableRow";
 
-function Table() {
+interface ITableProps {
+    isExtended?: boolean;
+}
+
+function PricesTable({ isExtended = false }: ITableProps) {
     return (
         <div>
             <section className={styles.wrapper}>
@@ -24,6 +28,7 @@ function Table() {
                             title={item.title}
                             hours={item.hours}
                             tip={item.tip}
+                            isExtended={isExtended}
                         />
                     );
                 })}
@@ -32,4 +37,4 @@ function Table() {
     );
 }
 
-export default Table;
+export default PricesTable;
