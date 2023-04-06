@@ -15,9 +15,7 @@ function Footer() {
                             alt="Логотип лабораторий Минюста. Двуглавый орел под увеличительным стеклом."
                         />
                         <div>
-                            <p className={s.domain}>
-                                irksudexpert.ru
-                            </p>
+                            <p className={s.domain}>irksudexpert.ru</p>
                             <p className={s.subtitle}>
                                 ФБУ Иркутская ЛСЭ Минюста России
                             </p>
@@ -27,8 +25,14 @@ function Footer() {
                         <div className={s.navList}>
                             <p className={s.listTitle}>Система учреждений</p>
                             <ul className={s.navLinks}>
-                                <li>Российский федеральный центр судебной экспертизы</li>
-                                <li>Сибирский Региональный центр Судебной Экспертизы</li>
+                                <li>
+                                    Российский федеральный центр судебной
+                                    экспертизы
+                                </li>
+                                <li>
+                                    Сибирский Региональный центр Судебной
+                                    Экспертизы
+                                </li>
                             </ul>
                         </div>
                         <div className={s.navList}>

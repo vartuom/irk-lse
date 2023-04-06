@@ -7,6 +7,7 @@
     --text-color-accent: #0061d9;
     --font-golos-regular: "GolosTextWebRegular", Arial, sans-serif;
     --font-golos-bold: "GolosTextWebBold", Arial, sans-serif;
+    --font-golos-demibold: "GolosTextWebDemibold", Arial, sans-serif;
     --hover-opacity: 0.8;
     --opacity-transition: opacity 0.2s linear;
 }

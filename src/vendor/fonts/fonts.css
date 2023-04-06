@@ -12,3 +12,11 @@
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: "GolosTextWebDemibold";
+    src: url("./Golos-Text/golos-text_demibold.woff2") format("woff2"),
+        url("./Golos-Text/golos-text_demibold.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}

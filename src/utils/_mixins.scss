@@ -1,13 +1,13 @@
 @use "./media";
 
-@mixin desktop-wide {
-    @media screen and (min-width: media.$desktop-wide) {
+@mixin desktop {
+    @media screen and (min-width: media.$desktop) {
         @content;
     }
 }
 
-@mixin desktop {
-    @media screen and (max-width: media.$desktop) {
+@mixin desktop-small {
+    @media screen and (max-width: media.$desktop-small) {
         @content;
     }
 }
@@ -19,7 +19,13 @@
 }
 
 @mixin phones {
-    @media screen and (max-width: media.$phones) {
+    @media screen and (max-width: media.$phones-large) {
+        @content;
+    }
+}
+
+@mixin phones-small {
+    @media screen and (max-width: media.$phones-small) {
         @content;
     }
 }

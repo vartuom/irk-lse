@@ -5,109 +5,154 @@
     gap: 32px;
 }
 
-.section_grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 36px;
-    color: var(--text-color-primary);
-}
-
-.section_facts_grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 36px;
-    color: var(--text-color-primary);
-}
-
-@include mixins.desktop {
-    .section_grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
-    }
-    .section__image {
-        grid-row: 1;
-    }
-    .section_facts_grid {
+.section {
+    &_grid {
+        display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 36px;
+        color: var(--text-color-primary);
+        @include mixins.desktop-small {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
     }
-    .buttonWrapper {
-        gap: 32px;
+
+    &_facts_grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+        color: var(--text-color-primary);
+        @include mixins.desktop-small {
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+        }
+        @include mixins.tablets {
+            grid-template-columns: 1fr;
+            gap: 36px;
+        }
     }
-    .buttonWrapper {
+
+    &_flat {
+        color: var(--text-color-primary);
+    }
+
+    &__container {
+        width: 70%;
+        @include mixins.tablets {
+            width: 100%;
+        }
+    }
+
+    &_accent {
+        position: relative;
+        margin: 0 -44px;
+        padding: 28px 44px 0 44px;
+        min-height: 480px;
+        color: var(--text-color-secondary);
+        background-color: var(--bg-color-secondary);
+        overflow: hidden;
+        @include mixins.tablets {
+            padding-bottom: 200px;
+        }
+    }
+
+    &__title {
+        font: 30px/1.5 var(--font-golos-bold);
+        margin: 0;
+        padding-bottom: 24px;
+    }
+
+    &__subtitle {
+        font: 18px/1.5 var(--font-golos-regular);
+        margin: -24px 0 0 0;
+    }
+
+    &__title {
+        &_big {
+            font: 30px/1.5 var(--font-golos-bold);
+            margin: 0;
+            padding-bottom: 24px;
+        }
+    }
+
+    &__heading {
+        &_centered {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    &__paragraph {
+        font: 18px/1.5 var(--font-golos-regular);
+        margin: 0;
+        padding-bottom: 12px;
+    }
+
+    &__paragraph:last-of-type {
+        padding-bottom: 0;
+    }
+
+    &__image {
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        @include mixins.desktop-small {
+            grid-row: 1;
+        }
+    }
+}
+
+.sectionCell__title {
+    font: 22px/1.5 var(--font-golos-regular);
+    padding-bottom: 12px;
+    margin: 0;
+    @include mixins.tablets {
+        padding-bottom: 16px;
+        font: 22px/1.5 var(--font-golos-demibold);
+    }
+}
+
+.buttonWrapper {
+    display: flex;
+    gap: 48px;
+    padding-top: 48px;
+    @include mixins.desktop-small {
         display: flex;
         gap: 32px;
         padding-top: 48px;
     }
-    .button {
+    @include mixins.tablets {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 10px;
+    }
+}
+
+.button {
+    min-width: 285px;
+    min-height: 60px;
+    border: 4px solid var(--text-color-secondary);
+    border-radius: 8px;
+    font: 18px/1.5 var(--font-golos-regular);
+    background: none;
+    color: var(--text-color-secondary);
+    cursor: pointer;
+    transition: var(--opacity-transition);
+    @include mixins.desktop-small {
         min-width: 170px;
         min-height: 60px;
-        border: 4px solid var(--text-color-secondary);
         border-radius: 8px;
-        font: 18px/1.5 var(--font-golos-regular);
-        background: none;
-        color: var(--text-color-secondary);
-        cursor: pointer;
-        transition: var(--opacity-transition);
     }
-    .rubbleLogo {
-        background-image: url(../../images/ruble-logo.svg);
-        position: absolute;
-        top: 250px;
-        left: 500px;
-        width: 340px;
-        height: 340px;
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-}
 
-.section_flat {
-    color: var(--text-color-primary);
-}
-
-.section__container {
-    width: 70%;
-}
-
-.section_accent {
-    position: relative;
-    margin: 0 -44px;
-    padding: 28px 44px 0 44px;
-    min-height: 480px;
-    color: var(--text-color-secondary);
-    background-color: var(--bg-color-secondary);
-    overflow: hidden;
-}
-
-@include mixins.desktop {
-    .buttonWrapper {
-        display: flex;
-        gap: 48px;
-        padding-top: 48px;
-    }
-    .button {
-        min-width: 285px;
-        min-height: 60px;
-        border: 4px solid var(--text-color-secondary);
+    @include mixins.tablets {
+        width: 300px;
+        height: 100px;
         border-radius: 8px;
-        font: 18px/1.5 var(--font-golos-regular);
-        background: none;
-        color: var(--text-color-secondary);
-        cursor: pointer;
-        transition: var(--opacity-transition);
-    }
-    .rubbleLogo {
-        background-image: url(../../images/ruble-logo.svg);
-        position: absolute;
-        top: 200px;
-        left: 900px;
-        width: 440px;
-        height: 440px;
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
+        z-index: 2;
+        background-color: var(--bg-color-secondary);
     }
 }
 
@@ -120,51 +165,38 @@ button:hover {
     background-color: var(--bg-color-primary);
 }
 
-.section__title {
-    font: 30px/1.5 var(--font-golos-bold);
-    margin: 0;
-    padding-bottom: 24px;
+button:hover {
+    opacity: var(--hover-opacity);
 }
 
-.section__subtitle {
-    font: 18px/1.5 var(--font-golos-regular);
-    margin: -24px 0 0 0;
+.button_accent {
+    color: var(--text-color-primary);
+    background-color: var(--bg-color-primary);
 }
 
-.section__title_big {
-    font: 30px/1.5 var(--font-golos-bold);
-    margin: 0;
-    padding-bottom: 24px;
-}
-
-.section__heading_centered {
-    grid-column: 1 / -1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.section__paragraph {
-    font: 18px/1.5 var(--font-golos-regular);
-    margin: 0;
-    padding-bottom: 12px;
-}
-
-.section__paragraph:last-of-type {
-    padding-bottom: 0;
-}
-
-.section__image {
-    height: 100%;
-    background-size: cover;
+.rubbleLogo {
+    background-image: url(../../images/ruble-logo.svg);
+    position: absolute;
+    top: 200px;
+    left: 900px;
+    width: 440px;
+    height: 440px;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-}
+    @include mixins.desktop-small {
+        top: 250px;
+        left: 500px;
+        width: 340px;
+        height: 340px;
+    }
 
-.sectionCell__title {
-    font: 22px/1.5 var(--font-golos-regular);
-    padding-bottom: 12px;
-    margin: 0;
+    @include mixins.tablets {
+        top: 640px;
+        left: 200px;
+        width: 370px;
+        height: 370px;
+    }
 }
 
 .sidorovImg {

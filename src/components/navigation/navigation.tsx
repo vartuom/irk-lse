@@ -46,7 +46,17 @@ function Navigation() {
                         Контакты
                     </NavLink>
                 </li>
-                <li className={s.link}>Обращения граждан</li>
+                <li>
+                    <NavLink
+                        /* className={({ isActive }) =>
+                            isActive ? `${s.link} ${s.link_active}` : s.link
+                        } */
+                        className={s.link}
+                        to="#"
+                    >
+                        Обращения граждан
+                    </NavLink>
+                </li>
             </ul>
         </nav>
     );
