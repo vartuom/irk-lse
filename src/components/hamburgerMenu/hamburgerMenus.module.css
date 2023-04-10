@@ -1,30 +1,28 @@
 .menu {
   width: 100%;
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 3;
 }
 .menu__content {
   display: flex;
   flex-flow: row nowrap;
-  gap: 20px;
   position: absolute;
   top: 0;
   left: 0;
-  padding: 28px 0px;
   transform-origin: top left;
-  transform: translate(-95%, 0);
+  transform: translate(calc(68px - 100%), 0);
   transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 }
 .menu__content.active {
-  transform: translate(-44px, 0);
-}
-
-.menu__items li {
-  color: black;
+  /* transform: translate(-44px, 0); */
+  transform: none;
 }
 
 .menu__items {
-  width: 300px;
-  background-color: #fff;
+  width: 350px;
+  height: 650px;
+  background-color: #010b23;
   box-shadow: 2px 2px 10px rgba(1, 11, 35, 0.5);
 }

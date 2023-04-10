@@ -1,45 +1,46 @@
 .iconWrapper {
-  z-index: 5;
   all: unset;
   position: relative;
   transition-duration: 0.5s;
   height: 48px;
   width: 48px;
+  padding: 12px;
+  border-radius: 0 12px 12px 0px;
+  /* background-color: aqua; */
 }
 .iconWrapper .icon {
   transition-duration: 0.5s;
-  background-color: greenyellow;
+  background-color: #fff;
   height: 6px;
   width: 48px;
 }
 .iconWrapper .icon::before {
   position: absolute;
-  top: 6px;
+  top: 16px;
   content: "";
   transition-duration: 0.5s;
   width: 48px;
   height: 6px;
-  background-color: greenyellow;
-  ;
+  background-color: #fff;
 }
 .iconWrapper .icon::after {
   position: absolute;
-  top: 36px;
+  top: 50px;
   content: "";
   transition-duration: 0.5s;
   width: 48px;
   height: 6px;
-  background-color: greenyellow;
+  background-color: #fff;
 }
 .iconWrapper.active .icon {
   transition-duration: 0.5s;
   background: transparent;
 }
 .iconWrapper.active .icon::before {
-  transform: rotateZ(45deg) scaleX(1.1) translate(10px, 10px);
+  transform: rotateZ(45deg) scaleX(1.1) translate(11px, 11px);
 }
 .iconWrapper.active .icon::after {
-  transform: rotateZ(-45deg) scaleX(1.1) translate(10px, -10px);
+  transform: rotateZ(-45deg) scaleX(1.1) translate(11px, -11px);
 }
 .iconWrapper:hover {
   cursor: pointer;

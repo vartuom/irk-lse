@@ -20,6 +20,12 @@
     width: 768px;
   }
 }
+@media screen and (max-width: 720px) {
+  .container {
+    margin: 0 0;
+    border-radius: 0 0 12px 12px;
+  }
+}
 @media screen and (max-width: 768px) {
   .container {
     width: 480px;
@@ -33,4 +39,4 @@
 
 .historyPageOverride {
   background-color: var(--bg-color-secondary);
-}/*# sourceMappingURL=content.module.css.map */
+}

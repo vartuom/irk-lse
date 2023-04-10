@@ -19,7 +19,7 @@
 }
 
 @mixin phones {
-    @media screen and (max-width: media.$phones-large) {
+    @media screen and (max-width: media.$phones) {
         @content;
     }
 }

@@ -8,7 +8,7 @@ import HamburgerMenu from "../hamburgerMenu/hamburgerMenu";
 
 function Header() {
     const width = useWindowWidth();
-    const isMobile = width <= 768;
+    const isMobile = width <= 703;
     return (
         <header className={styles.header}>
             <div className={styles.container}>

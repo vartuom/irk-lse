@@ -1,9 +1,12 @@
 .iconWrapper {
     all: unset;
-    position: absolute;
+    position: relative;
     transition-duration: 0.5s;
     height: 48px;
     width: 48px;
+    padding: 12px;
+    border-radius: 0 12px 12px 0px;
+    /* background-color: aqua; */
     .icon {
         transition-duration: 0.5s;
         background-color: #fff;
@@ -12,7 +15,7 @@
 
         &::before {
             position: absolute;
-            top: 6px;
+            top: 16px;
             content: "";
             transition-duration: 0.5s;
             width: 48px;
@@ -22,7 +25,7 @@
 
         &::after {
             position: absolute;
-            top: 36px;
+            top: 50px;
             content: "";
             transition-duration: 0.5s;
             width: 48px;
@@ -37,11 +40,11 @@
             background: transparent;
 
             &::before {
-                transform: rotateZ(45deg) scaleX(1.1) translate(10px, 10px);
+                transform: rotateZ(45deg) scaleX(1.1) translate(11px, 11px);
             }
 
             &::after {
-                transform: rotateZ(-45deg) scaleX(1.1) translate(10px, -10px);
+                transform: rotateZ(-45deg) scaleX(1.1) translate(11px, -11px);
             }
         }
     }
