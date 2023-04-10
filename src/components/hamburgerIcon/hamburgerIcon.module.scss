@@ -1,0 +1,51 @@
+.iconWrapper {
+    all: unset;
+    position: absolute;
+    transition-duration: 0.5s;
+    height: 48px;
+    width: 48px;
+    .icon {
+        transition-duration: 0.5s;
+        background-color: #fff;
+        height: 6px;
+        width: 48px;
+
+        &::before {
+            position: absolute;
+            top: 6px;
+            content: "";
+            transition-duration: 0.5s;
+            width: 48px;
+            height: 6px;
+            background-color: #fff;
+        }
+
+        &::after {
+            position: absolute;
+            top: 36px;
+            content: "";
+            transition-duration: 0.5s;
+            width: 48px;
+            height: 6px;
+            background-color: #fff;
+        }
+    }
+
+    &.active {
+        .icon {
+            transition-duration: 0.5s;
+            background: transparent;
+
+            &::before {
+                transform: rotateZ(45deg) scaleX(1.1) translate(10px, 10px);
+            }
+
+            &::after {
+                transform: rotateZ(-45deg) scaleX(1.1) translate(10px, -10px);
+            }
+        }
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
