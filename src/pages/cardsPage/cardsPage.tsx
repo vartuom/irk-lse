@@ -10,6 +10,7 @@ import s from "./cardsPage.module.css";
 import BasicsSlider from "../../components/cardSliders/basicsSlider";
 import PaymentSlider from "../../components/cardSliders/paymentSlider";
 import HandwritingSlider from "../../components/cardSliders/handwritingSlider";
+import AutoSlider from "../../components/cardSliders/autoSlider";
 
 function CardsPage() {
     return (
@@ -49,6 +50,10 @@ function CardsPage() {
                             >
                                 почерковедческие исследования
                             </Link>
+                            {", "}
+                            <Link className="link" to="auto" state="noScroll">
+                                автотехнические исследования
+                            </Link>
                             .
                         </p>
                     </div>
@@ -67,6 +72,7 @@ function CardsPage() {
                     <Route index element={<BasicsSlider />} />
                     <Route path="payment" element={<PaymentSlider />} />
                     <Route path="handwriting" element={<HandwritingSlider />} />
+                    <Route path="auto" element={<AutoSlider />} />
                 </Routes>
             </div>
         </main>
