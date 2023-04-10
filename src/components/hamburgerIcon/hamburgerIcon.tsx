@@ -4,16 +4,18 @@ import React, { useState, ReactNode } from "react";
 import styles from "./hamburgerIcon.module.css";
 
 interface IHamburgerProps {
-    isActive: boolean;
-    setIsActive: (value: boolean) => void;
+    isActiveIcon: boolean;
+    setIsActiveIcon: (value: boolean) => void;
 }
 
-function HamburgerIcon({ isActive, setIsActive }: IHamburgerProps) {
+function HamburgerIcon({ isActiveIcon, setIsActiveIcon }: IHamburgerProps) {
     return (
         <button
-            className={`${styles.iconWrapper} ${isActive ? styles.active : ""}`}
+            className={`${styles.iconWrapper} ${
+                isActiveIcon ? styles.active : ""
+            }`}
             onClick={() => {
-                setIsActive(!isActive);
+                setIsActiveIcon(!isActiveIcon);
             }}
         >
             <div className={styles.icon} />

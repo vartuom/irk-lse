@@ -60,19 +60,40 @@
     padding-bottom: 200px;
   }
 }
+@media screen and (max-width: 480px) {
+  .section_accent {
+    padding-bottom: 100px;
+  }
+}
 .section__title {
   font: 30px/1.5 var(--font-golos-bold);
   margin: 0;
   padding-bottom: 24px;
 }
+@media screen and (max-width: 480px) {
+  .section__title {
+    font: 22px/1.5 var(--font-golos-bold);
+  }
+}
 .section__subtitle {
   font: 18px/1.5 var(--font-golos-regular);
   margin: -24px 0 0 0;
+}
+@media screen and (max-width: 480px) {
+  .section__subtitle {
+    font: 16px/1.5 var(--font-golos-regular);
+    text-align: center;
+  }
 }
 .section__title_big {
   font: 30px/1.5 var(--font-golos-bold);
   margin: 0;
   padding-bottom: 24px;
+}
+@media screen and (max-width: 480px) {
+  .section__title_big {
+    font: 24px/1.5 var(--font-golos-bold);
+  }
 }
 .section__heading_centered {
   grid-column: 1/-1;
@@ -84,6 +105,11 @@
   font: 18px/1.5 var(--font-golos-regular);
   margin: 0;
   padding-bottom: 12px;
+}
+@media screen and (max-width: 480px) {
+  .section__paragraph {
+    font: 16px/1.5 var(--font-golos-regular);
+  }
 }
 .section__paragraph:last-of-type {
   padding-bottom: 0;
@@ -109,6 +135,11 @@
   .sectionCell__title {
     padding-bottom: 16px;
     font: 22px/1.5 var(--font-golos-demibold);
+  }
+}
+@media screen and (max-width: 480px) {
+  .sectionCell__title {
+    font: 18px/1.5 var(--font-golos-demibold);
   }
 }
 
@@ -159,6 +190,13 @@
     background-color: var(--bg-color-secondary);
   }
 }
+@media screen and (max-width: 480px) {
+  .button {
+    width: 250px;
+    height: 50px;
+    font: 16px/1.5 var(--font-golos-regular);
+  }
+}
 
 button:hover {
   opacity: var(--hover-opacity);
@@ -203,6 +241,14 @@ button:hover {
     left: 200px;
     width: 370px;
     height: 370px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .rubbleLogo {
+    top: 700px;
+    left: 212px;
+    width: 210px;
+    height: 210px;
   }
 }
 

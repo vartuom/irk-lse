@@ -1,19 +1,101 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import HamburgerIcon from "../hamburgerIcon/hamburgerIcon";
 
 import styles from "./hamburgerMenus.module.css";
 
 function HamburgerMenu() {
-    const [isActive, setIsActive] = useState(false);
+    const [isActiveBurger, setIsActiveBurger] = useState(false);
     return (
         <div className={styles.menu}>
+            <HamburgerIcon
+                isActiveIcon={isActiveBurger}
+                setIsActiveIcon={setIsActiveBurger}
+            />
             <div
                 className={`${styles.menu__content} ${
-                    isActive ? styles.active : ""
+                    isActiveBurger ? styles.active : ""
                 }`}
             >
-                <div className={styles.menu__items}>123</div>
-                <HamburgerIcon isActive={isActive} setIsActive={setIsActive} />
+                <div className={styles.menu__items}>
+                    <hr className={styles.horizontalLine} />
+                    <ul className={styles.navList}>
+                        <li>
+                            <NavLink
+                                to=""
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? `${styles.link} ${styles.link_active}`
+                                        : styles.link
+                                }
+                                onClick={() => {
+                                    setIsActiveBurger(!isActiveBurger);
+                                }}
+                            >
+                                О лаборатории
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="cards"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? `${styles.link} ${styles.link_active}`
+                                        : styles.link
+                                }
+                                onClick={() => {
+                                    setIsActiveBurger(!isActiveBurger);
+                                }}
+                            >
+                                Деятельность
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="prices"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? `${styles.link} ${styles.link_active}`
+                                        : styles.link
+                                }
+                                onClick={() => {
+                                    setIsActiveBurger(!isActiveBurger);
+                                }}
+                            >
+                                Услуги
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="contacts"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? `${styles.link} ${styles.link_active}`
+                                        : styles.link
+                                }
+                                onClick={() => {
+                                    setIsActiveBurger(!isActiveBurger);
+                                }}
+                            >
+                                Контакты
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                /* className={({ isActive }) =>
+                            isActive ? `${s.link} ${s.link_active}` : s.link
+                        } */
+                                className={styles.link}
+                                to="#"
+                                onClick={() => {
+                                    setIsActiveBurger(!isActiveBurger);
+                                }}
+                            >
+                                Обращения граждан
+                            </NavLink>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     );

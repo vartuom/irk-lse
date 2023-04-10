@@ -1,10 +1,10 @@
 import React from "react";
 import { useWindowWidth } from "@react-hook/window-size";
-
-import styles from "./header.module.css";
 import logo from "../../images/lse-logo.svg";
 import Navigation from "../navigation/navigation";
 import HamburgerMenu from "../hamburgerMenu/hamburgerMenu";
+
+import styles from "./header.module.css";
 
 function Header() {
     const width = useWindowWidth();
@@ -12,8 +12,9 @@ function Header() {
     return (
         <header className={styles.header}>
             <div className={styles.container}>
-                {isMobile ? <HamburgerMenu /> : <Navigation />}
+                {!isMobile && <Navigation />}
                 <div className={styles.wrapper}>
+                    {isMobile && <HamburgerMenu />}
                     <div className={styles.lead}>
                         <h1 className={styles.lead__title}>
                             ФБУ Иркутская ЛСЭ Минюста России
