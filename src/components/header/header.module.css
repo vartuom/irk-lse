@@ -90,7 +90,7 @@
     width: 100%;
     z-index: 3;
     background-color: var(--bg-color-secondary);
-    position: fixed;
+    /* position: fixed; */
   }
   .lead__title {
     text-align: center;
@@ -102,6 +102,7 @@
   }
   .header {
     position: sticky;
+    top: 0;
     z-index: 4;
     min-height: 90px;
   }
@@ -110,7 +111,7 @@
     width: 80px;
   }
   .container {
-    position: fixed;
+    /* position: fixed; */
     padding: 20px 20px;
   }
   .wrapper {

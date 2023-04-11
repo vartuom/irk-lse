@@ -15,7 +15,13 @@ function Content({ children }: IContentProps) {
                 isHistoryPage && styles.historyPageOverride
             }`}
         >
-            <div className={styles.container}>{children}</div>
+            <div
+                className={`${styles.container} ${
+                    isHistoryPage && styles.historyContainer
+                }`}
+            >
+                {children}
+            </div>
         </main>
     );
 }
