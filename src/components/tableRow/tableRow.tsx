@@ -33,11 +33,11 @@ function TableRow({ code, title, hours, tip, isExtended }: ITableRowProps) {
                     {`${code} ${title}`}
                 </li>
                 <li className={styles.rowList__item}>
-                    {hours[2] * pricePerHour} &#8381;
+                    {hours[0] * pricePerHour} &#8381;
                     {isExtended && ` (${hours[0]} ${getNoun(hours[0])})`}
                 </li>
                 <li className={styles.rowList__item}>
-                    {hours[2] * pricePerHour} &#8381;
+                    {hours[1] * pricePerHour} &#8381;
                     {isExtended && ` (${hours[1]} ${getNoun(hours[1])})`}
                 </li>
                 <li className={styles.rowList__item}>
