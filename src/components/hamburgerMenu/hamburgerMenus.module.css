@@ -5,12 +5,13 @@
   display: flex;
   flex-flow: row nowrap;
   position: absolute;
-  width: calc(100vw - (100vw - 100%));
+  width: 100%;
   top: 100%;
   left: 0;
   transform-origin: top left;
   transform: translate(calc(-100% - 12px), 0);
   transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+  overflow: hidden;
 }
 .menu__content.active {
   /* transform: translate(-44px, 0); */
@@ -18,6 +19,7 @@
 }
 
 .menu__items {
+  position: relative;
   height: 100vh;
   width: 100%;
   background-color: #010b23;
@@ -32,6 +34,7 @@
 }
 
 .navList {
+  margin-top: 48px;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -63,4 +66,14 @@
 
 .link_active:hover {
   opacity: 1;
+}
+
+.logo {
+  /* width: 350px;
+  position: absolute;
+  top: 49%;
+  left: 43px; */
+  position: absolute;
+  width: 500px;
+  left: 40vw;
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import logo from "../../images/lse-logo.svg";
 import HamburgerIcon from "../hamburgerIcon/hamburgerIcon";
 
 import styles from "./hamburgerMenus.module.css";
@@ -95,6 +96,11 @@ function HamburgerMenu() {
                             </NavLink>
                         </li>
                     </ul>
+                    <img
+                        className={styles.logo}
+                        src={logo}
+                        alt="Логотип лабораторий Минюста. Двуглавый орел под увеличительным стеклом."
+                    />
                 </div>
             </div>
         </div>

@@ -95,12 +95,15 @@
   .lead__title {
     text-align: center;
     font: 24px/1.5 var(--font-golos-bold);
+    padding: 0px 12px;
   }
   .lead__paragraph {
     display: none;
   }
   .header {
-    min-height: 100px;
+    position: sticky;
+    z-index: 4;
+    min-height: 90px;
   }
   .logo {
     margin-top: 0;
@@ -117,10 +120,11 @@
 }
 @media screen and (max-width: 480px) {
   .logo {
-    width: 75px;
+    width: 64px;
   }
   .lead__title {
     text-align: center;
-    font: 18px/1.5 var(--font-golos-bold);
+    font: 16px/1.4 var(--font-golos-bold);
+    max-width: 300px;
   }
 }

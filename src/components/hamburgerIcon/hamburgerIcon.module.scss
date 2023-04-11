@@ -1,36 +1,55 @@
+@use "../../utils/mixins";
 .iconWrapper {
     all: unset;
     position: relative;
     transition-duration: 0.5s;
     height: 48px;
-    width: 48px;
-    padding: 12px;
-    border-radius: 0 12px 12px 0px;
+    width: 80px;
+    @include mixins.phones {
+        height: 32px;
+        width: 64px;
+    }
     /* background-color: aqua; */
     .icon {
         transition-duration: 0.5s;
         background-color: #fff;
+        margin: 0 auto;
         height: 6px;
         width: 48px;
 
+        @include mixins.phones {
+            height: 4px;
+            width: 32px;
+        }
+
         &::before {
             position: absolute;
-            top: 16px;
+            top: 4px;
             content: "";
             transition-duration: 0.5s;
             width: 48px;
             height: 6px;
             background-color: #fff;
+            @include mixins.phones {
+                top: 2px;
+                height: 4px;
+                width: 32px;
+            }
         }
 
         &::after {
             position: absolute;
-            top: 50px;
+            top: 38px;
             content: "";
             transition-duration: 0.5s;
             width: 48px;
             height: 6px;
             background-color: #fff;
+            @include mixins.phones {
+                top: 26px;
+                height: 4px;
+                width: 32px;
+            }
         }
     }
 
@@ -41,10 +60,16 @@
 
             &::before {
                 transform: rotateZ(45deg) scaleX(1.1) translate(11px, 11px);
+                @include mixins.phones {
+                    transform: rotateZ(45deg) scaleX(1.1) translate(8px, 8px);
+                }
             }
 
             &::after {
                 transform: rotateZ(-45deg) scaleX(1.1) translate(11px, -11px);
+                @include mixins.phones {
+                    transform: rotateZ(-45deg) scaleX(1.1) translate(8px, -8px);
+                }
             }
         }
     }
