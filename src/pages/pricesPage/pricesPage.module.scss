@@ -1,0 +1,52 @@
+@use "../../utils/mixins";
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.lead {
+    display: grid;
+    grid-template-columns: 820px 1fr;
+
+    @include mixins.desktop-small {
+        grid-template-columns: 480px 1fr;
+    }
+
+    @include mixins.tablets {
+        display: block;
+        width: 380px;
+        & > svg {
+            display: none;
+        }
+    }
+}
+
+.lead__title {
+    margin: 0;
+    font: 36px/1.5 var(--font-golos-bold);
+}
+
+.lead__textContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font: 18px/1.5 var(--font-golos-regular);
+
+    @include mixins.desktop-small {
+        margin-top: 8px;
+    }
+}
+
+.lead__paragraph {
+    margin: 0;
+}
+
+.swiper__container {
+}
+
+.card__accordionContent {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
