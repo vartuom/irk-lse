@@ -1,0 +1,80 @@
+@use "../../utils/mixins";
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.heading {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.heading__title {
+    margin: 0;
+    font: 36px/1.5 var(--font-golos-bold);
+    @include mixins.tablets {
+        font: 30px/1.5 var(--font-golos-bold);
+    }
+}
+
+.section_grid {
+    display: grid;
+    grid-template-columns: 440px 1fr;
+    gap: 36px;
+    color: var(--text-color-primary);
+
+    @include mixins.tablets {
+        display: flex;
+        flex-flow: column nowrap;
+    }
+}
+
+.contacts {
+    font: 18px/1.5 var(--font-golos-regular);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 440px;
+    @include mixins.tablets {
+        font: 16px/1.5 var(--font-golos-regular);
+    }
+}
+
+.contacts__title {
+    margin: 0;
+    font: 24px/1.5 var(--font-golos-regular);
+    @include mixins.tablets {
+        font: 20px/1.5 var(--font-golos-regular);
+    }
+}
+
+.contacts__paragraph {
+    margin: 0;
+    @include mixins.tablets {
+        margin-top: 12px;
+        &:last-child {
+            margin-bottom: 4px;
+        }
+    }
+}
+
+.contacts__paragraph_type_accent {
+    font: 18px/1.5 var(--font-golos-regular);
+}
+
+.contacts__number {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: #cecece 1px solid;
+    min-height: 48px;
+}
+.contacts__number:last-child {
+    border-bottom: #cecece 1px solid;
+}
+
+.map {
+    margin: 0 -44px;
+}

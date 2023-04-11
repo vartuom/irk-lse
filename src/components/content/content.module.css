@@ -1,27 +1,46 @@
 .main {
-    width: 100%;
-    background-color: var(--bg-color-space-around);
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  background-color: var(--bg-color-space-around);
+  display: flex;
+  justify-content: center;
 }
 
 .container {
-    width: 1280px;
-    border-radius: 12px;
-    position: relative;
-    margin: -112px 0;
-    background-color: var(--bg-color-primary);
-    padding: 44px;
-    box-sizing: border-box;
-    z-index: 2;
+  width: 1280px;
+  border-radius: 12px;
+  position: relative;
+  margin: -112px 0;
+  background-color: var(--bg-color-primary);
+  padding: 44px;
+  box-sizing: border-box;
+  z-index: 2;
+}
+@media screen and (max-width: 1280px) {
+  .container {
+    width: 768px;
+  }
+}
+@media screen and (max-width: 720px) {
+  .container {
+    margin: 0 0;
+    border-radius: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .container {
+    width: 480px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .container {
+    width: 360px;
+  }
 }
 
-@media screen and (max-width: 1280px) {
-    .container {
-        width: 768px;
-    }
+.container.historyContainer {
+  border-radius: 12px;
 }
 
 .historyPageOverride {
-    background-color: var(--bg-color-secondary);
+  background-color: var(--bg-color-secondary);
 }

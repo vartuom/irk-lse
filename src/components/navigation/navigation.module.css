@@ -32,9 +32,12 @@
 
 @media screen and (max-width: 1280px) {
     .navList {
-        gap: 28px;
+        gap: 20px;
     }
     .link {
-        font: 18px/1.5 var(--font-golos-regular);
+        font: 14px/1.5 var(--font-golos-regular);
     }
 }
+
+
+
