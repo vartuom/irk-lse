@@ -4,6 +4,10 @@
     align-items: center;
     gap: 8px;
     text-align: left;
+
+    @include mixins.tablets {
+        grid-column: 1/-1;
+    }
 }
 
 .row {
@@ -34,10 +38,6 @@
     padding: 8px 0 0 0;
     margin: 0;
     transition: max-height 0.2s cubic-bezier(0, 1, 0, 1);
-
-    @include mixins.tablets {
-        font-size: 14px;
-    }
 }
 
 .row__tip_active {
@@ -52,9 +52,22 @@
 .rowList {
     display: grid;
     grid-template-columns: 0.4fr repeat(3, 0.2fr);
+    row-gap: 8px;
     list-style: none;
     padding: 0;
     margin: 0;
     align-items: center;
     text-align: center;
+    @include mixins.tablets {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    &__item {
+        display: grid;
+        grid-template-columns: repeat(2, min-content);
+        gap: 4px;
+        justify-content: center;
+        @include mixins.desktop-small {
+            grid-template-columns: min-content;
+        }
+    }
 }

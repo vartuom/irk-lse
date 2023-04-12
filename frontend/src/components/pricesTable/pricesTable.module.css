@@ -22,6 +22,7 @@
 }
 @media screen and (max-width: 768px) {
   .title {
+    grid-template-columns: repeat(3, 1fr);
     font: 14px/1.4 var(--font-golos-bold);
     padding-bottom: 4px;
   }
@@ -29,4 +30,11 @@
 
 .leadColumn {
   text-align: left;
+  justify-self: center;
+}
+@media screen and (max-width: 768px) {
+  .leadColumn {
+    padding-bottom: 8px;
+    grid-column: 1/-1;
+  }
 }
