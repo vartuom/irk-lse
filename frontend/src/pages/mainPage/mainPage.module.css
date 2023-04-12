@@ -5,6 +5,11 @@
   gap: 32px;
 }
 
+@media screen and (max-width: 768px) {
+  .section_type_map {
+    grid-template-rows: 1fr 3fr;
+  }
+}
 .section_grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -14,7 +19,12 @@
 @media screen and (max-width: 1280px) {
   .section_grid {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 500px 1fr;
+  }
+}
+@media screen and (max-width: 480px) {
+  .section_grid {
+    grid-template-rows: 300px 1fr;
   }
 }
 .section_facts_grid {
@@ -123,6 +133,11 @@
 @media screen and (max-width: 1280px) {
   .section__image {
     grid-row: 1;
+  }
+}
+@media screen and (max-width: 480px) {
+  .section__image {
+    margin: 0 -44px;
   }
 }
 

@@ -1,3 +1,4 @@
+@use "../../utils/mixins";
 .menu {
     z-index: 3;
     &__content {
@@ -74,8 +75,17 @@
     position: absolute;
     top: 49%;
     left: 43px; */
-    position: absolute;
-    width: 550px;
-    top: 50%;
-    left: 50%;
+    @include mixins.tablets {
+        position: absolute;
+        width: 550px;
+        top: 50%;
+        left: 50%;
+    }
+
+    @include mixins.phones {
+        position: relative;
+        width: 550px;
+        top: 2%;
+        left: 40%;
+    }
 }

@@ -82,7 +82,9 @@ function MainPage() {
                     </p>
                 </div>
             </section>
-            <section className={styles.section_grid}>
+            <section
+                className={`${styles.section_grid} ${styles.section_type_map}`}
+            >
                 <div>
                     <h2 className={styles.section__title}>
                         Территориальной сферой экспертного обслуживания

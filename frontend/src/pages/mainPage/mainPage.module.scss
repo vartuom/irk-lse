@@ -6,6 +6,13 @@
 }
 
 .section {
+    &_type {
+        &_map {
+            @include mixins.tablets {
+                grid-template-rows: 1fr 3fr;
+            }
+        }
+    }
     &_grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -13,7 +20,11 @@
         color: var(--text-color-primary);
         @include mixins.desktop-small {
             grid-template-columns: 1fr;
-            grid-template-rows: 1fr 1fr;
+            grid-template-rows: 500px 1fr;
+        }
+
+        @include mixins.phones {
+            grid-template-rows: 300px 1fr;
         }
     }
 
@@ -121,6 +132,10 @@
         background-repeat: no-repeat;
         @include mixins.desktop-small {
             grid-row: 1;
+        }
+
+        @include mixins.phones {
+            margin: 0 -44px;
         }
     }
 }

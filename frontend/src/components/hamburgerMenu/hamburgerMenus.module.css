@@ -5,7 +5,7 @@
   display: flex;
   flex-flow: row nowrap;
   position: absolute;
-  width: 100%;
+  width: calc(100vw - (100vw - 100%));
   top: 100%;
   left: 0;
   transform-origin: top left;
@@ -73,7 +73,20 @@
   position: absolute;
   top: 49%;
   left: 43px; */
-  position: absolute;
-  width: 500px;
-  left: 40vw;
+}
+@media screen and (max-width: 768px) {
+  .logo {
+    position: absolute;
+    width: 550px;
+    top: 50%;
+    left: 50%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .logo {
+    position: relative;
+    width: 550px;
+    top: 2%;
+    left: 40%;
+  }
 }
