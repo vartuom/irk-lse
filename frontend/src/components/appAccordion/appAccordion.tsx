@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -18,6 +19,7 @@ export default function AppAccordion({
     lastRow = false,
     noBorders = false,
 }: IAppAccordion) {
+    const isTablet = useMediaQuery("(max-width:768px)");
     return (
         <div>
             <Accordion
@@ -35,7 +37,9 @@ export default function AppAccordion({
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                    <Typography sx={{ fontSize: 18, color: "#0061D9" }}>
+                    <Typography
+                        sx={{ fontSize: isTablet ? 16 : 18, color: "#0061D9" }}
+                    >
                         {title}
                     </Typography>
                 </AccordionSummary>

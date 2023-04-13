@@ -7,6 +7,12 @@
         width: 410px;
         font: 14px/1.5 var(--font-golos-regular);
     }
+
+    @include mixins.phones {
+        width: 300px;
+        font: 14px/1.5 var(--font-golos-regular);
+        margin-left: -14px;
+    }
 }
 
 .title {

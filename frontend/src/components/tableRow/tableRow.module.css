@@ -39,6 +39,11 @@
   margin: 0;
   transition: max-height 0.2s cubic-bezier(0, 1, 0, 1);
 }
+@media screen and (max-width: 480px) {
+  .row__tip {
+    font: 14px/1.4 var(--font-golos-regular);
+  }
+}
 
 .row__tip_active {
   max-height: 999px;
@@ -62,6 +67,11 @@
 @media screen and (max-width: 768px) {
   .rowList {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 480px) {
+  .rowList {
+    row-gap: 20px;
   }
 }
 .rowList__item {
