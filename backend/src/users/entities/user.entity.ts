@@ -32,4 +32,8 @@ export class User {
   @Column({ select: false })
   @IsString()
   password: string;
+
+  @Column({ nullable: true, select: false })
+  @IsString()
+  refreshToken: string;
 }

@@ -5,3 +5,4 @@ export const EMAIL_EXISTS_ERROR_MESSAGE =
   "Пользователь с такой почтой уже существует.";
 export const WRONG_USERNAME_OR_PASSWORD_ERROR_MESSAGE =
   "Некорректная пара логин и пароль.";
+export const WRONG_REFRESH_TOKEN_MESSAGE = "Некорректный токен.";

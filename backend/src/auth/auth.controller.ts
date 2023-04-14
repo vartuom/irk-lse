@@ -14,6 +14,7 @@ import { CreateAuthDto } from "./dto/create-auth.dto";
 import { UpdateAuthDto } from "./dto/update-auth.dto";
 import { LocalAuthGuard } from "./guards/local-auth.guard";
 import { User } from "../users/entities/user.entity";
+import { JwtAuthGuard } from "./guards/jwt-auth.guard";
 
 @Controller("auth")
 export class AuthController {
@@ -25,6 +26,12 @@ export class AuthController {
     @Request() { user }: { user: Pick<User, "id" | "username" | "password"> },
   ) {
     return this.authService.signin(user.id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post("jwt")
+  jwtTest(@Request() { user }) {
+    return { user };
   }
 
   @Post()

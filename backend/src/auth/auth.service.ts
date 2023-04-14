@@ -5,6 +5,7 @@ import { WRONG_USERNAME_OR_PASSWORD_ERROR_MESSAGE } from "../utils/errorConstant
 import { UsersService } from "../users/users.service";
 import { HashService } from "../hash/hash.service";
 import { JwtService } from "@nestjs/jwt";
+import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class AuthService {
@@ -12,6 +13,7 @@ export class AuthService {
     private usersService: UsersService,
     private hashService: HashService,
     private jwtService: JwtService,
+    private configService: ConfigService,
   ) {}
 
   async validateUser(username: string, providedPassword: string) {
@@ -26,15 +28,20 @@ export class AuthService {
   }
 
   async signin(userId: number) {
-    return await this.issueTokens(userId);
+    const { accessToken, refreshToken } = await this.issueTokens(userId);
+    await this.usersService.updateUserRefreshToken(userId, refreshToken);
+    const user = await this.usersService.findOneByIdOrFail(userId);
+    return { ...user, accessToken, refreshToken };
   }
 
   private async issueTokens(userId: number) {
     const payload = { id: userId };
     const accessToken = this.jwtService.sign(payload, {
+      secret: this.configService.get("secret"),
       expiresIn: "1h",
     });
     const refreshToken = this.jwtService.sign(payload, {
+      secret: this.configService.get("refreshSecret"),
       expiresIn: "7d",
     });
     return { accessToken, refreshToken };
