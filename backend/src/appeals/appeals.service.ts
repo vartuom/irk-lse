@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAppealDto } from './dto/create-appeal.dto';
-import { UpdateAppealDto } from './dto/update-appeal.dto';
+import { Injectable } from "@nestjs/common";
+import { CreateAppealDto } from "./dto/create-appeal.dto";
+import { UpdateAppealDto } from "./dto/update-appeal.dto";
 
 @Injectable()
 export class AppealsService {
   create(createAppealDto: CreateAppealDto) {
-    return 'This action adds a new appeal';
+    return "This action adds a new appeal";
   }
 
   findAll() {

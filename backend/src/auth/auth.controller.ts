@@ -6,14 +6,26 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
+  Request,
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { CreateAuthDto } from "./dto/create-auth.dto";
 import { UpdateAuthDto } from "./dto/update-auth.dto";
+import { LocalAuthGuard } from "./guards/local-auth.guard";
+import { User } from "../users/entities/user.entity";
 
 @Controller("auth")
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+
+  @UseGuards(LocalAuthGuard)
+  @Post("signin")
+  signin(
+    @Request() { user }: { user: Pick<User, "id" | "username" | "password"> },
+  ) {
+    return this.authService.signin(user.id);
+  }
 
   @Post()
   create(@Body() createAuthDto: CreateAuthDto) {

@@ -8,6 +8,7 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import config from "./config/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { getDbConfig } from "./config/dbConfigFactory";
+import { HashModule } from "./hash/hash.module";
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { getDbConfig } from "./config/dbConfigFactory";
     AuthModule,
     UsersModule,
     AppealsModule,
+    HashModule,
   ],
   controllers: [AppController],
   providers: [AppService],
