@@ -1,0 +1,131 @@
+@use "../../utils/mixins";
+.swiper__container {
+}
+
+.swiper__slide {
+    width: 860px;
+    padding: 16px;
+    box-sizing: border-box;
+    cursor: grab;
+
+    @include mixins.desktop-small {
+        width: 520px;
+    }
+
+    @include mixins.tablets {
+        width: 100%;
+        padding: 8px;
+    }
+
+    @include mixins.phones {
+        /* width: 340px; */
+    }
+}
+
+.swiper__card {
+    min-height: 100px;
+    border-radius: 12px;
+    padding: 16px 32px 32px 32px;
+    box-sizing: border-box;
+    box-shadow: 0px 6px 16px #5a7abe;
+    @include mixins.phones {
+        padding: 16px 32px;
+    }
+}
+
+.card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    @include mixins.tablets {
+        gap: 8px;
+    }
+}
+
+.card__type {
+    text-align: right;
+    font: 18px/1.5 var(--font-golos-regular);
+    margin: 0;
+    color: gray;
+    @include mixins.phones {
+        font: 16px/1.4 var(--font-golos-regular);
+    }
+}
+
+.card__title {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    min-height: 64px;
+    margin-top: -8px;
+    margin-left: -8px;
+
+    @include mixins.tablets {
+        margin-top: 4px;
+    }
+}
+
+.card__heading {
+    margin: 0;
+    font: 36px/1.1 var(--font-golos-regular);
+
+    @include mixins.desktop-small {
+        font: 24px/1.2 var(--font-golos-regular);
+    }
+
+    @include mixins.phones {
+        font: 20px/1.3 var(--font-golos-regular);
+    }
+}
+
+.card__paragraph {
+    font: 18px/1.5 var(--font-golos-regular);
+    margin: 0;
+
+    @include mixins.tablets {
+        font: 16px/1.5 var(--font-golos-regular);
+    }
+}
+
+.card__accordionContent {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @include mixins.tablets {
+        gap: 8px;
+    }
+}
+
+.swiper__title {
+    margin: 0;
+    font: 30px/1.5 var(--font-golos-bold);
+    text-align: center;
+}
+
+.swiper__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 64px;
+}
+
+.arrowText {
+    margin: 0;
+    font: 18px/1.5 var(--font-golos-bold);
+    border-bottom: 2px black solid;
+}
+
+.swiperLink {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--opacity-transition);
+    text-decoration: none;
+    color: black;
+}
+
+.swiperLink:hover {
+    opacity: 0.5;
+}

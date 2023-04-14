@@ -3,11 +3,8 @@ import { Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import LooksOneRoundedIcon from "@mui/icons-material/LooksOneRounded";
 import LooksTwoRoundedIcon from "@mui/icons-material/LooksTwoRounded";
-import Looks3RoundedIcon from "@mui/icons-material/Looks3Rounded";
 import Looks4RoundedIcon from "@mui/icons-material/Looks4Rounded";
 import Looks5RoundedIcon from "@mui/icons-material/Looks5Rounded";
-import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
-import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import AppAccordion from "../appAccordion/appAccordion";
 import s from "./cardSlider.module.css";
 
@@ -73,7 +70,7 @@ function BasicsSlider() {
                                 следующую карточку).
                             </div>
                             <div>
-                                <AppAccordion title="Например, в гражданском процессе:">
+                                <AppAccordion title="Например, в гражданском процессе">
                                     <div className={s.card__accordionContent}>
                                         <p className={s.card__paragraph}>
                                             В соответсвии со статьей 79 ГПК РФ
