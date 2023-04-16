@@ -1,32 +1,75 @@
 import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { Input, Select, TextField } from "@mui/material";
+import {
+    Checkbox,
+    FormControlLabel,
+    Input,
+    Select,
+    TextField,
+} from "@mui/material";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigate } from "react-router-dom";
 import s from "./appealForm.module.css";
 import AccordionRow from "../accordionRow/accordionRow";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { setFirstStepState } from "../../store/appealFormSlice";
 
 interface IFormInput {
     firstName: string;
     lastName: string;
     patronymic: string;
+    isAgreed: boolean;
 }
 function StepOne() {
-    const { control, handleSubmit, watch } = useForm({
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    // используем функцию сравнения () => true что бы избежать лишних ререндеров
+    const { firstName, lastName, patronymic } = useAppSelector(
+        (store) => ({
+            firstName: store.appealForm.firstName,
+            lastName: store.appealForm.lastName,
+            patronymic: store.appealForm.patronymic,
+        }),
+        () => true
+    );
+
+    const schema = yup.object({
+        firstName: yup
+            .string()
+            .required("Это обязательное поле")
+            .matches(/^([^0-9]*)$/, "В имени могут быть только буквы"),
+        lastName: yup.string().required("Это обязательное поле"),
+        patronymic: yup.string(),
+    });
+
+    const {
+        control,
+        handleSubmit,
+        watch,
+        formState: { errors, isValid },
+    } = useForm({
         defaultValues: {
-            firstName: "",
-            lastName: "",
-            patronymic: "",
+            firstName,
+            lastName,
+            patronymic,
+            isAgreed: false,
         },
+        resolver: yupResolver(schema),
+        mode: "onBlur",
     });
 
     useEffect(() => {
-        const subscription = watch((value, { name, type }) =>
-            console.log(value, name, type)
-        );
+        const subscription = watch((value, { name, type }) => {
+            console.log(value);
+            dispatch(setFirstStepState(value));
+        });
         return () => subscription.unsubscribe();
     }, [watch]);
 
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
         console.log(data);
+        navigate("stepTwo", { state: "noScroll" });
     };
 
     return (
@@ -49,7 +92,18 @@ function StepOne() {
             <Controller
                 name="firstName"
                 control={control}
-                render={({ field }) => <TextField label="Имя" {...field} />}
+                render={({ field }) => (
+                    <TextField
+                        label="Имя"
+                        error={!!errors?.firstName}
+                        helperText={
+                            errors?.firstName
+                                ? errors?.firstName?.message
+                                : null
+                        }
+                        {...field}
+                    />
+                )}
             />
             <Controller
                 name="lastName"
@@ -67,7 +121,25 @@ function StepOne() {
                 Подробнее с политикой обработки персональных данных вы можете
                 ознакомиться <span className="spanAccent"> по ссылке.</span>
             </p>
-            <input type="submit" />
+            <Controller
+                name="isAgreed"
+                control={control}
+                defaultValue={false}
+                render={({ field }) => (
+                    <FormControlLabel
+                        control={<Checkbox {...field} />}
+                        label={
+                            <p className={s.formLabel}>
+                                Нажимая кнопку «Продолжить» я даю согласие на
+                                обработку своих персональных данных в
+                                соответствии с{" "}
+                                <span className="spanAccent"> Условиями.</span>
+                            </p>
+                        }
+                    />
+                )}
+            />
+            {isValid && <input type="submit" />}
         </form>
     );
 }

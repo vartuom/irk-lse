@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import AccordionRow from "../accordionRow/accordionRow";
 import s from "./appealForm.module.css";
 
@@ -10,6 +11,7 @@ interface IFormInput {
     patronymic: string;
 }
 function StepTwo() {
+    const navigate = useNavigate();
     const testName = "Геннадий Григорьевич";
     const { control, handleSubmit, watch } = useForm({
         defaultValues: {
@@ -28,6 +30,7 @@ function StepTwo() {
 
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
         console.log(data);
+        navigate(-1);
     };
 
     return (

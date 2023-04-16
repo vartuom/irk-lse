@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import appealFormSlice from "./appealFormSlice";
 
 export const store = configureStore({
-    reducer: {},
+    reducer: { appealForm: appealFormSlice },
 });
 
 type RootState = ReturnType<typeof store.getState>;

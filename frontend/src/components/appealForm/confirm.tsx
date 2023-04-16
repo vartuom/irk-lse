@@ -7,7 +7,7 @@ import s from "./appealForm.module.css";
 interface IFormInput {
     appealText: string;
 }
-function StepTwo() {
+function Confirm() {
     const testName = "Геннадий Григорьевич";
     const { control, handleSubmit, watch } = useForm({
         defaultValues: {
@@ -62,4 +62,4 @@ function StepTwo() {
     );
 }
 
-export default StepTwo;
+export default Confirm;

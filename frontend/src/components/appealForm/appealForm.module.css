@@ -18,3 +18,8 @@
   margin: 0;
   font: 18px/1.5 var(--font-golos-regular);
 }
+
+.formLabel {
+  margin: 0;
+  font: 18px/1.5 var(--font-golos-regular);
+}

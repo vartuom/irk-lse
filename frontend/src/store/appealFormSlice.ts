@@ -1,22 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IInitialState {
-    name: string;
-    surname: string;
+    firstName: string;
+    lastName: string;
     patronymic: string;
 }
 
 const initialState: IInitialState = {
-    name: "",
-    surname: "",
+    firstName: "",
+    lastName: "",
     patronymic: "",
 };
 
 export const appealFormSlice = createSlice({
     name: "appealForm",
     initialState,
-    reducers: {},
+    reducers: {
+        setFirstStepState(state, action) {
+            state.firstName = action.payload.firstName;
+            state.lastName = action.payload.lastName;
+            state.patronymic = action.payload.patronymic;
+        },
+    },
 });
 
-export const {} = appealFormSlice.actions;
+export const { setFirstStepState } = appealFormSlice.actions;
 export default appealFormSlice.reducer;
