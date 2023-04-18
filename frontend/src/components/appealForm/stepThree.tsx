@@ -1,18 +1,32 @@
 import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
-import AccordionRow from "../accordionRow/accordionRow";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigate } from "react-router-dom";
 import s from "./appealForm.module.css";
+import AccordionRow from "../accordionRow/accordionRow";
 
 interface IFormInput {
     appealText: string;
 }
-function StepTwo() {
+function StepThree() {
     const testName = "Геннадий Григорьевич";
-    const { control, handleSubmit, watch } = useForm({
+    const navigate = useNavigate();
+    const schema = yup.object({
+        appealText: yup.string().required("Это обязательное поле"),
+    });
+    const {
+        control,
+        handleSubmit,
+        watch,
+        formState: { errors, isValid },
+    } = useForm({
         defaultValues: {
             appealText: "",
         },
+        resolver: yupResolver(schema),
+        mode: "onBlur",
     });
 
     useEffect(() => {
@@ -52,14 +66,36 @@ function StepTwo() {
                         label="Ваши вопросы..."
                         multiline
                         rows={15}
+                        error={!!errors?.appealText}
+                        helperText={
+                            errors?.appealText
+                                ? errors?.appealText?.message
+                                : null
+                        }
                         inputProps={{ maxLength: 5000 }}
                         {...field}
                     />
                 )}
             />
-            <input type="submit" />
+            <button
+                type="submit"
+                aria-label="Отправить"
+                className={`${s.button} ${s.button_type_primary} ${
+                    !isValid && s.button_type_inactive
+                }`}
+            >
+                Продолжить
+            </button>
+            <button
+                type="button"
+                onClick={() => navigate(-1)}
+                aria-label="Назад"
+                className={`${s.button} ${s.button_type_secondary}`}
+            >
+                Назад
+            </button>
         </form>
     );
 }
 
-export default StepTwo;
+export default StepThree;

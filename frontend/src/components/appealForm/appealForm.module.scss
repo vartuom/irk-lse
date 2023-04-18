@@ -5,6 +5,31 @@
   width: 600px;
 }
 
+.button {
+  width: 100%;
+  min-height: 60px;
+  font: 18px/1.5 var(--font-golos-regular);
+  cursor: pointer;
+  transition: var(--opacity-transition);
+  &_type {
+    &_primary {
+      color: var(--text-color-secondary);
+      background: var(--bg-color-secondary);
+    }
+    &_secondary {
+      background: none;
+      border: 2px solid var(--bg-color-secondary);
+    }
+    &_inactive {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+  }
+  &:hover {
+    opacity: var(--hover-opacity);
+  }
+}
+
 .lead {
   display: flex;
   flex-direction: column;

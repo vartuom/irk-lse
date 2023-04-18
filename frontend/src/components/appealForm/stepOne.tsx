@@ -21,6 +21,7 @@ interface IFormInput {
     patronymic: string;
     isAgreed: boolean;
 }
+
 function StepOne() {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -39,8 +40,19 @@ function StepOne() {
             .string()
             .required("Это обязательное поле")
             .matches(/^([^0-9]*)$/, "В имени могут быть только буквы"),
-        lastName: yup.string().required("Это обязательное поле"),
-        patronymic: yup.string(),
+        lastName: yup
+            .string()
+            .required("Это обязательное поле")
+            .matches(/^([^0-9]*)$/, "В фамилии могут быть только буквы"),
+        patronymic: yup
+            .string()
+            .matches(/^([^0-9]*)$/, "В отчестве могут быть только буквы"),
+        isAgreed: yup
+            .bool()
+            .oneOf(
+                [true],
+                "Вы должны принять условия обработки персональных данных"
+            ),
     });
 
     const {
@@ -108,13 +120,31 @@ function StepOne() {
             <Controller
                 name="lastName"
                 control={control}
-                render={({ field }) => <TextField label="Фамилия" {...field} />}
+                render={({ field }) => (
+                    <TextField
+                        label="Фамилия"
+                        error={!!errors?.lastName}
+                        helperText={
+                            errors?.lastName ? errors?.lastName?.message : null
+                        }
+                        {...field}
+                    />
+                )}
             />
             <Controller
                 name="patronymic"
                 control={control}
                 render={({ field }) => (
-                    <TextField label="Отчество (при наличии)" {...field} />
+                    <TextField
+                        label="Отчество"
+                        error={!!errors?.patronymic}
+                        helperText={
+                            errors?.patronymic
+                                ? errors?.patronymic?.message
+                                : null
+                        }
+                        {...field}
+                    />
                 )}
             />
             <p className={s.lead_paragraph}>
@@ -139,7 +169,15 @@ function StepOne() {
                     />
                 )}
             />
-            {isValid && <input type="submit" />}
+            <button
+                type="submit"
+                aria-label="Отправить"
+                className={`${s.button} ${s.button_type_primary} ${
+                    !isValid && s.button_type_inactive
+                }`}
+            >
+                Продолжить
+            </button>
         </form>
     );
 }

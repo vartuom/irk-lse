@@ -2,23 +2,36 @@ import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
 import AccordionRow from "../accordionRow/accordionRow";
 import s from "./appealForm.module.css";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 interface IFormInput {
     email: string;
-    lastName: string;
-    patronymic: string;
+    extras: string;
 }
 function StepTwo() {
     const navigate = useNavigate();
     const testName = "Геннадий Григорьевич";
-    const { control, handleSubmit, watch } = useForm({
+    const schema = yup.object({
+        email: yup
+            .string()
+            .required("Это обязательное поле")
+            .email("Это должен быть корректный адрес электронной почты"),
+    });
+    const {
+        control,
+        handleSubmit,
+        watch,
+        formState: { errors, isValid },
+    } = useForm({
         defaultValues: {
             email: "",
-            lastName: "",
-            patronymic: "",
+            extras: "",
         },
+        mode: "onBlur",
+        resolver: yupResolver(schema),
     });
 
     useEffect(() => {
@@ -28,9 +41,10 @@ function StepTwo() {
         return () => subscription.unsubscribe();
     }, [watch]);
 
+
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
         console.log(data);
-        navigate(-1);
+        navigate("/appeals/stepThree", { state: "noScroll" });
     };
 
     return (
@@ -51,7 +65,14 @@ function StepTwo() {
                 name="email"
                 control={control}
                 render={({ field }) => (
-                    <TextField label="Электронная почта" {...field} />
+                    <TextField
+                        label="Электронная почта"
+                        error={!!errors?.email}
+                        helperText={
+                            errors?.email ? errors?.email?.message : null
+                        }
+                        {...field}
+                    />
                 )}
             />
             <p className={s.lead_paragraph}>
@@ -60,7 +81,7 @@ function StepTwo() {
                 нужными (телефон, адрес и прочее).
             </p>
             <Controller
-                name="lastName"
+                name="extras"
                 control={control}
                 render={({ field }) => (
                     <TextField
@@ -75,7 +96,23 @@ function StepTwo() {
                     />
                 )}
             />
-            <input type="submit" />
+            <button
+                type="submit"
+                aria-label="Отправить"
+                className={`${s.button} ${s.button_type_primary} ${
+                    !isValid && s.button_type_inactive
+                }`}
+            >
+                Продолжить
+            </button>
+            <button
+                type="button"
+                onClick={() => navigate(-1)}
+                aria-label="Назад"
+                className={`${s.button} ${s.button_type_secondary}`}
+            >
+                Назад
+            </button>
         </form>
     );
 }
