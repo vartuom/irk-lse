@@ -9,6 +9,7 @@ import AutoSlider from "../../components/cardSliders/autoSlider";
 import StepOne from "../../components/appealForm/stepOne";
 import StepTwo from "../../components/appealForm/stepTwo";
 import StepThree from "../../components/appealForm/stepThree";
+import Confirm from "../../components/appealForm/confirm";
 
 function AppealsPage() {
     return (
@@ -47,6 +48,7 @@ function AppealsPage() {
                     <Route index element={<StepOne />} />
                     <Route path="stepTwo" element={<StepTwo />} />
                     <Route path="stepThree" element={<StepThree />} />
+                    <Route path="confirm" element={<Confirm />} />
                 </Routes>
             </div>
         </main>

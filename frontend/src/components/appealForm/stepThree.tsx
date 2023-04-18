@@ -37,10 +37,8 @@ function StepThree() {
     }, [watch]);
 
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
-        console.log(data);
+        navigate("/appeals/confirm", { state: "noScroll" });
     };
-
-    const text = "123\nцйупамасфса\n5кнеинекгт\nкусце\nп р ама \n";
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
