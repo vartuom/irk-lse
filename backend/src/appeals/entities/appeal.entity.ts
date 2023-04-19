@@ -28,4 +28,8 @@ export class Appeal {
   @Column("text")
   @Length(2)
   appealText: string;
+
+  @Column("text")
+  @Length(2)
+  extras: string;
 }

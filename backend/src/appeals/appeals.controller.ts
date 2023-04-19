@@ -6,20 +6,27 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
+  ValidationPipe,
 } from "@nestjs/common";
 import { AppealsService } from "./appeals.service";
 import { CreateAppealDto } from "./dto/create-appeal.dto";
 import { UpdateAppealDto } from "./dto/update-appeal.dto";
+import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 
 @Controller("appeals")
 export class AppealsController {
   constructor(private readonly appealsService: AppealsService) {}
 
   @Post()
-  create(@Body() createAppealDto: CreateAppealDto) {
+  create(
+    @Body(new ValidationPipe({ transform: true }))
+    createAppealDto: CreateAppealDto,
+  ) {
     return this.appealsService.create(createAppealDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.appealsService.findAll();
