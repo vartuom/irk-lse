@@ -6,6 +6,8 @@ import { UsersService } from "../users/users.service";
 import { HashService } from "../hash/hash.service";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
+import { CreateUserDto } from "../users/dto/create-user.dto";
+import { User } from "../users/entities/user.entity";
 
 @Injectable()
 export class AuthService {
@@ -47,8 +49,10 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
-  create(createAuthDto: CreateAuthDto) {
-    return "This action adds a new auth";
+  createUser(
+    createUserDto: CreateUserDto,
+  ): Promise<Pick<User, "username" | "email">> {
+    return this.usersService.create(createUserDto);
   }
 
   findAll() {

@@ -8,13 +8,16 @@ import {
   Delete,
   UseGuards,
   Request,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
-import { CreateAuthDto } from "./dto/create-auth.dto";
 import { UpdateAuthDto } from "./dto/update-auth.dto";
 import { LocalAuthGuard } from "./guards/local-auth.guard";
 import { User } from "../users/entities/user.entity";
 import { JwtAuthGuard } from "./guards/jwt-auth.guard";
+import { CreateUserDto } from "../users/dto/create-user.dto";
+import { plainToClass } from "class-transformer";
 
 @Controller("auth")
 export class AuthController {
@@ -34,9 +37,11 @@ export class AuthController {
     return { user };
   }
 
-  @Post()
-  create(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Post("register")
+  async registerUser(@Body() createUserDto: CreateUserDto) {
+    const user = await this.authService.createUser(createUserDto);
+    return plainToClass(User, user);
   }
 
   @Get()

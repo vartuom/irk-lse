@@ -22,8 +22,17 @@ export class UsersService {
     private readonly usersRepository: Repository<User>,
     private readonly hashService: HashService,
   ) {}
-  create(createUserDto: CreateUserDto) {
-    return "This action adds a new user";
+
+  async create(
+    createUserDto: CreateUserDto,
+  ): Promise<Pick<User, "username" | "email">> {
+    const hashedPassword = await this.hashService.create(
+      createUserDto.password,
+    );
+    return this.usersRepository.save({
+      ...createUserDto,
+      password: hashedPassword,
+    });
   }
 
   findAll() {
