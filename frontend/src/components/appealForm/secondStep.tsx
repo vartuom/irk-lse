@@ -3,17 +3,29 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import AccordionRow from "../accordionRow/accordionRow";
-import s from "./appealForm.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
+import s from "./appealForm.module.css";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { setFirstStep, setSecondStep } from "../../store/appealForm.slice";
 
-interface IFormInput {
+export interface ISecondStep {
     email: string;
-    extras: string;
+    extraContacts: string;
 }
-function StepTwo() {
+function SecondStep() {
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const testName = "Геннадий Григорьевич";
+
+    const { firstName, patronymic, email, extraContacts } = useAppSelector(
+        (store) => ({
+            firstName: store.appealForm.firstStep.firstName,
+            patronymic: store.appealForm.firstStep.patronymic,
+            email: store.appealForm.secondStep.email,
+            extraContacts: store.appealForm.secondStep.extraContacts,
+        }),
+        () => true
+    );
+
     const schema = yup.object({
         email: yup
             .string()
@@ -27,22 +39,22 @@ function StepTwo() {
         formState: { errors, isValid },
     } = useForm({
         defaultValues: {
-            email: "",
-            extras: "",
+            email,
+            extraContacts,
         },
         mode: "onBlur",
         resolver: yupResolver(schema),
     });
 
     useEffect(() => {
-        const subscription = watch((value, { name, type }) =>
-            console.log(value, name, type)
-        );
+        const subscription = watch((value) => {
+            console.log(value);
+            dispatch(setSecondStep(value as ISecondStep));
+        });
         return () => subscription.unsubscribe();
-    }, [watch]);
+    }, [watch, dispatch]);
 
-
-    const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    const onSubmit: SubmitHandler<ISecondStep> = (data) => {
         console.log(data);
         navigate("/appeals/stepThree", { state: "noScroll" });
     };
@@ -51,13 +63,13 @@ function StepTwo() {
         <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
             <div className={s.lead}>
                 <h2 className={s.lead_title}>
-                    Хорошо, а куда нам направить ответ? (2 шаг из 3)
+                    Хорошо, а куда нам направить ответ? (2 шаг из 4)
                 </h2>
                 <p className={s.lead_paragraph}>
-                    {`${testName}, прежде чем мы перейдем к вашему вопросу, 
+                    {`${firstName} ${patronymic}, прежде чем мы перейдем к вашему вопросу, 
                     укажите пожалуйста ваш адрес электронной почты. Как только 
                     ответ на обращение будет готов, 
-                    мы отправим на этот адрес отсканированную копию документа. 
+                    мы отправим его отсканированную копию. 
                     Оригинал вы сможете получить в канцелярии нашего учреждения.`}
                 </p>
             </div>
@@ -81,7 +93,7 @@ function StepTwo() {
                 нужными (телефон, адрес и прочее).
             </p>
             <Controller
-                name="extras"
+                name="extraContacts"
                 control={control}
                 render={({ field }) => (
                     <TextField
@@ -117,4 +129,4 @@ function StepTwo() {
     );
 }
 
-export default StepTwo;
+export default SecondStep;

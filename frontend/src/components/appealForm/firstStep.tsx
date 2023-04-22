@@ -1,36 +1,30 @@
 import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import {
-    Checkbox,
-    FormControlLabel,
-    Input,
-    Select,
-    TextField,
-} from "@mui/material";
+import { TextField } from "@mui/material";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import s from "./appealForm.module.css";
 import AccordionRow from "../accordionRow/accordionRow";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setFirstStepState } from "../../store/appealFormSlice";
+import { setFirstStep } from "../../store/appealForm.slice";
 
-interface IFormInput {
+export interface IFirstStep {
     firstName: string;
     lastName: string;
     patronymic: string;
-    isAgreed: boolean;
 }
 
-function StepOne() {
+function FirstStep() {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
     // используем функцию сравнения () => true что бы избежать лишних ререндеров
     const { firstName, lastName, patronymic } = useAppSelector(
         (store) => ({
-            firstName: store.appealForm.firstName,
-            lastName: store.appealForm.lastName,
-            patronymic: store.appealForm.patronymic,
+            firstName: store.appealForm.firstStep.firstName,
+            lastName: store.appealForm.firstStep.lastName,
+            patronymic: store.appealForm.firstStep.patronymic,
         }),
         () => true
     );
@@ -47,12 +41,6 @@ function StepOne() {
         patronymic: yup
             .string()
             .matches(/^([^0-9]*)$/, "В отчестве могут быть только буквы"),
-        isAgreed: yup
-            .bool()
-            .oneOf(
-                [true],
-                "Вы должны принять условия обработки персональных данных"
-            ),
     });
 
     const {
@@ -65,21 +53,20 @@ function StepOne() {
             firstName,
             lastName,
             patronymic,
-            isAgreed: false,
         },
         resolver: yupResolver(schema),
         mode: "onBlur",
     });
 
     useEffect(() => {
-        const subscription = watch((value, { name, type }) => {
+        const subscription = watch((value) => {
             console.log(value);
-            dispatch(setFirstStepState(value));
+            dispatch(setFirstStep(value as IFirstStep));
         });
         return () => subscription.unsubscribe();
-    }, [watch]);
+    }, [watch, dispatch]);
 
-    const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    const onSubmit: SubmitHandler<IFirstStep> = (data) => {
         console.log(data);
         navigate("stepTwo", { state: "noScroll" });
     };
@@ -88,7 +75,7 @@ function StepOne() {
         <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
             <div className={s.lead}>
                 <h2 className={s.lead_title}>
-                    Отлично, сперва познакомимся (1 шаг из 3)
+                    Отлично, сперва познакомимся (1 шаг из 4)
                 </h2>
                 <AccordionRow title="Почему это важно?">
                     <p className={s.lead_paragraph}>
@@ -101,6 +88,20 @@ function StepOne() {
                     ответ на ваше обращение будет подготовлен, мы их удалим.
                 </p>
             </div>
+            <Controller
+                name="lastName"
+                control={control}
+                render={({ field }) => (
+                    <TextField
+                        label="Фамилия"
+                        error={!!errors?.lastName}
+                        helperText={
+                            errors?.lastName ? errors?.lastName?.message : null
+                        }
+                        {...field}
+                    />
+                )}
+            />
             <Controller
                 name="firstName"
                 control={control}
@@ -118,25 +119,11 @@ function StepOne() {
                 )}
             />
             <Controller
-                name="lastName"
-                control={control}
-                render={({ field }) => (
-                    <TextField
-                        label="Фамилия"
-                        error={!!errors?.lastName}
-                        helperText={
-                            errors?.lastName ? errors?.lastName?.message : null
-                        }
-                        {...field}
-                    />
-                )}
-            />
-            <Controller
                 name="patronymic"
                 control={control}
                 render={({ field }) => (
                     <TextField
-                        label="Отчество"
+                        label="Отчество (при наличии)"
                         error={!!errors?.patronymic}
                         helperText={
                             errors?.patronymic
@@ -151,24 +138,6 @@ function StepOne() {
                 Подробнее с политикой обработки персональных данных вы можете
                 ознакомиться <span className="spanAccent"> по ссылке.</span>
             </p>
-            <Controller
-                name="isAgreed"
-                control={control}
-                defaultValue={false}
-                render={({ field }) => (
-                    <FormControlLabel
-                        control={<Checkbox {...field} />}
-                        label={
-                            <p className={s.formLabel}>
-                                Нажимая кнопку «Продолжить» я даю согласие на
-                                обработку своих персональных данных в
-                                соответствии с{" "}
-                                <span className="spanAccent"> Условиями.</span>
-                            </p>
-                        }
-                    />
-                )}
-            />
             <button
                 type="submit"
                 aria-label="Отправить"
@@ -182,4 +151,4 @@ function StepOne() {
     );
 }
 
-export default StepOne;
+export default FirstStep;

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import appealFormSlice from "./appealFormSlice";
+import appealFormSlice from "./appealForm.slice";
 
 export const store = configureStore({
     reducer: { appealForm: appealFormSlice },

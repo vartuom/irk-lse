@@ -1,15 +1,11 @@
 import React from "react";
-import { Link, Route, Routes } from "react-router-dom";
-import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
+import { Route, Routes } from "react-router-dom";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import s from "./appealsPage.module.css";
-import BasicsSlider from "../../components/cardSliders/basicsSlider";
-import PaymentSlider from "../../components/cardSliders/paymentSlider";
-import HandwritingSlider from "../../components/cardSliders/handwritingSlider";
-import AutoSlider from "../../components/cardSliders/autoSlider";
-import StepOne from "../../components/appealForm/stepOne";
-import StepTwo from "../../components/appealForm/stepTwo";
-import StepThree from "../../components/appealForm/stepThree";
-import Confirm from "../../components/appealForm/confirm";
+import FirstStep from "../../components/appealForm/firstStep";
+import SecondStep from "../../components/appealForm/secondStep";
+import ThirdStep from "../../components/appealForm/thirdStep";
+import ConfirmStep from "../../components/appealForm/confirmStep";
 
 function AppealsPage() {
     return (
@@ -34,7 +30,7 @@ function AppealsPage() {
                         </p>
                     </div>
                 </div>
-                <QuizOutlinedIcon
+                <MailOutlineIcon
                     sx={{
                         fontSize: 240,
                         alignSelf: "center",
@@ -45,10 +41,10 @@ function AppealsPage() {
             </div>
             <div className={s.formContainer}>
                 <Routes>
-                    <Route index element={<StepOne />} />
-                    <Route path="stepTwo" element={<StepTwo />} />
-                    <Route path="stepThree" element={<StepThree />} />
-                    <Route path="confirm" element={<Confirm />} />
+                    <Route index element={<FirstStep />} />
+                    <Route path="stepTwo" element={<SecondStep />} />
+                    <Route path="stepThree" element={<ThirdStep />} />
+                    <Route path="confirm" element={<ConfirmStep />} />
                 </Routes>
             </div>
         </main>

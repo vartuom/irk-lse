@@ -5,22 +5,32 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import s from "./appealForm.module.css";
+import { useAppSelector } from "../../store/store";
 
-function Confirm() {
+function ConfirmStep() {
+    const {
+        firstName,
+        lastName,
+        patronymic,
+        email,
+        extraContacts,
+        appealText,
+    } = useAppSelector(
+        (store) => ({
+            firstName: store.appealForm.firstStep.firstName,
+            lastName: store.appealForm.firstStep.lastName,
+            patronymic: store.appealForm.firstStep.patronymic,
+            email: store.appealForm.secondStep.email,
+            extraContacts: store.appealForm.secondStep.extraContacts,
+            appealText: store.appealForm.thirdStep.appealText,
+        }),
+        () => true
+    );
+
     const schema = yup.object({
         isAgreed: yup.bool().oneOf([true], "Вы должны подтвердить готовность"),
     });
     const navigate = useNavigate();
-    const store = {
-        firstName: "Артем",
-        lastName: "Васильев",
-        patronymic: "Сергеевич",
-        email: "v.artuom@ya.ru",
-        extras: "г. Иркутск. Ул. Красноказачья д. 131.\nт. +7 924 620-22-43.",
-        appealTheme: "Запрос о сроках и стоимости",
-        appealText:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a nibh vitae urna vehicula varius. Morbi sagittis, justo non suscipit auctor, quam enim pulvinar nunc, sit amet tincidunt nibh nunc eu lectus. Donec in lacus elementum, iaculis nisi eu, elementum est. \nSed et pulvinar nibh. Nulla blandit suscipit maximus. Phasellus aliquam diam in sapien tincidunt, in cursus quam interdum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer turpis tellus, venenatis non vestibulum sit amet, eleifend varius nulla. In tempus malesuada orci id semper. Proin viverra consequat urna ac hendrerit.\nDonec eget erat a lectus sollicitudin tincidunt. Curabitur sem odio, tempor at euismod vel, mollis nec velit. \nMaecenas sit amet turpis a purus interdum cursus in et diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin nisl dui, sit amet porttitor sem auctor vitae. Nullam et elit gravida felis convallis porttitor ut a risus. Morbi nec arcu augue. Fusce eu scelerisque augue, dapibus cursus arcu. Ut scelerisque dolor purus, quis fermentum enim laoreet in. Nullam sapien est, dapibus et dapibus nec, faucibus interdum odio. Suspendisse varius porta dolor, in pulvinar magna facilisis sit amet. Donec cursus dapibus sagittis. Nulla facilisi. Fusce quis quam sit amet ex luctus ornare. Vestibulum consequat justo nisl.\n\nС уважением, Иванов И. И.",
-    };
 
     const {
         control,
@@ -31,12 +41,12 @@ function Confirm() {
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = (data) => {
+    const onSubmit = (data: any) => {
         console.log(data);
     };
 
-    const extrasParagraphs = store.extras.split("\n");
-    const appealParagraphs = store.appealText.split("\n");
+    const extraContactsParagraphs = extraContacts.split("\n");
+    const appealParagraphs = appealText.split("\n");
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
@@ -46,18 +56,23 @@ function Confirm() {
                 </h2>
                 <p className={s.lead_paragraph}>
                     <span className="spanBold">Заявитель: </span>{" "}
-                    {`${store.lastName} ${store.firstName} ${store.patronymic}`}
+                    {`${lastName} ${firstName} ${patronymic}`}
                 </p>
-                {extrasParagraphs.map((paragraph, index) => (
+                <p className={s.lead_paragraph}>
+                    <span className="spanBold">Эл. почта: </span>
+                    {email}
+                </p>
+                {extraContactsParagraphs.map((paragraph, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
                     <p className={s.lead_paragraph} key={index}>
                         {paragraph}
                     </p>
                 ))}
                 <p className={s.lead_paragraph}>
-                    <span className="spanBold">Тема обращения: </span>{" "}
-                    {`${store.appealTheme}`}
+                    <span className="spanBold">Текст обращения:</span>
                 </p>
                 {appealParagraphs.map((paragraph, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
                     <p className={s.lead_paragraph} key={index}>
                         {paragraph}
                     </p>
@@ -102,4 +117,4 @@ function Confirm() {
     );
 }
 
-export default Confirm;
+export default ConfirmStep;

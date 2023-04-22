@@ -2,7 +2,11 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 600px;
+  width: 800px;
+  margin: 0 auto;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-sizing: content-box;
+  padding: 36px;
 }
 
 .button {
