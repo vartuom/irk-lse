@@ -3,8 +3,6 @@ import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
-import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { Link, Route, Routes } from "react-router-dom";
 import s from "./cardsPage.module.css";
 import BasicsSlider from "../../components/cardSliders/basicsSlider";

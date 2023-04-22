@@ -48,11 +48,10 @@ function Navigation() {
                 </li>
                 <li>
                     <NavLink
-                        /* className={({ isActive }) =>
+                        to="appeals"
+                        className={({ isActive }) =>
                             isActive ? `${s.link} ${s.link_active}` : s.link
-                        } */
-                        className={s.link}
-                        to="#"
+                        }
                     >
                         Обращения граждан
                     </NavLink>
