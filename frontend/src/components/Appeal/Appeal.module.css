@@ -1,0 +1,60 @@
+.appeal {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 64px;
+  margin: 32px 0;
+}
+.appeal__titleContainer {
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  background: none;
+  cursor: pointer;
+}
+.appeal__title {
+  font: 24px/1.5 var(--font-golos-bold);
+}
+.appeal__text {
+  width: 700px;
+  font: 18px/1.5 var(--font-golos-regular);
+  overflow: hidden;
+}
+.appeal__text[aria-expanded=true] {
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  max-height: 999px;
+}
+.appeal__text[aria-expanded=false] {
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  max-height: 100px;
+}
+
+.appealer {
+  margin-top: 32px;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+.appealer__title {
+  font: 24px/1.5 var(--font-golos-bold);
+  padding-bottom: 8px;
+}
+.appealer__name {
+  font: 18px/1.5 var(--font-golos-regular);
+}
+.appealer__email {
+  font: 18px/1.5 var(--font-golos-regular);
+}
+.appealer__icon {
+  margin-bottom: -4px;
+}
+
+.arrow {
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.arrow_rotate {
+  transform: rotate(180deg);
+}

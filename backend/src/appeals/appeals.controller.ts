@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   ValidationPipe,
+  Query,
 } from "@nestjs/common";
 import { AppealsService } from "./appeals.service";
 import { CreateAppealDto } from "./dto/create-appeal.dto";
@@ -26,10 +27,10 @@ export class AppealsController {
     return this.appealsService.create(createAppealDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  /*@UseGuards(JwtAuthGuard)*/
   @Get()
-  findAll() {
-    return this.appealsService.findAll();
+  findAllByAppealStatus(@Query("processedStatus") processedStatus: boolean) {
+    return this.appealsService.findAllByAppealProcesStatus(processedStatus);
   }
 
   @Get(":id")
@@ -40,10 +41,5 @@ export class AppealsController {
   @Patch(":id")
   update(@Param("id") id: string, @Body() updateAppealDto: UpdateAppealDto) {
     return this.appealsService.update(+id, updateAppealDto);
-  }
-
-  @Delete(":id")
-  remove(@Param("id") id: string) {
-    return this.appealsService.remove(+id);
   }
 }

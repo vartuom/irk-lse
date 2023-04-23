@@ -16,8 +16,8 @@ export class AppealsService {
     await this.appealRepository.save(createAppealDto);
   }
 
-  findAll() {
-    return `This action returns all appeals`;
+  findAllByAppealProcesStatus(processedStatus: boolean) {
+    return this.appealRepository.findBy({ isProcessed: processedStatus });
   }
 
   findOne(id: number) {
@@ -26,9 +26,5 @@ export class AppealsService {
 
   update(id: number, updateAppealDto: UpdateAppealDto) {
     return `This action updates a #${id} appeal`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} appeal`;
   }
 }

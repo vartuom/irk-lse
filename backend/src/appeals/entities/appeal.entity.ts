@@ -32,4 +32,7 @@ export class Appeal {
   @Column("text")
   @Length(2)
   extras: string;
+
+  @Column({ default: false })
+  isProcessed: boolean;
 }
