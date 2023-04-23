@@ -10,6 +10,7 @@ import ContactsPage from "../../pages/contactsPage/contactsPage";
 import CardsPage from "../../pages/cardsPage/cardsPage";
 import PricesPage from "../../pages/pricesPage/pricesPage";
 import AppealsPage from "../../pages/appealsPage/appealsPage";
+import AppealDetails from "../appealDetails/appealDetails";
 
 function App() {
     const location = useLocation();
@@ -38,6 +39,17 @@ function App() {
                                     <ScrollBox>
                                         <PricesTable />
                                     </ScrollBox>
+                                </Modal>
+                            }
+                        />
+                        <Route
+                            path="/appeals/details"
+                            element={
+                                <Modal
+                                    onClose={() => navigate(-1)}
+                                    isModalOpened
+                                >
+                                    <AppealDetails />
                                 </Modal>
                             }
                         />

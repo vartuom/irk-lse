@@ -3,15 +3,19 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import s from "./appealForm.module.css";
-import { useAppSelector } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { postAppeal } from "../../store/appealForm.slice";
 
 function ConfirmStep() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const dispatch = useAppDispatch();
     const {
         firstName,
         lastName,
-        patronymic,
+        middleName,
         email,
         extraContacts,
         appealText,
@@ -19,7 +23,7 @@ function ConfirmStep() {
         (store) => ({
             firstName: store.appealForm.firstStep.firstName,
             lastName: store.appealForm.firstStep.lastName,
-            patronymic: store.appealForm.firstStep.patronymic,
+            middleName: store.appealForm.firstStep.middleName,
             email: store.appealForm.secondStep.email,
             extraContacts: store.appealForm.secondStep.extraContacts,
             appealText: store.appealForm.thirdStep.appealText,
@@ -30,7 +34,6 @@ function ConfirmStep() {
     const schema = yup.object({
         isAgreed: yup.bool().oneOf([true], "Вы должны подтвердить готовность"),
     });
-    const navigate = useNavigate();
 
     const {
         control,
@@ -41,8 +44,20 @@ function ConfirmStep() {
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = (data: any) => {
-        console.log(data);
+    const onSubmit = () => {
+        dispatch(
+            postAppeal({
+                firstName,
+                lastName,
+                middleName,
+                email,
+                extraContacts,
+                appealText,
+            })
+        );
+        navigate("/appeals/details", {
+            state: { background: location },
+        });
     };
 
     const extraContactsParagraphs = extraContacts.split("\n");
@@ -56,7 +71,7 @@ function ConfirmStep() {
                 </h2>
                 <p className={s.lead_paragraph}>
                     <span className="spanBold">Заявитель: </span>{" "}
-                    {`${lastName} ${firstName} ${patronymic}`}
+                    {`${lastName} ${firstName} ${middleName}`}
                 </p>
                 <p className={s.lead_paragraph}>
                     <span className="spanBold">Эл. почта: </span>
