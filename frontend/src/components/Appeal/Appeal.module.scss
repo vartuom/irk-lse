@@ -51,13 +51,16 @@
     }
 
     &__button {
+        display: flex;
+        align-items: center;
+        padding: 16px;
         cursor: pointer;
-        border: 2px solid var(--bg-color-secondary);
-        background: none;
+        border: none;
+        background: var(--bg-color-blue-accent);
         border-radius: 8px;
         height: 48px;
         font: 18px/1.5 var(--font-golos-regular);
-        color: #000;
+        color: #fff;
     }
 }
 
@@ -112,4 +115,6 @@
 }
 
 .titleSeparator {
+    border: 2px solid var(--bg-color-blue-accent);
+    border-radius: 50px;
 }

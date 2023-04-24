@@ -3,8 +3,10 @@ import Appeal from "../Appeal/Appeal";
 
 interface IAppeal {
     id: number;
-    appealerName: string;
-    appealerEmail: string;
+    firstName: string;
+    lastName: string;
+    middleName?: string;
+    email: string;
     appealText: string;
     extras?: string;
 }
@@ -37,8 +39,9 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
         <div>
             {appeals.map((appeal) => (
                 <Appeal
-                    appealerName={appeal.appealerName}
-                    appealerEmail={appeal.appealerEmail}
+                    firstName={appeal.firstName}
+                    lastName={appeal.lastName}
+                    email={appeal.email}
                     appealText={appeal.appealText}
                     id={appeal.id}
                     key={appeal.id}

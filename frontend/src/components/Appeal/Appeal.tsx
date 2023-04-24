@@ -6,17 +6,21 @@ import style from "./Appeal.module.css";
 
 interface IAppeal {
     id: number;
-    appealerName: string;
-    appealerEmail: string;
+    firstName: string;
+    lastName: string;
+    middleName?: string;
+    email: string;
     appealText: string;
     extras?: string;
 }
 
 export default function Appeal({
-    appealerName,
-    appealerEmail,
+    firstName,
+    lastName,
+    email,
     appealText,
     extras,
+    middleName,
     id,
 }: IAppeal) {
     const [isActive, setIsActive] = useState(false);
@@ -66,8 +70,8 @@ export default function Appeal({
                 />
                 <div className={style.appeler__info}>
                     <div className={style.appealer__title}>Отправитель</div>
-                    <div className={style.appealer__name}>{appealerName}</div>
-                    <div className={style.appealer__email}>{appealerEmail}</div>
+                    <div className={style.appealer__name}>{firstName}</div>
+                    <div className={style.appealer__email}>{email}</div>
                 </div>
             </div>
         </div>
