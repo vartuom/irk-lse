@@ -9,6 +9,7 @@ import HistoryPage from "../../pages/historyPage/historyPage";
 import ContactsPage from "../../pages/contactsPage/contactsPage";
 import CardsPage from "../../pages/cardsPage/cardsPage";
 import PricesPage from "../../pages/pricesPage/pricesPage";
+import AppealsPage from "../../pages/appealsPage/appealsPage";
 import AdminPage from "../../pages/adminPage/AdminPage";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
                     <Route path="/history" element={<HistoryPage />} />
                     <Route path="/contacts" element={<ContactsPage />} />
                     <Route path="/prices" element={<PricesPage />} />
+                    <Route path="/appeals/*" element={<AppealsPage />} />
                     <Route path="/cards/*" element={<CardsPage />} />
                     {/* Protected Route */}
                     <Route path="/admin/*" element={<AdminPage />} />
