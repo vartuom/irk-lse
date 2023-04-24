@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import DescriptionIcon from "@mui/icons-material/Description";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import style from "./Appeal.module.css";
 
@@ -25,28 +24,40 @@ export default function Appeal({
     return (
         <div className={style.appeal}>
             <div className={style.appeal__info}>
-                <button
-                    type="button"
-                    onClick={() => setIsActive(!isActive)}
-                    className={style.appeal__titleContainer}
-                >
+                <div className={style.appeal__titleContainer}>
                     <DescriptionIcon sx={{ fontSize: 48 }} />
                     <p
                         className={style.appeal__title}
                     >{`Обращение номер: #${id}`}</p>
-                    <div
-                        className={`${style.arrow} ${
-                            isActive ? style.arrow_rotate : ""
-                        }`}
-                    >
-                        <ExpandMoreIcon sx={{ fontSize: 42 }} />
-                    </div>
-                </button>
+                </div>
                 <hr className={style.titleSeparator} />
                 <div className={style.appeal__text} aria-expanded={isActive}>
                     <p>{appealText}</p>
-                    <button type="button">Test</button>
-                    <button type="button">Test</button>
+                </div>
+                <button
+                    type="button"
+                    className={style.overflowButton}
+                    onClick={() => setIsActive(!isActive)}
+                >
+                    {isActive ? "Свернуть" : "Читать Дальше"}
+                </button>
+
+                <div className={style.appeal__buttons}>
+                    <div className={style.buttons__redact}>
+                        <button className={style.appeal__button} type="button">
+                            Редактировать
+                        </button>
+                        <button className={style.appeal__button} type="button">
+                            В обработанные
+                        </button>
+                        <button className={style.appeal__button} type="button">
+                            Дать ответ
+                        </button>
+                    </div>
+
+                    <button className={style.appeal__button} type="button">
+                        Печать
+                    </button>
                 </div>
             </div>
             <div className={style.appealer}>
