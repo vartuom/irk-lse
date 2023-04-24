@@ -11,27 +11,41 @@ import { IsEmail, IsString, Length } from "class-validator";
 export class Appeal {
   @PrimaryGeneratedColumn()
   id: number;
+
   @CreateDateColumn()
   createdAt: Date;
+
   @UpdateDateColumn()
   updatedAt: Date;
 
   @Column()
   @IsString()
-  @Length(2)
-  appealerName: string;
+  @Length(2, 250)
+  firstName: string;
+
+  @Column()
+  @IsString()
+  @Length(2, 250)
+  lastName: string;
+
+  @Column({ nullable: true })
+  @IsString()
+  @Length(2, 250)
+  middleName: string;
 
   @Column()
   @IsEmail()
-  appealerEmail: string;
+  email: string;
+
+  @Column({ nullable: true })
+  @IsString()
+  @Length(2, 250)
+  extraContacts: string;
 
   @Column("text")
-  @Length(2)
+  @IsString()
+  @Length(2, 5000)
   appealText: string;
-
-  @Column("text")
-  @Length(2)
-  extras: string;
 
   @Column({ default: false })
   isProcessed: boolean;
