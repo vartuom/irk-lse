@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ValidationPipe,
 } from "@nestjs/common";
 import { AppealsService } from "./appeals.service";
 import { CreateAppealDto } from "./dto/create-appeal.dto";

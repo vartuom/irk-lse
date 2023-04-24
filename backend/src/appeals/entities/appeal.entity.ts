@@ -5,27 +5,43 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { IsEmail, IsString, Length } from "class-validator";
+import { IsEmail, IsOptional, IsString, Length } from "class-validator";
 
 @Entity({ name: "appeals" })
 export class Appeal {
   @PrimaryGeneratedColumn()
   id: number;
+
   @CreateDateColumn()
   createdAt: Date;
+
   @UpdateDateColumn()
   updatedAt: Date;
 
   @Column()
   @IsString()
-  @Length(2)
-  appealerName: string;
+  @Length(2, 250)
+  firstName: string;
+
+  @Column()
+  @IsString()
+  @Length(2, 250)
+  lastName: string;
+
+  @Column({ nullable: true })
+  @IsString()
+  @Length(2, 250)
+  middleName: string;
 
   @Column()
   @IsEmail()
-  appealerEmail: string;
+  email: string;
+
+  @IsString()
+  extraContacts: string;
 
   @Column("text")
-  @Length(2)
+  @IsString()
+  @Length(2, 5000)
   appealText: string;
 }
