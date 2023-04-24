@@ -4,13 +4,14 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import style from "./Appeal.module.css";
 
-interface IAppeal {
+interface IAppealCard {
     id: number;
     firstName: string;
     lastName: string;
     middleName?: string;
     email: string;
     appealText: string;
+    isProcessed?: boolean;
     extras?: string;
 }
 
@@ -21,9 +22,19 @@ export default function Appeal({
     appealText,
     extras,
     middleName,
+    isProcessed,
     id,
-}: IAppeal) {
+}: IAppealCard) {
     const [isActive, setIsActive] = useState(false);
+
+    const changeProcessedStatus = async () => {
+        const response = await fetch(`http://localhost:3000/appeals/${id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ processedStatus: !isProcessed }),
+        });
+        console.log(response.status);
+    };
 
     return (
         <div className={style.appeal}>
@@ -47,17 +58,19 @@ export default function Appeal({
                 </button>
 
                 <div className={style.appeal__buttons}>
-                    <div className={style.buttons__redact}>
-                        <button className={style.appeal__button} type="button">
-                            Редактировать
-                        </button>
-                        <button className={style.appeal__button} type="button">
-                            В обработанные
-                        </button>
-                        <button className={style.appeal__button} type="button">
-                            Дать ответ
-                        </button>
-                    </div>
+                    <button className={style.appeal__button} type="button">
+                        Редактировать
+                    </button>
+                    <button
+                        onClick={changeProcessedStatus}
+                        className={style.appeal__button}
+                        type="button"
+                    >
+                        {isProcessed ? "Вернуть" : "В обработанные"}
+                    </button>
+                    <button className={style.appeal__button} type="button">
+                        Дать ответ
+                    </button>
                     <button className={style.appeal__button} type="button">
                         Печать
                     </button>

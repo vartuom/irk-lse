@@ -21,10 +21,9 @@ export class AppealsService {
   }
 
   async updateAppealStatus(_id: number, processedStatus: boolean) {
-    return this.appealRepository.update(
-      { id: _id },
-      { isProcessed: processedStatus },
-    );
+    return await this.appealRepository.update(_id, {
+      isProcessed: processedStatus,
+    });
   }
 
   findOne(id: number) {

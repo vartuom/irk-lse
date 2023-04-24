@@ -45,6 +45,7 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
                     appealText={appeal.appealText}
                     id={appeal.id}
                     key={appeal.id}
+                    isProcessed={isProcessed}
                 />
             ))}
         </div>

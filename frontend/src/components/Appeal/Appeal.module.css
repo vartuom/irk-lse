@@ -5,7 +5,7 @@
   justify-content: flex-end;
   padding: 16px 32px 28px 32px;
   gap: 64px;
-  margin: 32px 0;
+  margin: 48px auto;
   border-radius: 16px;
   box-shadow: 0 -1px 2px 0 rgba(24, 94, 224, 0.15), 2px 8px 16px 0 rgba(24, 94, 224, 0.15);
   width: 900px;
@@ -41,7 +41,7 @@
 .appeal__buttons {
   margin-top: 24px;
   display: flex;
-  justify-content: space-between;
+  gap: 12px;
 }
 .appeal__button {
   display: flex;
@@ -104,4 +104,5 @@
 .titleSeparator {
   border: 2px solid var(--bg-color-blue-accent);
   border-radius: 50px;
+  margin: 0;
 }

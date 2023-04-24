@@ -35,7 +35,10 @@ export class AppealsController {
 
   /*@UseGuards(JwtAuthGuard)*/
   @Patch(":id")
-  update(@Param("id") id: number, @Body() processedStatus: boolean) {
+  update(
+    @Param("id") id: number,
+    @Body() { processedStatus }: { processedStatus: boolean },
+  ) {
     return this.appealsService.updateAppealStatus(id, processedStatus);
   }
 
