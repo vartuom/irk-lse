@@ -54,7 +54,6 @@ export default function Appeal({
                             Дать ответ
                         </button>
                     </div>
-
                     <button className={style.appeal__button} type="button">
                         Печать
                     </button>
