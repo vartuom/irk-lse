@@ -19,7 +19,7 @@ import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 export class AppealsController {
   constructor(private readonly appealsService: AppealsService) {}
 
-  @Post()
+  @Post("create")
   create(
     @Body(new ValidationPipe({ transform: true }))
     createAppealDto: CreateAppealDto,
@@ -33,13 +33,14 @@ export class AppealsController {
     return this.appealsService.findAllByAppealProcesStatus(processedStatus);
   }
 
+  /*@UseGuards(JwtAuthGuard)*/
+  @Patch(":id")
+  update(@Param("id") id: number, @Body() processedStatus: boolean) {
+    return this.appealsService.updateAppealStatus(id, processedStatus);
+  }
+
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.appealsService.findOne(+id);
-  }
-
-  @Patch(":id")
-  update(@Param("id") id: string, @Body() updateAppealDto: UpdateAppealDto) {
-    return this.appealsService.update(+id, updateAppealDto);
   }
 }

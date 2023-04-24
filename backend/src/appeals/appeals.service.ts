@@ -20,11 +20,14 @@ export class AppealsService {
     return this.appealRepository.findBy({ isProcessed: processedStatus });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} appeal`;
+  async updateAppealStatus(_id: number, processedStatus: boolean) {
+    return this.appealRepository.update(
+      { id: _id },
+      { isProcessed: processedStatus },
+    );
   }
 
-  update(id: number, updateAppealDto: UpdateAppealDto) {
-    return `This action updates a #${id} appeal`;
+  findOne(id: number) {
+    return `This action returns a #${id} appeal`;
   }
 }
