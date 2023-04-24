@@ -11,11 +11,19 @@ import CardsPage from "../../pages/cardsPage/cardsPage";
 import PricesPage from "../../pages/pricesPage/pricesPage";
 import AppealsPage from "../../pages/appealsPage/appealsPage";
 import AppealDetails from "../appealDetails/appealDetails";
+import { resetForm } from "../../store/appealForm.slice";
+import { useAppDispatch } from "../../store/store";
 
 function App() {
     const location = useLocation();
     const background = location.state?.background;
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
+    const handleAppealFormClose = () => {
+        dispatch(resetForm());
+        navigate("/appeals");
+    };
     return (
         <div>
             <Layout>
@@ -46,7 +54,7 @@ function App() {
                             path="/appeals/details"
                             element={
                                 <Modal
-                                    onClose={() => navigate(-1)}
+                                    onClose={handleAppealFormClose}
                                     isModalOpened
                                 >
                                     <AppealDetails />

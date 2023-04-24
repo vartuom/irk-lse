@@ -17,9 +17,7 @@ export class CreateAppealDto {
   @IsEmail()
   email: string;
 
-  @IsOptional()
   @IsString()
-  @Length(2, 250)
   extraContacts: string;
 
   @IsString()

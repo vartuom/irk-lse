@@ -29,6 +29,12 @@
       pointer-events: none;
     }
   }
+  &__loader {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+  }
   &:hover {
     opacity: var(--hover-opacity);
   }

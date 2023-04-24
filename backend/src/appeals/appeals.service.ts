@@ -4,6 +4,7 @@ import { UpdateAppealDto } from "./dto/update-appeal.dto";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Appeal } from "./entities/appeal.entity";
 import { Repository } from "typeorm";
+import { sleep } from "../utils/utils";
 
 @Injectable()
 export class AppealsService {
@@ -13,6 +14,7 @@ export class AppealsService {
   ) {}
   async create(createAppealDto: CreateAppealDto) {
     const newAppeal = this.appealsRepository.create(createAppealDto);
+    await sleep(5000);
     return await this.appealsRepository.save(newAppeal);
   }
 
