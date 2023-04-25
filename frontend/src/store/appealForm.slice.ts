@@ -11,7 +11,10 @@ export const postAppeal = createAsyncThunk(
     "appealForm/postAppeal",
     async (value: any, { rejectWithValue }) => {
         try {
-            const { data } = await axios.post(`${baseUrl}/appeals`, value);
+            const { data } = await axios.post(
+                `${baseUrl}/appeals/create`,
+                value
+            );
             return data;
         } catch (error: any) {
             return rejectWithValue(error.response.data);
