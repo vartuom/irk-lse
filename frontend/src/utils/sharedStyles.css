@@ -16,3 +16,7 @@
 .link:hover {
     opacity: 0.5;
 }
+
+.frozen {
+    pointer-events: none;
+}

@@ -6,7 +6,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import s from "./appealForm.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setFirstStep, setSecondStep } from "../../store/appealForm.slice";
+import { setSecondStep } from "../../store/appealForm.slice";
 
 export interface ISecondStep {
     email: string;
@@ -16,10 +16,10 @@ function SecondStep() {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const { firstName, patronymic, email, extraContacts } = useAppSelector(
+    const { firstName, middleName, email, extraContacts } = useAppSelector(
         (store) => ({
             firstName: store.appealForm.firstStep.firstName,
-            patronymic: store.appealForm.firstStep.patronymic,
+            middleName: store.appealForm.firstStep.middleName,
             email: store.appealForm.secondStep.email,
             extraContacts: store.appealForm.secondStep.extraContacts,
         }),
@@ -66,7 +66,7 @@ function SecondStep() {
                     Хорошо, а куда нам направить ответ? (2 шаг из 4)
                 </h2>
                 <p className={s.lead_paragraph}>
-                    {`${firstName} ${patronymic}, прежде чем мы перейдем к вашему вопросу, 
+                    {`${firstName} ${middleName}, прежде чем мы перейдем к вашему вопросу, 
                     укажите пожалуйста ваш адрес электронной почты. Как только 
                     ответ на обращение будет готов, 
                     мы отправим его отсканированную копию. 

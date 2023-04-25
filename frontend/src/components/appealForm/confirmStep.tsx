@@ -1,36 +1,46 @@
 import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { Checkbox, FormControlLabel, TextField } from "@mui/material";
+import {
+    Checkbox,
+    CircularProgress,
+    FormControlLabel,
+    TextField,
+} from "@mui/material";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Oval, TailSpin } from "react-loader-spinner";
 import s from "./appealForm.module.css";
-import { useAppSelector } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { postAppeal } from "../../store/appealForm.slice";
 
 function ConfirmStep() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const dispatch = useAppDispatch();
     const {
         firstName,
         lastName,
-        patronymic,
+        middleName,
         email,
         extraContacts,
         appealText,
-    } = useAppSelector(
-        (store) => ({
-            firstName: store.appealForm.firstStep.firstName,
-            lastName: store.appealForm.firstStep.lastName,
-            patronymic: store.appealForm.firstStep.patronymic,
-            email: store.appealForm.secondStep.email,
-            extraContacts: store.appealForm.secondStep.extraContacts,
-            appealText: store.appealForm.thirdStep.appealText,
-        }),
-        () => true
-    );
+        isMailed,
+        isPending,
+    } = useAppSelector((store) => ({
+        firstName: store.appealForm.firstStep.firstName,
+        lastName: store.appealForm.firstStep.lastName,
+        middleName: store.appealForm.firstStep.middleName,
+        email: store.appealForm.secondStep.email,
+        extraContacts: store.appealForm.secondStep.extraContacts,
+        appealText: store.appealForm.thirdStep.appealText,
+        isMailed: store.appealForm.isMailed,
+        isPending: store.appealForm.isPending,
+    }));
 
     const schema = yup.object({
         isAgreed: yup.bool().oneOf([true], "Вы должны подтвердить готовность"),
     });
-    const navigate = useNavigate();
 
     const {
         control,
@@ -41,12 +51,28 @@ function ConfirmStep() {
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = (data: any) => {
-        console.log(data);
+    const onSubmit = () => {
+        dispatch(
+            postAppeal({
+                firstName,
+                lastName,
+                middleName,
+                email,
+                extraContacts,
+                appealText,
+            })
+        );
     };
-
     const extraContactsParagraphs = extraContacts.split("\n");
     const appealParagraphs = appealText.split("\n");
+
+    useEffect(() => {
+        if (isMailed)
+            navigate("/appeals/details", {
+                state: { background: location },
+            });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isMailed]);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
@@ -56,7 +82,7 @@ function ConfirmStep() {
                 </h2>
                 <p className={s.lead_paragraph}>
                     <span className="spanBold">Заявитель: </span>{" "}
-                    {`${lastName} ${firstName} ${patronymic}`}
+                    {`${lastName} ${firstName} ${middleName}`}
                 </p>
                 <p className={s.lead_paragraph}>
                     <span className="spanBold">Эл. почта: </span>
@@ -85,6 +111,7 @@ function ConfirmStep() {
                 render={({ field }) => (
                     <FormControlLabel
                         control={<Checkbox {...field} />}
+                        disabled={isPending}
                         label={
                             <p className={s.formLabel}>
                                 Нажимая кнопку «Отправить» я даю согласие на
@@ -99,17 +126,38 @@ function ConfirmStep() {
             <button
                 type="submit"
                 aria-label="Отправить"
+                disabled={isPending}
                 className={`${s.button} ${s.button_type_primary} ${
                     !isValid && s.button_type_inactive
-                }`}
+                } ${isPending && "frozen"}`}
             >
-                Отправить
+                <div className={s.button__loader}>
+                    {isPending ? (
+                        <>
+                            Отправляем...{" "}
+                            <TailSpin
+                                height="18"
+                                width="18"
+                                color="#ffffff"
+                                ariaLabel="tail-spin-loading"
+                                radius="1"
+                                wrapperStyle={{}}
+                                wrapperClass=""
+                            />
+                        </>
+                    ) : (
+                        <>Отправить</>
+                    )}
+                </div>
             </button>
             <button
                 type="button"
                 onClick={() => navigate(-1)}
                 aria-label="Назад"
-                className={`${s.button} ${s.button_type_secondary}`}
+                disabled={isPending}
+                className={`${s.button} ${s.button_type_secondary} ${
+                    isPending && "frozen"
+                }`}
             >
                 Назад
             </button>

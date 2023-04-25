@@ -10,12 +10,21 @@ import ContactsPage from "../../pages/contactsPage/contactsPage";
 import CardsPage from "../../pages/cardsPage/cardsPage";
 import PricesPage from "../../pages/pricesPage/pricesPage";
 import AppealsPage from "../../pages/appealsPage/appealsPage";
+import AppealDetails from "../appealDetails/appealDetails";
+import { resetForm } from "../../store/appealForm.slice";
+import { useAppDispatch } from "../../store/store";
 import AdminPage from "../../pages/adminPage/AdminPage";
 
 function App() {
     const location = useLocation();
     const background = location.state?.background;
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
+    const handleAppealFormClose = () => {
+        dispatch(resetForm());
+        navigate("/appeals");
+    };
     return (
         <div>
             <Layout>
@@ -41,6 +50,17 @@ function App() {
                                     <ScrollBox>
                                         <PricesTable />
                                     </ScrollBox>
+                                </Modal>
+                            }
+                        />
+                        <Route
+                            path="/appeals/details"
+                            element={
+                                <Modal
+                                    onClose={handleAppealFormClose}
+                                    isModalOpened
+                                >
+                                    <AppealDetails />
                                 </Modal>
                             }
                         />

@@ -28,6 +28,12 @@
   opacity: 0.3;
   pointer-events: none;
 }
+.button__loader {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
 .button:hover {
   opacity: var(--hover-opacity);
 }

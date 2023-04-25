@@ -1,19 +1,39 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import axios from "axios";
+import moment from "moment";
 import { IFirstStep } from "../components/appealForm/firstStep";
 import { ISecondStep } from "../components/appealForm/secondStep";
 import { IThirdStep } from "../components/appealForm/thirdStep";
+import { baseUrl } from "../utils/utils";
+import { IAppealResponse } from "../utils/types";
+
+export const postAppeal = createAsyncThunk(
+    "appealForm/postAppeal",
+    async (value: any, { rejectWithValue }) => {
+        try {
+            const { data } = await axios.post(`${baseUrl}/appeals`, value);
+            return data;
+        } catch (error: any) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
 
 interface IInitialState {
     firstStep: IFirstStep;
     secondStep: ISecondStep;
     thirdStep: IThirdStep;
+    isPending: boolean;
+    isError: boolean;
+    isMailed: boolean;
+    appealDetails: string;
 }
 
 const initialState: IInitialState = {
     firstStep: {
         firstName: "",
         lastName: "",
-        patronymic: "",
+        middleName: "",
     },
     secondStep: {
         email: "",
@@ -22,6 +42,10 @@ const initialState: IInitialState = {
     thirdStep: {
         appealText: "",
     },
+    isPending: false,
+    isError: false,
+    isMailed: false,
+    appealDetails: "",
 };
 
 export const appealFormSlice = createSlice({
@@ -31,7 +55,8 @@ export const appealFormSlice = createSlice({
         setFirstStep(state, action: PayloadAction<IFirstStep>) {
             state.firstStep.firstName = action.payload.firstName;
             state.firstStep.lastName = action.payload.lastName;
-            state.firstStep.patronymic = action.payload.patronymic;
+            state.firstStep.middleName = action.payload.middleName;
+            state.isMailed = false;
         },
         setSecondStep(state, action: PayloadAction<ISecondStep>) {
             state.secondStep.email = action.payload.email;
@@ -40,9 +65,39 @@ export const appealFormSlice = createSlice({
         setThirdStep(state, action) {
             state.thirdStep.appealText = action.payload.appealText;
         },
+        resetForm(state) {
+            state.firstStep.firstName = "";
+            state.firstStep.lastName = "";
+            state.firstStep.middleName = "";
+            state.secondStep.email = "";
+            state.secondStep.extraContacts = "";
+            state.thirdStep.appealText = "";
+            state.appealDetails = "";
+        },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(
+            postAppeal.fulfilled,
+            (state, action: PayloadAction<IAppealResponse>) => {
+                state.isPending = false;
+                state.isMailed = true;
+                state.appealDetails = `№ ${action.payload.id} от ${moment(
+                    action.payload.createdAt
+                ).format("DD.MM.YYYY")} г.`;
+            }
+        );
+        builder.addCase(postAppeal.pending, (state) => {
+            state.isMailed = false;
+            state.isError = false;
+            state.isPending = true;
+        });
+        builder.addCase(postAppeal.rejected, (state, action) => {
+            state.isError = true;
+            state.isPending = false;
+        });
     },
 });
 
-export const { setFirstStep, setSecondStep, setThirdStep } =
+export const { setFirstStep, setSecondStep, setThirdStep, resetForm } =
     appealFormSlice.actions;
 export default appealFormSlice.reducer;

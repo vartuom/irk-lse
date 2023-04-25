@@ -1,0 +1,44 @@
+.container {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  &__lead {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__title {
+    margin: 0;
+    font: 22px/1.5 var(--font-golos-bold);
+  }
+  &__paragraph {
+    margin: 0;
+    font: 18px/1.5 var(--font-golos-regular);
+    &_type_tip {
+      font-size: 16px;
+      opacity: 0.6;
+    }
+  }
+}
+
+.button {
+  width: 260px;
+  min-height: 60px;
+  font: 18px/1.5 var(--font-golos-regular);
+  cursor: pointer;
+  transition: var(--opacity-transition);
+  border-radius: 8px;
+  &_type {
+    &_primary {
+      color: var(--text-color-secondary);
+      background: var(--bg-color-secondary);
+    }
+  }
+  &:hover {
+    opacity: var(--hover-opacity);
+  }
+}

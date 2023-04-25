@@ -12,7 +12,7 @@ import { setFirstStep } from "../../store/appealForm.slice";
 export interface IFirstStep {
     firstName: string;
     lastName: string;
-    patronymic: string;
+    middleName: string;
 }
 
 function FirstStep() {
@@ -20,11 +20,11 @@ function FirstStep() {
     const navigate = useNavigate();
 
     // используем функцию сравнения () => true что бы избежать лишних ререндеров
-    const { firstName, lastName, patronymic } = useAppSelector(
+    const { firstName, lastName, middleName } = useAppSelector(
         (store) => ({
             firstName: store.appealForm.firstStep.firstName,
             lastName: store.appealForm.firstStep.lastName,
-            patronymic: store.appealForm.firstStep.patronymic,
+            middleName: store.appealForm.firstStep.middleName,
         }),
         () => true
     );
@@ -52,7 +52,7 @@ function FirstStep() {
         defaultValues: {
             firstName,
             lastName,
-            patronymic,
+            middleName,
         },
         resolver: yupResolver(schema),
         mode: "onBlur",
@@ -119,15 +119,15 @@ function FirstStep() {
                 )}
             />
             <Controller
-                name="patronymic"
+                name="middleName"
                 control={control}
                 render={({ field }) => (
                     <TextField
                         label="Отчество (при наличии)"
-                        error={!!errors?.patronymic}
+                        error={!!errors?.middleName}
                         helperText={
-                            errors?.patronymic
-                                ? errors?.patronymic?.message
+                            errors?.middleName
+                                ? errors?.middleName?.message
                                 : null
                         }
                         {...field}

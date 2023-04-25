@@ -1,19 +1,21 @@
 import { Injectable } from "@nestjs/common";
 import { CreateAppealDto } from "./dto/create-appeal.dto";
-import { UpdateAppealDto } from "./dto/update-appeal.dto";
-import { InjectRepository } from "@nestjs/typeorm";
 import { Appeal } from "./entities/appeal.entity";
 import { Repository } from "typeorm";
+import { InjectRepository } from "@nestjs/typeorm";
+import { sleep } from "../utils/utils";
 
 @Injectable()
 export class AppealsService {
   constructor(
     @InjectRepository(Appeal)
-    private appealRepository: Repository<Appeal>,
+    private readonly appealRepository: Repository<Appeal>,
   ) {}
 
-  async create(createAppealDto: CreateAppealDto): Promise<void> {
-    await this.appealRepository.save(createAppealDto);
+  async create(createAppealDto: CreateAppealDto): Promise<Appeal> {
+    const newAppeal = this.appealRepository.create(createAppealDto);
+    await sleep(5000);
+    return await this.appealRepository.save(newAppeal);
   }
 
   findAllByAppealProcesStatus(processedStatus: boolean) {

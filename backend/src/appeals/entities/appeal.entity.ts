@@ -5,7 +5,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { IsEmail, IsString, Length } from "class-validator";
+import { IsEmail, IsOptional, IsString, Length } from "class-validator";
 
 @Entity({ name: "appeals" })
 export class Appeal {
@@ -39,7 +39,6 @@ export class Appeal {
 
   @Column({ nullable: true })
   @IsString()
-  @Length(2, 250)
   extraContacts: string;
 
   @Column("text")

@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import s from "./appealForm.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setSecondStep, setThirdStep } from "../../store/appealForm.slice";
+import { setThirdStep } from "../../store/appealForm.slice";
 
 export interface IThirdStep {
     appealText: string;
