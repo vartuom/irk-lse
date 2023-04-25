@@ -1,24 +1,35 @@
 .appeal {
+  position: relative;
   display: flex;
   align-items: flex-start;
   flex-direction: row-reverse;
   justify-content: flex-end;
   padding: 16px 32px 28px 32px;
-  gap: 64px;
+  gap: 32px;
   margin: 48px auto;
   border-radius: 16px;
   box-shadow: 0 -1px 2px 0 rgba(24, 94, 224, 0.15), 2px 8px 16px 0 rgba(24, 94, 224, 0.15);
   width: 900px;
 }
-.appeal__titleContainer {
+.appeal__titleLeft {
   border: none;
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 24px;
   background: none;
+}
+.appeal__titleContainer {
+  display: flex;
+  justify-content: space-between;
 }
 .appeal__title {
   font: 24px/1.5 var(--font-golos-bold);
+}
+.appeal__date {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 32px;
+  font: 18px/1.5 var(--font-golos-regular);
 }
 .appeal__text {
   width: 600px;
@@ -62,19 +73,30 @@
 }
 
 .appealer {
+  width: 220px;
   margin-top: 16px;
   display: flex;
   align-items: flex-end;
-  gap: 12px;
+}
+.appealer > div {
+  width: 100%;
 }
 .appealer__title {
   font: 24px/1.5 var(--font-golos-bold);
-  padding-bottom: 8px;
+  padding-bottom: 12px;
 }
-.appealer__name {
+.appealer__text {
   font: 18px/1.5 var(--font-golos-regular);
 }
 .appealer__email {
+  margin-top: 12px;
+  font: 18px/1.5 var(--font-golos-demibold);
+  overflow-wrap: anywhere;
+}
+.appealer__extraContacts {
+  overflow-wrap: break-word;
+  margin-top: 8px;
+  padding-right: 16px;
   font: 18px/1.5 var(--font-golos-regular);
 }
 .appealer__icon {

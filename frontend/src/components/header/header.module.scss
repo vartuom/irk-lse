@@ -135,3 +135,9 @@
         max-width: 300px;
     }
 }
+
+@media print {
+    .header {
+        display: none;
+    }
+}

@@ -3,12 +3,15 @@ import Appeal from "../Appeal/Appeal";
 
 interface IAppeal {
     id: number;
+    createdAt: Date;
+    updatedAt: Date;
     firstName: string;
     lastName: string;
     middleName?: string;
     email: string;
     appealText: string;
-    extras?: string;
+    isProcessed?: boolean;
+    extraContacts?: string;
 }
 
 function Appeals({ isProcessed }: { isProcessed?: boolean }) {
@@ -41,11 +44,15 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
                 <Appeal
                     firstName={appeal.firstName}
                     lastName={appeal.lastName}
+                    middleName={appeal.middleName}
                     email={appeal.email}
                     appealText={appeal.appealText}
                     id={appeal.id}
                     key={appeal.id}
                     isProcessed={isProcessed}
+                    extraContacts={appeal.extraContacts}
+                    createdAt={appeal.createdAt}
+                    updatedAt={appeal.updatedAt}
                 />
             ))}
         </div>

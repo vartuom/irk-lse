@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { Route, Routes, NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Route, Routes, NavLink, useLocation } from "react-router-dom";
 import Appeals from "../../components/Appeals/Appeals";
 
 import style from "./AdminPage.module.css";
 
 function AdminPage() {
+    const notScrollToTop = true;
+
     return (
         <main className="main appeals">
             <div className={style.appeals__tabs}>
@@ -18,6 +20,7 @@ function AdminPage() {
                                 : ""
                         } ${style.tab}`
                     }
+                    state={{ notScrollToTop }}
                 >
                     Необработанные обращения
                 </NavLink>
@@ -31,6 +34,7 @@ function AdminPage() {
                                 : ""
                         } ${style.tab}`
                     }
+                    state={{ notScrollToTop }}
                 >
                     Обработанные обращения
                 </NavLink>

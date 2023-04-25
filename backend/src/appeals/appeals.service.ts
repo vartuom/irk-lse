@@ -28,7 +28,8 @@ export class AppealsService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} appeal`;
+  async findOne(_id: number): Promise<Appeal> {
+    const appeal = await this.appealRepository.findOneBy({ id: _id });
+    return appeal;
   }
 }

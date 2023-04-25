@@ -5,6 +5,11 @@
   color: var(--text-color-secondary);
   position: relative;
 }
+@media print {
+  .footer {
+    display: none;
+  }
+}
 
 .container {
   display: flex;

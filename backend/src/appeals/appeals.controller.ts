@@ -41,6 +41,7 @@ export class AppealsController {
     return this.appealsService.updateAppealStatus(id, processedStatus);
   }
 
+  /*@UseGuards(JwtAuthGuard)*/
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.appealsService.findOne(+id);
