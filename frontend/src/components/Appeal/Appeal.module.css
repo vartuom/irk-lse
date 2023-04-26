@@ -54,6 +54,11 @@
   display: flex;
   gap: 12px;
 }
+@media print {
+  .appeal__buttons {
+    display: none;
+  }
+}
 .appeal__button {
   display: flex;
   align-items: center;

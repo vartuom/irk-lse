@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import DescriptionIcon from "@mui/icons-material/Description";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+import { useReactToPrint } from "react-to-print";
 import moment from "moment";
 import "moment/dist/locale/ru";
 
@@ -45,8 +46,17 @@ export default function Appeal({
         console.log(response.status);
     };
 
+    const appealRef = useRef(null);
+
+    const handlePrint = useReactToPrint({
+        content: () => appealRef.current,
+        onAfterPrint: () => {
+            console.log("Print had been closed");
+        },
+    });
+
     return (
-        <div className={style.appeal}>
+        <div className={style.appeal} ref={appealRef}>
             <div className={style.appeal__info}>
                 <div className={style.appeal__titleContainer}>
                     <div className={style.appeal__titleLeft}>
@@ -87,7 +97,8 @@ export default function Appeal({
                     </button>
                     <button
                         onClick={() => {
-                            navigate(`/printAppeal/${id}`);
+                            /* navigate(`/printAppeal/${id}`); */
+                            handlePrint();
                         }}
                         className={style.appeal__button}
                         type="button"
