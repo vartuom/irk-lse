@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from "react";
-import Appeal from "../Appeal/Appeal";
+import React, { useCallback, useEffect, useState } from "react";
+import { saveAs } from "file-saver";
 
-interface IAppeal {
-    id: number;
-    createdAt: Date;
-    updatedAt: Date;
-    firstName: string;
-    lastName: string;
-    middleName?: string;
-    email: string;
-    appealText: string;
-    isProcessed?: boolean;
-    extraContacts?: string;
-}
+import Appeal from "../Appeal/Appeal";
+import { IAppeal } from "../../types/types";
+import AppealDocxCreator from "../Appeal/AppealDocxCreator/appealDocxCreator";
+import style from "./Appeals.module.css";
 
 function Appeals({ isProcessed }: { isProcessed?: boolean }) {
     const [appeals, setAppeals] = useState<Array<IAppeal>>([]);
+    const docxGenerator = AppealDocxCreator.init();
 
     useEffect(() => {
         let activeFetch = true;
@@ -38,8 +31,23 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
         };
     }, [isProcessed]);
 
+    const saveDocx = useCallback(async () => {
+        docxGenerator.setAllAppeals(appeals);
+        const blob = await docxGenerator.generateAllAppeals();
+        saveAs(blob, `Обращения.docx`, { autoBom: true });
+    }, [appeals]);
+
     return (
         <div>
+            {!isProcessed && (
+                <button
+                    type="button"
+                    className={style.printAll}
+                    onClick={() => saveDocx()}
+                >
+                    Скачать все обращения
+                </button>
+            )}
             {appeals.map((appeal) => (
                 <Appeal
                     firstName={appeal.firstName}

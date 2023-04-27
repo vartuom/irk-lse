@@ -7,19 +7,7 @@ import moment from "moment";
 
 import style from "./Appeal.module.css";
 import AppealDocxCreator from "./AppealDocxCreator/appealDocxCreator";
-
-interface IAppealCard {
-    id: number;
-    createdAt: Date;
-    updatedAt: Date;
-    firstName: string;
-    lastName: string;
-    middleName?: string;
-    email: string;
-    appealText: string;
-    isProcessed?: boolean;
-    extraContacts?: string;
-}
+import { IAppeal } from "../../types/types";
 
 export default function Appeal({
     firstName,
@@ -32,7 +20,7 @@ export default function Appeal({
     middleName,
     isProcessed,
     id,
-}: IAppealCard) {
+}: IAppeal) {
     const [isActive, setIsActive] = useState(false);
     const navigate = useNavigate();
 
@@ -52,7 +40,7 @@ export default function Appeal({
             id,
         });
         const blob = await docxGenerator.generate();
-        await saveAs(blob, `Обращение${id}.docx`, { autoBom: true });
+        saveAs(blob, `Обращение${id}.docx`, { autoBom: true });
     };
 
     const changeProcessedStatus = async () => {

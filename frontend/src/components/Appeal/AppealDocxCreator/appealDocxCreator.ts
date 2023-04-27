@@ -1,24 +1,8 @@
-import {
-    AlignmentType,
-    Document,
-    Packer,
-    Paragraph,
-    SectionType,
-    TextRun,
-} from "docx";
-
-interface IAppeal {
-    id: number;
-    createdAt: Date;
-    updatedAt: Date;
-    firstName: string;
-    lastName: string;
-    middleName?: string;
-    email: string;
-    appealText: string;
-    isProcessed?: boolean;
-    extraContacts?: string;
-}
+import { Packer } from "docx";
+import moment from "moment";
+import logo from "../../../images/lselogo.png";
+import { IAppeal } from "../../../types/types";
+import { docForMultipleAppeals, docForOneAppeal } from "./document-cv";
 
 export default class AppealDocxCreator {
     static instance: AppealDocxCreator;
@@ -33,34 +17,38 @@ export default class AppealDocxCreator {
 
     private appeal: IAppeal | undefined;
 
+    private appeals: Array<IAppeal>;
+
     private constructor() {
         this.appeal = undefined;
+        this.appeals = [];
     }
 
     public setAppeal(new_appeal: IAppeal) {
         this.appeal = new_appeal;
     }
 
+    public setAllAppeals(appeals: Array<IAppeal>) {
+        this.appeals = appeals;
+    }
+
     public async generate(): Promise<Blob> {
         if (!this.appeal)
             throw Error(
-                'Appeal data uninitialized, perhaps method "setAppeal" wasn\'t called'
+                'Appeal data uninitialized, perhaps method "setAppeal" for docxGenerator wasn\'t called'
             );
-        const doc = new Document({
-            sections: [
-                {
-                    properties: {
-                        type: SectionType.CONTINUOUS,
-                    },
-                    children: [
-                        new Paragraph({
-                            alignment: AlignmentType.RIGHT,
-                            children: [new TextRun(this.appeal.email)],
-                        }),
-                    ],
-                },
-            ],
-        });
+        const doc = await docForOneAppeal(this.appeal);
+        const blob = await Packer.toBlob(doc);
+        return blob;
+    }
+
+    public async generateAllAppeals(): Promise<Blob> {
+        if (!this.appeals) {
+            throw Error(
+                'Appeals List uninitialized, perhaps method "setAllAppeals" for docxGenerator wasn\'t called'
+            );
+        }
+        const doc = await docForMultipleAppeals(this.appeals);
         const blob = await Packer.toBlob(doc);
         return blob;
     }

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Route, Routes, NavLink, useLocation } from "react-router-dom";
+import React from "react";
+import { Route, Routes, NavLink } from "react-router-dom";
 import moment from "moment";
 import "moment/dist/locale/ru";
 
@@ -43,7 +43,6 @@ function AdminPage() {
                 >
                     Обработанные обращения
                 </NavLink>
-
                 <span className={style.glider} />
             </div>
             <div className="appeals__container">
