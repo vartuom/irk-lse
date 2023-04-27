@@ -1,12 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import DescriptionIcon from "@mui/icons-material/Description";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useLocation, useNavigate } from "react-router";
-import { useReactToPrint } from "react-to-print";
+import { useNavigate } from "react-router";
+import { saveAs } from "file-saver";
 import moment from "moment";
-import "moment/dist/locale/ru";
 
 import style from "./Appeal.module.css";
+import AppealDocxCreator from "./AppealDocxCreator/appealDocxCreator";
 
 interface IAppealCard {
     id: number;
@@ -35,7 +35,25 @@ export default function Appeal({
 }: IAppealCard) {
     const [isActive, setIsActive] = useState(false);
     const navigate = useNavigate();
-    moment.locale("ru");
+
+    const docxGenerator = AppealDocxCreator.init();
+
+    const saveDocx = async () => {
+        docxGenerator.setAppeal({
+            firstName,
+            lastName,
+            email,
+            createdAt,
+            updatedAt,
+            appealText,
+            extraContacts,
+            middleName,
+            isProcessed,
+            id,
+        });
+        const blob = await docxGenerator.generate();
+        await saveAs(blob, `Обращение${id}.docx`, { autoBom: true });
+    };
 
     const changeProcessedStatus = async () => {
         const response = await fetch(`http://localhost:3000/appeals/${id}`, {
@@ -46,17 +64,8 @@ export default function Appeal({
         console.log(response.status);
     };
 
-    const appealRef = useRef(null);
-
-    const handlePrint = useReactToPrint({
-        content: () => appealRef.current,
-        onAfterPrint: () => {
-            console.log("Print had been closed");
-        },
-    });
-
     return (
-        <div className={style.appeal} ref={appealRef}>
+        <div className={style.appeal}>
             <div className={style.appeal__info}>
                 <div className={style.appeal__titleContainer}>
                     <div className={style.appeal__titleLeft}>
@@ -97,13 +106,12 @@ export default function Appeal({
                     </button>
                     <button
                         onClick={() => {
-                            /* navigate(`/printAppeal/${id}`); */
-                            handlePrint();
+                            saveDocx();
                         }}
                         className={style.appeal__button}
                         type="button"
                     >
-                        Печать
+                        Скачать
                     </button>
                 </div>
             </div>
