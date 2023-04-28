@@ -48,10 +48,9 @@ function AdminPage() {
             <div className="appeals__container">
                 <Routes>
                     <Route index element={<Appeals />} />
-                    <Route
-                        path="/processed"
-                        element={<Appeals isProcessed />}
-                    />
+                    <Route path="/processed" element={<Appeals isProcessed />}>
+                        <Route path=":page" element={<div>test</div>} />
+                    </Route>
                 </Routes>
             </div>
         </main>

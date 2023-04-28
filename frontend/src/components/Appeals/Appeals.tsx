@@ -1,13 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { saveAs } from "file-saver";
+import { useParams } from "react-router";
 
 import Appeal from "../Appeal/Appeal";
 import { IAppeal } from "../../types/types";
 import AppealDocxCreator from "../Appeal/AppealDocxCreator/appealDocxCreator";
 import style from "./Appeals.module.css";
+import Pagination from "../paginationAppeals/PaginationAppeals";
 
 function Appeals({ isProcessed }: { isProcessed?: boolean }) {
     const [appeals, setAppeals] = useState<Array<IAppeal>>([]);
+    const { page } = useParams();
     const docxGenerator = AppealDocxCreator.init();
 
     useEffect(() => {
@@ -27,14 +30,20 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
         getAppeals();
 
         return () => {
+            console.log("exit");
             activeFetch = false;
         };
-    }, [isProcessed]);
+    }, [isProcessed, page]);
+
+    useEffect(() => {
+        console.log(page);
+    }, [page]);
 
     const saveDocx = useCallback(async () => {
         docxGenerator.setAllAppeals(appeals);
         const blob = await docxGenerator.generateAllAppeals();
         saveAs(blob, `Обращения.docx`, { autoBom: true });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [appeals]);
 
     return (
@@ -63,6 +72,12 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
                     updatedAt={appeal.updatedAt}
                 />
             ))}
+            {isProcessed && (
+                <Pagination
+                    currentPage={page ?? 1}
+                    isNextPageAvailable={false}
+                />
+            )}
         </div>
     );
 }

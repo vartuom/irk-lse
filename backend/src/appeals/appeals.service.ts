@@ -18,8 +18,24 @@ export class AppealsService {
     return await this.appealRepository.save(newAppeal);
   }
 
-  findAllByAppealProcesStatus(processedStatus: boolean) {
-    return this.appealRepository.findBy({ isProcessed: processedStatus });
+  async findAllByAppealProcesStatus(
+    processedStatus: boolean,
+    start?: number,
+    take?: number,
+  ) {
+    if (start && take) {
+      return await this.appealRepository.find({
+        where: {
+          isProcessed: processedStatus,
+        },
+        skip: start,
+        take: take,
+      });
+    } else {
+      return await this.appealRepository.findBy({
+        isProcessed: processedStatus,
+      });
+    }
   }
 
   async updateAppealStatus(_id: number, processedStatus: boolean) {
