@@ -125,16 +125,19 @@ export async function docForOneAppeal(appeal: IAppeal): Promise<Document> {
                         thematicBreak: true,
                         children: [new TextRun("")],
                     }),
-                    new Paragraph({
-                        alignment: AlignmentType.LEFT,
-                        spacing: { after: 160, before: 160 },
-                        children: [
-                            new TextRun({
-                                text: appeal.appealText,
-                                size: 28,
-                            }),
-                        ],
-                    }),
+                    ...appeal.appealText.split("\n").map(
+                        (text) =>
+                            new Paragraph({
+                                alignment: AlignmentType.LEFT,
+                                spacing: { after: 80, before: 80 },
+                                children: [
+                                    new TextRun({
+                                        text,
+                                        size: 28,
+                                    }),
+                                ],
+                            })
+                    ),
                     new Paragraph({
                         alignment: AlignmentType.LEFT,
                         spacing: { after: 160, before: 160 },
@@ -155,7 +158,7 @@ export async function docForOneAppeal(appeal: IAppeal): Promise<Document> {
                         spacing: { after: 160, before: 160 },
                         children: [
                             new TextRun({
-                                text: "____________________",
+                                text: "_______________",
                                 size: 28,
                             }),
                         ],
@@ -277,16 +280,19 @@ export async function docForMultipleAppeals(
                     thematicBreak: true,
                     children: [new TextRun("")],
                 }),
-                new Paragraph({
-                    alignment: AlignmentType.LEFT,
-                    spacing: { after: 160, before: 160 },
-                    children: [
-                        new TextRun({
-                            text: appeal.appealText,
-                            size: 28,
-                        }),
-                    ],
-                }),
+                ...appeal.appealText.split("\n").map(
+                    (text) =>
+                        new Paragraph({
+                            alignment: AlignmentType.LEFT,
+                            spacing: { after: 80, before: 80 },
+                            children: [
+                                new TextRun({
+                                    text,
+                                    size: 28,
+                                }),
+                            ],
+                        })
+                ),
                 new Paragraph({
                     alignment: AlignmentType.LEFT,
                     spacing: { after: 160, before: 160 },

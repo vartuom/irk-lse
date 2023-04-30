@@ -7,10 +7,13 @@ import { sleep } from "../utils/utils";
 
 @Injectable()
 export class AppealsService {
+  pageAppealAmount: number;
   constructor(
     @InjectRepository(Appeal)
     private readonly appealRepository: Repository<Appeal>,
-  ) {}
+  ) {
+    this.pageAppealAmount = 8;
+  }
 
   async create(createAppealDto: CreateAppealDto): Promise<Appeal> {
     const newAppeal = this.appealRepository.create(createAppealDto);
@@ -18,22 +21,20 @@ export class AppealsService {
     return await this.appealRepository.save(newAppeal);
   }
 
-  async findAllByAppealProcesStatus(
-    processedStatus: boolean,
-    start?: number,
-    take?: number,
-  ) {
-    if (start && take) {
-      return await this.appealRepository.find({
+  async findAllByAppealProcesStatus(processedStatus: boolean, page?: number) {
+    if (page) {
+      return await this.appealRepository.findAndCount({
         where: {
           isProcessed: processedStatus,
         },
-        skip: start,
-        take: take,
+        skip: (page - 1) * this.pageAppealAmount,
+        take: this.pageAppealAmount,
       });
     } else {
-      return await this.appealRepository.findBy({
-        isProcessed: processedStatus,
+      return await this.appealRepository.findAndCount({
+        where: {
+          isProcessed: processedStatus,
+        },
       });
     }
   }

@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { saveAs } from "file-saver";
 import { useParams } from "react-router";
+import { Pagination as MuiPagination, PaginationItem } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 import Appeal from "../Appeal/Appeal";
 import { IAppeal } from "../../types/types";
@@ -10,20 +12,25 @@ import Pagination from "../paginationAppeals/PaginationAppeals";
 
 function Appeals({ isProcessed }: { isProcessed?: boolean }) {
     const [appeals, setAppeals] = useState<Array<IAppeal>>([]);
+    const [appealsCount, setAppealsCount] = useState(0);
     const { page } = useParams();
     const docxGenerator = AppealDocxCreator.init();
 
     useEffect(() => {
         let activeFetch = true;
         async function getAppeals() {
-            const res = await fetch(
-                `http://localhost:3000/appeals?processedStatus=${Boolean(
-                    isProcessed
-                )}`
-            );
-            const data = await res.json();
+            let queryString =
+                "http://localhost:3000/appeals?processedStatus=false";
+            if (isProcessed) {
+                queryString = `http://localhost:3000/appeals?processedStatus=true&page=${
+                    page ?? 1
+                }`;
+            }
+            const res = await fetch(queryString);
+            const [data, count] = await res.json();
             if (activeFetch) {
                 setAppeals(data);
+                setAppealsCount(count);
             }
         }
 
@@ -73,9 +80,23 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
                 />
             ))}
             {isProcessed && (
-                <Pagination
-                    currentPage={page ?? 1}
-                    isNextPageAvailable={false}
+                <MuiPagination
+                    showFirstButton
+                    showLastButton
+                    color="primary"
+                    size="medium"
+                    className={style.pagination}
+                    count={Math.ceil(appealsCount / 8)}
+                    page={page ? +page : 1}
+                    renderItem={(item) => (
+                        <PaginationItem
+                            component={NavLink}
+                            sx={{ fontSize: "18px" }}
+                            to={`${item.page === 1 ? "" : `${item.page}`}`}
+                            // eslint-disable-next-line react/jsx-props-no-spreading
+                            {...item}
+                        />
+                    )}
                 />
             )}
         </div>

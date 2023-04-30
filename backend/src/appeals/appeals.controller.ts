@@ -30,13 +30,11 @@ export class AppealsController {
   @Get()
   findAllByAppealStatus(
     @Query("processedStatus") processedStatus: boolean,
-    @Query("start") start?: number,
-    @Query("take") take?: number,
+    @Query("page") page?: number,
   ) {
     return this.appealsService.findAllByAppealProcesStatus(
       processedStatus,
-      start,
-      take,
+      page,
     );
   }
 

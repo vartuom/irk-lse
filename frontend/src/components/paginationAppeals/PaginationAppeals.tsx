@@ -1,6 +1,8 @@
 import React, { ReactNode, useState } from "react";
 import { NavLink } from "react-router-dom";
 
+import styles from "./Pagination.module.css";
+
 interface IPaginationProps {
     children?: ReactNode;
     currentPage: number | string;
@@ -13,19 +15,19 @@ function Pagination({
     isNextPageAvailable,
 }: IPaginationProps) {
     return (
-        <div className="pagination">
+        <div className={styles.pagination}>
+            <NavLink
+                to={+currentPage === 2 ? "" : `${+currentPage - 1}`}
+                className={`${+currentPage <= 1 && "disabled"}`}
+            >
+                Back
+            </NavLink>
+            <div className="text">{`Страница ${currentPage}`}</div>
             <NavLink
                 to={`${+currentPage + 1}`}
                 className={`${!isNextPageAvailable && "disabled"}`}
             >
                 Next
-            </NavLink>
-            <div className="text">{`Страница ${currentPage}`}</div>
-            <NavLink
-                to={`${+currentPage - 1}`}
-                className={`${+currentPage <= 1 && "disabled"}`}
-            >
-                Back
             </NavLink>
         </div>
     );

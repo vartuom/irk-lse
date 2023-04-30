@@ -65,6 +65,9 @@ export default function Appeal({
                 </div>
                 <hr className={style.titleSeparator} />
                 <div className={style.appeal__text} aria-expanded={isActive}>
+                    {/* {appealText.split("\n").map((text) => (
+                        <p>{text}</p>
+                    ))} */}
                     <p>{appealText}</p>
                     <p className={style.appeal__date}>
                         {moment(createdAt).format("Do MMMM YYYY, HH:mm")}

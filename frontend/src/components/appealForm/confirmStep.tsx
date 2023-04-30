@@ -59,7 +59,7 @@ function ConfirmStep() {
                 middleName,
                 email,
                 extraContacts,
-                appealText,
+                appealText: appealText.trim(),
             })
         );
     };
@@ -110,6 +110,7 @@ function ConfirmStep() {
                 defaultValue={false}
                 render={({ field }) => (
                     <FormControlLabel
+                        // eslint-disable-next-line react/jsx-props-no-spreading
                         control={<Checkbox {...field} />}
                         disabled={isPending}
                         label={
