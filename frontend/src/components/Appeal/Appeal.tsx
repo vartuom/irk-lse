@@ -8,6 +8,8 @@ import moment from "moment";
 import style from "./Appeal.module.css";
 import AppealDocxCreator from "./AppealDocxCreator/appealDocxCreator";
 import { IAppeal } from "../../types/types";
+import { useAppDispatch } from "../../store/store";
+import { filterAppeals } from "../../store/appeals.slice";
 
 export default function Appeal({
     firstName,
@@ -22,7 +24,9 @@ export default function Appeal({
     id,
 }: IAppeal) {
     const [isActive, setIsActive] = useState(false);
+    const [isFetching, setIsFetching] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const docxGenerator = AppealDocxCreator.init();
 
@@ -44,12 +48,14 @@ export default function Appeal({
     };
 
     const changeProcessedStatus = async () => {
+        setIsFetching(true);
         const response = await fetch(`http://localhost:3000/appeals/${id}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ processedStatus: !isProcessed }),
         });
-        console.log(response.status);
+        setIsFetching(false);
+        dispatch(filterAppeals({ id }));
     };
 
     return (
@@ -82,28 +88,40 @@ export default function Appeal({
                 </button>
 
                 <div className={style.appeal__buttons}>
-                    <button className={style.appeal__button} type="button">
-                        Редактировать
-                    </button>
-                    <button
-                        onClick={changeProcessedStatus}
-                        className={style.appeal__button}
-                        type="button"
-                    >
-                        {isProcessed ? "Вернуть" : "В обработанные"}
-                    </button>
-                    <button className={style.appeal__button} type="button">
-                        Дать ответ
-                    </button>
-                    <button
-                        onClick={() => {
-                            saveDocx();
-                        }}
-                        className={style.appeal__button}
-                        type="button"
-                    >
-                        Скачать
-                    </button>
+                    {isFetching ? (
+                        "Загрузка..."
+                    ) : (
+                        <>
+                            <button
+                                className={style.appeal__button}
+                                type="button"
+                            >
+                                Редактировать
+                            </button>
+                            <button
+                                onClick={changeProcessedStatus}
+                                className={style.appeal__button}
+                                type="button"
+                            >
+                                {isProcessed ? "Вернуть" : "В обработанные"}
+                            </button>
+                            <button
+                                className={style.appeal__button}
+                                type="button"
+                            >
+                                Дать ответ
+                            </button>
+                            <button
+                                onClick={() => {
+                                    saveDocx();
+                                }}
+                                className={style.appeal__button}
+                                type="button"
+                            >
+                                Скачать
+                            </button>
+                        </>
+                    )}
                 </div>
             </div>
             <div className={style.appealer}>

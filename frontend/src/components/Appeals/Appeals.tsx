@@ -9,15 +9,20 @@ import { IAppeal } from "../../types/types";
 import AppealDocxCreator from "../Appeal/AppealDocxCreator/appealDocxCreator";
 import style from "./Appeals.module.css";
 import Pagination from "../paginationAppeals/PaginationAppeals";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { setAppeals } from "../../store/appeals.slice";
 
 function Appeals({ isProcessed }: { isProcessed?: boolean }) {
-    const [appeals, setAppeals] = useState<Array<IAppeal>>([]);
+    const appeals = useAppSelector((state) => state.appeals.appeals);
+    const [isFetching, setIsFetching] = useState(true);
+    const dispatch = useAppDispatch();
     const [appealsCount, setAppealsCount] = useState(0);
     const { page } = useParams();
     const docxGenerator = AppealDocxCreator.init();
 
     useEffect(() => {
         let activeFetch = true;
+        setIsFetching(true);
         async function getAppeals() {
             let queryString =
                 "http://localhost:3000/appeals?processedStatus=false";
@@ -29,22 +34,20 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
             const res = await fetch(queryString);
             const [data, count] = await res.json();
             if (activeFetch) {
-                setAppeals(data);
+                dispatch(setAppeals(data));
                 setAppealsCount(count);
             }
         }
 
         getAppeals();
+        setIsFetching(false);
 
         return () => {
             console.log("exit");
             activeFetch = false;
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isProcessed, page]);
-
-    useEffect(() => {
-        console.log(page);
-    }, [page]);
 
     const saveDocx = useCallback(async () => {
         docxGenerator.setAllAppeals(appeals);
@@ -52,6 +55,8 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
         saveAs(blob, `Обращения.docx`, { autoBom: true });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [appeals]);
+
+    if (isFetching) return <div>Загрузка...</div>;
 
     return (
         <div>
