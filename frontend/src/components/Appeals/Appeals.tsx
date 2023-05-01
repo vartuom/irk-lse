@@ -11,6 +11,7 @@ import style from "./Appeals.module.css";
 import Pagination from "../paginationAppeals/PaginationAppeals";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setAppeals } from "../../store/appeals.slice";
+import { sleep } from "../../utils/utils";
 
 function Appeals({ isProcessed }: { isProcessed?: boolean }) {
     const appeals = useAppSelector((state) => state.appeals.appeals);
@@ -33,14 +34,15 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
             }
             const res = await fetch(queryString);
             const [data, count] = await res.json();
+            await sleep(1000);
             if (activeFetch) {
                 dispatch(setAppeals(data));
                 setAppealsCount(count);
+                setIsFetching(false);
             }
         }
 
         getAppeals();
-        setIsFetching(false);
 
         return () => {
             console.log("exit");

@@ -29,3 +29,7 @@ export const debounce = (fn: Function, t: number) => {
         timer = setTimeout(() => fn(args), t);
     };
 };
+
+export const sleep = (time: number) =>
+    // eslint-disable-next-line no-promise-executor-return
+    new Promise<void>((res) => setTimeout(() => res(), time));

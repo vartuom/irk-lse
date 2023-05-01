@@ -10,6 +10,7 @@ import AppealDocxCreator from "./AppealDocxCreator/appealDocxCreator";
 import { IAppeal } from "../../types/types";
 import { useAppDispatch } from "../../store/store";
 import { filterAppeals } from "../../store/appeals.slice";
+import { sleep } from "../../utils/utils";
 
 export default function Appeal({
     firstName,
@@ -54,6 +55,7 @@ export default function Appeal({
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ processedStatus: !isProcessed }),
         });
+        await sleep(3000);
         setIsFetching(false);
         dispatch(filterAppeals({ id }));
     };

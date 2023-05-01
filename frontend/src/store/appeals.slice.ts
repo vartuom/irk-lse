@@ -17,7 +17,9 @@ export const appealsSlice = createSlice({
             state.appeals = action.payload;
         },
         filterAppeals(state, action) {
-            state.appeals.filter((item) => item.id !== action.payload.id);
+            state.appeals = state.appeals.filter(
+                (item) => item.id !== action.payload.id
+            );
         },
     },
 });
