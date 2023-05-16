@@ -4,13 +4,15 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router";
 import { saveAs } from "file-saver";
 import moment from "moment";
+import axios from "axios";
 
-import style from "./Appeal.module.css";
+import style from "./appeal.module.css";
 import AppealDocxCreator from "./appealDocxCreator/appealDocxCreator";
 import { IAppeal } from "../../types/types";
 import { useAppDispatch } from "../../store/store";
 import { filterAppeals } from "../../store/appeals.slice";
 import { sleep } from "../../utils/utils";
+import { baseUrl } from "../../utils/constants";
 
 export default function Appeal({
     firstName,
@@ -50,11 +52,13 @@ export default function Appeal({
 
     const changeProcessedStatus = async () => {
         setIsFetching(true);
-        const response = await fetch(`http://localhost:3000/appeals/${id}`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ processedStatus: !isProcessed }),
-        });
+        const response = await axios.post(
+            `${baseUrl}/appeals/${id}`,
+            {
+                processedStatus: !isProcessed,
+            },
+            { headers: { "Content-Type": "application/json" } }
+        );
         await sleep(3000);
         setIsFetching(false);
         dispatch(filterAppeals({ id }));

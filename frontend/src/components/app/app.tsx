@@ -13,7 +13,7 @@ import AppealsPage from "../../pages/appealsPage/appealsPage";
 import AppealDetails from "../appealDetails/appealDetails";
 import { resetForm } from "../../store/appealForm.slice";
 import { useAppDispatch } from "../../store/store";
-import AdminPage from "../../pages/adminPage/AdminPage";
+import AdminPage from "../../pages/adminPage/adminPage";
 import PrintAppeal from "../printAppeal/PrintAppeal";
 
 function App() {

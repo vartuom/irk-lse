@@ -3,15 +3,17 @@ import { saveAs } from "file-saver";
 import { useParams } from "react-router";
 import { Pagination as MuiPagination, PaginationItem } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
-import Appeal from "../appeal/Appeal";
+import Appeal from "../appeal/appeal";
 import { IAppeal } from "../../types/types";
 import AppealDocxCreator from "../appeal/appealDocxCreator/appealDocxCreator";
-import style from "./Appeals.module.css";
+import style from "./appeals.module.css";
 import Pagination from "../paginationAppeals/PaginationAppeals";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setAppeals } from "../../store/appeals.slice";
 import { sleep } from "../../utils/utils";
+import { baseUrl } from "../../utils/constants";
 
 function Appeals({ isProcessed }: { isProcessed?: boolean }) {
     const appeals = useAppSelector((state) => state.appeals.appeals);
@@ -25,15 +27,14 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
         let activeFetch = true;
         setIsFetching(true);
         async function getAppeals() {
-            let queryString =
-                "http://localhost:3000/appeals?processedStatus=false";
+            let queryString = `${baseUrl}/appeals?processedStatus=false`;
             if (isProcessed) {
-                queryString = `http://localhost:3000/appeals?processedStatus=true&page=${
+                queryString = `${baseUrl}/appeals?processedStatus=true&page=${
                     page ?? 1
                 }`;
             }
-            const res = await fetch(queryString);
-            const [data, count] = await res.json();
+            const res = await axios.get<[Array<IAppeal>, number]>(queryString);
+            const [data, count] = res.data;
             await sleep(1000);
             if (activeFetch) {
                 dispatch(setAppeals(data));

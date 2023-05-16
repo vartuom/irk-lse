@@ -19,8 +19,6 @@ export const getNoun = (
     return five;
 };
 
-export const baseUrl = "http://localhost:3000";
-
 // eslint-disable-next-line @typescript-eslint/ban-types
 export const debounce = (fn: Function, t: number) => {
     let timer: ReturnType<typeof setTimeout>;

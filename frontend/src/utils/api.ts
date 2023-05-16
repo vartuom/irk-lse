@@ -1,58 +1,71 @@
+import axios, { AxiosResponse } from "axios";
 import { baseUrl, cookiesLifeTime } from "./constants";
 import { setCookie } from "./storage";
 
-export const checkResponse = (res: Response) => {
-    return res.ok ? res.json() : Promise.reject(res);
+interface ITokenResponse {
+    success: boolean;
+    accessToken: string;
+    refreshToken: string;
+}
+
+export const checkResponse = async (res: AxiosResponse) => {
+    return res.status === 200 ? (res.data as unknown) : Promise.reject(res);
 };
 
 export const refreshToken = () => {
-    return fetch(`${baseUrl}/auth/token`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            token: localStorage.getItem("refreshToken"),
-        }),
-    }).then(checkResponse);
+    return axios
+        .post(
+            `${baseUrl}/auth/token`,
+            {
+                token: localStorage.getItem("refreshToken"),
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        )
+        .then(checkResponse);
 };
 
 type TOptions = {
     [key: string]: string | TOptions;
 };
-export const fetchWithRefresh = async (
+
+export async function fetchWithRefresh<ResponseDataType>(
     url: string,
     options: Record<string, TOptions | string>
-) => {
+) {
     try {
-        const res = await fetch(url, options);
-        const data = await checkResponse(res);
+        const res = await axios({ url, ...options });
+        const data = (await checkResponse(res)) as ResponseDataType;
         return data;
     } catch (err) {
         if (
             err instanceof Error &&
             (err.message === "jwt expired" || "jwt malformed")
         ) {
-            const refreshedData = await refreshToken();
+            const refreshedData = (await refreshToken()) as ITokenResponse;
             if (!refreshedData.success) {
                 return Promise.reject(refreshedData);
             }
             localStorage.setItem("refreshToken", refreshedData.refreshToken);
             setCookie(
                 "accessToken",
-                refreshedData.accessToken.split("Bearer ")[1],
+                refreshedData.accessToken.replace("Bearer ", ""),
                 { expires: cookiesLifeTime }
             );
-            const res = await fetch(url, {
+            const res = await axios({
+                url,
                 ...options,
                 headers: {
                     ...(options.headers as TOptions),
                     Authorization: refreshedData.accessToken,
                 },
             });
-            const data = await checkResponse(res);
+            const data = (await checkResponse(res)) as ResponseDataType;
             return data;
         }
         return Promise.reject(err);
     }
-};
+}

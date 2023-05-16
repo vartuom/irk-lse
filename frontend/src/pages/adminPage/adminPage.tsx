@@ -3,9 +3,9 @@ import { Route, Routes, NavLink } from "react-router-dom";
 import moment from "moment";
 import "moment/dist/locale/ru";
 
-import style from "./AdminPage.module.css";
+import style from "./adminPage.module.css";
 import AppealDocxCreator from "../../components/appeal/appealDocxCreator/appealDocxCreator";
-import Appeals from "../../components/appeals/Appeals";
+import Appeals from "../../components/appeals/appeals";
 
 function AdminPage() {
     const notScrollToTop = true;
