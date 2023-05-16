@@ -18,5 +18,3 @@ export const getNoun = (
     }
     return five;
 };
-
-export const baseUrl = "http://localhost:3000";
