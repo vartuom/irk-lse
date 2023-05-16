@@ -1,15 +1,19 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { baseUrl, cookiesLifeTime } from "./constants";
-import { setCookie } from "./storage";
+import { getCookie, setCookie } from "./storage";
 
-interface ITokenResponse {
+export interface ITokenResponse {
     success: boolean;
     accessToken: string;
     refreshToken: string;
 }
 
+type TOptions = {
+    [key: string]: string | TOptions;
+};
+
 export const checkResponse = async (res: AxiosResponse) => {
-    return res.status === 200 ? (res.data as unknown) : Promise.reject(res);
+    return res.status === 200 ? res.data : Promise.reject(res);
 };
 
 export const refreshToken = () => {
@@ -28,13 +32,9 @@ export const refreshToken = () => {
         .then(checkResponse);
 };
 
-type TOptions = {
-    [key: string]: string | TOptions;
-};
-
 export async function fetchWithRefresh<ResponseDataType>(
     url: string,
-    options: Record<string, TOptions | string>
+    options: TOptions
 ) {
     try {
         const res = await axios({ url, ...options });
