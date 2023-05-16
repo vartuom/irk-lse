@@ -4,8 +4,8 @@ import moment from "moment";
 import "moment/dist/locale/ru";
 
 import style from "./AdminPage.module.css";
-import AppealDocxCreator from "../../components/Appeal/AppealDocxCreator/appealDocxCreator";
-import Appeals from "../../components/Appeals/Appeals";
+import AppealDocxCreator from "../../components/appeal/appealDocxCreator/appealDocxCreator";
+import Appeals from "../../components/appeals/Appeals";
 
 function AdminPage() {
     const notScrollToTop = true;

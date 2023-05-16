@@ -14,7 +14,7 @@ import AppealDetails from "../appealDetails/appealDetails";
 import { resetForm } from "../../store/appealForm.slice";
 import { useAppDispatch } from "../../store/store";
 import AdminPage from "../../pages/adminPage/AdminPage";
-import PrintAppeal from "../PrintAppeal/PrintAppeal";
+import PrintAppeal from "../printAppeal/PrintAppeal";
 
 function App() {
     const location = useLocation();
@@ -30,7 +30,7 @@ function App() {
         <div>
             <Layout>
                 <Routes location={background || location}>
-                    <Route path="/" element={<MainPage />} />
+                    <Route path="/" index element={<MainPage />} />
                     <Route path="/history" element={<HistoryPage />} />
                     <Route path="/contacts" element={<ContactsPage />} />
                     <Route path="/prices" element={<PricesPage />} />

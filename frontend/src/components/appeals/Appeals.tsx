@@ -4,9 +4,9 @@ import { useParams } from "react-router";
 import { Pagination as MuiPagination, PaginationItem } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-import Appeal from "../Appeal/Appeal";
+import Appeal from "../appeal/Appeal";
 import { IAppeal } from "../../types/types";
-import AppealDocxCreator from "../Appeal/AppealDocxCreator/appealDocxCreator";
+import AppealDocxCreator from "../appeal/appealDocxCreator/appealDocxCreator";
 import style from "./Appeals.module.css";
 import Pagination from "../paginationAppeals/PaginationAppeals";
 import { useAppDispatch, useAppSelector } from "../../store/store";

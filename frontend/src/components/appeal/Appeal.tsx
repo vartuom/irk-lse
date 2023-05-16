@@ -6,7 +6,7 @@ import { saveAs } from "file-saver";
 import moment from "moment";
 
 import style from "./Appeal.module.css";
-import AppealDocxCreator from "./AppealDocxCreator/appealDocxCreator";
+import AppealDocxCreator from "./appealDocxCreator/appealDocxCreator";
 import { IAppeal } from "../../types/types";
 import { useAppDispatch } from "../../store/store";
 import { filterAppeals } from "../../store/appeals.slice";

@@ -35,7 +35,7 @@ export default class AppealDocxCreator {
     public async generate(): Promise<Blob> {
         if (!this.appeal)
             throw Error(
-                'Appeal data uninitialized, perhaps method "setAppeal" for docxGenerator wasn\'t called'
+                'appeal data uninitialized, perhaps method "setAppeal" for docxGenerator wasn\'t called'
             );
         const doc = await docForOneAppeal(this.appeal);
         const blob = await Packer.toBlob(doc);
@@ -45,7 +45,7 @@ export default class AppealDocxCreator {
     public async generateAllAppeals(): Promise<Blob> {
         if (!this.appeals) {
             throw Error(
-                'Appeals List uninitialized, perhaps method "setAllAppeals" for docxGenerator wasn\'t called'
+                'appeals List uninitialized, perhaps method "setAllAppeals" for docxGenerator wasn\'t called'
             );
         }
         const doc = await docForMultipleAppeals(this.appeals);
