@@ -1,13 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import StepConnector, {
+    stepConnectorClasses,
+} from "@mui/material/StepConnector";
+import { styled } from "@mui/material/styles";
+
 import s from "./appealsPage.module.css";
 import FirstStep from "../../components/appealForm/firstStep";
 import SecondStep from "../../components/appealForm/secondStep";
 import ThirdStep from "../../components/appealForm/thirdStep";
 import ConfirmStep from "../../components/appealForm/confirmStep";
+import { useAppSelector } from "../../store/store";
+
+const QontoConnector = styled(StepConnector)(({ theme }) => ({
+    [`&.${stepConnectorClasses.active}`]: {
+        [`& .${stepConnectorClasses.line}`]: {
+            borderColor: "#1976d2",
+        },
+    },
+    [`&.${stepConnectorClasses.completed}`]: {
+        [`& .${stepConnectorClasses.line}`]: {
+            borderColor: "#1976d2",
+        },
+    },
+    [`& .${stepConnectorClasses.line}`]: {
+        marginLeft: "-8px",
+        borderColor:
+            theme.palette.mode === "dark" ? theme.palette.grey[800] : "#eaeaf0",
+        borderTopWidth: 3,
+        borderRadius: 1,
+    },
+}));
 
 function AppealsPage() {
+    const steps = ["", "", "", ""];
+    const currentStep = useAppSelector((state) => state.appealForm.currentStep);
+
     return (
         <main className={s.main}>
             <div className={s.lead}>
@@ -40,6 +72,19 @@ function AppealsPage() {
                 />
             </div>
             <div className={s.formContainer}>
+                <Stepper
+                    activeStep={currentStep}
+                    sx={{
+                        padding: "36px 36px 0px 36px",
+                    }}
+                    connector={<QontoConnector />}
+                >
+                    {steps.map((label, ind) => (
+                        <Step key={ind}>
+                            <StepLabel>{label}</StepLabel>
+                        </Step>
+                    ))}
+                </Stepper>
                 <Routes>
                     <Route index element={<FirstStep />} />
                     <Route path="stepTwo" element={<SecondStep />} />

@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { TextField } from "@mui/material";
+import TextField from "@mui/material/TextField";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import s from "./appealForm.module.css";
 import AccordionRow from "../accordionRow/accordionRow";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setFirstStep } from "../../store/appealForm.slice";
+import {
+    setCurrentStepNumber,
+    setFirstStep,
+} from "../../store/appealForm.slice";
 
 export interface IFirstStep {
     firstName: string;
@@ -59,6 +62,10 @@ function FirstStep() {
     });
 
     useEffect(() => {
+        dispatch(setCurrentStepNumber({ step: 0 }));
+    }, []);
+
+    useEffect(() => {
         const subscription = watch((value) => {
             console.log(value);
             dispatch(setFirstStep(value as IFirstStep));
@@ -77,7 +84,7 @@ function FirstStep() {
                 <h2 className={s.lead_title}>
                     Отлично, сперва познакомимся (1 шаг из 4)
                 </h2>
-                <AccordionRow title="Почему это важно?">
+                <AccordionRow type="accent" title="Почему это важно?">
                     <p className={s.lead_paragraph}>
                         Мы не ответим на анонимное обращение. Это закон.
                     </p>

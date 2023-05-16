@@ -1,18 +1,13 @@
 import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import {
-    Checkbox,
-    CircularProgress,
-    FormControlLabel,
-    TextField,
-} from "@mui/material";
+import { Checkbox, FormControlLabel } from "@mui/material";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Oval, TailSpin } from "react-loader-spinner";
 import s from "./appealForm.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { postAppeal } from "../../store/appealForm.slice";
+import { postAppeal, setCurrentStepNumber } from "../../store/appealForm.slice";
 
 function ConfirmStep() {
     const navigate = useNavigate();
@@ -65,6 +60,10 @@ function ConfirmStep() {
     };
     const extraContactsParagraphs = extraContacts.split("\n");
     const appealParagraphs = appealText.split("\n");
+
+    useEffect(() => {
+        dispatch(setCurrentStepNumber({ step: 3 }));
+    }, []);
 
     useEffect(() => {
         if (isMailed)

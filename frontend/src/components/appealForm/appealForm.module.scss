@@ -4,7 +4,6 @@
   gap: 16px;
   width: 800px;
   margin: 0 auto;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   box-sizing: content-box;
   padding: 36px;
 }
@@ -13,6 +12,8 @@
   width: 100%;
   min-height: 60px;
   font: 18px/1.5 var(--font-golos-regular);
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
   transition: var(--opacity-transition);
   &_type {
@@ -55,6 +56,6 @@
 }
 
 .formLabel {
-    margin: 0;
-    font: 18px/1.5 var(--font-golos-regular);
+  margin: 0;
+  font: 18px/1.5 var(--font-golos-regular);
 }

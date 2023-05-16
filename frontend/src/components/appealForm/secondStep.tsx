@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { TextField } from "@mui/material";
+import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import s from "./appealForm.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setSecondStep } from "../../store/appealForm.slice";
+import {
+    setCurrentStepNumber,
+    setSecondStep,
+} from "../../store/appealForm.slice";
 
 export interface ISecondStep {
     email: string;
@@ -45,6 +48,10 @@ function SecondStep() {
         mode: "onBlur",
         resolver: yupResolver(schema),
     });
+
+    useEffect(() => {
+        dispatch(setCurrentStepNumber({ step: 1 }));
+    }, []);
 
     useEffect(() => {
         const subscription = watch((value) => {

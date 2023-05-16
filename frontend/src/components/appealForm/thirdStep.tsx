@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { TextField } from "@mui/material";
+import TextField from "@mui/material/TextField";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import s from "./appealForm.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setThirdStep } from "../../store/appealForm.slice";
+import {
+    setCurrentStepNumber,
+    setThirdStep,
+} from "../../store/appealForm.slice";
 
 export interface IThirdStep {
     appealText: string;
@@ -38,6 +41,10 @@ function ThirdStep() {
         resolver: yupResolver(schema),
         mode: "onBlur",
     });
+
+    useEffect(() => {
+        dispatch(setCurrentStepNumber({ step: 2 }));
+    }, []);
 
     useEffect(() => {
         const subscription = watch((value) => {
