@@ -4,8 +4,8 @@ import moment from "moment";
 import { IFirstStep } from "../components/appealForm/firstStep";
 import { ISecondStep } from "../components/appealForm/secondStep";
 import { IThirdStep } from "../components/appealForm/thirdStep";
-import { baseUrl } from "../utils/utils";
 import { IAppealResponse } from "../utils/types";
+import { baseUrl } from "../utils/constants";
 
 export const postAppeal = createAsyncThunk(
     "appealForm/postAppeal",
