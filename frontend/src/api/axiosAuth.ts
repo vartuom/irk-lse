@@ -1,12 +1,22 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
-import { baseUrl, cookiesLifeTime } from "./constants";
-import { getCookie, setCookie } from "./storage";
+import axios, {
+    AxiosError,
+    AxiosHeaders,
+    AxiosRequestConfig,
+    InternalAxiosRequestConfig,
+} from "axios";
+import { baseUrl, cookiesLifeTime } from "../utils/constants";
+import { getCookie, setCookie } from "../utils/storage";
 import { ITokenResponse, checkResponse, refreshToken } from "./api";
 
-const axiosApiInstance = axios.create();
+type AxiosConfigWithRetry = InternalAxiosRequestConfig & { retry: boolean };
+interface AxiosErrorWithRetry extends AxiosError {
+    config: AxiosConfigWithRetry;
+}
 
-axiosApiInstance.interceptors.request.use(
-    (config) => {
+const axiosAuthInstance = axios.create();
+
+axiosAuthInstance.interceptors.request.use(
+    (config: InternalAxiosRequestConfig) => {
         const accessToken = getCookie("accessToken");
         config.headers = {
             Authorization: `Bearer ${accessToken}`,
@@ -19,18 +29,18 @@ axiosApiInstance.interceptors.request.use(
     (error) => Promise.reject(error)
 );
 
-axiosApiInstance.interceptors.response.use(
+axiosAuthInstance.interceptors.response.use(
     (response) => {
         return response;
     },
-    async (error) => {
+    async (error: AxiosErrorWithRetry) => {
         if (
             error instanceof AxiosError &&
             error.response?.status === 403 &&
-            !error.config._retry
+            !error.config.retry
         ) {
             const { config, message } = error;
-            error.config._retry = true;
+            config.retry = true;
             const refreshedData = (await refreshToken()) as ITokenResponse;
             if (!refreshedData.success) {
                 return Promise.reject(refreshedData);
@@ -42,7 +52,7 @@ axiosApiInstance.interceptors.response.use(
                 { expires: cookiesLifeTime }
             );
 
-            const res = await axios(config);
+            const res = await axios(config as AxiosRequestConfig);
             const data = await checkResponse(res);
             return data;
         }
@@ -50,4 +60,4 @@ axiosApiInstance.interceptors.response.use(
     }
 );
 
-export default axiosApiInstance;
+export default axiosAuthInstance;

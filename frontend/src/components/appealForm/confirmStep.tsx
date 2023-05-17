@@ -77,7 +77,7 @@ function ConfirmStep() {
         <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
             <div className={s.lead}>
                 <h2 className={s.lead_title}>
-                    Почти готово, осталось только проверить (4 шаг из 4)
+                    Почти готово, осталось только проверить
                 </h2>
                 <p className={s.lead_paragraph}>
                     <span className="spanBold">Заявитель: </span>{" "}

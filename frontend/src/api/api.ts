@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { baseUrl, cookiesLifeTime } from "./constants";
-import { getCookie, setCookie } from "./storage";
+import { baseUrl, cookiesLifeTime } from "../utils/constants";
+import { getCookie, setCookie } from "../utils/storage";
 
 export interface ITokenResponse {
     success: boolean;
@@ -13,7 +13,7 @@ type TOptions = {
 };
 
 export const checkResponse = async (res: AxiosResponse) => {
-    return res.status === 200 ? res.data : Promise.reject(res);
+    return res.status === 200 ? (res.data as unknown) : Promise.reject(res);
 };
 
 export const refreshToken = () => {

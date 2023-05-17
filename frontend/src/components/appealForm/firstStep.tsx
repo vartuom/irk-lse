@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import TextField from "@mui/material/TextField";
+import { TextField } from "@mui/material";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
@@ -81,9 +81,7 @@ function FirstStep() {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
             <div className={s.lead}>
-                <h2 className={s.lead_title}>
-                    Отлично, сперва познакомимся (1 шаг из 4)
-                </h2>
+                <h2 className={s.lead_title}>Отлично, сперва познакомимся</h2>
                 <AccordionRow type="accent" title="Почему это важно?">
                     <p className={s.lead_paragraph}>
                         Мы не ответим на анонимное обращение. Это закон.

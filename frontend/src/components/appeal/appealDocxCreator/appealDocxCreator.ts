@@ -4,6 +4,7 @@ import logo from "../../../images/lselogo.png";
 import { IAppeal } from "../../../types/types";
 import { docForMultipleAppeals, docForOneAppeal } from "./document-cv";
 
+/** Singletone class for generating docx files based on Docx schemas */
 export default class AppealDocxCreator {
     static instance: AppealDocxCreator;
 
@@ -32,6 +33,9 @@ export default class AppealDocxCreator {
         this.appeals = appeals;
     }
 
+    /** before proceeding with generate docx file
+     *  requires initialization of appeal
+     *  by calling setAppeal method */
     public async generate(): Promise<Blob> {
         if (!this.appeal)
             throw Error(
@@ -42,6 +46,9 @@ export default class AppealDocxCreator {
         return blob;
     }
 
+    /** before proceeding with generateAllAppeal
+     *  requires initialization of appeal
+     *  by calling setAppeals method */
     public async generateAllAppeals(): Promise<Blob> {
         if (!this.appeals) {
             throw Error(

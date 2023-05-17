@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import TextField from "@mui/material/TextField";
+import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -70,7 +70,7 @@ function SecondStep() {
         <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
             <div className={s.lead}>
                 <h2 className={s.lead_title}>
-                    Хорошо, а куда нам направить ответ? (2 шаг из 4)
+                    Хорошо, а куда нам направить ответ?
                 </h2>
                 <p className={s.lead_paragraph}>
                     {`${firstName} ${middleName}, прежде чем мы перейдем к вашему вопросу, 

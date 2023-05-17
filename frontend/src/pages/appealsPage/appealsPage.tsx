@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
+import { Stepper, Step, StepLabel } from "@mui/material";
 import StepConnector, {
     stepConnectorClasses,
 } from "@mui/material/StepConnector";

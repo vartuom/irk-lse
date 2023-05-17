@@ -49,12 +49,6 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
-  createUser(
-    createUserDto: CreateUserDto,
-  ): Promise<Pick<User, "username" | "email">> {
-    return this.usersService.create(createUserDto);
-  }
-
   findAll() {
     return `This action returns all auth`;
   }

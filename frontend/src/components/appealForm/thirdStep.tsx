@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import TextField from "@mui/material/TextField";
+import { TextField } from "@mui/material";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
@@ -62,7 +62,7 @@ function ThirdStep() {
         <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
             <div className={s.lead}>
                 <h2 className={s.lead_title}>
-                    Замечательно, перейдем к вашим вопросам (3 шаг из 4)
+                    Замечательно, перейдем к вашим вопросам
                 </h2>
                 <p className={s.lead_paragraph}>
                     Пожалуйста изложите в краткой форме свой вопрос и

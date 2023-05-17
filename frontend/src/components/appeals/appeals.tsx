@@ -3,7 +3,7 @@ import { saveAs } from "file-saver";
 import { useParams } from "react-router";
 import { Pagination as MuiPagination, PaginationItem } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import axiosApiInstance from "../../utils/axios";
+import axiosAuthInstance from "../../api/axiosAuth";
 
 import Appeal from "../appeal/appeal";
 import { IAppeal } from "../../types/types";
@@ -33,7 +33,7 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
                     page ?? 1
                 }`;
             }
-            const res = await axiosApiInstance.get<[Array<IAppeal>, number]>(
+            const res = await axiosAuthInstance.get<[Array<IAppeal>, number]>(
                 queryString
             );
             const [data, count] = res.data;
