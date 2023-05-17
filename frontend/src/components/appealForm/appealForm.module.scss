@@ -1,3 +1,4 @@
+@use "../../utils/mixins";
 .container {
   display: flex;
   flex-direction: column;
@@ -6,6 +7,17 @@
   margin: 0 auto;
   box-sizing: content-box;
   padding: 36px;
+  @include mixins.desktop-small {
+    width: 500px;
+  }
+
+  @include mixins.tablets {
+    width: 300px;
+  }
+
+  @include mixins.phones {
+    width: 240px;
+  }
 }
 
 .button {

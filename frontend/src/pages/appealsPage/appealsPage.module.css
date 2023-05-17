@@ -60,3 +60,22 @@
   box-shadow: rgba(149, 157, 165, 0.2) 0px 0px 16px;
   border-radius: 12px;
 }
+@media screen and (max-width: 1280px) {
+  .formContainer {
+    width: 600px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .formContainer {
+    position: relative;
+    left: -4px;
+    width: 400px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .formContainer {
+    width: 340px;
+    position: relative;
+    left: -32px;
+  }
+}

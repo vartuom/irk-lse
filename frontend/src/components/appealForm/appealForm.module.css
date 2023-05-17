@@ -7,6 +7,21 @@
   box-sizing: content-box;
   padding: 36px;
 }
+@media screen and (max-width: 1280px) {
+  .container {
+    width: 500px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .container {
+    width: 300px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .container {
+    width: 240px;
+  }
+}
 
 .button {
   width: 100%;

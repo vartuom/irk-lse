@@ -14,7 +14,7 @@
     cursor: pointer;
     font: 18px/1.5 var(--font-golos-regular);
     color: #0061D9;
-    padding: 12px 0;
+    padding: 12px 0 0 0;
 }
 
 .accordion__title_light {
@@ -27,17 +27,18 @@
 
 .accordion__content {
     max-height: 999px;
-    transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: max-height 400ms cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
+    margin-bottom: 12px;
 }
 
 .accordion__content[aria-expanded="true"] {
-    padding-bottom: 12px;
+    /* padding-bottom: 12px; */
 }
 
 .accordion__content[aria-expanded="false"] {
     max-height: 0px;
-    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1)
+    transition: max-height 200ms cubic-bezier(0.4, 0, 0.2, 1)
 }
 
 .accordion__arrow_opened {
