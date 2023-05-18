@@ -7,7 +7,10 @@ import { useNavigate } from "react-router-dom";
 import s from "./appealForm.module.css";
 import AccordionRow from "../accordionRow/accordionRow";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setFirstStep } from "../../store/appealForm.slice";
+import {
+    setCurrentStepNumber,
+    setFirstStep,
+} from "../../store/appealForm.slice";
 
 export interface IFirstStep {
     firstName: string;
@@ -59,6 +62,10 @@ function FirstStep() {
     });
 
     useEffect(() => {
+        dispatch(setCurrentStepNumber({ step: 0 }));
+    }, []);
+
+    useEffect(() => {
         const subscription = watch((value) => {
             console.log(value);
             dispatch(setFirstStep(value as IFirstStep));
@@ -74,10 +81,8 @@ function FirstStep() {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
             <div className={s.lead}>
-                <h2 className={s.lead_title}>
-                    Отлично, сперва познакомимся (1 шаг из 4)
-                </h2>
-                <AccordionRow title="Почему это важно?">
+                <h2 className={s.lead_title}>Отлично, сперва познакомимся</h2>
+                <AccordionRow type="accent" title="Почему это важно?">
                     <p className={s.lead_paragraph}>
                         Мы не ответим на анонимное обращение. Это закон.
                     </p>

@@ -16,6 +16,10 @@
     box-sizing: border-box;
     z-index: 2;
 
+    @media print {
+        margin: 0 0;
+    }
+
     @include mixins.desktop-small {
         width: 768px;
     }

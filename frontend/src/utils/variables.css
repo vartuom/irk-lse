@@ -2,9 +2,11 @@
     --bg-color-secondary: #010b23;
     --bg-color-primary: #ffffff;
     --bg-color-space-around: #ebf1f9;
+    --bg-color-gray: #D9D9DE;
     --text-color-secondary: #ffffff;
     --text-color-primary: #000000;
     --text-color-accent: #0061d9;
+    --bg-color-blue-accent: #1976d2;
     --font-golos-regular: "GolosTextWebRegular", Arial, sans-serif;
     --font-golos-bold: "GolosTextWebBold", Arial, sans-serif;
     --font-golos-demibold: "GolosTextWebDemibold", Arial, sans-serif;

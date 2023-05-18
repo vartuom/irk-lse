@@ -20,7 +20,7 @@
         color: var(--text-color-primary);
         @include mixins.desktop-small {
             grid-template-columns: 1fr;
-            grid-template-rows: 500px 1fr;
+            grid-template-rows: 360px 1fr;
         }
 
         @include mixins.phones {

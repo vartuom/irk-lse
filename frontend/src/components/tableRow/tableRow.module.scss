@@ -22,7 +22,7 @@
 
 .row__chevron {
     font-size: 0;
-    transition-duration: 0.3s;
+    transition-duration: 0.2s;
     transition-property: transform;
 }
 
@@ -45,7 +45,7 @@
 
 .row__tip_active {
     max-height: 999px;
-    transition: max-height 400ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: max-height 400ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; /* cubic-bezier(0.4, 0.3, 0.2, 1) 0ms; */
 }
 
 .row:hover {

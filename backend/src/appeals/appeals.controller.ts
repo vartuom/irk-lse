@@ -5,39 +5,51 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
+  UseGuards,
+  Query,
   ValidationPipe,
 } from "@nestjs/common";
 import { AppealsService } from "./appeals.service";
 import { CreateAppealDto } from "./dto/create-appeal.dto";
 import { UpdateAppealDto } from "./dto/update-appeal.dto";
+import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 
 @Controller("appeals")
 export class AppealsController {
   constructor(private readonly appealsService: AppealsService) {}
 
-  @Post()
-  create(@Body() createAppealDto: CreateAppealDto) {
+  @Post("create")
+  create(
+    @Body(new ValidationPipe({ transform: true }))
+    createAppealDto: CreateAppealDto,
+  ) {
     return this.appealsService.create(createAppealDto);
   }
 
+  /*@UseGuards(JwtAuthGuard)*/
   @Get()
-  findAll() {
-    return this.appealsService.findAll();
+  findAllByAppealStatus(
+    @Query("processedStatus") processedStatus: boolean,
+    @Query("page") page?: number,
+  ) {
+    return this.appealsService.findAllByAppealProcesStatus(
+      processedStatus,
+      page,
+    );
   }
 
+  /*@UseGuards(JwtAuthGuard)*/
+  @Patch(":id")
+  update(
+    @Param("id") id: number,
+    @Body() { processedStatus }: { processedStatus: boolean },
+  ) {
+    return this.appealsService.updateAppealStatus(id, processedStatus);
+  }
+
+  /*@UseGuards(JwtAuthGuard)*/
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.appealsService.findOne(+id);
-  }
-
-  @Patch(":id")
-  update(@Param("id") id: string, @Body() updateAppealDto: UpdateAppealDto) {
-    return this.appealsService.update(+id, updateAppealDto);
-  }
-
-  @Delete(":id")
-  remove(@Param("id") id: string) {
-    return this.appealsService.remove(+id);
   }
 }

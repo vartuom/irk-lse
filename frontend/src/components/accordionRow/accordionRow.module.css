@@ -9,28 +9,36 @@
     align-items: center;
     gap: 12px;
     border: none;
-    border-top: 2px solid var(--bg-color-space-around);
     background: none;
     text-align: left;
     cursor: pointer;
     font: 18px/1.5 var(--font-golos-regular);
     color: #0061D9;
-    padding: 12px 0;
+    padding: 12px 0 0 0;
+}
+
+.accordion__title_light {
+    border-top: 2px solid var(--bg-color-space-around);
+}
+
+.accordion__title_accent {
+    border-top: 2px solid var(--bg-color-blue-accent);
 }
 
 .accordion__content {
     max-height: 999px;
-    transition: max-height 0.5s ease-in-out;
+    transition: max-height 400ms cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
+    margin-bottom: 12px;
 }
 
 .accordion__content[aria-expanded="true"] {
-    padding-bottom: 12px;
+    /* padding-bottom: 12px; */
 }
 
 .accordion__content[aria-expanded="false"] {
     max-height: 0px;
-    transition: max-height 0.2s cubic-bezier(0, 1, 0, 1);
+    transition: max-height 200ms cubic-bezier(0.4, 0, 0.2, 1)
 }
 
 .accordion__arrow_opened {

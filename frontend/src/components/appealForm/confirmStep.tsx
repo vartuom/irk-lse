@@ -1,18 +1,13 @@
 import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import {
-    Checkbox,
-    CircularProgress,
-    FormControlLabel,
-    TextField,
-} from "@mui/material";
+import { Checkbox, FormControlLabel } from "@mui/material";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Oval, TailSpin } from "react-loader-spinner";
 import s from "./appealForm.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { postAppeal } from "../../store/appealForm.slice";
+import { postAppeal, setCurrentStepNumber } from "../../store/appealForm.slice";
 
 function ConfirmStep() {
     const navigate = useNavigate();
@@ -59,12 +54,16 @@ function ConfirmStep() {
                 middleName,
                 email,
                 extraContacts,
-                appealText,
+                appealText: appealText.trim(),
             })
         );
     };
     const extraContactsParagraphs = extraContacts.split("\n");
     const appealParagraphs = appealText.split("\n");
+
+    useEffect(() => {
+        dispatch(setCurrentStepNumber({ step: 3 }));
+    }, []);
 
     useEffect(() => {
         if (isMailed)
@@ -78,7 +77,7 @@ function ConfirmStep() {
         <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
             <div className={s.lead}>
                 <h2 className={s.lead_title}>
-                    Почти готово, осталось только проверить (4 шаг из 4)
+                    Почти готово, осталось только проверить
                 </h2>
                 <p className={s.lead_paragraph}>
                     <span className="spanBold">Заявитель: </span>{" "}
@@ -110,6 +109,7 @@ function ConfirmStep() {
                 defaultValue={false}
                 render={({ field }) => (
                     <FormControlLabel
+                        // eslint-disable-next-line react/jsx-props-no-spreading
                         control={<Checkbox {...field} />}
                         disabled={isPending}
                         label={

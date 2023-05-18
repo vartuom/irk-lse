@@ -18,3 +18,16 @@ export const getNoun = (
     }
     return five;
 };
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export const debounce = (fn: Function, t: number) => {
+    let timer: ReturnType<typeof setTimeout>;
+    return function (...args: any[]) {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn(args), t);
+    };
+};
+
+export const sleep = (time: number) =>
+    // eslint-disable-next-line no-promise-executor-return
+    new Promise<void>((res) => setTimeout(() => res(), time));

@@ -1,4 +1,4 @@
-import { IsEmail, IsOptional, IsString, Length } from "class-validator";
+import { IsEmail, Length, IsOptional, IsString } from "class-validator";
 
 export class CreateAppealDto {
   @IsString()
@@ -17,7 +17,9 @@ export class CreateAppealDto {
   @IsEmail()
   email: string;
 
+  @IsOptional()
   @IsString()
+  @Length(2, 250)
   extraContacts: string;
 
   @IsString()

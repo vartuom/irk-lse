@@ -6,7 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import s from "./appealForm.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setThirdStep } from "../../store/appealForm.slice";
+import {
+    setCurrentStepNumber,
+    setThirdStep,
+} from "../../store/appealForm.slice";
 
 export interface IThirdStep {
     appealText: string;
@@ -40,6 +43,10 @@ function ThirdStep() {
     });
 
     useEffect(() => {
+        dispatch(setCurrentStepNumber({ step: 2 }));
+    }, []);
+
+    useEffect(() => {
         const subscription = watch((value) => {
             console.log(value);
             dispatch(setThirdStep(value as IThirdStep));
@@ -55,7 +62,7 @@ function ThirdStep() {
         <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
             <div className={s.lead}>
                 <h2 className={s.lead_title}>
-                    Замечательно, перейдем к вашим вопросам (3 шаг из 4)
+                    Замечательно, перейдем к вашим вопросам
                 </h2>
                 <p className={s.lead_paragraph}>
                     Пожалуйста изложите в краткой форме свой вопрос и

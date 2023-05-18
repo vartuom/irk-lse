@@ -3,12 +3,14 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styles from "./accordionRow.module.css";
 
 interface IAccordionProps {
+    type?: string;
     title: string;
     children?: React.ReactNode;
     isExpanded?: boolean;
 }
 
 function AccordionRow({
+    type,
     title,
     children,
     isExpanded = false,
@@ -19,7 +21,11 @@ function AccordionRow({
         <div className={styles.accordion__row}>
             <button
                 type="button"
-                className={styles.accordion__title}
+                className={`${styles.accordion__title} ${
+                    type && type === "accent"
+                        ? styles.accordion__title_accent
+                        : styles.accordion__title_light
+                }`}
                 onClick={() => {
                     setIsActive(!isActive);
                 }}

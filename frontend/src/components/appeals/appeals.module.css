@@ -1,0 +1,23 @@
+.printAll {
+  cursor: pointer;
+  position: absolute;
+  left: 68%;
+  top: -36px;
+  border: none;
+  background: var(--bg-color-blue-accent);
+  border-radius: 64px;
+  color: #fff;
+  box-shadow: 0 -0.25px 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
+  height: 64px;
+  padding: 0 24px;
+  font: 18px/1.5 var(--font-golos-demibold);
+}
+.printAll:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}

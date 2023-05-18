@@ -11,7 +11,10 @@ export const postAppeal = createAsyncThunk(
     "appealForm/postAppeal",
     async (value: any, { rejectWithValue }) => {
         try {
-            const { data } = await axios.post(`${baseUrl}/appeals`, value);
+            const { data } = await axios.post(
+                `${baseUrl}/appeals/create`,
+                value
+            );
             return data;
         } catch (error: any) {
             return rejectWithValue(error.response.data);
@@ -20,6 +23,7 @@ export const postAppeal = createAsyncThunk(
 );
 
 interface IInitialState {
+    currentStep: number;
     firstStep: IFirstStep;
     secondStep: ISecondStep;
     thirdStep: IThirdStep;
@@ -30,6 +34,7 @@ interface IInitialState {
 }
 
 const initialState: IInitialState = {
+    currentStep: 0,
     firstStep: {
         firstName: "",
         lastName: "",
@@ -66,6 +71,7 @@ export const appealFormSlice = createSlice({
             state.thirdStep.appealText = action.payload.appealText;
         },
         resetForm(state) {
+            state.currentStep = 0;
             state.firstStep.firstName = "";
             state.firstStep.lastName = "";
             state.firstStep.middleName = "";
@@ -73,6 +79,9 @@ export const appealFormSlice = createSlice({
             state.secondStep.extraContacts = "";
             state.thirdStep.appealText = "";
             state.appealDetails = "";
+        },
+        setCurrentStepNumber(state, action) {
+            state.currentStep = action.payload.step;
         },
     },
     extraReducers: (builder) => {
@@ -98,6 +107,11 @@ export const appealFormSlice = createSlice({
     },
 });
 
-export const { setFirstStep, setSecondStep, setThirdStep, resetForm } =
-    appealFormSlice.actions;
+export const {
+    setFirstStep,
+    setSecondStep,
+    setThirdStep,
+    resetForm,
+    setCurrentStepNumber,
+} = appealFormSlice.actions;
 export default appealFormSlice.reducer;

@@ -1,36 +1,52 @@
 import { Injectable } from "@nestjs/common";
 import { CreateAppealDto } from "./dto/create-appeal.dto";
-import { UpdateAppealDto } from "./dto/update-appeal.dto";
-import { InjectRepository } from "@nestjs/typeorm";
 import { Appeal } from "./entities/appeal.entity";
 import { Repository } from "typeorm";
+import { InjectRepository } from "@nestjs/typeorm";
 import { sleep } from "../utils/utils";
 
 @Injectable()
 export class AppealsService {
+  pageAppealAmount: number;
   constructor(
     @InjectRepository(Appeal)
-    private readonly appealsRepository: Repository<Appeal>,
-  ) {}
-  async create(createAppealDto: CreateAppealDto) {
-    const newAppeal = this.appealsRepository.create(createAppealDto);
+    private readonly appealRepository: Repository<Appeal>,
+  ) {
+    this.pageAppealAmount = 8;
+  }
+
+  async create(createAppealDto: CreateAppealDto): Promise<Appeal> {
+    const newAppeal = this.appealRepository.create(createAppealDto);
     await sleep(5000);
-    return await this.appealsRepository.save(newAppeal);
+    return await this.appealRepository.save(newAppeal);
   }
 
-  findAll() {
-    return `This action returns all appeals`;
+  async findAllByAppealProcesStatus(processedStatus: boolean, page?: number) {
+    if (page) {
+      return await this.appealRepository.findAndCount({
+        where: {
+          isProcessed: processedStatus,
+        },
+        skip: (page - 1) * this.pageAppealAmount,
+        take: this.pageAppealAmount,
+      });
+    } else {
+      return await this.appealRepository.findAndCount({
+        where: {
+          isProcessed: processedStatus,
+        },
+      });
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} appeal`;
+  async updateAppealStatus(_id: number, processedStatus: boolean) {
+    return await this.appealRepository.update(_id, {
+      isProcessed: processedStatus,
+    });
   }
 
-  update(id: number, updateAppealDto: UpdateAppealDto) {
-    return `This action updates a #${id} appeal`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} appeal`;
+  async findOne(_id: number): Promise<Appeal> {
+    const appeal = await this.appealRepository.findOneBy({ id: _id });
+    return appeal;
   }
 }

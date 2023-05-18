@@ -13,6 +13,8 @@ import AppealsPage from "../../pages/appealsPage/appealsPage";
 import AppealDetails from "../appealDetails/appealDetails";
 import { resetForm } from "../../store/appealForm.slice";
 import { useAppDispatch } from "../../store/store";
+import AdminPage from "../../pages/adminPage/adminPage";
+import PrintAppeal from "../printAppeal/PrintAppeal";
 
 function App() {
     const location = useLocation();
@@ -28,12 +30,15 @@ function App() {
         <div>
             <Layout>
                 <Routes location={background || location}>
-                    <Route path="/" element={<MainPage />} />
+                    <Route path="/" index element={<MainPage />} />
                     <Route path="/history" element={<HistoryPage />} />
                     <Route path="/contacts" element={<ContactsPage />} />
                     <Route path="/prices" element={<PricesPage />} />
                     <Route path="/appeals/*" element={<AppealsPage />} />
                     <Route path="/cards/*" element={<CardsPage />} />
+                    {/* Protected Route */}
+                    <Route path="/admin/*" element={<AdminPage />} />
+                    <Route path="printAppeal/:id" element={<PrintAppeal />} />
                 </Routes>
                 {background && (
                     <Routes>

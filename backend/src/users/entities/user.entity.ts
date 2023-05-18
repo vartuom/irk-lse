@@ -8,6 +8,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { IsString, Length, IsEmail } from "class-validator";
+import { Exclude, plainToInstance } from "class-transformer";
 
 @Entity({ name: "users" })
 @Unique(["username", "email"])
@@ -31,6 +32,7 @@ export class User {
 
   @Column({ select: false })
   @IsString()
+  @Exclude({ toPlainOnly: true })
   password: string;
 
   @Column({ nullable: true, select: false })

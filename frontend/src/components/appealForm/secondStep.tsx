@@ -6,7 +6,10 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import s from "./appealForm.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setSecondStep } from "../../store/appealForm.slice";
+import {
+    setCurrentStepNumber,
+    setSecondStep,
+} from "../../store/appealForm.slice";
 
 export interface ISecondStep {
     email: string;
@@ -47,6 +50,10 @@ function SecondStep() {
     });
 
     useEffect(() => {
+        dispatch(setCurrentStepNumber({ step: 1 }));
+    }, []);
+
+    useEffect(() => {
         const subscription = watch((value) => {
             console.log(value);
             dispatch(setSecondStep(value as ISecondStep));
@@ -63,7 +70,7 @@ function SecondStep() {
         <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
             <div className={s.lead}>
                 <h2 className={s.lead_title}>
-                    Хорошо, а куда нам направить ответ? (2 шаг из 4)
+                    Хорошо, а куда нам направить ответ?
                 </h2>
                 <p className={s.lead_paragraph}>
                     {`${firstName} ${middleName}, прежде чем мы перейдем к вашему вопросу, 

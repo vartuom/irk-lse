@@ -37,6 +37,7 @@ export class Appeal {
   @IsEmail()
   email: string;
 
+  @Column({ nullable: true })
   @IsString()
   extraContacts: string;
 
@@ -44,4 +45,7 @@ export class Appeal {
   @IsString()
   @Length(2, 5000)
   appealText: string;
+
+  @Column({ default: false })
+  isProcessed: boolean;
 }
