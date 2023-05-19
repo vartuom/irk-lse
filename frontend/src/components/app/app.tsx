@@ -15,6 +15,7 @@ import { resetForm } from "../../store/appealForm.slice";
 import { useAppDispatch } from "../../store/store";
 import AdminPage from "../../pages/adminPage/adminPage";
 import PrintAppeal from "../printAppeal/PrintAppeal";
+import ProtectedRoutes from "../protectedRoutes/protectedRoutes";
 
 function App() {
     const location = useLocation();
@@ -37,8 +38,13 @@ function App() {
                     <Route path="/appeals/*" element={<AppealsPage />} />
                     <Route path="/cards/*" element={<CardsPage />} />
                     {/* Protected Route */}
-                    <Route path="/admin/*" element={<AdminPage />} />
-                    <Route path="printAppeal/:id" element={<PrintAppeal />} />
+                    <Route element={<ProtectedRoutes />}>
+                        <Route path="/admin/*" element={<AdminPage />} />
+                        <Route
+                            path="printAppeal/:id"
+                            element={<PrintAppeal />}
+                        />
+                    </Route>
                 </Routes>
                 {background && (
                     <Routes>
