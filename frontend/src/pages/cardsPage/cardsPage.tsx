@@ -29,7 +29,11 @@ function CardsPage() {
                             Что нужно знать перед обращением в лабораторию? Мы
                             подготовили небольшой набор карточек с ответами на
                             самые важные вопросы:{" "}
-                            <Link className="link" to="/cards" state="noScroll">
+                            <Link
+                                className="link"
+                                to="/home/cards"
+                                state="noScroll"
+                            >
                                 основные понятия
                             </Link>
                             {", "}
