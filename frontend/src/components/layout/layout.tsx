@@ -1,15 +1,12 @@
 import React, { ReactNode, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { Outlet } from "react-router";
 import Header from "../header/header";
 import styles from "./layout.module.css";
 import Content from "../content/content";
 import Footer from "../footer/footer";
 
-interface ILayoutProps {
-    children: ReactNode;
-}
-
-function Layout({ children }: ILayoutProps) {
+function Layout() {
     const { pathname, state } = useLocation();
     // крутим страницу вверх при смене роута
     useEffect(() => {
@@ -19,7 +16,9 @@ function Layout({ children }: ILayoutProps) {
     return (
         <div className={styles.test}>
             <Header />
-            <Content>{children}</Content>
+            <Content>
+                <Outlet />
+            </Content>
             <Footer />
         </div>
     );

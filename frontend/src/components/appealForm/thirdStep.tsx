@@ -55,7 +55,7 @@ function ThirdStep() {
     }, [watch, dispatch]);
 
     const onSubmit: SubmitHandler<IThirdStep> = (data) => {
-        navigate("/appeals/confirm", { state: "noScroll" });
+        navigate("/home/appeals/confirm", { state: "noScroll" });
     };
 
     return (

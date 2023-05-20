@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router";
 import Layout from "../layout/layout";
 import MainPage from "../../pages/mainPage/mainPage";
 import Modal from "../modal/modal";
@@ -29,52 +30,51 @@ function App() {
     };
     return (
         <div>
-            <Layout>
-                <Routes location={background || location}>
-                    <Route path="/" index element={<MainPage />} />
-                    <Route path="/history" element={<HistoryPage />} />
-                    <Route path="/contacts" element={<ContactsPage />} />
-                    <Route path="/prices" element={<PricesPage />} />
-                    <Route path="/appeals/*" element={<AppealsPage />} />
-                    <Route path="/cards/*" element={<CardsPage />} />
+            <Routes location={background || location}>
+                <Route path="/login" element={<ContactsPage />} />
+                <Route path="/" element={<Navigate to="/home" replace />} />
+                <Route path={"/home/*"} element={<Layout />}>
+                    <Route index element={<MainPage />} />
+                    <Route path="contacts" element={<ContactsPage />} />
+                    <Route path="prices" element={<PricesPage />} />
+                    <Route path="appeals/*" element={<AppealsPage />} />
+                    <Route path="cards/*" element={<CardsPage />} />
                     {/* Protected Route */}
                     <Route element={<ProtectedRoutes />}>
-                        <Route path="/admin/*" element={<AdminPage />} />
+                        <Route path="history" element={<HistoryPage />} />
+                        <Route path="admin/*" element={<AdminPage />} />
                         <Route
                             path="printAppeal/:id"
                             element={<PrintAppeal />}
                         />
                     </Route>
+                </Route>
+            </Routes>
+            {background && (
+                <Routes>
+                    <Route
+                        path="/home/prices"
+                        element={
+                            <Modal onClose={() => navigate(-1)} isModalOpened>
+                                <ScrollBox>
+                                    <PricesTable />
+                                </ScrollBox>
+                            </Modal>
+                        }
+                    />
+                    <Route
+                        path="/home/appeals/details"
+                        element={
+                            <Modal
+                                onClose={handleAppealFormClose}
+                                isModalOpened
+                            >
+                                <AppealDetails />
+                            </Modal>
+                        }
+                    />
                 </Routes>
-                {background && (
-                    <Routes>
-                        <Route
-                            path="/prices"
-                            element={
-                                <Modal
-                                    onClose={() => navigate(-1)}
-                                    isModalOpened
-                                >
-                                    <ScrollBox>
-                                        <PricesTable />
-                                    </ScrollBox>
-                                </Modal>
-                            }
-                        />
-                        <Route
-                            path="/appeals/details"
-                            element={
-                                <Modal
-                                    onClose={handleAppealFormClose}
-                                    isModalOpened
-                                >
-                                    <AppealDetails />
-                                </Modal>
-                            }
-                        />
-                    </Routes>
-                )}
-            </Layout>
+            )}
         </div>
     );
 }

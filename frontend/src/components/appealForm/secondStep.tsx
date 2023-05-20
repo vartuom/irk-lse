@@ -63,7 +63,7 @@ function SecondStep() {
 
     const onSubmit: SubmitHandler<ISecondStep> = (data) => {
         console.log(data);
-        navigate("/appeals/stepThree", { state: "noScroll" });
+        navigate("/home/appeals/stepThree", { state: "noScroll" });
     };
 
     return (
