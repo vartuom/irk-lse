@@ -3,7 +3,6 @@ import { saveAs } from "file-saver";
 import { useParams } from "react-router";
 import { Pagination as MuiPagination, PaginationItem } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import axiosAuthInstance from "../../api/axiosAuth";
 
 import Appeal from "../appeal/appeal";
 import { IAppeal } from "../../types/types";
@@ -13,7 +12,8 @@ import Pagination from "../paginationAppeals/PaginationAppeals";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setAppeals } from "../../store/appeals.slice";
 import { sleep } from "../../utils/utils";
-import { baseUrl } from "../../utils/constants";
+import { BASE_URL } from "../../utils/constants";
+import { axiosPrivate } from "../../api/axios";
 
 function Appeals({ isProcessed }: { isProcessed?: boolean }) {
     const appeals = useAppSelector((state) => state.appeals.appeals);
@@ -27,13 +27,13 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
         let activeFetch = true;
         setIsFetching(true);
         async function getAppeals() {
-            let queryString = `${baseUrl}/appeals?processedStatus=false`;
+            let queryString = `${BASE_URL}/appeals?processedStatus=false`;
             if (isProcessed) {
-                queryString = `${baseUrl}/appeals?processedStatus=true&page=${
+                queryString = `${BASE_URL}/appeals?processedStatus=true&page=${
                     page ?? 1
                 }`;
             }
-            const res = await axiosAuthInstance.get<[Array<IAppeal>, number]>(
+            const res = await axiosPrivate.get<[Array<IAppeal>, number]>(
                 queryString
             );
             const [data, count] = res.data;
