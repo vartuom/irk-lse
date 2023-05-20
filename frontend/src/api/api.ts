@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { baseUrl, cookiesLifeTime } from "../utils/constants";
+import { BASE_URL, cookiesLifeTime } from "../utils/constants";
 import { getCookie, setCookie } from "../utils/storage";
 
 export interface ITokenResponse {
@@ -19,7 +19,7 @@ export const checkResponse = async (res: AxiosResponse) => {
 export const refreshToken = () => {
     return axios
         .post(
-            `${baseUrl}/auth/token`,
+            `${BASE_URL}/auth/token`,
             {
                 token: localStorage.getItem("refreshToken"),
             },
