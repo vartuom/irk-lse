@@ -67,7 +67,7 @@ function ConfirmStep() {
 
     useEffect(() => {
         if (isMailed)
-            navigate("/appeals/details", {
+            navigate("/home/appeals/details", {
                 state: { background: location },
             });
         // eslint-disable-next-line react-hooks/exhaustive-deps

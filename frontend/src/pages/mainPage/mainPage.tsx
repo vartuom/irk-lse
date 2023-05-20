@@ -138,7 +138,7 @@ function MainPage() {
                         type="button"
                         className={`${styles.button} ${styles.button_accent}`}
                         onClick={() =>
-                            navigate("prices", {
+                            navigate("/home/prices", {
                                 state: { background: location },
                             })
                         }
@@ -148,7 +148,7 @@ function MainPage() {
                     <button
                         type="button"
                         className={styles.button}
-                        onClick={() => navigate("prices")}
+                        onClick={() => navigate("/home/prices")}
                     >
                         Узнать подробнее
                     </button>

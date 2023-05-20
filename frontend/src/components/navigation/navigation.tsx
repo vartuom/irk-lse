@@ -9,6 +9,7 @@ function Navigation() {
                 <li>
                     <NavLink
                         to=""
+                        end
                         className={({ isActive }) =>
                             isActive ? `${s.link} ${s.link_active}` : s.link
                         }
