@@ -12,7 +12,7 @@ import { IAppeal } from "../../types/types";
 import { useAppDispatch } from "../../store/store";
 import { filterAppeals } from "../../store/appeals.slice";
 import { sleep } from "../../utils/utils";
-import { baseUrl } from "../../utils/constants";
+import { BASE_URL } from "../../utils/constants";
 
 export default function Appeal({
     firstName,
@@ -53,7 +53,7 @@ export default function Appeal({
     const changeProcessedStatus = async () => {
         setIsFetching(true);
         const response = await axios.post(
-            `${baseUrl}/appeals/${id}`,
+            `${BASE_URL}/appeals/${id}`,
             {
                 processedStatus: !isProcessed,
             },

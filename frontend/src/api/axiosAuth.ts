@@ -4,7 +4,7 @@ import axios, {
     AxiosRequestConfig,
     InternalAxiosRequestConfig,
 } from "axios";
-import { baseUrl, cookiesLifeTime } from "../utils/constants";
+import { cookiesLifeTime } from "../utils/constants";
 import { getCookie, setCookie } from "../utils/storage";
 import { ITokenResponse, checkResponse, refreshToken } from "./api";
 
