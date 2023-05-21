@@ -8,6 +8,7 @@ import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 import { CreateUserDto } from "../users/dto/create-user.dto";
 import { User } from "../users/entities/user.entity";
+import { IRefreshTokens, ISigninTokens } from "./types/types";
 
 @Injectable()
 export class AuthService {
@@ -29,24 +30,37 @@ export class AuthService {
     return user;
   }
 
-  async signin(userId: number) {
-    const { accessToken, refreshToken } = await this.issueTokens(userId);
+  async signin(userId: number): Promise<ISigninTokens> {
+    const [accessToken, refreshToken] = await Promise.all([
+      this.issueAccessToken(userId),
+      this.issueRefreshToken(userId),
+    ]);
     await this.usersService.updateUserRefreshToken(userId, refreshToken);
     const user = await this.usersService.findOneByIdOrFail(userId);
-    return { ...user, accessToken, refreshToken };
+    return { user, accessToken, refreshToken };
   }
 
-  private async issueTokens(userId: number) {
+  async refreshAccessToken(userId: number): Promise<IRefreshTokens> {
+    const accessToken = await this.issueAccessToken(userId);
+    return { accessToken };
+  }
+
+  private async issueAccessToken(userId: number) {
     const payload = { id: userId };
     const accessToken = this.jwtService.sign(payload, {
       secret: this.configService.get("secret"),
       expiresIn: "1h",
     });
+    return accessToken;
+  }
+
+  private async issueRefreshToken(userId: number) {
+    const payload = { id: userId };
     const refreshToken = this.jwtService.sign(payload, {
       secret: this.configService.get("refreshSecret"),
       expiresIn: "7d",
     });
-    return { accessToken, refreshToken };
+    return refreshToken;
   }
 
   findAll() {

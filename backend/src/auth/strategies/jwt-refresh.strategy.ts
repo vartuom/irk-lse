@@ -21,19 +21,26 @@ export class JwtRefreshStrategy extends PassportStrategy(
     super({
       secretOrKey: configService.get("jwt.secret"),
       ignoreExpiration: false,
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: (request: Request) => {
+        let token = null;
+        if (request && request.cookies) {
+          token = request.cookies["refreshToken"];
+          console.log(token);
+        }
+        return token;
+      },
       passReqToCallback: true,
     });
   }
 
   async validate(request: Request, payload: Pick<User, "id">) {
     const user = await this.userService.getUserRefreshToken(payload.id);
-    const refreshToken = request.get("Authorization").replace("Bearer ", "");
+    const refreshToken = request.cookies["refreshToken"];
     const match = await this.hashService.compare(
       refreshToken,
       user.refreshToken,
     );
     if (!match) throw new UnauthorizedException(WRONG_REFRESH_TOKEN_MESSAGE);
-    return { ...payload, refreshToken };
+    return { ...payload };
   }
 }
