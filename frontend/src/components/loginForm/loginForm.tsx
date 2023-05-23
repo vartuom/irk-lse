@@ -1,6 +1,7 @@
-import { TextField, styled } from "@mui/material";
+import { TextField, styled, InputAdornment, IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 
 import styles from "./loginForm.module.css";
 
@@ -23,8 +24,17 @@ interface IfromState {
 }
 
 function LoginForm() {
+    const [showPassword, setShowPassword] = useState(false);
     const { pathname, state }: IfromState = useLocation();
     async function login(someparams: any) {}
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (
+        event: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        event.preventDefault();
+    };
+
     return (
         <form className={styles.container}>
             <div>
@@ -43,8 +53,26 @@ function LoginForm() {
                         id="password"
                         label="Password"
                         variant="outlined"
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         autoComplete="current-password"
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? (
+                                            <VisibilityOff />
+                                        ) : (
+                                            <Visibility />
+                                        )}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                 </div>
                 <button className={styles.button} type="submit">
