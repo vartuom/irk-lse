@@ -1,0 +1,21 @@
+.container {
+    height: 100vh;
+    background-color: var(--bg-color-space-around);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formContainer {
+    position: relative;
+    overflow: hidden;
+    padding: 100px 0px 0 100px;
+    height: 600px;
+    width: 1000px;
+    background-color: #fff;
+    border-radius: 16px;
+}
+
+.logo {
+    position: absolute;
+}

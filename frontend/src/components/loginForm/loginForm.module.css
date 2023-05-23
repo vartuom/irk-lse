@@ -1,0 +1,39 @@
+.container {
+  height: 100%;
+  width: 400px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+.text {
+  margin-top: 0;
+  font: 24px/1.4 var(--font-golos-regular);
+  text-align: center;
+}
+
+.inputs__wrapper {
+  margin-top: 46px;
+  width: 400px;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 32px;
+}
+
+.button {
+  cursor: pointer;
+  margin-top: 32px;
+  width: 200px;
+  height: 52px;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  background-color: var(--bg-color-blue-accent);
+  font: 22px/1.4 var(--font-golos-regular);
+}
+
+.registerLink {
+  margin-bottom: 48px;
+  color: var(--bg-color-blue-accent);
+  font: 18px/1.2 var(--font-golos-regular);
+}

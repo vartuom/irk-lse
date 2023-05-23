@@ -17,6 +17,8 @@ import { useAppDispatch } from "../../store/store";
 import AdminPage from "../../pages/adminPage/adminPage";
 import PrintAppeal from "../printAppeal/PrintAppeal";
 import ProtectedRoutes from "../protectedRoutes/protectedRoutes";
+import AuthPage from "../../pages/authPage/authPage";
+import LoginForm from "../loginForm/loginForm";
 
 function App() {
     const location = useLocation();
@@ -31,7 +33,10 @@ function App() {
     return (
         <div>
             <Routes location={background || location}>
-                <Route path="/login" element={<ContactsPage />} />
+                <Route path="/auth/*" element={<AuthPage />}>
+                    <Route path="login" element={<LoginForm />} />
+                    <Route path="register" />
+                </Route>
                 <Route path="/" element={<Navigate to="/home" replace />} />
                 <Route path={"/home/*"} element={<Layout />}>
                     <Route index element={<MainPage />} />
