@@ -10,6 +10,7 @@ import {
   Request,
   UseInterceptors,
   ClassSerializerInterceptor,
+  Response,
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { UpdateAuthDto } from "./dto/update-auth.dto";
@@ -19,6 +20,8 @@ import { JwtAuthGuard } from "./guards/jwt-auth.guard";
 import { CreateUserDto } from "../users/dto/create-user.dto";
 import { plainToClass } from "class-transformer";
 import { UsersService } from "src/users/users.service";
+import { Response as ExpressResponse, response } from "express";
+import { JwtRefreshGuard } from "./guards/jwt-refresh.guard";
 
 @Controller("auth")
 export class AuthController {
@@ -29,10 +32,20 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post("signin")
-  signin(
+  async signin(
     @Request() { user }: { user: Pick<User, "id" | "username" | "password"> },
+    @Response({ passthrough: true }) response: ExpressResponse,
   ) {
-    return this.authService.signin(user.id);
+    const tokens = await this.authService.signin(user.id);
+    response.cookie("accessToken", tokens.accessToken, {
+      httpOnly: true,
+      sameSite: "strict",
+    });
+    response.cookie("refreshToken", tokens.refreshToken, {
+      httpOnly: true,
+      sameSite: "strict",
+    });
+    return tokens;
   }
 
   @UseGuards(JwtAuthGuard)
@@ -41,11 +54,33 @@ export class AuthController {
     return { user };
   }
 
+  @UseGuards(JwtRefreshGuard)
+  @Post("refresh")
+  async refresh(
+    @Request() { user }: { user: Pick<User, "id"> },
+    @Response({ passthrough: true }) response: ExpressResponse,
+  ) {
+    const accessToken = await this.authService.refreshAccessToken(user.id);
+    response.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      sameSite: "strict",
+    });
+    return { accessToken };
+  }
+
   @UseInterceptors(ClassSerializerInterceptor)
   @Post("register")
   async registerUser(@Body() createUserDto: CreateUserDto) {
     const user = await this.userService.create(createUserDto);
     return plainToClass(User, user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post("logout")
+  async logout(@Response({ passthrough: true }) response: ExpressResponse) {
+    response.clearCookie("accessToken");
+    response.clearCookie("refreshToken");
+    return;
   }
 
   @Get()

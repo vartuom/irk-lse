@@ -10,7 +10,8 @@ const useAxiosPrivate = () => {
     };
 
     useEffect(() => {
-        const requestIntercept = axiosPrivate.interceptors.request.use(
+        /* по идее если accessToken в куке, то этот интерсептор не нужен
+        /* const requestIntercept = axiosPrivate.interceptors.request.use(
             (config) => {
                 if (!config.headers.Authorization) {
                     // потом убрать в оперативную память!
@@ -22,7 +23,7 @@ const useAxiosPrivate = () => {
                 return config;
             },
             (error) => Promise.reject(error)
-        );
+        ); */
 
         const responseIntercept = axiosPrivate.interceptors.response.use(
             (response) => response,
@@ -30,8 +31,8 @@ const useAxiosPrivate = () => {
                 const prevRequest = error?.config;
                 if (error?.response?.status === 403 && !prevRequest?.sent) {
                     prevRequest.sent = true;
-                    const newAccessToken = await refreshToken();
-                    prevRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+                    /* refreshToken установит новый cookie для аксес токена  */
+                    await refreshToken();
                     return axiosPrivate(prevRequest);
                 }
                 return Promise.reject(error);
@@ -39,7 +40,7 @@ const useAxiosPrivate = () => {
         );
 
         return () => {
-            axiosPrivate.interceptors.request.eject(requestIntercept);
+            /* axiosPrivate.interceptors.request.eject(requestIntercept); */
             axiosPrivate.interceptors.response.eject(responseIntercept);
         };
     }, []);

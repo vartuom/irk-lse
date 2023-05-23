@@ -8,10 +8,11 @@ import { HashModule } from "../hash/hash.module";
 import { JwtStrategy } from "./strategies/jwt.strategy";
 import { LocalStrategy } from "./strategies/local.strategy";
 import { PassportModule } from "@nestjs/passport";
+import { JwtRefreshStrategy } from "./strategies/jwt-refresh.strategy";
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, JwtRefreshStrategy],
   imports: [
     JwtModule.registerAsync({
       imports: [ConfigModule],
