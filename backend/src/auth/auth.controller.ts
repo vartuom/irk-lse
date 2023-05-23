@@ -41,7 +41,7 @@ export class AuthController {
       httpOnly: true,
       sameSite: "strict",
     });
-    response.cookie("resreshToken", tokens.refreshToken, {
+    response.cookie("refreshToken", tokens.refreshToken, {
       httpOnly: true,
       sameSite: "strict",
     });
