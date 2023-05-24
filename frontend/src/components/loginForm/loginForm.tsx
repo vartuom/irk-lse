@@ -1,9 +1,11 @@
 import { TextField, styled, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useLocation } from "react-router-dom";
-import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
 import styles from "./loginForm.module.css";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { setLoggedIn } from "../../store/user.slice";
 
 const CustomTextField = styled(TextField)({
     "& .MuiOutlinedInput-root": {
@@ -24,8 +26,20 @@ interface IfromState {
 }
 
 function LoginForm() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const dispatch = useAppDispatch();
+    const from = location.state?.from?.pathname || "/home";
     const [showPassword, setShowPassword] = useState(false);
     const { pathname, state }: IfromState = useLocation();
+    const { isLoggedIn } = useAppSelector((store) => ({
+        isLoggedIn: store.user.isLoggedIn,
+    }));
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate(from, { replace: true });
+        }
+    }, [isLoggedIn]);
     async function login(someparams: any) {}
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -35,8 +49,13 @@ function LoginForm() {
         event.preventDefault();
     };
 
+    const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+        evt.preventDefault();
+        dispatch(setLoggedIn());
+    };
+
     return (
-        <form className={styles.container}>
+        <form className={styles.container} onSubmit={handleSubmit}>
             <div>
                 <p className={styles.text}>
                     Чтобы продолжить, пожалуйста пройдите авторизацию
@@ -45,13 +64,13 @@ function LoginForm() {
                     <CustomTextField
                         style={{ borderRadius: "12px" }}
                         id="username"
-                        label="Username"
+                        label="Имя пользователя"
                         variant="outlined"
                     />
                     <CustomTextField
                         style={{ borderRadius: "12px" }}
                         id="password"
-                        label="Password"
+                        label="Пароль"
                         variant="outlined"
                         type={showPassword ? "text" : "password"}
                         autoComplete="current-password"

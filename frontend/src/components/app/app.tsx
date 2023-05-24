@@ -44,9 +44,9 @@ function App() {
                     <Route path="prices" element={<PricesPage />} />
                     <Route path="appeals/*" element={<AppealsPage />} />
                     <Route path="cards/*" element={<CardsPage />} />
+                    <Route path="history" element={<HistoryPage />} />
                     {/* Protected Route */}
                     <Route element={<ProtectedRoutes />}>
-                        <Route path="history" element={<HistoryPage />} />
                         <Route path="admin/*" element={<AdminPage />} />
                         <Route
                             path="printAppeal/:id"
