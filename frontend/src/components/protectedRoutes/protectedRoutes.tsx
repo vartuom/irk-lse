@@ -12,7 +12,7 @@ function ProtectedRoutes() {
     return isLoggedIn ? (
         <Outlet />
     ) : (
-        <Navigate to="/login" state={{ from: location }} replace />
+        <Navigate to="/auth/login" state={{ from: location }} replace />
     );
 }
 

@@ -20,8 +20,12 @@ const initialState: IInitialState = {
 const userSlice = createSlice({
     name: "user",
     initialState,
-    reducers: {},
+    reducers: {
+        setLoggedIn(state) {
+            state.isLoggedIn = true;
+        },
+    },
 });
 
-export const {} = userSlice.actions;
+export const { setLoggedIn } = userSlice.actions;
 export default userSlice.reducer;
