@@ -1,12 +1,13 @@
 import { PassportStrategy } from "@nestjs/passport";
-import { ExtractJwt, Strategy } from "passport-jwt";
+import { Strategy } from "passport-jwt";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { UsersService } from "../../users/users.service";
 import { ConfigService } from "@nestjs/config";
+
+import { UsersService } from "../../users/users.service";
 import { User } from "../../users/entities/user.entity";
-import { Request } from "express";
 import { HashService } from "../../hash/hash.service";
 import { WRONG_REFRESH_TOKEN_MESSAGE } from "../../utils/errorConstants";
+import { ExpressRequest } from "../types/types";
 
 @Injectable()
 export class JwtRefreshStrategy extends PassportStrategy(
@@ -21,9 +22,9 @@ export class JwtRefreshStrategy extends PassportStrategy(
     super({
       secretOrKey: configService.get("jwt.secret"),
       ignoreExpiration: false,
-      jwtFromRequest: (request: Request) => {
+      jwtFromRequest: (request: ExpressRequest) => {
         let token = null;
-        if (request && request.cookies) {
+        if (request && request.cookies && request.cookies["refreshToken"]) {
           token = request.cookies["refreshToken"];
           //console.log(token); //TO DO TO DEBUG
         }
@@ -33,7 +34,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
     });
   }
 
-  async validate(request: Request, payload: Pick<User, "id">) {
+  async validate(request: ExpressRequest, payload: Pick<User, "id">) {
     const user = await this.userService.getUserRefreshToken(payload.id);
     const refreshToken = request.cookies["refreshToken"];
     const match = await this.hashService.compare(
