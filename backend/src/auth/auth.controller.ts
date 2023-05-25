@@ -36,16 +36,16 @@ export class AuthController {
     @Request() { user }: { user: Pick<User, "id" | "username" | "password"> },
     @Response({ passthrough: true }) response: ExpressResponse,
   ) {
-    const tokens = await this.authService.signin(user.id);
-    response.cookie("accessToken", tokens.accessToken, {
+    const authData = await this.authService.signin(user.id);
+    response.cookie("accessToken", authData.accessToken, {
       httpOnly: true,
       sameSite: "strict",
     });
-    response.cookie("refreshToken", tokens.refreshToken, {
+    response.cookie("refreshToken", authData.refreshToken, {
       httpOnly: true,
       sameSite: "strict",
     });
-    return tokens;
+    return authData.user;
   }
 
   @UseGuards(JwtAuthGuard)
@@ -81,6 +81,11 @@ export class AuthController {
     response.clearCookie("accessToken");
     response.clearCookie("refreshToken");
     return;
+  }
+  @UseGuards(JwtAuthGuard)
+  @Get("user")
+  async user(@Request() { user }) {
+    return user;
   }
 
   @Get()

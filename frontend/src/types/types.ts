@@ -10,3 +10,8 @@ export interface IAppeal {
     isProcessed?: boolean;
     extraContacts?: string;
 }
+
+export interface ICredentials {
+    username: string;
+    password: string;
+}
