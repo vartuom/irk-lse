@@ -12,9 +12,9 @@ const CustomTextField = styled(TextField)({
         "& fieldset": {
             borderRadius: "12px",
         },
-    },
-    "& .MuiOutlinedInput-input": {
-        borderRadius: "12px",
+        "& .MuiInputBase-input": {
+            borderRadius: "12px 0 0 12px",
+        },
     },
 });
 
