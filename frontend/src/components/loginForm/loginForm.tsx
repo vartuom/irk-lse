@@ -3,102 +3,145 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
+import * as yup from "yup";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { TailSpin } from "react-loader-spinner";
 import styles from "./loginForm.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { fetchLogIn, setLoggedIn } from "../../store/user.slice";
-
-const CustomTextField = styled(TextField)({
-    "& .MuiOutlinedInput-root": {
-        "& fieldset": {
-            borderRadius: "12px",
-        },
-    },
-    "& .MuiOutlinedInput-input": {
-        borderRadius: "12px",
-    },
-});
-
-interface IfromState {
-    pathname: string;
-    state: {
-        from: string;
-    };
-}
+import s from "../appealForm/appealForm.module.css";
 
 function LoginForm() {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useAppDispatch();
     const from = location.state?.from?.pathname || "/home";
+
     const [showPassword, setShowPassword] = useState(false);
-    const { pathname, state }: IfromState = useLocation();
-    const { isLoggedIn } = useAppSelector((store) => ({
+
+    const { isLoggedIn, isAuthPending } = useAppSelector((store) => ({
         isLoggedIn: store.user.isLoggedIn,
+        isAuthPending: store.user.isAuthPending,
     }));
+
+    const schema = yup.object({
+        username: yup.string().required("Это обязательное поле"),
+        password: yup.string().required("Это обязательное поле"),
+    });
+    const {
+        control,
+        handleSubmit,
+        formState: { errors, isValid },
+    } = useForm({
+        defaultValues: {
+            username: "",
+            password: "",
+        },
+        resolver: yupResolver(schema),
+        mode: "onBlur",
+    });
+
     useEffect(() => {
         if (isLoggedIn) {
             navigate(from, { replace: true });
         }
     }, [isLoggedIn]);
-    async function login(someparams: any) {}
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-    const handleMouseDownPassword = (
-        event: React.MouseEvent<HTMLButtonElement>
-    ) => {
-        event.preventDefault();
-    };
-
-    const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
-        evt.preventDefault();
-        dispatch(fetchLogIn({ username: "artem", password: "386686" }));
+    const onSubmit = (data: any) => {
+        console.log(data);
+        dispatch(
+            fetchLogIn({ username: data.username, password: data.password })
+        );
     };
 
     return (
-        <form className={styles.container} onSubmit={handleSubmit}>
-            <div>
-                <p className={styles.text}>
-                    Чтобы продолжить, пожалуйста пройдите авторизацию
-                </p>
-                <div className={styles.inputs__wrapper}>
-                    <CustomTextField
-                        style={{ borderRadius: "12px" }}
-                        id="username"
-                        label="Имя пользователя"
-                        variant="outlined"
-                    />
-                    <CustomTextField
-                        style={{ borderRadius: "12px" }}
-                        id="password"
-                        label="Пароль"
-                        variant="outlined"
-                        type={showPassword ? "text" : "password"}
-                        autoComplete="current-password"
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                    >
-                                        {showPassword ? (
-                                            <VisibilityOff />
-                                        ) : (
-                                            <Visibility />
-                                        )}
-                                    </IconButton>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </div>
-                <button className={styles.button} type="submit">
-                    Войти
-                </button>
+        <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
+            <p className={styles.text}>Вход для сотрудников учреждения</p>
+            <div className={styles.inputs__wrapper}>
+                <Controller
+                    name="username"
+                    control={control}
+                    render={({ field }) => (
+                        <TextField
+                            label="Имя пользователя"
+                            error={!!errors?.username}
+                            helperText={
+                                errors?.username
+                                    ? errors?.username?.message
+                                    : null
+                            }
+                            {...field}
+                        />
+                    )}
+                />
+                <Controller
+                    name="password"
+                    control={control}
+                    render={({ field }) => (
+                        <TextField
+                            label="Пароль"
+                            type={showPassword ? "text" : "password"}
+                            error={!!errors?.password}
+                            helperText={
+                                errors?.password
+                                    ? errors?.password?.message
+                                    : null
+                            }
+                            InputProps={{
+                                // отключаем автоподстановку пароля
+                                // https://mui.com/material-ui/react-autocomplete/#autocomplete-autofill
+                                autoComplete: "new-password",
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password"
+                                            edge="end"
+                                            onClick={() =>
+                                                setShowPassword((show) => !show)
+                                            }
+                                        >
+                                            {showPassword ? (
+                                                <Visibility />
+                                            ) : (
+                                                <VisibilityOff />
+                                            )}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
+                            {...field}
+                        />
+                    )}
+                />
             </div>
-            <span className={styles.registerLink}>Зарегистрироваться</span>
+            <button
+                type="submit"
+                aria-label="Отправить"
+                disabled={isAuthPending}
+                className={`${s.button} ${s.button_type_primary} ${
+                    !isValid && s.button_type_inactive
+                } ${isAuthPending && "frozen"}`}
+            >
+                <div className={s.button__loader}>
+                    {isAuthPending ? (
+                        <>
+                            Вход...{" "}
+                            <TailSpin
+                                height="18"
+                                width="18"
+                                color="#ffffff"
+                                ariaLabel="tail-spin-loading"
+                                radius="1"
+                                wrapperStyle={{}}
+                                wrapperClass=""
+                            />
+                        </>
+                    ) : (
+                        <>Отправить</>
+                    )}
+                </div>
+            </button>
         </form>
     );
 }

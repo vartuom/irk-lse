@@ -22,6 +22,7 @@ import { plainToClass } from "class-transformer";
 import { UsersService } from "src/users/users.service";
 import { Response as ExpressResponse, response } from "express";
 import { JwtRefreshGuard } from "./guards/jwt-refresh.guard";
+import { sleep } from "../utils/utils";
 
 @Controller("auth")
 export class AuthController {
@@ -45,6 +46,7 @@ export class AuthController {
       httpOnly: true,
       sameSite: "strict",
     });
+    await sleep(5000);
     return authData.user;
   }
 
