@@ -3,7 +3,7 @@
   width: 400px;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: space-between;
+  gap: 24px;
 }
 
 .text {
@@ -13,7 +13,6 @@
 }
 
 .inputs__wrapper {
-  margin-top: 46px;
   width: 400px;
   display: flex;
   flex-flow: column nowrap;
@@ -21,15 +20,34 @@
 }
 
 .button {
-  cursor: pointer;
-  margin-top: 32px;
-  width: 200px;
-  height: 52px;
+  width: 100%;
+  min-height: 60px;
+  font: 18px/1.5 var(--font-golos-regular);
   border: none;
-  border-radius: 12px;
-  color: #fff;
-  background-color: var(--bg-color-blue-accent);
-  font: 22px/1.4 var(--font-golos-regular);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--opacity-transition);
+}
+.button_type_primary {
+  color: var(--text-color-secondary);
+  background: var(--bg-color-secondary);
+}
+.button_type_secondary {
+  background: none;
+  border: 2px solid var(--bg-color-secondary);
+}
+.button_type_inactive {
+  opacity: 0.3;
+  pointer-events: none;
+}
+.button__loader {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+.button:hover {
+  opacity: var(--hover-opacity);
 }
 
 .registerLink {
