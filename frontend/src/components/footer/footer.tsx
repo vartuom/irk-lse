@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../../images/lse-logo.svg";
 import s from "./footer.module.css";
 import styles from "../header/header.module.css";
@@ -41,6 +42,11 @@ function Footer() {
                                 <li>Нормативная база</li>
                                 <li>Журнал "ТиПСЭ"</li>
                                 <li>#СТОПВИЧСПИД</li>
+                                <li>
+                                    <Link to="/home/admin">
+                                        Вход для сотрудников
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
                     </div>

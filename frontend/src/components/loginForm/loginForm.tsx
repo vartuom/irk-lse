@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 
 import styles from "./loginForm.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setLoggedIn } from "../../store/user.slice";
+import { fetchLogIn, setLoggedIn } from "../../store/user.slice";
 
 const CustomTextField = styled(TextField)({
     "& .MuiOutlinedInput-root": {
@@ -51,7 +51,7 @@ function LoginForm() {
 
     const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
-        dispatch(setLoggedIn());
+        dispatch(fetchLogIn({ username: "artem", password: "386686" }));
     };
 
     return (
