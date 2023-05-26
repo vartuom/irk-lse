@@ -54,6 +54,7 @@
   margin-top: 24px;
   display: flex;
   gap: 12px;
+  justify-content: flex-end;
 }
 @media print {
   .appeal__buttons {
@@ -66,11 +67,26 @@
   padding: 16px;
   cursor: pointer;
   border: none;
-  background: var(--bg-color-blue-accent);
-  border-radius: 8px;
   height: 48px;
   font: 18px/1.5 var(--font-golos-regular);
+  border-radius: 8px;
   color: #fff;
+  transition: var(--opacity-transition);
+}
+.appeal__button_type_primary {
+  color: var(--text-color-secondary);
+  background: var(--bg-color-secondary);
+}
+.appeal__button_type_secondary {
+  background: none;
+  border: 2px solid var(--bg-color-secondary);
+}
+.appeal__button_type_inactive {
+  opacity: 0.3;
+  pointer-events: none;
+}
+.appeal__button:hover {
+  opacity: var(--hover-opacity);
 }
 
 .buttons__redact {
@@ -130,7 +146,8 @@
 }
 
 .titleSeparator {
-  border: 2px solid var(--bg-color-blue-accent);
+  /* border: 2px solid var(--bg-color-blue-accent); */
+  border: 2px solid var(--bg-color-secondary);
   border-radius: 50px;
   margin: 0;
 }

@@ -8,12 +8,14 @@ import Appeal from "../appeal/appeal";
 import { IAppeal } from "../../types/types";
 import AppealDocxCreator from "../appeal/appealDocxCreator/appealDocxCreator";
 import style from "./appeals.module.css";
-import Pagination from "../paginationAppeals/PaginationAppeals";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setAppeals } from "../../store/appeals.slice";
 import { sleep } from "../../utils/utils";
 import { BASE_URL } from "../../utils/constants";
 import { axiosPrivate } from "../../api/axios";
+import AppealsFilter from "../appealsFilter/appealsFilter";
+import AppealsLoader from "../appealsLoader/appealsLoader";
+import FancyAppealLoader from "../fancyAppealLoader/fancyAppealLoader";
 
 function Appeals({ isProcessed }: { isProcessed?: boolean }) {
     const appeals = useAppSelector((state) => state.appeals.appeals);
@@ -37,7 +39,7 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
                 queryString
             );
             const [data, count] = res.data;
-            await sleep(1000);
+            await sleep(60000);
             if (activeFetch) {
                 dispatch(setAppeals(data));
                 setAppealsCount(count);
@@ -61,34 +63,32 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [appeals]);
 
-    if (isFetching) return <div>Загрузка...</div>;
-
     return (
         <div>
-            {!isProcessed && (
-                <button
-                    type="button"
-                    className={style.printAll}
-                    onClick={() => saveDocx()}
-                >
-                    Скачать все обращения
-                </button>
+            <AppealsFilter
+                isProcessed={isProcessed}
+                generateAllAppeals={saveDocx}
+            />
+            {isFetching ? (
+                // AppealsLoader isProcessed page={page} />
+                <FancyAppealLoader isProcessed page={page} />
+            ) : (
+                appeals.map((appeal) => (
+                    <Appeal
+                        firstName={appeal.firstName}
+                        lastName={appeal.lastName}
+                        middleName={appeal.middleName}
+                        email={appeal.email}
+                        appealText={appeal.appealText}
+                        id={appeal.id}
+                        key={appeal.id}
+                        isProcessed={isProcessed}
+                        extraContacts={appeal.extraContacts}
+                        createdAt={appeal.createdAt}
+                        updatedAt={appeal.updatedAt}
+                    />
+                ))
             )}
-            {appeals.map((appeal) => (
-                <Appeal
-                    firstName={appeal.firstName}
-                    lastName={appeal.lastName}
-                    middleName={appeal.middleName}
-                    email={appeal.email}
-                    appealText={appeal.appealText}
-                    id={appeal.id}
-                    key={appeal.id}
-                    isProcessed={isProcessed}
-                    extraContacts={appeal.extraContacts}
-                    createdAt={appeal.createdAt}
-                    updatedAt={appeal.updatedAt}
-                />
-            ))}
             {isProcessed && (
                 <MuiPagination
                     showFirstButton

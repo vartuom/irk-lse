@@ -13,8 +13,9 @@
             background: var(--bg-color-secondary);
         }
         &_secondary {
+            color: var(--text-color-primary);
             background: none;
-            border: 2px solid var(--bg-color-secondary);
+            border: 1px solid var(--bg-color-secondary);
         }
         &_inactive {
             opacity: 0.3;
@@ -27,23 +28,38 @@
     }
 }
 
-.pagination {
-    display: flex;
-    justify-content: center;
-}
-
 .filter {
     padding: 24px 32px;
     margin-top: 24px;
     display: grid;
     gap: 36px;
-    grid-template-columns: 0.65fr 1fr 0.6fr 0.4fr;
+    grid-template-columns: 0.5fr 1fr 0.3fr;
     box-shadow: 0 -0.25px 1px 0 rgba(#185ee0, 0.15), 0 6px 12px 0 rgba(#185ee0, 0.15);
 }
 
 .printAll {
-    width: 500px;
-    justify-self: center;
-    grid-column: 1 / 5;
+    width: 400px;
     grid-row: 2;
+    grid-column: 2/4;
+    justify-self: end;
+}
+
+.datepickers {
+    width: 350px;
+    grid-row: 2;
+    justify-self: start;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__separator {
+        margin: 0;
+        width: 24px;
+        border: 3px solid var(--bg-color-secondary);
+        border-radius: 50px;
+    }
+    & > .button {
+        width: 148px;
+        font: 18px/1.5 var(--font-golos-regular);
+    }
 }
