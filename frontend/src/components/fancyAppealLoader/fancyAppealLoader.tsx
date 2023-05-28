@@ -32,9 +32,13 @@ function FancyAppealLoader({ isProcessed, page }: ILoaderProps) {
                 count.current.currentString = 0;
                 count.current.currentChar = 0;
             }
-            setCurrentString(
-                "\xa0".repeat(fancyStrings[count.current.currentString].length)
-            );
+            if (isHanging) {
+                setCurrentString(
+                    "\xa0".repeat(
+                        fancyStrings[count.current.currentString].length
+                    )
+                );
+            }
             isHanging = false;
         }
         const interval = setInterval(() => {
@@ -56,8 +60,9 @@ function FancyAppealLoader({ isProcessed, page }: ILoaderProps) {
              * то есть конкатенация str с символом, на который указывает current.currentChar
              * однако такой подход делает появление строки более резким и
              * не привычным для глаза
-             * Сложность для добавления символа в конец --- O(1)
-             * При использовании substring --- O(n)
+             * Сложность для добавления символа в конец --- O(1) (при оптимизации),
+             * в ином случае конкатенация в цикле это O(n^2)
+             * При использовании substring --- O(n), общая сложность метода O(n^2)
              * Для метода с использованием substring необходимо заполнение
              * изначальной строки неразрывными пробелами
              *
@@ -77,7 +82,9 @@ function FancyAppealLoader({ isProcessed, page }: ILoaderProps) {
         }, 35);
 
         return () => {
+            isHanging = false;
             count.current = { currentString: 0, currentChar: 0 };
+            setCurrentString("\xa0".repeat(fancyStrings[0].length));
             clearInterval(interval);
         };
     }, [isProcessed, page]);

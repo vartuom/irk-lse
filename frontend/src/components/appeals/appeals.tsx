@@ -39,7 +39,7 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
                 queryString
             );
             const [data, count] = res.data;
-            await sleep(60000);
+            await sleep(30000);
             if (activeFetch) {
                 dispatch(setAppeals(data));
                 setAppealsCount(count);
