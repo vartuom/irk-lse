@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Collapse } from "@mui/material";
 import styles from "./accordionRow.module.css";
 
 interface IAccordionProps {
-    type?: string;
+    borders?: "none" | "both";
     title: string;
     children?: React.ReactNode;
     isExpanded?: boolean;
 }
 
 function AccordionRow({
-    type,
+    borders,
     title,
     children,
     isExpanded = false,
@@ -18,14 +19,17 @@ function AccordionRow({
     const [isActive, setIsActive] = useState(isExpanded);
 
     return (
-        <div className={styles.accordion__row}>
+        <div
+            className={`${styles.accordion__row} ${
+                borders &&
+                (borders === "none"
+                    ? styles.accordion__row_border_none
+                    : styles.accordion__row_border_bottom)
+            }`}
+        >
             <button
                 type="button"
-                className={`${styles.accordion__title} ${
-                    type && type === "accent"
-                        ? styles.accordion__title_accent
-                        : styles.accordion__title_light
-                }`}
+                className={styles.accordion__title}
                 onClick={() => {
                     setIsActive(!isActive);
                 }}
@@ -39,9 +43,14 @@ function AccordionRow({
                     <ExpandMoreIcon />
                 </div>
             </button>
-            <div className={styles.accordion__content} aria-expanded={isActive}>
-                {children}
-            </div>
+            <Collapse in={isActive}>
+                <div
+                    className={styles.accordion__content}
+                    aria-expanded={isActive}
+                >
+                    {children}
+                </div>
+            </Collapse>
         </div>
     );
 }

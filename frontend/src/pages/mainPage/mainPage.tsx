@@ -316,7 +316,10 @@ function MainPage() {
                             предыдущий пункт).
                         </p>
                     </AccordionRow>
-                    <AccordionRow title="По каким направления проводятся исследования?">
+                    <AccordionRow
+                        title="По каким направления проводятся исследования?"
+                        borders="both"
+                    >
                         <p className={styles.section__paragraph}>
                             Полный перечень имеющихся в лаборатории экспертных
                             специальностей и проводимых исследований приведен в

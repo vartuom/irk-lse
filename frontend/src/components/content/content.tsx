@@ -10,7 +10,7 @@ function Content({ children }: IContentProps) {
     const location = useLocation();
     const isHistoryPage = location.pathname.includes("history");
     return (
-        <main
+        <div
             className={`${styles.main} ${
                 isHistoryPage && styles.historyPageOverride
             }`}
@@ -22,7 +22,7 @@ function Content({ children }: IContentProps) {
             >
                 {children}
             </div>
-        </main>
+        </div>
     );
 }
 
