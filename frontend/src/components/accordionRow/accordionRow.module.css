@@ -27,7 +27,7 @@
 
 .accordion__content {
     max-height: 999px;
-    transition: max-height 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: max-height 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     overflow: hidden;
     margin-bottom: 12px;
 }
@@ -38,7 +38,7 @@
 
 .accordion__content[aria-expanded="false"] {
     max-height: 0px;
-    transition: max-height 200ms cubic-bezier(0.4, 0, 0.2, 1)
+    transition: max-height 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
 .accordion__arrow_opened {
