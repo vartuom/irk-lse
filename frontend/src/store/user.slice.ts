@@ -8,7 +8,13 @@ interface IInitialState {
     isLoggedIn: boolean;
     user: {
         name: string;
+        accessToken: string;
     };
+}
+
+interface ILoginData {
+    user: any;
+    accessToken: string;
 }
 
 const initialState: IInitialState = {
@@ -16,6 +22,7 @@ const initialState: IInitialState = {
     isLoggedIn: false,
     user: {
         name: "",
+        accessToken: "",
     },
 };
 
@@ -23,7 +30,10 @@ export const fetchLogIn = createAsyncThunk(
     "user/fetchLogIn",
     async (credentials: ICredentials, { rejectWithValue }) => {
         try {
-            const { data } = await axios.post(`/auth/signin`, credentials);
+            const { data } = await axios.post<ILoginData>(
+                `/auth/signin`,
+                credentials
+            );
             return data;
         } catch (error: any) {
             return rejectWithValue(error.response.data);
@@ -36,7 +46,7 @@ export const fetchGetUserData = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const { data } = await axios.get(`/auth/signin`);
-            return data;
+            return data.user;
         } catch (error: any) {
             return rejectWithValue(error.response.data);
         }
@@ -49,6 +59,9 @@ const userSlice = createSlice({
     reducers: {
         setLoggedIn(state) {
             state.isLoggedIn = true;
+        },
+        setToken(state, action) {
+            state.user.accessToken = action.payload.accessToken;
         },
     },
     extraReducers: (builder) => {
@@ -63,10 +76,11 @@ const userSlice = createSlice({
             .addCase(fetchLogIn.fulfilled, (state, action) => {
                 state.isAuthPending = false;
                 state.isLoggedIn = true;
-                state.user.name = action.payload.username;
+                state.user.name = action.payload.user.name;
+                state.user.accessToken = action.payload.accessToken;
             });
     },
 });
 
-export const { setLoggedIn } = userSlice.actions;
+export const { setLoggedIn, setToken } = userSlice.actions;
 export default userSlice.reducer;

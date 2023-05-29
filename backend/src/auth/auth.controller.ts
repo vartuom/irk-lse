@@ -38,16 +38,12 @@ export class AuthController {
     @Response({ passthrough: true }) response: ExpressResponse,
   ) {
     const authData = await this.authService.signin(user.id);
-    response.cookie("accessToken", authData.accessToken, {
-      httpOnly: true,
-      sameSite: "strict",
-    });
     response.cookie("refreshToken", authData.refreshToken, {
       httpOnly: true,
       sameSite: "strict",
     });
     await sleep(5000);
-    return authData.user;
+    return { user: authData.user, accessToken: authData.accessToken };
   }
 
   @UseGuards(JwtAuthGuard)
@@ -58,15 +54,8 @@ export class AuthController {
 
   @UseGuards(JwtRefreshGuard)
   @Post("refresh")
-  async refresh(
-    @Request() { user }: { user: Pick<User, "id"> },
-    @Response({ passthrough: true }) response: ExpressResponse,
-  ) {
+  async refresh(@Request() { user }: { user: Pick<User, "id"> }) {
     const accessToken = await this.authService.refreshAccessToken(user.id);
-    response.cookie("accessToken", accessToken, {
-      httpOnly: true,
-      sameSite: "strict",
-    });
     return { accessToken };
   }
 
@@ -80,7 +69,6 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Post("logout")
   async logout(@Response({ passthrough: true }) response: ExpressResponse) {
-    response.clearCookie("accessToken");
     response.clearCookie("refreshToken");
     return;
   }

@@ -1,29 +1,34 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
+
 import axios, { axiosPrivate } from "../api/axios";
+import { useAppDispatch, useAppStore } from "../store/store";
+import { setToken } from "../store/user.slice";
 
 const useAxiosPrivate = () => {
+    const store = useAppStore();
+    const dispatch = useAppDispatch();
+
     const refreshToken = async () => {
         const response = await axios.get("/auth/refresh", {
             withCredentials: true,
         });
-        return response.data.accessToken;
+        dispatch(setToken({ accessToken: response.data.accessToken }));
     };
 
     useEffect(() => {
-        /* по идее если accessToken в куке, то этот интерсептор не нужен
-        /* const requestIntercept = axiosPrivate.interceptors.request.use(
+        const requestIntercept = axiosPrivate.interceptors.request.use(
             (config) => {
                 if (!config.headers.Authorization) {
                     // потом убрать в оперативную память!
                     // eslint-disable-next-line no-param-reassign
-                    config.headers.Authorization = `Bearer ${localStorage.getItem(
-                        "accessToken"
-                    )}`;
+                    config.headers.Authorization = `Bearer ${
+                        store.getState().user.user.accessToken
+                    }}`;
                 }
                 return config;
             },
             (error) => Promise.reject(error)
-        ); */
+        );
 
         const responseIntercept = axiosPrivate.interceptors.response.use(
             (response) => response,
@@ -31,7 +36,6 @@ const useAxiosPrivate = () => {
                 const prevRequest = error?.config;
                 if (error?.response?.status === 403 && !prevRequest?.sent) {
                     prevRequest.sent = true;
-                    /* refreshToken установит новый cookie для аксес токена  */
                     await refreshToken();
                     return axiosPrivate(prevRequest);
                 }
@@ -40,10 +44,11 @@ const useAxiosPrivate = () => {
         );
 
         return () => {
-            /* axiosPrivate.interceptors.request.eject(requestIntercept); */
+            axiosPrivate.interceptors.request.eject(requestIntercept);
             axiosPrivate.interceptors.response.eject(responseIntercept);
         };
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [store]);
 
     return axiosPrivate;
 };
