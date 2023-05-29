@@ -28,13 +28,17 @@ export class AppealsController {
 
   /*@UseGuards(JwtAuthGuard)*/
   @Get()
-  findAllByAppealStatus(
-    @Query("processedStatus") processedStatus: boolean,
+  findAllByFilter(
+    @Query("isProcessed") processedStatus: boolean,
     @Query("page") page?: number,
+    @Query("email") email?: string,
+    @Query("name") name?: string,
   ) {
-    return this.appealsService.findAllByAppealProcesStatus(
+    return this.appealsService.findAllByFilter(
       processedStatus,
       page,
+      email,
+      name,
     );
   }
 

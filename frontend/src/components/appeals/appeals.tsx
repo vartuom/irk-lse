@@ -11,35 +11,43 @@ import style from "./appeals.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setAppeals } from "../../store/appeals.slice";
 import { sleep } from "../../utils/utils";
-import { BASE_URL } from "../../utils/constants";
 import { axiosPrivate } from "../../api/axios";
 import AppealsFilter from "../appealsFilter/appealsFilter";
 import AppealsLoader from "../appealsLoader/appealsLoader";
 import FancyAppealLoader from "../fancyAppealLoader/fancyAppealLoader";
+import { createURL } from "../../api/api";
 
 function Appeals({ isProcessed }: { isProcessed?: boolean }) {
     const appeals = useAppSelector((state) => state.appeals.appeals);
-    const [isFetching, setIsFetching] = useState(true);
+    const { sort, name, startDate, endDate, email } = useAppSelector(
+        (state) => state.appealsFilter
+    );
     const dispatch = useAppDispatch();
-    const [appealsCount, setAppealsCount] = useState(0);
     const { page } = useParams();
+
+    const [isFetching, setIsFetching] = useState(true);
+    const [appealsCount, setAppealsCount] = useState(0);
     const docxGenerator = AppealDocxCreator.init();
 
     useEffect(() => {
         let activeFetch = true;
         setIsFetching(true);
         async function getAppeals() {
-            let queryString = `${BASE_URL}/appeals?processedStatus=false`;
-            if (isProcessed) {
-                queryString = `${BASE_URL}/appeals?processedStatus=true&page=${
-                    page ?? 1
-                }`;
-            }
+            const queryString = createURL(
+                {
+                    isProcessed: Boolean(isProcessed),
+                    page: isProcessed ? page ?? 1 : undefined,
+                    sort,
+                    name,
+                    email,
+                },
+                "/appeals"
+            );
             const res = await axiosPrivate.get<[Array<IAppeal>, number]>(
                 queryString
             );
             const [data, count] = res.data;
-            await sleep(30000);
+            await sleep(5000);
             if (activeFetch) {
                 dispatch(setAppeals(data));
                 setAppealsCount(count);
@@ -54,7 +62,7 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
             activeFetch = false;
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isProcessed, page]);
+    }, [isProcessed, page, name, email]);
 
     const saveDocx = useCallback(async () => {
         docxGenerator.setAllAppeals(appeals);

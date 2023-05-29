@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { CreateAppealDto } from "./dto/create-appeal.dto";
 import { Appeal } from "./entities/appeal.entity";
-import { Repository } from "typeorm";
+import { FindOptionsWhere, Like, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { sleep } from "../utils/utils";
 
@@ -21,10 +21,34 @@ export class AppealsService {
     return await this.appealRepository.save(newAppeal);
   }
 
-  async findAllByAppealProcesStatus(processedStatus: boolean, page?: number) {
+  async findAllByFilter(
+    processedStatus: boolean,
+    page?: number,
+    email?: string,
+    name?: string,
+  ) {
+    let findOpts: FindOptionsWhere<Appeal>;
+    if (email) {
+      findOpts = { email: Like(email) };
+    }
+    console.log({ ...findOpts, isProcessed: processedStatus });
+    //3 поля ищутся как and, по идее их нужно объединять через or
+    if (name) {
+      const [firstName, middleName, lastName] = name.split(" ");
+      if (firstName) {
+        findOpts = { ...findOpts, firstName: Like(firstName) };
+      }
+      if (middleName) {
+        findOpts = { ...findOpts, middleName: Like(middleName) };
+      }
+      if (lastName) {
+        findOpts = { ...findOpts, lastName: Like(lastName) };
+      }
+    }
     if (page) {
       return await this.appealRepository.findAndCount({
         where: {
+          ...findOpts,
           isProcessed: processedStatus,
         },
         skip: (page - 1) * this.pageAppealAmount,
@@ -33,6 +57,7 @@ export class AppealsService {
     } else {
       return await this.appealRepository.findAndCount({
         where: {
+          ...findOpts,
           isProcessed: processedStatus,
         },
       });
