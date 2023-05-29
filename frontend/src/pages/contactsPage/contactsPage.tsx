@@ -1,7 +1,7 @@
 import React from "react";
 import BusinessIcon from "@mui/icons-material/Business";
 import s from "./contactsPage.module.css";
-import AppAccordion from "../../components/appAccordion/appAccordion";
+import AccordionRow from "../../components/accordionRow/accordionRow";
 
 function ContactsPage() {
     return (
@@ -67,7 +67,7 @@ function ContactsPage() {
                             , либо на адрес электронной почты.
                         </p>
                     </div>
-                    <AppAccordion title="Отделы и подразделения" noBorders>
+                    <AccordionRow title="Отделы и подразделения" borders="none">
                         <div className={s.contacts}>
                             <div>
                                 <p
@@ -101,13 +101,13 @@ function ContactsPage() {
                                 </p>
                             </div>
                         </div>
-                    </AppAccordion>
+                    </AccordionRow>
                 </div>
                 <div>
                     <p className={s.contacts__title}>Прочая информация</p>
-                    <AppAccordion
+                    <AccordionRow
                         title="Карточка сведений о контрагенте и банковские реквизиты"
-                        noBorders
+                        borders="none"
                     >
                         <div className={s.contacts}>
                             <div>
@@ -142,8 +142,8 @@ function ContactsPage() {
                                 </p>
                             </div>
                         </div>
-                    </AppAccordion>
-                    <AppAccordion title="Вакансии" noBorders>
+                    </AccordionRow>
+                    <AccordionRow title="Вакансии" borders="none">
                         <div className={s.contacts}>
                             <div>
                                 <p
@@ -177,10 +177,10 @@ function ContactsPage() {
                                 </p>
                             </div>
                         </div>
-                    </AppAccordion>
-                    <AppAccordion
+                    </AccordionRow>
+                    <AccordionRow
                         title="Политика для целей бухгалтерского учета"
-                        noBorders
+                        borders="none"
                     >
                         <div className={s.contacts}>
                             <div>
@@ -215,7 +215,7 @@ function ContactsPage() {
                                 </p>
                             </div>
                         </div>
-                    </AppAccordion>
+                    </AccordionRow>
                 </div>
             </section>
             <div className={s.map}>
