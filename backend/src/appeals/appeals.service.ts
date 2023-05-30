@@ -82,6 +82,7 @@ export class AppealsService {
     name?: string,
   ) {
     const searchParams: any = {
+      OR: [],
       AND: { isProcessed: processedStatus },
     };
     if (email) {
@@ -100,6 +101,7 @@ export class AppealsService {
       });
     }
     console.log(searchParams);
+    if (searchParams.OR.length === 0) delete searchParams.OR;
     if (false) {
       /*return await this.appealRepository.findAndCount({
           where: {
