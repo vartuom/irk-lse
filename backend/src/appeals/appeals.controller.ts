@@ -38,7 +38,7 @@ export class AppealsController {
     //поправить потом
     return this.appealsService.findMany(
       processedStatus === "true",
-      page,
+      +page,
       email,
       name,
     );
@@ -47,10 +47,10 @@ export class AppealsController {
   /*@UseGuards(JwtAuthGuard)*/
   @Patch(":id")
   update(
-    @Param("id") id: number,
+    @Param("id") id: string,
     @Body() { processedStatus }: { processedStatus: boolean },
   ) {
-    return this.appealsService.updateAppealStatus(id, processedStatus);
+    return this.appealsService.updateAppealStatus(+id, processedStatus);
   }
 
   /*@UseGuards(JwtAuthGuard)*/

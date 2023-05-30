@@ -102,16 +102,18 @@ export class AppealsService {
     }
     console.log(searchParams);
     if (searchParams.OR.length === 0) delete searchParams.OR;
-    if (false) {
-      /*return await this.appealRepository.findAndCount({
-          where: {
-            ...findOpts,
-            isProcessed: processedStatus,
-          },
+    if (page) {
+      const [appeals, count] = await prisma.$transaction([
+        prisma.appeals.findMany({
+          where: searchParams,
           skip: (page - 1) * this.pageAppealAmount,
           take: this.pageAppealAmount,
-        });*/
-      return null;
+        }),
+        prisma.appeals.count({
+          where: searchParams,
+        }),
+      ]);
+      return [appeals, count];
     } else {
       const appeals = await prisma.appeals.findMany({
         where: searchParams,
