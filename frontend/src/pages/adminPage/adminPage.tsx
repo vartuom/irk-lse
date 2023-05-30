@@ -17,7 +17,7 @@ function AdminPage() {
             <div className={style.appeals__tabs}>
                 <NavLink
                     end
-                    to="/admin"
+                    to="/home/admin"
                     className={({ isActive }) =>
                         `${
                             isActive
@@ -31,7 +31,7 @@ function AdminPage() {
                 </NavLink>
 
                 <NavLink
-                    to="/admin/processed"
+                    to="/home/admin/processed"
                     className={({ isActive }) =>
                         `${
                             isActive

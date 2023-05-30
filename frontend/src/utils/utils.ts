@@ -20,13 +20,20 @@ export const getNoun = (
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export const debounce = (fn: Function, t: number) => {
+export function debounce(fn: Function, t: number) {
     let timer: ReturnType<typeof setTimeout>;
-    return function (...args: any[]) {
+
+    function debounced(...args: any[]) {
         clearTimeout(timer);
-        timer = setTimeout(() => fn(args), t);
+        timer = setTimeout(() => fn(...args), t);
+    }
+
+    debounced.clear = function () {
+        clearTimeout(timer);
     };
-};
+
+    return debounced;
+}
 
 export const sleep = (time: number) =>
     // eslint-disable-next-line no-promise-executor-return

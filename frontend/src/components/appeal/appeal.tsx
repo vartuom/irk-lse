@@ -52,7 +52,7 @@ export default function Appeal({
 
     const changeProcessedStatus = async () => {
         setIsFetching(true);
-        const response = await axios.post(
+        const response = await axios.patch(
             `${BASE_URL}/appeals/${id}`,
             {
                 processedStatus: !isProcessed,
@@ -99,20 +99,14 @@ export default function Appeal({
                     ) : (
                         <>
                             <button
-                                className={style.appeal__button}
-                                type="button"
-                            >
-                                Редактировать
-                            </button>
-                            <button
                                 onClick={changeProcessedStatus}
-                                className={style.appeal__button}
+                                className={`${style.appeal__button} ${style.appeal__button_type_primary}`}
                                 type="button"
                             >
                                 {isProcessed ? "Вернуть" : "В обработанные"}
                             </button>
                             <button
-                                className={style.appeal__button}
+                                className={`${style.appeal__button} ${style.appeal__button_type_primary}`}
                                 type="button"
                             >
                                 Дать ответ
@@ -121,7 +115,7 @@ export default function Appeal({
                                 onClick={() => {
                                     saveDocx();
                                 }}
-                                className={style.appeal__button}
+                                className={`${style.appeal__button} ${style.appeal__button_type_primary}`}
                                 type="button"
                             >
                                 Скачать

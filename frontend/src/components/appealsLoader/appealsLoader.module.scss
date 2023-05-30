@@ -1,0 +1,18 @@
+.loader {
+    margin-top: 64px;
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+    &__text {
+        margin: 0;
+        margin: 36px 0;
+        font: 22px/1.4 var(--font-golos-regular);
+        white-space: pre;
+    }
+
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

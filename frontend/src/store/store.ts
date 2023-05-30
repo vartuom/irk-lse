@@ -8,12 +8,14 @@ import {
 import appealFormSlice from "./appealForm.slice";
 import appealsSlice from "./appeals.slice";
 import userSlice from "./user.slice";
+import appealFilterSlice from "./appealFilter.slice";
 
 export const store = configureStore({
     reducer: {
         appealForm: appealFormSlice,
         appeals: appealsSlice,
         user: userSlice,
+        appealsFilter: appealFilterSlice,
     },
 });
 

@@ -62,6 +62,7 @@
         margin-top: 24px;
         display: flex;
         gap: 12px;
+        justify-content: flex-end;
 
         @media print {
             display: none;
@@ -74,11 +75,30 @@
         padding: 16px;
         cursor: pointer;
         border: none;
-        background: var(--bg-color-blue-accent);
-        border-radius: 8px;
         height: 48px;
         font: 18px/1.5 var(--font-golos-regular);
+        border-radius: 8px;
         color: #fff;
+        transition: var(--opacity-transition);
+
+        &_type {
+            &_primary {
+                color: var(--text-color-secondary);
+                background: var(--bg-color-secondary);
+            }
+            &_secondary {
+                background: none;
+                border: 2px solid var(--bg-color-secondary);
+            }
+            &_inactive {
+                opacity: 0.3;
+                pointer-events: none;
+            }
+        }
+
+        &:hover {
+            opacity: var(--hover-opacity);
+        }
     }
 }
 
@@ -146,7 +166,8 @@
 }
 
 .titleSeparator {
-    border: 2px solid var(--bg-color-blue-accent);
+    /* border: 2px solid var(--bg-color-blue-accent); */
+    border: 2px solid var(--bg-color-secondary);
     border-radius: 50px;
     margin: 0;
 }
