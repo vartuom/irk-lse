@@ -1,8 +1,5 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { CreateAppealDto } from "./dto/create-appeal.dto";
-import { Appeal } from "./entities/appeal.entity";
-import { FindOptionsWhere, Like, Repository } from "typeorm";
-import { InjectRepository } from "@nestjs/typeorm";
 import { sleep } from "../utils/utils";
 import { prisma } from "../prisma";
 
@@ -13,7 +10,7 @@ export class AppealsService {
     this.pageAppealAmount = 8;
   }
 
-  async create(createAppealDto: CreateAppealDto): Promise<Appeal> {
+  async create(createAppealDto: CreateAppealDto) {
     const newAppeal = await prisma.appeals.create({
       data: createAppealDto,
     });
@@ -71,10 +68,53 @@ export class AppealsService {
     });
   }
 
-  async findOne(appealId: number): Promise<Appeal> {
+  async findOne(appealId: number) {
     const appeal = await prisma.appeals.findUnique({
       where: { id: appealId },
     });
     return appeal;
+  }
+
+  async findMany(
+    processedStatus: boolean,
+    page?: number,
+    email?: string,
+    name?: string,
+  ) {
+    const searchParams: any = {
+      AND: { isProcessed: processedStatus },
+    };
+    if (email) {
+      searchParams.OR.push({ email: { contains: email } });
+    }
+    if (name) {
+      const nameParts = name.split(" ");
+      if (nameParts.length > 3)
+        throw new BadRequestException(
+          "ФИО не может состоять из 4 частей и более",
+        );
+      nameParts.forEach((namePart) => {
+        searchParams.OR.push({ firstName: { contains: namePart } });
+        searchParams.OR.push({ middleName: { contains: namePart } });
+        searchParams.OR.push({ lastName: { contains: namePart } });
+      });
+    }
+    console.log(searchParams);
+    if (false) {
+      /*return await this.appealRepository.findAndCount({
+          where: {
+            ...findOpts,
+            isProcessed: processedStatus,
+          },
+          skip: (page - 1) * this.pageAppealAmount,
+          take: this.pageAppealAmount,
+        });*/
+      return null;
+    } else {
+      const appeals = await prisma.appeals.findMany({
+        where: searchParams,
+      });
+      return [appeals, 1];
+    }
   }
 }

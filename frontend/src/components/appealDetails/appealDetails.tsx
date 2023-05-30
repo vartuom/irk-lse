@@ -15,7 +15,7 @@ function AppealDetails() {
 
     const handleFormSubmit = () => {
         dispatch(resetForm());
-        navigate("/appeals");
+        navigate("/home/appeals");
     };
 
     return (

@@ -5,9 +5,6 @@ import {
 } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
-import { InjectRepository } from "@nestjs/typeorm";
-import { User } from "./entities/user.entity";
-import { Repository } from "typeorm";
 import { HashService } from "../hash/hash.service";
 import {
   USER_NOT_FOUND_ERROR_MESSAGE,
@@ -20,9 +17,7 @@ import { prisma } from "../prisma";
 export class UsersService {
   constructor(private readonly hashService: HashService) {}
 
-  async create(
-    createUserDto: CreateUserDto,
-  ): Promise<Pick<User, "username" | "email">> {
+  async create(createUserDto: CreateUserDto) {
     const hashedPassword = await this.hashService.create(
       createUserDto.password,
     );
@@ -42,7 +37,7 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
-  async findOneByIdOrFail(userId: number): Promise<User> {
+  async findOneByIdOrFail(userId: number) {
     const user = await prisma.users.findUnique({
       where: { id: userId },
     });
@@ -50,9 +45,7 @@ export class UsersService {
     return user;
   }
 
-  async findOneForAuthOrFail(
-    username: string,
-  ): Promise<Pick<User, "id" | "username" | "password">> {
+  async findOneForAuthOrFail(username: string) {
     const user = await prisma.users.findUnique({
       where: { username: username },
     });
@@ -61,9 +54,7 @@ export class UsersService {
     return user;
   }
 
-  async getUserRefreshToken(
-    userId: number,
-  ): Promise<Pick<User, "id" | "refreshToken">> {
+  async getUserRefreshToken(userId: number) {
     const user = await prisma.users.findUnique({
       select: {
         id: true,
@@ -75,10 +66,7 @@ export class UsersService {
     return user;
   }
 
-  async updateUserRefreshToken(
-    userId: number,
-    refreshToken: string,
-  ): Promise<Pick<User, "id" | "refreshToken">> {
+  async updateUserRefreshToken(userId: number, refreshToken: string) {
     const hash = await this.hashService.create(refreshToken);
     await prisma.users.update({
       where: { id: userId },
