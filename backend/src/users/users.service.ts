@@ -14,14 +14,11 @@ import {
   WRONG_REFRESH_TOKEN_MESSAGE,
   WRONG_USERNAME_OR_PASSWORD_ERROR_MESSAGE,
 } from "../utils/errorConstants";
+import { prisma } from "../prisma";
 
 @Injectable()
 export class UsersService {
-  constructor(
-    @InjectRepository(User)
-    private readonly usersRepository: Repository<User>,
-    private readonly hashService: HashService,
-  ) {}
+  constructor(private readonly hashService: HashService) {}
 
   async create(
     createUserDto: CreateUserDto,
@@ -29,9 +26,11 @@ export class UsersService {
     const hashedPassword = await this.hashService.create(
       createUserDto.password,
     );
-    return this.usersRepository.save({
-      ...createUserDto,
-      password: hashedPassword,
+    return prisma.users.create({
+      data: {
+        ...createUserDto,
+        password: hashedPassword,
+      },
     });
   }
 
@@ -43,8 +42,10 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
-  async findOneByIdOrFail(id: number): Promise<User> {
-    const user = await this.usersRepository.findOneBy({ id });
+  async findOneByIdOrFail(userId: number): Promise<User> {
+    const user = await prisma.users.findUnique({
+      where: { id: userId },
+    });
     if (!user) throw new NotFoundException(USER_NOT_FOUND_ERROR_MESSAGE);
     return user;
   }
@@ -52,8 +53,7 @@ export class UsersService {
   async findOneForAuthOrFail(
     username: string,
   ): Promise<Pick<User, "id" | "username" | "password">> {
-    const user = await this.usersRepository.findOne({
-      select: ["id", "username", "password"],
+    const user = await prisma.users.findUnique({
       where: { username: username },
     });
     if (!user)
@@ -62,22 +62,30 @@ export class UsersService {
   }
 
   async getUserRefreshToken(
-    id: number,
+    userId: number,
   ): Promise<Pick<User, "id" | "refreshToken">> {
-    const user = await this.usersRepository.findOne({
-      select: ["id", "refreshToken"],
-      where: { id },
+    const user = await prisma.users.findUnique({
+      select: {
+        id: true,
+        refreshToken: true,
+      },
+      where: { id: userId },
     });
     if (!user) throw new UnauthorizedException(WRONG_REFRESH_TOKEN_MESSAGE);
     return user;
   }
 
   async updateUserRefreshToken(
-    id: number,
+    userId: number,
     refreshToken: string,
   ): Promise<Pick<User, "id" | "refreshToken">> {
     const hash = await this.hashService.create(refreshToken);
-    await this.usersRepository.update(id, { refreshToken: hash });
+    await prisma.users.update({
+      where: { id: userId },
+      data: {
+        refreshToken: hash,
+      },
+    });
     return undefined;
   }
 

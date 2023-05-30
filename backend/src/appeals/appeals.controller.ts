@@ -34,12 +34,13 @@ export class AppealsController {
     @Query("email") email?: string,
     @Query("name") name?: string,
   ) {
-    return this.appealsService.findAllByFilter(
+    return null;
+    /*return this.appealsService.findAllByFilter(
       processedStatus,
       page,
       email,
       name,
-    );
+    );*/
   }
 
   /*@UseGuards(JwtAuthGuard)*/

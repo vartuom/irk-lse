@@ -7,7 +7,7 @@ import { HashModule } from "../hash/hash.module";
 import { ConfigModule } from "@nestjs/config";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), HashModule, ConfigModule],
+  imports: [HashModule, ConfigModule],
   controllers: [UsersController],
   providers: [UsersService],
   exports: [UsersService],

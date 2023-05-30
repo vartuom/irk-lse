@@ -4,24 +4,24 @@ import { Appeal } from "./entities/appeal.entity";
 import { FindOptionsWhere, Like, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { sleep } from "../utils/utils";
+import { prisma } from "../prisma";
 
 @Injectable()
 export class AppealsService {
   pageAppealAmount: number;
-  constructor(
-    @InjectRepository(Appeal)
-    private readonly appealRepository: Repository<Appeal>,
-  ) {
+  constructor() {
     this.pageAppealAmount = 8;
   }
 
   async create(createAppealDto: CreateAppealDto): Promise<Appeal> {
-    const newAppeal = this.appealRepository.create(createAppealDto);
+    const newAppeal = await prisma.appeals.create({
+      data: createAppealDto,
+    });
     await sleep(5000);
-    return await this.appealRepository.save(newAppeal);
+    return newAppeal;
   }
 
-  async findAllByFilter(
+  /*async findAllByFilter(
     processedStatus: boolean,
     page?: number,
     email?: string,
@@ -62,16 +62,19 @@ export class AppealsService {
         },
       });
     }
-  }
+  }*/
 
-  async updateAppealStatus(_id: number, processedStatus: boolean) {
-    return await this.appealRepository.update(_id, {
-      isProcessed: processedStatus,
+  async updateAppealStatus(appealId: number, processedStatus: boolean) {
+    return prisma.appeals.update({
+      where: { id: appealId },
+      data: { isProcessed: processedStatus },
     });
   }
 
-  async findOne(_id: number): Promise<Appeal> {
-    const appeal = await this.appealRepository.findOneBy({ id: _id });
+  async findOne(appealId: number): Promise<Appeal> {
+    const appeal = await prisma.appeals.findUnique({
+      where: { id: appealId },
+    });
     return appeal;
   }
 }
