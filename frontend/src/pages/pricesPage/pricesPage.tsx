@@ -13,7 +13,7 @@ import PricesTable from "../../components/pricesTable/pricesTable";
 function PricesPage() {
     return (
         <main className={s.main}>
-            <div className={s.lead}>
+            <section className={s.lead}>
                 <div>
                     <h1 className={s.lead__title}>Прейскурант</h1>
                     <div className={s.lead__textContainer}>
@@ -47,10 +47,10 @@ function PricesPage() {
                         color: "#ebf1f9",
                     }}
                 />
-            </div>
-            <div>
+            </section>
+            <section>
                 <PricesTable isExtended />
-            </div>
+            </section>
         </main>
     );
 }

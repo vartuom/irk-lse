@@ -2,12 +2,14 @@
   width: 100%;
   padding: 12px 0;
   border-top: 2px solid var(--bg-color-space-around);
-}
-.accordion__row_border_bottom {
-  border-bottom: 2px solid var(--bg-color-space-around);
-}
-.accordion__row_border_none {
-  border: none;
+  &_border {
+    &_bottom {
+      border-bottom: 2px solid var(--bg-color-space-around);
+    }
+    &_none {
+      border: none;
+    }
+  }
 }
 
 .accordion__title {
