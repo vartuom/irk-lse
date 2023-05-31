@@ -5,18 +5,39 @@
   flex-flow: column nowrap;
   gap: 24px;
 }
+@media screen and (max-width: 768px) {
+  .container {
+    justify-content: center;
+    width: 350px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .container {
+    width: 280px;
+  }
+}
 
 .text {
   margin-top: 0;
   font: 24px/1.4 var(--font-golos-regular);
   text-align: center;
 }
+@media screen and (max-width: 480px) {
+  .text {
+    font: 20px/1.4 var(--font-golos-regular);
+  }
+}
 
 .inputs__wrapper {
-  width: 400px;
+  width: 100%;
   display: flex;
   flex-flow: column nowrap;
   gap: 32px;
+}
+@media screen and (max-width: 768px) {
+  .inputs__wrapper {
+    gap: 24px;
+  }
 }
 
 .button {

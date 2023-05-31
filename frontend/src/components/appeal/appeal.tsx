@@ -52,13 +52,17 @@ export default function Appeal({
 
     const changeProcessedStatus = async () => {
         setIsFetching(true);
-        const response = await axios.patch(
-            `${BASE_URL}/appeals/${id}`,
-            {
-                processedStatus: !isProcessed,
-            },
-            { headers: { "Content-Type": "application/json" } }
-        );
+        try {
+            const response = await axios.patch(
+                `${BASE_URL}/appeals/${id}`,
+                {
+                    processedStatus: !isProcessed,
+                },
+                { headers: { "Content-Type": "application/json" } }
+            );
+        } catch (error) {
+            console.log(error);
+        }
         await sleep(3000);
         setIsFetching(false);
         dispatch(filterAppeals({ id }));
@@ -129,19 +133,25 @@ export default function Appeal({
                     className={style.appealer__icon}
                     sx={{ fontSize: 64, display: "none" }}
                 />
-                <div className={style.appeler__info}>
-                    <div className={style.appealer__title}>Отправитель</div>
-                    <div className={style.appealer__text}>{lastName}</div>
-                    <div className={style.appealer__text}>{firstName}</div>
-                    {middleName && (
-                        <div className={style.appealer__text}>{middleName}</div>
-                    )}
-                    <div className={style.appealer__email}>{email}</div>
-                    {extraContacts && (
-                        <div className={style.appealer__extraContacts}>
-                            {extraContacts}
-                        </div>
-                    )}
+                <div className={style.appealer__info}>
+                    <div>
+                        <div className={style.appealer__title}>Отправитель</div>
+                        <div className={style.appealer__text}>{lastName}</div>
+                        <div className={style.appealer__text}>{firstName}</div>
+                        {middleName && (
+                            <div className={style.appealer__text}>
+                                {middleName}
+                            </div>
+                        )}
+                    </div>
+                    <div>
+                        <div className={style.appealer__email}>{email}</div>
+                        {extraContacts && (
+                            <div className={style.appealer__extraContacts}>
+                                {extraContacts}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

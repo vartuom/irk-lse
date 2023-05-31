@@ -26,10 +26,22 @@
   gap: 36px;
   color: var(--text-color-primary);
 }
+@media screen and (max-width: 1280px) {
+  .section_grid {
+    grid-template-columns: 380px 1fr;
+    gap: 48px;
+  }
+  .section_grid:last-child {
+    padding-bottom: 5px;
+  }
+}
 @media screen and (max-width: 768px) {
   .section_grid {
     display: flex;
     flex-flow: column nowrap;
+  }
+  .section_grid:last-child {
+    padding-bottom: 0;
   }
 }
 
@@ -70,6 +82,11 @@
 
 .contacts__paragraph_type_accent {
   font: 18px/1.5 var(--font-golos-regular);
+}
+@media screen and (max-width: 768px) {
+  .contacts__paragraph_type_accent {
+    font: 16px/1.5 var(--font-golos-regular);
+  }
 }
 
 .contacts__number {

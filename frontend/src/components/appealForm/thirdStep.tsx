@@ -10,6 +10,7 @@ import {
     setCurrentStepNumber,
     setThirdStep,
 } from "../../store/appealForm.slice";
+import ResponsiveTextField from "../responsiveTextField/responsiveTextField";
 
 export interface IThirdStep {
     appealText: string;
@@ -78,7 +79,7 @@ function ThirdStep() {
                 name="appealText"
                 control={control}
                 render={({ field }) => (
-                    <TextField
+                    <ResponsiveTextField
                         label="Ваши вопросы..."
                         multiline
                         rows={15}

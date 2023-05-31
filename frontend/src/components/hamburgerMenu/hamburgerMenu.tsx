@@ -23,7 +23,7 @@ function HamburgerMenu() {
                     <ul className={styles.navList}>
                         <li>
                             <NavLink
-                                to=""
+                                to="/home"
                                 className={({ isActive }) =>
                                     isActive
                                         ? `${styles.link} ${styles.link_active}`
@@ -32,13 +32,14 @@ function HamburgerMenu() {
                                 onClick={() => {
                                     setIsActiveBurger(!isActiveBurger);
                                 }}
+                                end
                             >
                                 О лаборатории
                             </NavLink>
                         </li>
                         <li>
                             <NavLink
-                                to="cards"
+                                to="/home/cards"
                                 className={({ isActive }) =>
                                     isActive
                                         ? `${styles.link} ${styles.link_active}`
@@ -53,7 +54,7 @@ function HamburgerMenu() {
                         </li>
                         <li>
                             <NavLink
-                                to="prices"
+                                to="/home/prices"
                                 className={({ isActive }) =>
                                     isActive
                                         ? `${styles.link} ${styles.link_active}`
@@ -68,7 +69,7 @@ function HamburgerMenu() {
                         </li>
                         <li>
                             <NavLink
-                                to="contacts"
+                                to="/home/contacts"
                                 className={({ isActive }) =>
                                     isActive
                                         ? `${styles.link} ${styles.link_active}`
@@ -83,11 +84,12 @@ function HamburgerMenu() {
                         </li>
                         <li>
                             <NavLink
-                                /* className={({ isActive }) =>
-                            isActive ? `${s.link} ${s.link_active}` : s.link
-                        } */
-                                className={styles.link}
-                                to="#"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? `${styles.link} ${styles.link_active}`
+                                        : styles.link
+                                }
+                                to="/home/appeals"
                                 onClick={() => {
                                     setIsActiveBurger(!isActiveBurger);
                                 }}

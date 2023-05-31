@@ -11,6 +11,7 @@ import {
     setCurrentStepNumber,
     setFirstStep,
 } from "../../store/appealForm.slice";
+import ResponsiveTextField from "../responsiveTextField/responsiveTextField";
 
 export interface IFirstStep {
     firstName: string;
@@ -97,7 +98,7 @@ function FirstStep() {
                 name="lastName"
                 control={control}
                 render={({ field }) => (
-                    <TextField
+                    <ResponsiveTextField
                         label="Фамилия"
                         error={!!errors?.lastName}
                         helperText={
@@ -111,7 +112,7 @@ function FirstStep() {
                 name="firstName"
                 control={control}
                 render={({ field }) => (
-                    <TextField
+                    <ResponsiveTextField
                         label="Имя"
                         error={!!errors?.firstName}
                         helperText={
@@ -127,7 +128,7 @@ function FirstStep() {
                 name="middleName"
                 control={control}
                 render={({ field }) => (
-                    <TextField
+                    <ResponsiveTextField
                         label="Отчество (при наличии)"
                         error={!!errors?.middleName}
                         helperText={

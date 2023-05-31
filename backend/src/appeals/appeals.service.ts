@@ -29,7 +29,7 @@ export class AppealsService {
   ) {
     let findOpts: FindOptionsWhere<Appeal>;
     if (email) {
-      findOpts = { email: Like(email) };
+      findOpts = { email: Like(`${email}%`) };
     }
     console.log({ ...findOpts, isProcessed: processedStatus });
     //3 поля ищутся как and, по идее их нужно объединять через or

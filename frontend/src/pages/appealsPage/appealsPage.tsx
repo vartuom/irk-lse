@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import { Stepper, Step, StepLabel } from "@mui/material";
+import {
+    Stepper,
+    MobileStepper,
+    useMediaQuery,
+    Step,
+    StepLabel,
+} from "@mui/material";
 import StepConnector, {
     stepConnectorClasses,
 } from "@mui/material/StepConnector";
@@ -37,6 +43,7 @@ const QontoConnector = styled(StepConnector)(({ theme }) => ({
 function AppealsPage() {
     const steps = ["", "", "", ""];
     const currentStep = useAppSelector((state) => state.appealForm.currentStep);
+    const mobileLayout = useMediaQuery("(max-width: 768px)");
 
     return (
         <main className={s.main}>
@@ -70,19 +77,25 @@ function AppealsPage() {
                 />
             </div>
             <div className={s.formContainer}>
-                <Stepper
-                    activeStep={currentStep}
-                    sx={{
-                        padding: "36px 36px 0px 36px",
-                    }}
-                    connector={<QontoConnector />}
-                >
-                    {steps.map((label, ind) => (
-                        <Step key={ind}>
-                            <StepLabel>{label}</StepLabel>
-                        </Step>
-                    ))}
-                </Stepper>
+                {mobileLayout ? (
+                    <div className={s.stepper}>
+                        {`Шаг \xa0${currentStep + 1}/4`}
+                    </div>
+                ) : (
+                    <Stepper
+                        activeStep={currentStep}
+                        sx={{
+                            padding: "36px 36px 0px 36px",
+                        }}
+                        connector={<QontoConnector />}
+                    >
+                        {steps.map((label, ind) => (
+                            <Step key={ind}>
+                                <StepLabel>{label}</StepLabel>
+                            </Step>
+                        ))}
+                    </Stepper>
+                )}
                 <Routes>
                     <Route index element={<FirstStep />} />
                     <Route path="stepTwo" element={<SecondStep />} />

@@ -9,11 +9,34 @@
 .formContainer {
   position: relative;
   overflow: hidden;
-  padding: 100px 0px 0 100px;
+  padding: 100px 0 0 100px;
   height: 600px;
   width: 1000px;
   background-color: #fff;
   border-radius: 16px;
+}
+@media screen and (max-width: 1280px) {
+  .formContainer {
+    padding: 64px 0 0 64px;
+    width: 800px;
+    height: 500px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .formContainer {
+    padding: 0;
+    width: 450px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 480px) {
+  .formContainer {
+    width: 350px;
+    height: 500px;
+  }
 }
 
 .logo {
@@ -23,4 +46,17 @@
   position: absolute;
   left: 600px;
   top: 15px;
+}
+@media screen and (max-width: 1280px) {
+  .logo {
+    left: 550px;
+    top: 25px;
+    width: 550px;
+    height: 550px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .logo {
+    display: none;
+  }
 }

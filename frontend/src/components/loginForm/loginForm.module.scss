@@ -1,22 +1,38 @@
+@use "../../utils/mixins";
 .container {
     height: 100%;
     width: 400px;
     display: flex;
     flex-flow: column nowrap;
     gap: 24px;
+    @include mixins.tablets {
+        justify-content: center;
+        width: 350px;
+    }
+
+    @include mixins.phones {
+        width: 280px;
+    }
 }
 
 .text {
     margin-top: 0;
     font: 24px/1.4 var(--font-golos-regular);
     text-align: center;
+
+    @include mixins.phones {
+        font: 20px/1.4 var(--font-golos-regular);
+    }
 }
 
 .inputs__wrapper {
-    width: 400px;
+    width: 100%;
     display: flex;
     flex-flow: column nowrap;
     gap: 32px;
+    @include mixins.tablets {
+        gap: 24px;
+    }
 }
 
 .button {
