@@ -26,8 +26,3 @@ export interface IGetAppealsQueryOpts {
     endDate: Date;
     id: number;
 }
-
-export enum SortOpts {
-    DATE_CREATED,
-    DATE_UPDATED,
-}

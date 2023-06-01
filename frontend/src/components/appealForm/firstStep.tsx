@@ -83,7 +83,7 @@ function FirstStep() {
         <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
             <div className={s.lead}>
                 <h2 className={s.lead_title}>Отлично, сперва познакомимся</h2>
-                <AccordionRow type="accent" title="Почему это важно?">
+                <AccordionRow borders="none" title="Почему это важно?">
                     <p className={s.lead_paragraph}>
                         Мы не ответим на анонимное обращение. Это закон.
                     </p>

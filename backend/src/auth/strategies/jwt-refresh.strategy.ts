@@ -4,7 +4,6 @@ import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
 import { UsersService } from "../../users/users.service";
-import { User } from "../../users/entities/user.entity";
 import { HashService } from "../../hash/hash.service";
 import { WRONG_REFRESH_TOKEN_MESSAGE } from "../../utils/errorConstants";
 import { ExpressRequest } from "../types/types";
@@ -34,7 +33,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
     });
   }
 
-  async validate(request: ExpressRequest, payload: Pick<User, "id">) {
+  async validate(request: ExpressRequest, payload: any) {
     const user = await this.userService.getUserRefreshToken(payload.id);
     const refreshToken = request.cookies["refreshToken"];
     const match = await this.hashService.compare(

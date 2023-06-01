@@ -1,27 +1,30 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { CreateAppealDto } from "./dto/create-appeal.dto";
-import { Appeal } from "./entities/appeal.entity";
-import { FindOptionsWhere, Like, Repository } from "typeorm";
-import { InjectRepository } from "@nestjs/typeorm";
 import { sleep } from "../utils/utils";
+import { prisma } from "../prisma";
+import { Prisma } from "@prisma/client";
+
+interface AppealsWhereInputCombineOperators {
+  OR?: Array<Prisma.AppealsWhereInput>;
+  AND?: Array<Prisma.AppealsWhereInput>;
+}
 
 @Injectable()
 export class AppealsService {
   pageAppealAmount: number;
-  constructor(
-    @InjectRepository(Appeal)
-    private readonly appealRepository: Repository<Appeal>,
-  ) {
+  constructor() {
     this.pageAppealAmount = 8;
   }
 
-  async create(createAppealDto: CreateAppealDto): Promise<Appeal> {
-    const newAppeal = this.appealRepository.create(createAppealDto);
+  async create(createAppealDto: CreateAppealDto) {
+    const newAppeal = await prisma.appeals.create({
+      data: createAppealDto,
+    });
     await sleep(5000);
-    return await this.appealRepository.save(newAppeal);
+    return newAppeal;
   }
 
-  async findAllByFilter(
+  /*async findAllByFilter(
     processedStatus: boolean,
     page?: number,
     email?: string,
@@ -62,16 +65,92 @@ export class AppealsService {
         },
       });
     }
-  }
+  }*/
 
-  async updateAppealStatus(_id: number, processedStatus: boolean) {
-    return await this.appealRepository.update(_id, {
-      isProcessed: processedStatus,
+  async updateAppealStatus(appealId: number, processedStatus: boolean) {
+    return prisma.appeals.update({
+      where: { id: appealId },
+      data: { isProcessed: processedStatus },
     });
   }
 
-  async findOne(_id: number): Promise<Appeal> {
-    const appeal = await this.appealRepository.findOneBy({ id: _id });
+  async findOne(appealId: number) {
+    const appeal = await prisma.appeals.findUnique({
+      where: { id: appealId },
+    });
     return appeal;
+  }
+
+  async findMany(
+    processedStatus: boolean,
+    page?: number,
+    sortProp?: string,
+    email?: string,
+    name?: string,
+    startDate?: number,
+    endDate?: number,
+  ) {
+    const searchParams: AppealsWhereInputCombineOperators = {
+      AND: [{ isProcessed: processedStatus }],
+    };
+    if (startDate && endDate) {
+      searchParams.AND.push({
+        createdAt: {
+          //оказывается Date.toISOString для даты сформированной из строки
+          // с unix форматом ("number") дает ошибку преобразования
+          //нужно явное приведение к number
+          gte: new Date(+startDate),
+          lte: new Date(+endDate),
+        },
+      });
+    }
+
+    if (email) {
+      searchParams.AND.push({ email: { contains: email } });
+    }
+    if (name) {
+      let appealsORParams: Array<Prisma.AppealsWhereInput> = [];
+      const nameParts = name.split(" ");
+      if (nameParts.length > 3)
+        throw new BadRequestException(
+          "ФИО не может состоять из 4 частей и более",
+        );
+      nameParts.forEach((namePart) => {
+        appealsORParams.push({ firstName: { contains: namePart } });
+        appealsORParams.push({ middleName: { contains: namePart } });
+        appealsORParams.push({ lastName: { contains: namePart } });
+      });
+      if (appealsORParams.length === 0) {
+        appealsORParams = null;
+      } else {
+        searchParams.AND.push({ OR: appealsORParams });
+      }
+    }
+    if (page) {
+      const [appeals, count] = await prisma.$transaction([
+        prisma.appeals.findMany({
+          where: searchParams,
+          skip: (page - 1) * this.pageAppealAmount,
+          take: this.pageAppealAmount,
+          orderBy:
+            sortProp === "DATE_UPDATED"
+              ? { updatedAt: "desc" }
+              : { createdAt: "desc" },
+        }),
+        prisma.appeals.count({
+          where: searchParams,
+        }),
+      ]);
+      return [appeals, count];
+    } else {
+      const appeals = await prisma.appeals.findMany({
+        where: searchParams,
+        orderBy:
+          sortProp === "DATE_UPDATED"
+            ? { updatedAt: "desc" }
+            : { createdAt: "desc" },
+      });
+      return [appeals, 1];
+    }
   }
 }

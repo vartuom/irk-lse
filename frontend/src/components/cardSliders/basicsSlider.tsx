@@ -5,8 +5,8 @@ import LooksOneRoundedIcon from "@mui/icons-material/LooksOneRounded";
 import LooksTwoRoundedIcon from "@mui/icons-material/LooksTwoRounded";
 import Looks4RoundedIcon from "@mui/icons-material/Looks4Rounded";
 import Looks5RoundedIcon from "@mui/icons-material/Looks5Rounded";
-import AppAccordion from "../appAccordion/appAccordion";
 import s from "./cardSlider.module.css";
+import AccordionRow from "../accordionRow/accordionRow";
 
 function BasicsSlider() {
     return (
@@ -70,7 +70,7 @@ function BasicsSlider() {
                                 следующую карточку).
                             </div>
                             <div>
-                                <AppAccordion title="Например, в гражданском процессе">
+                                <AccordionRow title="Например, в гражданском процессе">
                                     <div className={s.card__accordionContent}>
                                         <p className={s.card__paragraph}>
                                             В соответсвии со статьей 79 ГПК РФ
@@ -97,7 +97,7 @@ function BasicsSlider() {
                                             граждан).
                                         </p>
                                     </div>
-                                </AppAccordion>
+                                </AccordionRow>
                             </div>
                         </div>
                     </div>
@@ -128,9 +128,9 @@ function BasicsSlider() {
                                 может быть использован в качестве доказательства
                                 наравне с другими материалами дела.
                             </div>
-                            <AppAccordion
+                            <AccordionRow
                                 title="Экспертиза и исследование: в чем отличия"
-                                noBorders
+                                borders="none"
                             >
                                 <div className={s.card__paragraph}>
                                     Эксперт при производстве несудебной
@@ -147,7 +147,7 @@ function BasicsSlider() {
                                     допрошен при наличии дополнительного
                                     соглашения.
                                 </div>
-                            </AppAccordion>
+                            </AccordionRow>
                             <div className={s.card__paragraph}>
                                 В случае если лаборатория уже проводила
                                 экспертное исследование во внесудебном порядке,
@@ -205,11 +205,11 @@ function BasicsSlider() {
                                 вопросами. Для вашего удобства мы их собрали вот
                                 тут:
                             </div>
-                            <AppAccordion title="Карточки по направлениям">
+                            <AccordionRow title="Карточки по направлениям">
                                 <div className={s.card__paragraph}>
                                     1. Линк на автотехнику и прочее.
                                 </div>
-                            </AppAccordion>
+                            </AccordionRow>
                         </div>
                     </div>
                 </SwiperSlide>
