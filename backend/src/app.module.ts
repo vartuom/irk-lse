@@ -13,11 +13,6 @@ import { HashModule } from "./hash/hash.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ load: [config] }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: getDbConfig,
-    }),
     AuthModule,
     UsersModule,
     AppealsModule,

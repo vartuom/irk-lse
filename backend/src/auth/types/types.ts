@@ -1,4 +1,3 @@
-import { User } from "src/users/entities/user.entity";
 import { Request } from "express";
 
 export interface IRefreshTokens {
@@ -6,7 +5,7 @@ export interface IRefreshTokens {
 }
 
 export interface ISigninTokens {
-  user: Pick<User, "id" | "username">;
+  user: any;
   accessToken: string;
   refreshToken: string;
 }

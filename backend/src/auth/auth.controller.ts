@@ -15,7 +15,6 @@ import {
 import { AuthService } from "./auth.service";
 import { UpdateAuthDto } from "./dto/update-auth.dto";
 import { LocalAuthGuard } from "./guards/local-auth.guard";
-import { User } from "../users/entities/user.entity";
 import { JwtAuthGuard } from "./guards/jwt-auth.guard";
 import { CreateUserDto } from "../users/dto/create-user.dto";
 import { plainToClass } from "class-transformer";
@@ -34,7 +33,7 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post("signin")
   async signin(
-    @Request() { user }: { user: Pick<User, "id" | "username" | "password"> },
+    @Request() { user },
     @Response({ passthrough: true }) response: ExpressResponse,
   ) {
     const authData = await this.authService.signin(user.id);
@@ -54,7 +53,7 @@ export class AuthController {
 
   @UseGuards(JwtRefreshGuard)
   @Post("refresh")
-  async refresh(@Request() { user }: { user: Pick<User, "id"> }) {
+  async refresh(@Request() { user }) {
     const accessToken = await this.authService.refreshAccessToken(user.id);
     return { accessToken };
   }
@@ -63,7 +62,8 @@ export class AuthController {
   @Post("register")
   async registerUser(@Body() createUserDto: CreateUserDto) {
     const user = await this.userService.create(createUserDto);
-    return plainToClass(User, user);
+    return user;
+    //return plainToClass(User, user);
   }
 
   @UseGuards(JwtAuthGuard)

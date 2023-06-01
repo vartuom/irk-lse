@@ -6,8 +6,6 @@ import { UsersService } from "../users/users.service";
 import { HashService } from "../hash/hash.service";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
-import { CreateUserDto } from "../users/dto/create-user.dto";
-import { User } from "../users/entities/user.entity";
 import { IRefreshTokens, ISigninTokens } from "./types/types";
 
 @Injectable()

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
 import moment from "moment";
+import axios from "../api/axios";
 import { IFirstStep } from "../components/appealForm/firstStep";
 import { ISecondStep } from "../components/appealForm/secondStep";
 import { IThirdStep } from "../components/appealForm/thirdStep";

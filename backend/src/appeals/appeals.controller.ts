@@ -29,14 +29,16 @@ export class AppealsController {
   /*@UseGuards(JwtAuthGuard)*/
   @Get()
   findAllByFilter(
-    @Query("isProcessed") processedStatus: boolean,
+    @Query("isProcessed") processedStatus: string,
     @Query("page") page?: number,
     @Query("email") email?: string,
     @Query("name") name?: string,
   ) {
-    return this.appealsService.findAllByFilter(
-      processedStatus,
-      page,
+    console.log(processedStatus);
+    //поправить потом
+    return this.appealsService.findMany(
+      processedStatus === "true",
+      +page,
       email,
       name,
     );
@@ -45,10 +47,10 @@ export class AppealsController {
   /*@UseGuards(JwtAuthGuard)*/
   @Patch(":id")
   update(
-    @Param("id") id: number,
+    @Param("id") id: string,
     @Body() { processedStatus }: { processedStatus: boolean },
   ) {
-    return this.appealsService.updateAppealStatus(id, processedStatus);
+    return this.appealsService.updateAppealStatus(+id, processedStatus);
   }
 
   /*@UseGuards(JwtAuthGuard)*/
