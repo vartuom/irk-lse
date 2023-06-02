@@ -1,4 +1,5 @@
 .appeal {
+  overflow: hidden;
   position: relative;
   display: flex;
   align-items: flex-start;

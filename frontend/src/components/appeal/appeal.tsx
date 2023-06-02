@@ -13,6 +13,7 @@ import { useAppDispatch } from "../../store/store";
 import { filterAppeals } from "../../store/appeals.slice";
 import { sleep } from "../../utils/utils";
 import { BASE_URL } from "../../utils/constants";
+import LayoutLoader from "../layoutLoader/layoutLoader";
 
 export default function Appeal({
     firstName,
@@ -63,13 +64,14 @@ export default function Appeal({
         } catch (error) {
             console.log(error);
         }
-        await sleep(3000);
+        await sleep(60000);
         setIsFetching(false);
         dispatch(filterAppeals({ id }));
     };
 
     return (
         <div className={style.appeal}>
+            {isFetching && <LayoutLoader />}
             <div className={style.appeal__info}>
                 <div className={style.appeal__titleContainer}>
                     <div className={style.appeal__titleLeft}>
@@ -98,34 +100,34 @@ export default function Appeal({
                 </button>
 
                 <div className={style.appeal__buttons}>
-                    {isFetching ? (
-                        "Загрузка..."
-                    ) : (
-                        <>
-                            <button
-                                onClick={changeProcessedStatus}
-                                className={`${style.appeal__button} ${style.appeal__button_type_primary}`}
-                                type="button"
-                            >
-                                {isProcessed ? "Вернуть" : "В обработанные"}
-                            </button>
-                            <button
-                                className={`${style.appeal__button} ${style.appeal__button_type_primary}`}
-                                type="button"
-                            >
-                                Дать ответ
-                            </button>
-                            <button
-                                onClick={() => {
-                                    saveDocx();
-                                }}
-                                className={`${style.appeal__button} ${style.appeal__button_type_primary}`}
-                                type="button"
-                            >
-                                Скачать
-                            </button>
-                        </>
-                    )}
+                    <button
+                        onClick={changeProcessedStatus}
+                        className={`${style.appeal__button} ${
+                            style.appeal__button_type_primary
+                        } ${isFetching && style.appeal__button_type_inactive}`}
+                        type="button"
+                    >
+                        {isProcessed ? "Вернуть" : "В обработанные"}
+                    </button>
+                    <button
+                        className={`${style.appeal__button} ${
+                            style.appeal__button_type_primary
+                        } ${isFetching && style.appeal__button_type_inactive}`}
+                        type="button"
+                    >
+                        Дать ответ
+                    </button>
+                    <button
+                        onClick={() => {
+                            saveDocx();
+                        }}
+                        className={`${style.appeal__button} ${
+                            style.appeal__button_type_primary
+                        } ${isFetching && style.appeal__button_type_inactive}`}
+                        type="button"
+                    >
+                        Скачать
+                    </button>
                 </div>
             </div>
             <div className={style.appealer}>

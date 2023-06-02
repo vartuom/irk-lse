@@ -14,7 +14,8 @@ import {
     setSortProp,
     setStartDate,
 } from "../../store/appealFilter.slice";
-import MuiDatePicker from "../DatePicker/MuiDatePicker";
+import MuiDatePicker from "../datePicker/MuiDatePicker";
+import ResponsiveTextField from "../responsiveTextField/responsiveTextField";
 
 const sortOptions = [
     { value: "DATE_UPDATED", label: "Дата изменения" },
@@ -61,7 +62,7 @@ function AppealsFilter({
 
     return (
         <div className={style.filter}>
-            <TextField
+            <ResponsiveTextField
                 variant="outlined"
                 select
                 label="Сортировка"
@@ -82,7 +83,7 @@ function AppealsFilter({
                         {opt.label}
                     </MenuItem>
                 ))}
-            </TextField>
+            </ResponsiveTextField>
             <div className={style.datepickers}>
                 <MuiDatePicker
                     value={moment(startDate)}
@@ -100,7 +101,7 @@ function AppealsFilter({
                     }
                 />
             </div>
-            <TextField
+            <ResponsiveTextField
                 variant="outlined"
                 label="Поиск по ФИО"
                 inputRef={nameInputRef}
@@ -115,7 +116,7 @@ function AppealsFilter({
                     debouncedDispatch(setName({ name: e.target.value }));
                 }}
             />
-            <TextField
+            <ResponsiveTextField
                 className={style.search__email}
                 variant="outlined"
                 label="Поиск по E-mail"

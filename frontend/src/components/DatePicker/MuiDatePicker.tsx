@@ -4,6 +4,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { ruRU } from "@mui/x-date-pickers/locales";
 import { MomentInput } from "moment";
+import ResponsiveTextField from "../responsiveTextField/responsiveTextField";
 
 interface IDatePickerProps {
     value: MomentInput;
