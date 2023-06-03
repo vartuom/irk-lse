@@ -88,7 +88,7 @@ function AppealsFilter({
                 <MuiDatePicker
                     value={moment(startDate)}
                     onChange={(value) =>
-                        dispatch(
+                        debouncedDispatch(
                             setStartDate({ date: moment(value).valueOf() })
                         )
                     }
@@ -97,7 +97,9 @@ function AppealsFilter({
                 <MuiDatePicker
                     value={moment(endDate)}
                     onChange={(value) =>
-                        dispatch(setEndDate({ date: moment(value).valueOf() }))
+                        debouncedDispatch(
+                            setEndDate({ date: moment(value).valueOf() })
+                        )
                     }
                 />
             </div>

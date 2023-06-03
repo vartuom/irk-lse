@@ -49,7 +49,6 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
             const res = await axiosPrivate.get<[Array<IAppeal>, number]>(
                 queryString
             );
-            console.log(res.data);
             const [data, count] = res.data;
             await sleep(5000);
             if (activeFetch) {
@@ -62,7 +61,6 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
         getAppeals();
 
         return () => {
-            console.log("exit");
             activeFetch = false;
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
