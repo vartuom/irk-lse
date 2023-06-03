@@ -12,13 +12,14 @@ import style from "./appeals.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setAppeals } from "../../store/appeals.slice";
 import { sleep } from "../../utils/utils";
-import { axiosPrivate } from "../../api/axios";
 import AppealsFilter from "../appealsFilter/appealsFilter";
 import AppealsLoader from "../appealsLoader/appealsLoader";
 import FancyAppealLoader from "../fancyAppealLoader/fancyAppealLoader";
 import { createURL } from "../../api/api";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 function Appeals({ isProcessed }: { isProcessed?: boolean }) {
+    const axiosPrivate = useAxiosPrivate();
     const appeals = useAppSelector((state) => state.appeals.appeals);
     const { sort, name, startDate, endDate, email } = useAppSelector(
         (state) => state.appealsFilter

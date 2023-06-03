@@ -26,7 +26,7 @@ export class AppealsController {
     return this.appealsService.create(createAppealDto);
   }
 
-  /*@UseGuards(JwtAuthGuard)*/
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAllByFilter(
     @Query("isProcessed") processedStatus: string,

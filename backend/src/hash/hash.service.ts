@@ -3,7 +3,7 @@ import { hash, compare } from "bcrypt";
 
 @Injectable()
 export class HashService {
-  async create(plainTextPassword: string) {
+  async create(plainTextPassword: string): Promise<string> {
     return await hash(plainTextPassword, 10);
   }
 

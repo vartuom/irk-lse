@@ -55,7 +55,7 @@ export class AuthController {
   @Post("refresh")
   async refresh(@Request() { user }) {
     const accessToken = await this.authService.refreshAccessToken(user.id);
-    return { accessToken };
+    return accessToken;
   }
 
   @UseInterceptors(ClassSerializerInterceptor)

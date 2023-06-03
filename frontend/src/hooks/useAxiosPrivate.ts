@@ -1,15 +1,20 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 import axios, { axiosPrivate } from "../api/axios";
-import { useAppDispatch, useAppStore } from "../store/store";
+import { useAppDispatch, useAppSelector } from "../store/store";
 import { setToken } from "../store/user.slice";
+import { sleep } from "../utils/utils";
 
 const useAxiosPrivate = () => {
-    const store = useAppStore();
+    const token = useAppSelector((state) => state.user.user.accessToken);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const refreshToken = async () => {
-        const response = await axios.get("/auth/refresh", {
+        const response = await axios({
+            method: "post",
+            url: "auth/refresh",
             withCredentials: true,
         });
         dispatch(setToken({ accessToken: response.data.accessToken }));
@@ -21,9 +26,7 @@ const useAxiosPrivate = () => {
                 if (!config.headers.Authorization) {
                     // потом убрать в оперативную память!
                     // eslint-disable-next-line no-param-reassign
-                    config.headers.Authorization = `Bearer ${
-                        store.getState().user.user.accessToken
-                    }}`;
+                    config.headers.Authorization = `Bearer ${token}`;
                 }
                 return config;
             },
@@ -34,7 +37,10 @@ const useAxiosPrivate = () => {
             (response) => response,
             async (error) => {
                 const prevRequest = error?.config;
-                if (error?.response?.status === 403 && !prevRequest?.sent) {
+                if (prevRequest.url === "auth/refresh") {
+                    return Promise.reject(error);
+                }
+                if (error?.response?.status === 401 && !prevRequest?.sent) {
                     prevRequest.sent = true;
                     await refreshToken();
                     return axiosPrivate(prevRequest);
@@ -48,7 +54,7 @@ const useAxiosPrivate = () => {
             axiosPrivate.interceptors.response.eject(responseIntercept);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [store]);
+    }, [token]);
 
     return axiosPrivate;
 };
