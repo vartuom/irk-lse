@@ -10,6 +10,7 @@ const useAxiosPrivate = () => {
     const token = useAppSelector((state) => state.user.user.accessToken);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    let tokenMemory = token;
 
     const refreshToken = async () => {
         const response = await axios({
@@ -17,6 +18,7 @@ const useAxiosPrivate = () => {
             url: "auth/refresh",
             withCredentials: true,
         });
+        tokenMemory = response.data.accessToken;
         dispatch(setToken({ accessToken: response.data.accessToken }));
     };
 
@@ -26,7 +28,7 @@ const useAxiosPrivate = () => {
                 if (!config.headers.Authorization) {
                     // потом убрать в оперативную память!
                     // eslint-disable-next-line no-param-reassign
-                    config.headers.Authorization = `Bearer ${token}`;
+                    config.headers.Authorization = `Bearer ${tokenMemory}`;
                 }
                 return config;
             },
@@ -37,9 +39,6 @@ const useAxiosPrivate = () => {
             (response) => response,
             async (error) => {
                 const prevRequest = error?.config;
-                if (prevRequest.url === "auth/refresh") {
-                    return Promise.reject(error);
-                }
                 if (error?.response?.status === 401 && !prevRequest?.sent) {
                     prevRequest.sent = true;
                     await refreshToken();
