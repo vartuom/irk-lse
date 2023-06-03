@@ -10,26 +10,24 @@ const useAxiosPrivate = () => {
     const token = useAppSelector((state) => state.user.user.accessToken);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    let tokenMemory = token;
 
-    const refreshToken = async () => {
+    const refreshToken: () => Promise<string> = async () => {
         const response = await axios({
             method: "post",
             url: "auth/refresh",
             withCredentials: true,
         });
-        tokenMemory = response.data.accessToken;
         dispatch(setToken({ accessToken: response.data.accessToken }));
+        return response.data.accessToken;
     };
 
     useEffect(() => {
         const requestIntercept = axiosPrivate.interceptors.request.use(
             (config) => {
-                if (!config.headers.Authorization) {
-                    // потом убрать в оперативную память!
-                    // eslint-disable-next-line no-param-reassign
-                    config.headers.Authorization = `Bearer ${tokenMemory}`;
-                }
+                // потом убрать в оперативную память!
+                // eslint-disable-next-line no-param-reassign
+                config.headers.Authorization = `Bearer ${token}`;
+
                 return config;
             },
             (error) => Promise.reject(error)
