@@ -1,16 +1,16 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
-import axios from "../api/axios";
 import { IFirstStep } from "../components/appealForm/firstStep";
 import { ISecondStep } from "../components/appealForm/secondStep";
 import { IThirdStep } from "../components/appealForm/thirdStep";
 import { IAppealResponse } from "../utils/types";
+import { axiosGeneric } from "../api/axios";
 
 export const postAppeal = createAsyncThunk(
     "appealForm/postAppeal",
     async (value: any, { rejectWithValue }) => {
         try {
-            const { data } = await axios.post(`/appeals/create`, value);
+            const { data } = await axiosGeneric.post(`/appeals/create`, value);
             return data;
         } catch (error: any) {
             return rejectWithValue(error.response.data);

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { axiosPrivate } from "../api/axios";
 import { ICredentials } from "../types/types";
+import { axiosGeneric } from "../api/axios";
 
 interface IInitialState {
     isAuthPending: boolean;
@@ -29,7 +29,7 @@ export const fetchLogIn = createAsyncThunk(
     "user/fetchLogIn",
     async (credentials: ICredentials, { rejectWithValue }) => {
         try {
-            const { data } = await axiosPrivate.post<ILoginData>(
+            const { data } = await axiosGeneric.post<ILoginData>(
                 `/auth/signin`,
                 credentials
             );
@@ -44,7 +44,7 @@ export const fetchGetUserData = createAsyncThunk(
     "user/fetchGetUserData",
     async (_, { rejectWithValue }) => {
         try {
-            const { data } = await axiosPrivate.get(`/auth/signin`);
+            const { data } = await axiosGeneric.get(`/auth/signin`);
             return data.user;
         } catch (error: any) {
             return rejectWithValue(error.response.data);

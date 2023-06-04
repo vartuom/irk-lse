@@ -1,5 +1,5 @@
-import { IGetAppealsQueryOpts } from "../types/types";
-import axios from "./axios";
+import { axiosGeneric } from "./axios";
+import { setToken } from "../store/user.slice";
 
 export interface ITokenResponse {
     success: boolean;
@@ -24,3 +24,16 @@ export function createURL(
     }
     return `${baseURL}?${params.toString()}`;
 }
+
+export const getLocalAccessToken = () => localStorage.getItem("accessToken");
+
+export const refreshAccessToken = async () => {
+    const response = await axiosGeneric({
+        method: "post",
+        url: "auth/refresh",
+        withCredentials: true,
+        // headers: { "Content-Type": "application/json" },
+    });
+    localStorage.setItem("accessToken", response.data.accessToken);
+    // dispatch(setToken({ accessToken: response.data.accessToken }));
+};

@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import moment from "moment";
 
-interface IFAppealsilterState {
+interface IAppealFilterState {
     sort: string;
     name?: string;
     email?: string;
@@ -11,9 +11,9 @@ interface IFAppealsilterState {
 
 const initialState = {
     sort: "DATE_CREATED",
-    startDate: moment().startOf("day").valueOf(),
-    endDate: moment().endOf("day").valueOf(),
-} as IFAppealsilterState;
+    fromDate: moment().startOf("day").valueOf(),
+    toDate: moment().endOf("day").valueOf(),
+} as IAppealFilterState;
 
 const appealsFilterSlice = createSlice({
     name: "appealFilter",

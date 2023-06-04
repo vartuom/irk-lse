@@ -1,3 +1,5 @@
+import moment from "moment/moment";
+
 export interface IAppeal {
     id: number;
     createdAt: Date;
@@ -25,4 +27,12 @@ export interface IGetAppealsQueryOpts {
     startDate: Date;
     endDate: Date;
     id: number;
+}
+
+export interface IFilterOptions {
+    name: string;
+    email: string;
+    fromDate: moment.Moment | null;
+    toDate: moment.Moment | null;
+    sortOrder: "DATE_UPDATED" | "DATE_CREATED";
 }
