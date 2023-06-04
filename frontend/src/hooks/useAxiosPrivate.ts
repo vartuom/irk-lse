@@ -4,21 +4,19 @@ import { useNavigate } from "react-router";
 import axios, { axiosPrivate } from "../api/axios";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { setToken } from "../store/user.slice";
-import { sleep } from "../utils/utils";
 
 const useAxiosPrivate = () => {
     const token = useAppSelector((state) => state.user.user.accessToken);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const refreshToken: () => Promise<string> = async () => {
+    const refreshToken = async () => {
         const response = await axios({
             method: "post",
             url: "auth/refresh",
             withCredentials: true,
         });
         dispatch(setToken({ accessToken: response.data.accessToken }));
-        return response.data.accessToken;
     };
 
     useEffect(() => {
