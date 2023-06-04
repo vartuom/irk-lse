@@ -62,34 +62,18 @@
   }
 }
 
-.datepickers {
+.datePickers {
   justify-self: end;
   display: flex;
   justify-content: space-between;
   gap: 12px;
   align-items: center;
-}
-.datepickers__separator {
-  margin: 0;
-  width: 24px;
-  border: 3px solid rgba(0, 0, 0, 0.33);
-  border-radius: 50px;
+  width: 100%;
 }
 @media screen and (max-width: 768px) {
-  .datepickers__separator {
-    display: none;
-  }
-}
-.datepickers > div {
-  /* width: 200px; */
-}
-@media screen and (max-width: 768px) {
-  .datepickers {
+  .datePickers {
     display: flex;
     flex-flow: column nowrap;
-    width: 100%;
-  }
-  .datepickers > * {
     width: 100%;
   }
 }

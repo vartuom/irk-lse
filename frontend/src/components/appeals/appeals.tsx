@@ -3,13 +3,11 @@ import { saveAs } from "file-saver";
 import { useParams } from "react-router";
 import { Pagination as MuiPagination, PaginationItem } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import moment from "moment";
 import empty from "../../images/empty.png";
 import Appeal from "../appeal/appeal";
 import { IAppeal, IFilterOptions } from "../../types/types";
 import AppealDocxCreator from "../appeal/appealDocxCreator/appealDocxCreator";
 import style from "./appeals.module.css";
-import { useAppDispatch, useAppSelector } from "../../store/store";
 import { sleep } from "../../utils/utils";
 import AppealsFilter from "../appealsFilter/appealsFilter";
 import FancyAppealLoader from "../fancyAppealLoader/fancyAppealLoader";
@@ -17,12 +15,11 @@ import { createURL } from "../../api/api";
 import { axiosPrivate } from "../../api/axios";
 
 function Appeals({ isProcessed }: { isProcessed?: boolean }) {
-    const dispatch = useAppDispatch();
     const { page } = useParams();
 
     const [isFetching, setIsFetching] = useState(true);
     const [appealsCount, setAppealsCount] = useState(0);
-    const [appeals, setAppeals] = useState([]);
+    const [appeals, setAppeals] = useState<IAppeal[]>([]);
     const [filterOptions, setFilterOptions] = useState<IFilterOptions>({
         name: "",
         email: "",
@@ -58,20 +55,17 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
                 queryString
             );
             const [data, count] = res.data;
-            await sleep(5000);
+            await sleep(2000);
             if (activeFetch) {
                 setAppeals(data);
                 setAppealsCount(count);
                 setIsFetching(false);
             }
         }
-
         getAppeals();
-
         return () => {
             activeFetch = false;
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isProcessed, page, filterOptions]);
 
     const saveDocx = useCallback(async () => {
@@ -91,7 +85,6 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
             />
             {/* eslint-disable-next-line no-nested-ternary */}
             {isFetching ? (
-                // AppealsLoader isProcessed page={page} />
                 <FancyAppealLoader isProcessed page={page} />
             ) : appeals.length ? (
                 appeals.map((appeal) => (

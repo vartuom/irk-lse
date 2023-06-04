@@ -95,7 +95,7 @@ function AppealsFilter({
                     </ResponsiveTextField>
                 )}
             />
-            <div className={style.datepickers}>
+            <div className={style.datePickers}>
                 <Controller
                     name="fromDate"
                     control={control}
@@ -110,14 +110,16 @@ function AppealsFilter({
                             <DatePicker
                                 label="С даты"
                                 slotProps={{
-                                    textField: { variant: "outlined" },
+                                    textField: {
+                                        variant: "outlined",
+                                        fullWidth: true,
+                                    },
                                 }}
                                 {...field}
                             />
                         </LocalizationProvider>
                     )}
                 />
-                <hr className={style.datepickers__separator} />
                 <Controller
                     name="toDate"
                     control={control}
@@ -132,7 +134,10 @@ function AppealsFilter({
                             <DatePicker
                                 label="По дату"
                                 slotProps={{
-                                    textField: { variant: "outlined" },
+                                    textField: {
+                                        variant: "outlined",
+                                        fullWidth: true,
+                                    },
                                 }}
                                 {...field}
                             />
@@ -183,15 +188,13 @@ function AppealsFilter({
             >
                 Применить
             </button>
-            {!isProcessed && (
-                <button
-                    type="button"
-                    className={`${style.button} ${style.button_type_primary} ${style.printAll}`}
-                    onClick={() => generateAllAppeals()}
-                >
-                    Скачать все обращения
-                </button>
-            )}
+            {/* <button
+                type="button"
+                className={`${style.button} ${style.button_type_primary} ${style.printAll}`}
+                onClick={() => generateAllAppeals()}
+            >
+                Скачать все обращения
+            </button> */}
         </form>
     );
 }
