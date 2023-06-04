@@ -1,3 +1,4 @@
+@use "../../utils/mixins";
 .appeals {
     &__tabs {
         position: absolute;
@@ -16,6 +17,30 @@
         * {
             z-index: 2;
         }
+
+        @include mixins.desktop-small {
+            top: -36px;
+            left: 12px;
+            height: 50px;
+        }
+
+        @include mixins.tablets {
+            top: 24px;
+            left: -16px;
+            height: 50px;
+            width: 340px;
+        }
+
+        @include mixins.phones {
+            width: 300px;
+            top: 24px;
+            left: -12px;
+            height: 50px;
+        }
+    }
+
+    @include mixins.tablets {
+        margin-top: 80px;
     }
 }
 
@@ -32,6 +57,9 @@
     text-decoration: none;
     color: inherit;
     font: 18px/1.5 var(--font-golos-demibold);
+    @include mixins.phones {
+        font: 16px/1.5 var(--font-golos-demibold);
+    }
 }
 
 .active {
@@ -47,6 +75,14 @@
 .active_processed {
     & ~ .glider {
         transform: translateX(310px);
+
+        @include mixins.tablets {
+            transform: translate(195px);
+        }
+
+        @include mixins.phones {
+            transform: translate(180px);
+        }
     }
 }
 
@@ -60,4 +96,17 @@
     border-radius: 99px;
     transition: 0.25s ease-out;
     background-color: #e6eef9;
+    @include mixins.desktop-small {
+        height: 44px;
+    }
+
+    @include mixins.tablets {
+        left: 18px;
+        width: 200px;
+    }
+
+    @include mixins.phones {
+        left: 26px;
+        width: 165px;
+    }
 }

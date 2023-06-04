@@ -6,8 +6,6 @@ import { UsersModule } from "./users/users.module";
 import { AppealsModule } from "./appeals/appeals.module";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import config from "./config/config";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { getDbConfig } from "./config/dbConfigFactory";
 import { HashModule } from "./hash/hash.module";
 
 @Module({

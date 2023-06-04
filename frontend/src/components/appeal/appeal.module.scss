@@ -1,4 +1,6 @@
+@use "../../utils/mixins";
 .appeal {
+    overflow: hidden;
     position: relative;
     display: flex;
     align-items: flex-start;
@@ -10,6 +12,21 @@
     border-radius: 16px;
     box-shadow: 0 -1px 2px 0 rgba(#185ee0, 0.15), 2px 8px 16px 0 rgba(#185ee0, 0.15);
     width: 900px;
+
+    @include mixins.desktop-small {
+        width: 620px;
+    }
+
+    @include mixins.tablets {
+        width: 380px;
+        left: -25px;
+        flex-direction: column-reverse;
+    }
+
+    @include mixins.phones {
+        width: 280px;
+        left: -36px;
+    }
 
     &__titleLeft {
         border: none;
@@ -26,6 +43,9 @@
 
     &__title {
         font: 24px/1.5 var(--font-golos-bold);
+        @include mixins.phones {
+            font: 20px/1.5 var(--font-golos-bold);
+        }
     }
 
     &__date {
@@ -33,6 +53,10 @@
         justify-content: flex-end;
         margin-right: 32px;
         font: 18px/1.5 var(--font-golos-regular);
+
+        @include mixins.phones {
+            font: 16px/1.5 var(--font-golos-regular);
+        }
     }
 
     &__text {
@@ -45,17 +69,33 @@
             margin-bottom: 0px;
             white-space: pre-wrap;
         }
+
+        @include mixins.desktop-small {
+            width: 400px;
+        }
+
+        @include mixins.tablets {
+            width: 380px;
+        }
+
+        @include mixins.phones {
+            width: 280px;
+            font: 16px/1.5 var(--font-golos-regular);
+        }
     }
 
     &__text[aria-expanded="true"] {
-        transition: all 0.3s cubic-bezier(0.75, 0.29, 0.51, 0.89) 0ms; /* cubic-bezier(0.4, 0, 0.2, 1) */ /* cubic-bezier(0.58, 0.19, 0.11, 0.46) */
+        transition: all 0.35s cubic-bezier(0.75, 0.3, 0.5, 0.9) 0ms; /* cubic-bezier(0.4, 0, 0.2, 1) */ /* cubic-bezier(0.58, 0.19, 0.11, 0.46) */
         -webkit-mask-image: none;
-        max-height: 999px;
+        max-height: 1400px;
     }
 
     &__text[aria-expanded="false"] {
-        transition: all 0.2s cubic-bezier(0.36, 0.22, 0.43, 0.81) 0ms;
+        transition: all 0.25s cubic-bezier(0.35, 0.2, 0.45, 0.8) 0ms;
         max-height: 100px;
+        @include mixins.phones {
+            max-height: 112px;
+        }
     }
 
     &__buttons {
@@ -64,8 +104,9 @@
         gap: 12px;
         justify-content: flex-end;
 
-        @media print {
-            display: none;
+        @include mixins.tablets {
+            flex-flow: column nowrap;
+            align-items: center;
         }
     }
 
@@ -80,6 +121,15 @@
         border-radius: 8px;
         color: #fff;
         transition: var(--opacity-transition);
+
+        @include mixins.tablets {
+            justify-content: center;
+            width: 320px;
+        }
+
+        @include mixins.phones {
+            width: 250px;
+        }
 
         &_type {
             &_primary {
@@ -113,6 +163,22 @@
     display: flex;
     align-items: flex-end;
 
+    @include mixins.tablets {
+        width: 100%;
+    }
+
+    &__info {
+        @include mixins.tablets {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        @include mixins.phones {
+            align-items: flex-start;
+            gap: 36px;
+        }
+    }
+
     & > div {
         width: 100%;
     }
@@ -120,15 +186,25 @@
     &__title {
         font: 24px/1.5 var(--font-golos-bold);
         padding-bottom: 12px;
+
+        @include mixins.phones {
+            font: 20px/1.5 var(--font-golos-bold);
+        }
     }
 
     &__text {
         font: 18px/1.5 var(--font-golos-regular);
+        @include mixins.phones {
+            font: 16px/1.5 var(--font-golos-regular);
+        }
     }
 
     &__email {
         margin-top: 12px;
         font: 18px/1.5 var(--font-golos-demibold);
+        @include mixins.phones {
+            font: 16px/1.5 var(--font-golos-demibold);
+        }
         overflow-wrap: anywhere;
     }
 
@@ -137,6 +213,12 @@
         margin-top: 8px;
         padding-right: 16px;
         font: 18px/1.5 var(--font-golos-regular);
+        @include mixins.tablets {
+            margin-top: 0;
+        }
+        @include mixins.phones {
+            font: 16px/1.5 var(--font-golos-regular);
+        }
     }
 
     &__icon {
@@ -154,6 +236,10 @@
 
     &:hover {
         text-decoration: underline;
+    }
+
+    @include mixins.phones {
+        font: 16px/1.5 var(--font-golos-regular);
     }
 }
 

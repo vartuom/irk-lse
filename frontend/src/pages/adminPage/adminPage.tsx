@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes, NavLink } from "react-router-dom";
+import { useMediaQuery, useTheme } from "@mui/material";
 import moment from "moment";
 import "moment/dist/locale/ru";
 
@@ -11,9 +12,11 @@ function AdminPage() {
     const notScrollToTop = true;
     const docxGenerator = AppealDocxCreator.init();
     moment.locale("ru");
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("tablets"));
 
     return (
-        <main className="main appeals">
+        <main className={style.appeals}>
             <div className={style.appeals__tabs}>
                 <NavLink
                     end
@@ -27,7 +30,7 @@ function AdminPage() {
                     }
                     state={{ notScrollToTop }}
                 >
-                    Необработанные обращения
+                    {!isMobile ? "Необработанные обращения" : "Необработанные"}
                 </NavLink>
 
                 <NavLink
@@ -41,11 +44,11 @@ function AdminPage() {
                     }
                     state={{ notScrollToTop }}
                 >
-                    Обработанные обращения
+                    {!isMobile ? "Обработанные обращения" : "Обработанные"}
                 </NavLink>
                 <span className={style.glider} />
             </div>
-            <div className="appeals__container">
+            <div className={style.appeals__container}>
                 <Routes>
                     <Route index element={<Appeals />} />
                     <Route path="/processed" element={<Appeals isProcessed />}>

@@ -26,21 +26,28 @@ export class AppealsController {
     return this.appealsService.create(createAppealDto);
   }
 
-  /*@UseGuards(JwtAuthGuard)*/
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAllByFilter(
     @Query("isProcessed") processedStatus: string,
     @Query("page") page?: number,
     @Query("email") email?: string,
     @Query("name") name?: string,
+    @Query("startDate") startDate?: number,
+    @Query("endDate") endDate?: number,
+    @Query("sort") sortProp?: string,
   ) {
     console.log(processedStatus);
+    console.log(sortProp);
     //поправить потом
     return this.appealsService.findMany(
       processedStatus === "true",
       +page,
+      sortProp,
       email,
       name,
+      startDate,
+      endDate,
     );
   }
 

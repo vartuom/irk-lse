@@ -2,6 +2,12 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { CreateAppealDto } from "./dto/create-appeal.dto";
 import { sleep } from "../utils/utils";
 import { prisma } from "../prisma";
+import { Prisma } from "@prisma/client";
+
+interface AppealsWhereInputCombineOperators {
+  OR?: Array<Prisma.AppealsWhereInput>;
+  AND?: Array<Prisma.AppealsWhereInput>;
+}
 
 @Injectable()
 export class AppealsService {
@@ -26,7 +32,7 @@ export class AppealsService {
   ) {
     let findOpts: FindOptionsWhere<Appeal>;
     if (email) {
-      findOpts = { email: Like(email) };
+      findOpts = { email: Like(`${email}%`) };
     }
     console.log({ ...findOpts, isProcessed: processedStatus });
     //3 поля ищутся как and, по идее их нужно объединять через or
@@ -78,36 +84,58 @@ export class AppealsService {
   async findMany(
     processedStatus: boolean,
     page?: number,
+    sortProp?: string,
     email?: string,
     name?: string,
+    startDate?: number,
+    endDate?: number,
   ) {
-    const searchParams: any = {
-      OR: [],
-      AND: { isProcessed: processedStatus },
+    const searchParams: AppealsWhereInputCombineOperators = {
+      AND: [{ isProcessed: processedStatus }],
     };
+    if (startDate && endDate) {
+      searchParams.AND.push({
+        createdAt: {
+          //оказывается Date.toISOString для даты сформированной из строки
+          // с unix форматом ("number") дает ошибку преобразования
+          //нужно явное приведение к number
+          gte: new Date(+startDate),
+          lte: new Date(+endDate),
+        },
+      });
+    }
+
     if (email) {
-      searchParams.OR.push({ email: { contains: email } });
+      searchParams.AND.push({ email: { contains: email } });
     }
     if (name) {
+      let appealsORParams: Array<Prisma.AppealsWhereInput> = [];
       const nameParts = name.split(" ");
       if (nameParts.length > 3)
         throw new BadRequestException(
           "ФИО не может состоять из 4 частей и более",
         );
       nameParts.forEach((namePart) => {
-        searchParams.OR.push({ firstName: { contains: namePart } });
-        searchParams.OR.push({ middleName: { contains: namePart } });
-        searchParams.OR.push({ lastName: { contains: namePart } });
+        appealsORParams.push({ firstName: { contains: namePart } });
+        appealsORParams.push({ middleName: { contains: namePart } });
+        appealsORParams.push({ lastName: { contains: namePart } });
       });
+      if (appealsORParams.length === 0) {
+        appealsORParams = null;
+      } else {
+        searchParams.AND.push({ OR: appealsORParams });
+      }
     }
-    console.log(searchParams);
-    if (searchParams.OR.length === 0) delete searchParams.OR;
     if (page) {
       const [appeals, count] = await prisma.$transaction([
         prisma.appeals.findMany({
           where: searchParams,
           skip: (page - 1) * this.pageAppealAmount,
           take: this.pageAppealAmount,
+          orderBy:
+            sortProp === "DATE_UPDATED"
+              ? { updatedAt: "desc" }
+              : { createdAt: "desc" },
         }),
         prisma.appeals.count({
           where: searchParams,
@@ -117,6 +145,10 @@ export class AppealsService {
     } else {
       const appeals = await prisma.appeals.findMany({
         where: searchParams,
+        orderBy:
+          sortProp === "DATE_UPDATED"
+            ? { updatedAt: "desc" }
+            : { createdAt: "desc" },
       });
       return [appeals, 1];
     }

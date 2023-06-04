@@ -1,15 +1,19 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { SortOpts } from "../types/types";
+import moment from "moment";
 
 interface IFAppealsilterState {
-    sort: SortOpts;
+    sort: string;
     name?: string;
     email?: string;
-    startDate?: Date;
-    endDate?: Date;
+    startDate?: number;
+    endDate?: number;
 }
 
-const initialState = { sort: SortOpts.DATE_CREATED } as IFAppealsilterState;
+const initialState = {
+    sort: "DATE_CREATED",
+    startDate: moment().startOf("day").valueOf(),
+    endDate: moment().endOf("day").valueOf(),
+} as IFAppealsilterState;
 
 const appealsFilterSlice = createSlice({
     name: "appealFilter",
@@ -21,14 +25,29 @@ const appealsFilterSlice = createSlice({
         setEmail(state, action: PayloadAction<{ email: string }>) {
             state.email = action.payload.email;
         },
-        setStartDate(state, action: PayloadAction<{ date: Date }>) {
+        setStartDate(state, action: PayloadAction<{ date: number }>) {
             state.startDate = action.payload.date;
         },
-        setEndDate(state, action: PayloadAction<{ date: Date }>) {
+        setEndDate(state, action: PayloadAction<{ date: number }>) {
             state.endDate = action.payload.date;
+        },
+        setSortProp(state, action: PayloadAction<{ sortProp: string }>) {
+            state.sort = action.payload.sortProp;
+        },
+        clearFilterState(state) {
+            state.email = "";
+            state.name = "";
+            state.startDate = moment().startOf("day").valueOf();
+            state.endDate = moment().endOf("day").valueOf();
         },
     },
 });
-export const { setName, setEmail, setStartDate, setEndDate } =
-    appealsFilterSlice.actions;
+export const {
+    setName,
+    setEmail,
+    setStartDate,
+    setEndDate,
+    clearFilterState,
+    setSortProp,
+} = appealsFilterSlice.actions;
 export default appealsFilterSlice.reducer;

@@ -13,6 +13,7 @@ import { useAppDispatch } from "../../store/store";
 import { filterAppeals } from "../../store/appeals.slice";
 import { sleep } from "../../utils/utils";
 import { BASE_URL } from "../../utils/constants";
+import LayoutLoader from "../layoutLoader/layoutLoader";
 
 export default function Appeal({
     firstName,
@@ -52,20 +53,25 @@ export default function Appeal({
 
     const changeProcessedStatus = async () => {
         setIsFetching(true);
-        const response = await axios.patch(
-            `${BASE_URL}/appeals/${id}`,
-            {
-                processedStatus: !isProcessed,
-            },
-            { headers: { "Content-Type": "application/json" } }
-        );
-        await sleep(3000);
+        try {
+            const response = await axios.patch(
+                `${BASE_URL}/appeals/${id}`,
+                {
+                    processedStatus: !isProcessed,
+                },
+                { headers: { "Content-Type": "application/json" } }
+            );
+        } catch (error) {
+            console.log(error);
+        }
+        await sleep(60000);
         setIsFetching(false);
         dispatch(filterAppeals({ id }));
     };
 
     return (
         <div className={style.appeal}>
+            {isFetching && <LayoutLoader />}
             <div className={style.appeal__info}>
                 <div className={style.appeal__titleContainer}>
                     <div className={style.appeal__titleLeft}>
@@ -94,34 +100,34 @@ export default function Appeal({
                 </button>
 
                 <div className={style.appeal__buttons}>
-                    {isFetching ? (
-                        "Загрузка..."
-                    ) : (
-                        <>
-                            <button
-                                onClick={changeProcessedStatus}
-                                className={`${style.appeal__button} ${style.appeal__button_type_primary}`}
-                                type="button"
-                            >
-                                {isProcessed ? "Вернуть" : "В обработанные"}
-                            </button>
-                            <button
-                                className={`${style.appeal__button} ${style.appeal__button_type_primary}`}
-                                type="button"
-                            >
-                                Дать ответ
-                            </button>
-                            <button
-                                onClick={() => {
-                                    saveDocx();
-                                }}
-                                className={`${style.appeal__button} ${style.appeal__button_type_primary}`}
-                                type="button"
-                            >
-                                Скачать
-                            </button>
-                        </>
-                    )}
+                    <button
+                        onClick={changeProcessedStatus}
+                        className={`${style.appeal__button} ${
+                            style.appeal__button_type_primary
+                        } ${isFetching && style.appeal__button_type_inactive}`}
+                        type="button"
+                    >
+                        {isProcessed ? "Вернуть" : "В обработанные"}
+                    </button>
+                    <button
+                        className={`${style.appeal__button} ${
+                            style.appeal__button_type_primary
+                        } ${isFetching && style.appeal__button_type_inactive}`}
+                        type="button"
+                    >
+                        Дать ответ
+                    </button>
+                    <button
+                        onClick={() => {
+                            saveDocx();
+                        }}
+                        className={`${style.appeal__button} ${
+                            style.appeal__button_type_primary
+                        } ${isFetching && style.appeal__button_type_inactive}`}
+                        type="button"
+                    >
+                        Скачать
+                    </button>
                 </div>
             </div>
             <div className={style.appealer}>
@@ -129,19 +135,25 @@ export default function Appeal({
                     className={style.appealer__icon}
                     sx={{ fontSize: 64, display: "none" }}
                 />
-                <div className={style.appeler__info}>
-                    <div className={style.appealer__title}>Отправитель</div>
-                    <div className={style.appealer__text}>{lastName}</div>
-                    <div className={style.appealer__text}>{firstName}</div>
-                    {middleName && (
-                        <div className={style.appealer__text}>{middleName}</div>
-                    )}
-                    <div className={style.appealer__email}>{email}</div>
-                    {extraContacts && (
-                        <div className={style.appealer__extraContacts}>
-                            {extraContacts}
-                        </div>
-                    )}
+                <div className={style.appealer__info}>
+                    <div>
+                        <div className={style.appealer__title}>Отправитель</div>
+                        <div className={style.appealer__text}>{lastName}</div>
+                        <div className={style.appealer__text}>{firstName}</div>
+                        {middleName && (
+                            <div className={style.appealer__text}>
+                                {middleName}
+                            </div>
+                        )}
+                    </div>
+                    <div>
+                        <div className={style.appealer__email}>{email}</div>
+                        {extraContacts && (
+                            <div className={style.appealer__extraContacts}>
+                                {extraContacts}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

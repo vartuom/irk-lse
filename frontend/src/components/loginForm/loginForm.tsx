@@ -11,6 +11,7 @@ import styles from "./loginForm.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { fetchLogIn, setLoggedIn } from "../../store/user.slice";
 import s from "../appealForm/appealForm.module.css";
+import ResponsiveTextField from "../responsiveTextField/responsiveTextField";
 
 function LoginForm() {
     const navigate = useNavigate();
@@ -63,7 +64,7 @@ function LoginForm() {
                     name="username"
                     control={control}
                     render={({ field }) => (
-                        <TextField
+                        <ResponsiveTextField
                             label="Имя пользователя"
                             error={!!errors?.username}
                             helperText={
@@ -79,7 +80,7 @@ function LoginForm() {
                     name="password"
                     control={control}
                     render={({ field }) => (
-                        <TextField
+                        <ResponsiveTextField
                             label="Пароль"
                             type={showPassword ? "text" : "password"}
                             error={!!errors?.password}

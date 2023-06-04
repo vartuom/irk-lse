@@ -1,0 +1,22 @@
+@use "../../utils/mixins";
+.layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(#010b23, 0.15);
+    background: linear-gradient(0deg, rgba(#ebf1f9, 0.3), rgba(#ebf1f9, 0.8));
+    /* backdrop-filter: blur(1px); */
+    z-index: 2;
+    &__loader {
+        margin-bottom: 60px;
+        @include mixins.tablets {
+            margin-bottom: 100px;
+        }
+    }
+}

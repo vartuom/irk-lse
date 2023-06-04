@@ -25,9 +25,20 @@
     gap: 36px;
     color: var(--text-color-primary);
 
+    @include mixins.desktop-small {
+        grid-template-columns: 380px 1fr;
+        gap: 48px;
+        &:last-child {
+            padding-bottom: 5px;
+        }
+    }
+
     @include mixins.tablets {
         display: flex;
         flex-flow: column nowrap;
+        &:last-child {
+            padding-bottom: 0;
+        }
     }
 }
 
@@ -62,6 +73,9 @@
 
 .contacts__paragraph_type_accent {
     font: 18px/1.5 var(--font-golos-regular);
+    @include mixins.tablets {
+        font: 16px/1.5 var(--font-golos-regular);
+    }
 }
 
 .contacts__number {

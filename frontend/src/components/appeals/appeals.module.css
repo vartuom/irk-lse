@@ -43,3 +43,19 @@
   grid-column: 1/5;
   grid-row: 2;
 }
+
+.empty {
+  margin: 64px 0px 48px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+.empty__img {
+  opacity: 0.6;
+  width: 152px;
+  height: 152px;
+}
+.empty__text {
+  font: 22px/1.5 var(--font-golos-regular);
+}

@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { Pagination as MuiPagination, PaginationItem } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
+import empty from "../../images/empty.png";
 import Appeal from "../appeal/appeal";
 import { IAppeal } from "../../types/types";
 import AppealDocxCreator from "../appeal/appealDocxCreator/appealDocxCreator";
@@ -11,13 +12,14 @@ import style from "./appeals.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setAppeals } from "../../store/appeals.slice";
 import { sleep } from "../../utils/utils";
-import { axiosPrivate } from "../../api/axios";
 import AppealsFilter from "../appealsFilter/appealsFilter";
 import AppealsLoader from "../appealsLoader/appealsLoader";
 import FancyAppealLoader from "../fancyAppealLoader/fancyAppealLoader";
 import { createURL } from "../../api/api";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 function Appeals({ isProcessed }: { isProcessed?: boolean }) {
+    const axiosPrivate = useAxiosPrivate();
     const appeals = useAppSelector((state) => state.appeals.appeals);
     const { sort, name, startDate, endDate, email } = useAppSelector(
         (state) => state.appealsFilter
@@ -40,13 +42,14 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
                     sort,
                     name,
                     email,
+                    startDate,
+                    endDate,
                 },
                 "/appeals"
             );
             const res = await axiosPrivate.get<[Array<IAppeal>, number]>(
                 queryString
             );
-            console.log(res.data);
             const [data, count] = res.data;
             await sleep(5000);
             if (activeFetch) {
@@ -59,11 +62,10 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
         getAppeals();
 
         return () => {
-            console.log("exit");
             activeFetch = false;
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isProcessed, page, name, email]);
+    }, [isProcessed, page, name, email, startDate, endDate, sort]);
 
     const saveDocx = useCallback(async () => {
         docxGenerator.setAllAppeals(appeals);
@@ -78,10 +80,11 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
                 isProcessed={isProcessed}
                 generateAllAppeals={saveDocx}
             />
+            {/* eslint-disable-next-line no-nested-ternary*/}
             {isFetching ? (
                 // AppealsLoader isProcessed page={page} />
                 <FancyAppealLoader isProcessed page={page} />
-            ) : (
+            ) : appeals.length ? (
                 appeals.map((appeal) => (
                     <Appeal
                         firstName={appeal.firstName}
@@ -97,6 +100,17 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
                         updatedAt={appeal.updatedAt}
                     />
                 ))
+            ) : (
+                <div className={style.empty}>
+                    <img
+                        width={256}
+                        height={256}
+                        src={empty}
+                        alt="empty result"
+                        className={style.empty__img}
+                    />
+                    <p className={style.empty__text}>Ничего не найдено</p>
+                </div>
             )}
             {isProcessed && (
                 <MuiPagination

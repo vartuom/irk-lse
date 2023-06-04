@@ -12,6 +12,7 @@
   }
 
   @include mixins.tablets {
+    padding: 0px 36px 36px 36px;
     width: 300px;
   }
 
@@ -60,14 +61,30 @@
   &_title {
     margin: 0;
     font: 22px/1.5 var(--font-golos-bold);
+    @include mixins.phones {
+      font: 18px/1.4 var(--font-golos-bold);
+    }
   }
   &_paragraph {
     margin: 0;
     font: 18px/1.5 var(--font-golos-regular);
+
+    @include mixins.phones {
+      font: 16px/1.4 var(--font-golos-regular);
+    }
   }
 }
 
 .formLabel {
   margin: 0;
   font: 18px/1.5 var(--font-golos-regular);
+  @include mixins.phones {
+    font: 16px/1.5 var(--font-golos-regular);
+  }
+}
+
+@include mixins.phones {
+  .MuiTextField-root {
+    font: 16px/1.5 var(--font-golos-regular);
+  }
 }

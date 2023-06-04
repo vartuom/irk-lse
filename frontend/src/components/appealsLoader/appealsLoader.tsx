@@ -6,9 +6,26 @@ import style from "./appealsLoader.module.css";
 interface ILoaderProps {
     isProcessed?: boolean;
     page?: string;
+    loaderText?: string;
+    isFetching?: boolean;
+    className?: string;
+    height?: number | string;
+    width?: number | string;
+    charAppearInterval?: number;
 }
 
-function AppealsLoader({ isProcessed, page }: ILoaderProps) {
+function AppealsLoader({
+    isProcessed,
+    page,
+    loaderText,
+    isFetching,
+    className,
+    height,
+    width,
+    charAppearInterval,
+}: ILoaderProps) {
+    const text = loaderText ?? "Загрузка";
+    const appearInterval = charAppearInterval ?? 400;
     // \xa0 - неразрывный пробел, или &nbsp; в html
     const [dots, setDots] = useState("\xa0\xa0\xa0");
     const count = useRef(0);
@@ -27,25 +44,26 @@ function AppealsLoader({ isProcessed, page }: ILoaderProps) {
                     .concat(".")
                     .concat(dots.substring(count.current));
             });
-        }, 400);
+        }, appearInterval);
 
         return () => {
             count.current = 0;
             clearInterval(interval);
         };
-    }, [isProcessed, page]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isProcessed, page, isFetching]);
     return (
-        <div className={style.loader}>
+        <div className={`${style.loader} ${className}`}>
             <TailSpin
-                height="128"
-                width="128"
+                height={height ?? "128"}
+                width={width ?? "128"}
                 color="var(--bg-color-blue-accent)"
                 ariaLabel="tail-spin-loading"
                 radius="1"
                 wrapperStyle={{}}
                 wrapperClass={style.loader__wrapper}
             />
-            <p className={style.loader__text}>{`Загрузка${dots}`}</p>
+            <p className={style.loader__text}>{`${text}${dots}`}</p>
         </div>
     );
 }

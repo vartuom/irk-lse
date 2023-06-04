@@ -41,7 +41,7 @@ export class AuthController {
       httpOnly: true,
       sameSite: "strict",
     });
-    await sleep(5000);
+    await sleep(2000);
     return { user: authData.user, accessToken: authData.accessToken };
   }
 
@@ -55,7 +55,7 @@ export class AuthController {
   @Post("refresh")
   async refresh(@Request() { user }) {
     const accessToken = await this.authService.refreshAccessToken(user.id);
-    return { accessToken };
+    return accessToken;
   }
 
   @UseInterceptors(ClassSerializerInterceptor)

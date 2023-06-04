@@ -1,3 +1,4 @@
+@use "../../utils/mixins";
 .accordion__row {
   width: 100%;
   padding: 12px 0;
@@ -24,7 +25,7 @@
   text-align: left;
   cursor: pointer;
   font: 18px/1.5 var(--font-golos-regular);
-  color: #0061D9;
+  color: #0061d9;
 }
 
 .accordion__content {

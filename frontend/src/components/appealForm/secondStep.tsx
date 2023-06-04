@@ -10,6 +10,7 @@ import {
     setCurrentStepNumber,
     setSecondStep,
 } from "../../store/appealForm.slice";
+import ResponsiveTextField from "../responsiveTextField/responsiveTextField";
 
 export interface ISecondStep {
     email: string;
@@ -84,7 +85,7 @@ function SecondStep() {
                 name="email"
                 control={control}
                 render={({ field }) => (
-                    <TextField
+                    <ResponsiveTextField
                         label="Электронная почта"
                         error={!!errors?.email}
                         helperText={
@@ -103,7 +104,7 @@ function SecondStep() {
                 name="extraContacts"
                 control={control}
                 render={({ field }) => (
-                    <TextField
+                    <ResponsiveTextField
                         label="Дополнительные контактные данные (не обязательно)"
                         multiline
                         inputProps={{
