@@ -45,6 +45,7 @@ function AppealsFilter({
         control,
         handleSubmit,
         formState: { errors, isValid },
+        watch,
     } = useForm({
         defaultValues: {
             name: filterOptions.name,
@@ -57,10 +58,16 @@ function AppealsFilter({
         mode: "onBlur",
     });
 
-    const dispatch = useAppDispatch();
-    // const debouncedDispatch = debounce(dispatch, 300);
+    // const debouncedSetFilterOptions= debounce(setFilterOptions, 300);
 
+    /* useEffect(()=>{
+        const subscription = watch((value) => {
+            debouncedSetFilterOptions(value)
+        })
+    }, [watch])
+ */
     const onSubmit = (data: any) => {
+        console.log(data);
         setFilterOptions({
             ...data,
             toDate: data.toDate,

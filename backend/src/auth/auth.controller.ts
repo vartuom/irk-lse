@@ -3,9 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Patch,
-  Param,
-  Delete,
   UseGuards,
   Request,
   UseInterceptors,
@@ -13,7 +10,6 @@ import {
   Response,
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
-import { UpdateAuthDto } from "./dto/update-auth.dto";
 import { LocalAuthGuard } from "./guards/local-auth.guard";
 import { JwtAuthGuard } from "./guards/jwt-auth.guard";
 import { CreateUserDto } from "../users/dto/create-user.dto";
@@ -76,25 +72,5 @@ export class AuthController {
   @Get("user")
   async user(@Request() { user }) {
     return user;
-  }
-
-  @Get()
-  findAll() {
-    return this.authService.findAll();
-  }
-
-  @Get(":id")
-  findOne(@Param("id") id: string) {
-    return this.authService.findOne(+id);
-  }
-
-  @Patch(":id")
-  update(@Param("id") id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }
-
-  @Delete(":id")
-  remove(@Param("id") id: string) {
-    return this.authService.remove(+id);
   }
 }

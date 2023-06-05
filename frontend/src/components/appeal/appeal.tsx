@@ -64,7 +64,7 @@ export default function Appeal({
         } catch (error) {
             console.log(error);
         }
-        await sleep(60000);
+        await sleep(5000);
         setIsFetching(false);
         dispatch(filterAppeals({ id }));
     };
