@@ -2,7 +2,6 @@ import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-jwt";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-
 import { UsersService } from "../../users/users.service";
 import { HashService } from "../../hash/hash.service";
 import { WRONG_REFRESH_TOKEN_MESSAGE } from "../../utils/errorConstants";
@@ -27,6 +26,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
         if (request && request.cookies && request.cookies["refreshToken"]) {
           token = request.cookies["refreshToken"];
         }
+        console.log(token);
         return token;
       },
       passReqToCallback: true,

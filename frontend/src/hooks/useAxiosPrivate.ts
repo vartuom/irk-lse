@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
-import axios, { axiosPrivate } from "../api/axios";
+import { axiosPrivate, axiosGeneric } from "../api/axios";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { setToken } from "../store/user.slice";
 
-const useAxiosPrivate = () => {
+const useAxiosPrivate1 = () => {
     const token = useAppSelector((state) => state.user.user.accessToken);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const refreshToken = async () => {
-        const response = await axios({
+        const response = await axiosGeneric({
             method: "post",
             url: "auth/refresh",
             withCredentials: true,
@@ -54,4 +54,4 @@ const useAxiosPrivate = () => {
     return axiosPrivate;
 };
 
-export default useAxiosPrivate;
+export default useAxiosPrivate1;

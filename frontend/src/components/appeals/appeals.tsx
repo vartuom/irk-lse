@@ -3,32 +3,32 @@ import { saveAs } from "file-saver";
 import { useParams } from "react-router";
 import { Pagination as MuiPagination, PaginationItem } from "@mui/material";
 import { NavLink } from "react-router-dom";
-
 import empty from "../../images/empty.png";
 import Appeal from "../appeal/appeal";
-import { IAppeal } from "../../types/types";
+import { IAppeal, IFilterOptions } from "../../types/types";
 import AppealDocxCreator from "../appeal/appealDocxCreator/appealDocxCreator";
 import style from "./appeals.module.css";
-import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setAppeals } from "../../store/appeals.slice";
 import { sleep } from "../../utils/utils";
 import AppealsFilter from "../appealsFilter/appealsFilter";
-import AppealsLoader from "../appealsLoader/appealsLoader";
 import FancyAppealLoader from "../fancyAppealLoader/fancyAppealLoader";
 import { createURL } from "../../api/api";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { axiosPrivate } from "../../api/axios";
 
 function Appeals({ isProcessed }: { isProcessed?: boolean }) {
-    const axiosPrivate = useAxiosPrivate();
-    const appeals = useAppSelector((state) => state.appeals.appeals);
-    const { sort, name, startDate, endDate, email } = useAppSelector(
-        (state) => state.appealsFilter
-    );
-    const dispatch = useAppDispatch();
     const { page } = useParams();
 
     const [isFetching, setIsFetching] = useState(true);
     const [appealsCount, setAppealsCount] = useState(0);
+    const [appeals, setAppeals] = useState<IAppeal[]>([]);
+    const [filterOptions, setFilterOptions] = useState<IFilterOptions>({
+        name: "",
+        email: "",
+        // fromDate: moment(Date.now()),
+        // toDate: moment(Date.now()),
+        fromDate: null,
+        toDate: null,
+        sortOrder: "DATE_CREATED",
+    });
     const docxGenerator = AppealDocxCreator.init();
 
     useEffect(() => {
@@ -39,11 +39,15 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
                 {
                     isProcessed: Boolean(isProcessed),
                     page: isProcessed ? page ?? 1 : undefined,
-                    sort,
-                    name,
-                    email,
-                    startDate,
-                    endDate,
+                    sort: filterOptions.sortOrder,
+                    name: filterOptions.name,
+                    email: filterOptions.email,
+                    startDate: filterOptions.fromDate
+                        ? filterOptions.fromDate.valueOf()
+                        : "",
+                    endDate: filterOptions.fromDate
+                        ? filterOptions.fromDate.valueOf()
+                        : "",
                 },
                 "/appeals"
             );
@@ -51,21 +55,18 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
                 queryString
             );
             const [data, count] = res.data;
-            await sleep(5000);
+            await sleep(2000);
             if (activeFetch) {
-                dispatch(setAppeals(data));
+                setAppeals(data);
                 setAppealsCount(count);
                 setIsFetching(false);
             }
         }
-
         getAppeals();
-
         return () => {
             activeFetch = false;
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isProcessed, page, name, email, startDate, endDate, sort]);
+    }, [isProcessed, page, filterOptions]);
 
     const saveDocx = useCallback(async () => {
         docxGenerator.setAllAppeals(appeals);
@@ -79,10 +80,11 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
             <AppealsFilter
                 isProcessed={isProcessed}
                 generateAllAppeals={saveDocx}
+                filterOptions={filterOptions}
+                setFilterOptions={setFilterOptions}
             />
-            {/* eslint-disable-next-line no-nested-ternary*/}
+            {/* eslint-disable-next-line no-nested-ternary */}
             {isFetching ? (
-                // AppealsLoader isProcessed page={page} />
                 <FancyAppealLoader isProcessed page={page} />
             ) : appeals.length ? (
                 appeals.map((appeal) => (
