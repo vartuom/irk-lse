@@ -1,5 +1,4 @@
-import { axiosGeneric } from "./axios";
-import { setToken } from "../store/user.slice";
+import axiosGeneric from "./axios/axiosGeneric";
 
 export interface ITokenResponse {
     success: boolean;
@@ -34,6 +33,7 @@ export const refreshAccessToken = async () => {
         withCredentials: true,
         // headers: { "Content-Type": "application/json" },
     });
-    localStorage.setItem("accessToken", response.data.accessToken);
+    return response.data.accessToken;
+    /* localStorage.setItem("accessToken", response.data.accessToken); */
     // dispatch(setToken({ accessToken: response.data.accessToken }));
 };

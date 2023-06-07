@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ICredentials } from "../types/types";
 import { axiosGeneric } from "../api/axios";
+import { setAccessToken } from "../api/tokenStorage";
 
 interface IInitialState {
     isAuthPending: boolean;
     isLoggedIn: boolean;
     user: {
         name: string;
-        accessToken: string;
+        /* accessToken: string; */
     };
 }
 
@@ -21,7 +22,7 @@ const initialState: IInitialState = {
     isLoggedIn: false,
     user: {
         name: "",
-        accessToken: "",
+        /* accessToken: "", */
     },
 };
 
@@ -61,7 +62,7 @@ const userSlice = createSlice({
             state.isLoggedIn = true;
         },
         setToken(state, action) {
-            state.user.accessToken = action.payload.accessToken;
+            /* state.user.accessToken = action.payload.accessToken; */
         },
     },
     extraReducers: (builder) => {
@@ -77,8 +78,9 @@ const userSlice = createSlice({
                 state.isAuthPending = false;
                 state.isLoggedIn = true;
                 state.user.name = action.payload.user.name;
-                state.user.accessToken = action.payload.accessToken;
-                //ъуъа как же стремно с localstorage
+                /* state.user.accessToken = action.payload.accessToken; */
+                // ъуъа как же стремно с localstorage
+                setAccessToken(action.payload.accessToken);
                 localStorage.setItem("accessToken", action.payload.accessToken);
             });
     },
