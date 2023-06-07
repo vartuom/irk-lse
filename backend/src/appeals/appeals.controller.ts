@@ -31,13 +31,10 @@ export class AppealsController {
   @UseGuards(JwtAuthGuard)
   @Get()
   findAllByFilter(
-    @Query("isProcessed") isProcessed: boolean,
     @Query(new ValidationPipe({ transform: true }))
     appealFilterQueryDto: AppealFilterQueryDto,
   ) {
     //поправить потом
-    console.log(isProcessed);
-    console.log(typeof isProcessed);
     console.log(appealFilterQueryDto);
     return this.appealsService.findMany(appealFilterQueryDto);
   }

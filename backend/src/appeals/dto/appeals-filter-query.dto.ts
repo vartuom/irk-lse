@@ -12,9 +12,9 @@ export class AppealFilterQueryDto {
   @IsBoolean()
   isProcessed: boolean;
 
+  @Type(() => Number)
   @IsOptional()
   @IsNumber()
-  @Type(() => Number)
   page?: number;
 
   @IsOptional()
@@ -26,8 +26,15 @@ export class AppealFilterQueryDto {
   @IsString()
   name?: string;
 
+  @Type(() => Number)
+  @IsOptional()
+  @IsNumber()
   startDate?: number;
-  endDate?: number;
+
+  @Type(() => Number)
+  @IsOptional()
+  @IsNumber()
+  toDate?: number;
 
   @IsOptional()
   @IsString()

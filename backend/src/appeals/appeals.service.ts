@@ -87,20 +87,25 @@ export class AppealsService {
   }
 
   async findMany(appealFilterQueryDto: AppealFilterQueryDto) {
-    const { name, email, startDate, endDate, page, sort, isProcessed } =
+    const { name, email, startDate, toDate, page, sort, isProcessed } =
       appealFilterQueryDto;
     const searchParams: AppealsWhereInputCombineOperators = {
       AND: [{ isProcessed: isProcessed }],
     };
-    if (startDate && endDate) {
+
+    if (startDate || toDate) {
+      //оказывается Date.toISOString для даты сформированной из строки
+      // с unix форматом ("number") дает ошибку преобразования
+      //нужно явное приведение к number
+      const dateRangeOpts: Prisma.DateTimeFilter = {};
+      if (startDate) {
+        dateRangeOpts.gte = new Date(+startDate);
+      }
+      if (toDate) {
+        dateRangeOpts.lte = new Date(+toDate);
+      }
       searchParams.AND.push({
-        createdAt: {
-          //оказывается Date.toISOString для даты сформированной из строки
-          // с unix форматом ("number") дает ошибку преобразования
-          //нужно явное приведение к number
-          gte: new Date(+startDate),
-          lte: new Date(+endDate),
-        },
+        createdAt: dateRangeOpts,
       });
     }
 
