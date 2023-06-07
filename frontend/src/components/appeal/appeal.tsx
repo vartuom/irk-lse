@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DescriptionIcon from "@mui/icons-material/Description";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router";
 import { saveAs } from "file-saver";
 import moment from "moment";
-import axios from "axios";
 
 import style from "./appeal.module.css";
 import AppealDocxCreator from "./appealDocxCreator/appealDocxCreator";
@@ -14,6 +13,7 @@ import { filterAppeals } from "../../store/appeals.slice";
 import { sleep } from "../../utils/utils";
 import { BASE_URL } from "../../utils/constants";
 import LayoutLoader from "../layoutLoader/layoutLoader";
+import { axiosPrivate } from "../../api/axios";
 
 export default function Appeal({
     firstName,
@@ -54,7 +54,7 @@ export default function Appeal({
     const changeProcessedStatus = async () => {
         setIsFetching(true);
         try {
-            const response = await axios.patch(
+            const response = await axiosPrivate.patch(
                 `${BASE_URL}/appeals/${id}`,
                 {
                     processedStatus: !isProcessed,
