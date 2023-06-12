@@ -19,41 +19,12 @@ import PrintAppeal from "../printAppeal/PrintAppeal";
 import ProtectedRoutes from "../protectedRoutes/protectedRoutes";
 import AuthPage from "../../pages/authPage/authPage";
 import LoginForm from "../loginForm/loginForm";
-import { axiosGeneric } from "../../api/axios";
-import { setLoggedIn } from "../../store/user.slice";
-import { setAccessToken } from "../../api/tokenStorage";
 
 function App() {
     const location = useLocation();
     const background = location.state?.background;
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const [isLoading, setIsLoading] = useState(true);
-
-    /**
-     * При первом монтировании компонента делается запрос с куком
-     * с refresh токеном на получение access токена, который устанавливается
-     * в tokenStorage
-     */
-    useEffect(() => {
-        async function getUserToken() {
-            try {
-                const response = await axiosGeneric({
-                    method: "post",
-                    url: "auth/refresh",
-                    withCredentials: true,
-                });
-                setAccessToken(response.data.accessToken);
-                dispatch(setLoggedIn());
-            } catch (error) {
-                // TODO: сделать обработчик ошибок
-                console.log(error);
-            }
-            setIsLoading(false);
-        }
-        getUserToken();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     const handleAppealFormClose = () => {
         dispatch(resetForm());
@@ -61,63 +32,53 @@ function App() {
     };
     return (
         <div>
-            {!isLoading && (
-                <>
-                    <Routes location={background || location}>
-                        <Route path="/auth/*" element={<AuthPage />}>
-                            <Route path="login" element={<LoginForm />} />
-                            <Route path="register" />
-                        </Route>
+            <Routes location={background || location}>
+                <Route path="/auth/*" element={<AuthPage />}>
+                    <Route path="login" element={<LoginForm />} />
+                    <Route path="register" />
+                </Route>
+                <Route path="/" element={<Navigate to="/home" replace />} />
+                <Route path={"/home/*"} element={<Layout />}>
+                    <Route index element={<MainPage />} />
+                    <Route path="contacts" element={<ContactsPage />} />
+                    <Route path="prices" element={<PricesPage />} />
+                    <Route path="appeals/*" element={<AppealsPage />} />
+                    <Route path="cards/*" element={<CardsPage />} />
+                    <Route path="history" element={<HistoryPage />} />
+                    {/* Protected Route */}
+                    <Route element={<ProtectedRoutes />}>
+                        <Route path="admin/*" element={<AdminPage />} />
                         <Route
-                            path="/"
-                            element={<Navigate to="/home" replace />}
+                            path="printAppeal/:id"
+                            element={<PrintAppeal />}
                         />
-                        <Route path={"/home/*"} element={<Layout />}>
-                            <Route index element={<MainPage />} />
-                            <Route path="contacts" element={<ContactsPage />} />
-                            <Route path="prices" element={<PricesPage />} />
-                            <Route path="appeals/*" element={<AppealsPage />} />
-                            <Route path="cards/*" element={<CardsPage />} />
-                            <Route path="history" element={<HistoryPage />} />
-                            {/* Protected Route */}
-                            <Route element={<ProtectedRoutes />}>
-                                <Route path="admin/*" element={<AdminPage />} />
-                                <Route
-                                    path="printAppeal/:id"
-                                    element={<PrintAppeal />}
-                                />
-                            </Route>
-                        </Route>
-                    </Routes>
-                    {background && (
-                        <Routes>
-                            <Route
-                                path="/home/prices"
-                                element={
-                                    <Modal
-                                        onClose={() => navigate(-1)}
-                                        isModalOpened
-                                    >
-                                        <ScrollBox>
-                                            <PricesTable />
-                                        </ScrollBox>
-                                    </Modal>
-                                }
-                            />
-                            <Route
-                                path="/home/appeals/details"
-                                element={
-                                    <Modal
-                                        onClose={handleAppealFormClose}
-                                        isModalOpened
-                                    >
-                                        <AppealDetails />
-                                    </Modal>
-                                }
-                            />
-                        </Routes>
-                    )}
-                </>
+                    </Route>
+                </Route>
+            </Routes>
+            {background && (
+                <Routes>
+                    <Route
+                        path="/home/prices"
+                        element={
+                            <Modal onClose={() => navigate(-1)} isModalOpened>
+                                <ScrollBox>
+                                    <PricesTable />
+                                </ScrollBox>
+                            </Modal>
+                        }
+                    />
+                    <Route
+                        path="/home/appeals/details"
+                        element={
+                            <Modal
+                                onClose={handleAppealFormClose}
+                                isModalOpened
+                            >
+                                <AppealDetails />
+                            </Modal>
+                        }
+                    />
+                </Routes>
             )}
         </div>
     );
