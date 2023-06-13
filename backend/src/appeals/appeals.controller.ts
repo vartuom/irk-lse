@@ -13,6 +13,8 @@ import { AppealsService } from "./appeals.service";
 import { CreateAppealDto } from "./dto/create-appeal.dto";
 import { UpdateAppealDto } from "./dto/update-appeal.dto";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
+import { UpdateProcessedStatusDto } from "./dto/update-processed-status.dto";
+import { AppealFilterQueryDto } from "./dto/appeals-filter-query.dto";
 
 @Controller("appeals")
 export class AppealsController {
@@ -29,38 +31,27 @@ export class AppealsController {
   @UseGuards(JwtAuthGuard)
   @Get()
   findAllByFilter(
-    @Query("isProcessed") processedStatus: string,
-    @Query("page") page?: number,
-    @Query("email") email?: string,
-    @Query("name") name?: string,
-    @Query("startDate") startDate?: number,
-    @Query("endDate") endDate?: number,
-    @Query("sort") sortProp?: string,
+    @Query(new ValidationPipe({ transform: true }))
+    appealFilterQueryDto: AppealFilterQueryDto,
   ) {
-    console.log(processedStatus);
-    console.log(sortProp);
     //поправить потом
-    return this.appealsService.findMany(
-      processedStatus === "true",
-      +page,
-      sortProp,
-      email,
-      name,
-      startDate,
-      endDate,
-    );
+    console.log(appealFilterQueryDto);
+    return this.appealsService.findMany(appealFilterQueryDto);
   }
 
-  /*@UseGuards(JwtAuthGuard)*/
+  @UseGuards(JwtAuthGuard)
   @Patch(":id")
   update(
     @Param("id") id: string,
-    @Body() { processedStatus }: { processedStatus: boolean },
+    @Body() updateProcessedStatusDto: UpdateProcessedStatusDto,
   ) {
-    return this.appealsService.updateAppealStatus(+id, processedStatus);
+    return this.appealsService.updateAppealStatus(
+      +id,
+      updateProcessedStatusDto,
+    );
   }
 
-  /*@UseGuards(JwtAuthGuard)*/
+  @UseGuards(JwtAuthGuard)
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.appealsService.findOne(+id);

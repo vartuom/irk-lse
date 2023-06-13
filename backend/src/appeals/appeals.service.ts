@@ -3,6 +3,8 @@ import { CreateAppealDto } from "./dto/create-appeal.dto";
 import { sleep } from "../utils/utils";
 import { prisma } from "../prisma";
 import { Prisma } from "@prisma/client";
+import { UpdateProcessedStatusDto } from "./dto/update-processed-status.dto";
+import { AppealFilterQueryDto } from "./dto/appeals-filter-query.dto";
 
 interface AppealsWhereInputCombineOperators {
   OR?: Array<Prisma.AppealsWhereInput>;
@@ -67,10 +69,13 @@ export class AppealsService {
     }
   }*/
 
-  async updateAppealStatus(appealId: number, processedStatus: boolean) {
+  async updateAppealStatus(
+    appealId: number,
+    updateProcessedStatusDto: UpdateProcessedStatusDto,
+  ) {
     return prisma.appeals.update({
       where: { id: appealId },
-      data: { isProcessed: processedStatus },
+      data: { isProcessed: updateProcessedStatusDto.processedStatus },
     });
   }
 
@@ -81,32 +86,33 @@ export class AppealsService {
     return appeal;
   }
 
-  async findMany(
-    processedStatus: boolean,
-    page?: number,
-    sortProp?: string,
-    email?: string,
-    name?: string,
-    startDate?: number,
-    endDate?: number,
-  ) {
+  async findMany(appealFilterQueryDto: AppealFilterQueryDto) {
+    const { name, email, startDate, toDate, page, sort, isProcessed } =
+      appealFilterQueryDto;
     const searchParams: AppealsWhereInputCombineOperators = {
-      AND: [{ isProcessed: processedStatus }],
+      AND: [{ isProcessed: isProcessed }],
     };
-    if (startDate && endDate) {
+
+    if (startDate || toDate) {
+      //оказывается Date.toISOString для даты сформированной из строки
+      // с unix форматом ("number") дает ошибку преобразования
+      //нужно явное приведение к number
+      const dateRangeOpts: Prisma.DateTimeFilter = {};
+      if (startDate) {
+        dateRangeOpts.gte = new Date(+startDate);
+      }
+      if (toDate) {
+        dateRangeOpts.lte = new Date(+toDate);
+      }
       searchParams.AND.push({
-        createdAt: {
-          //оказывается Date.toISOString для даты сформированной из строки
-          // с unix форматом ("number") дает ошибку преобразования
-          //нужно явное приведение к number
-          gte: new Date(+startDate),
-          lte: new Date(+endDate),
-        },
+        createdAt: dateRangeOpts,
       });
     }
 
     if (email) {
-      searchParams.AND.push({ email: { contains: email } });
+      searchParams.AND.push({
+        email: { contains: email, mode: "insensitive" },
+      });
     }
     if (name) {
       let appealsORParams: Array<Prisma.AppealsWhereInput> = [];
@@ -116,9 +122,15 @@ export class AppealsService {
           "ФИО не может состоять из 4 частей и более",
         );
       nameParts.forEach((namePart) => {
-        appealsORParams.push({ firstName: { contains: namePart } });
-        appealsORParams.push({ middleName: { contains: namePart } });
-        appealsORParams.push({ lastName: { contains: namePart } });
+        appealsORParams.push({
+          firstName: { contains: namePart, mode: "insensitive" },
+        });
+        appealsORParams.push({
+          middleName: { contains: namePart, mode: "insensitive" },
+        });
+        appealsORParams.push({
+          lastName: { contains: namePart, mode: "insensitive" },
+        });
       });
       if (appealsORParams.length === 0) {
         appealsORParams = null;
@@ -133,7 +145,7 @@ export class AppealsService {
           skip: (page - 1) * this.pageAppealAmount,
           take: this.pageAppealAmount,
           orderBy:
-            sortProp === "DATE_UPDATED"
+            sort === "DATE_UPDATED"
               ? { updatedAt: "desc" }
               : { createdAt: "desc" },
         }),
@@ -146,7 +158,7 @@ export class AppealsService {
       const appeals = await prisma.appeals.findMany({
         where: searchParams,
         orderBy:
-          sortProp === "DATE_UPDATED"
+          sort === "DATE_UPDATED"
             ? { updatedAt: "desc" }
             : { createdAt: "desc" },
       });

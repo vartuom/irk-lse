@@ -31,7 +31,8 @@ export const fetchLogIn = createAsyncThunk(
         try {
             const { data } = await axiosGeneric.post<ILoginData>(
                 `/auth/signin`,
-                credentials
+                credentials,
+                { withCredentials: true }
             );
             return data;
         } catch (error: any) {
@@ -76,7 +77,9 @@ const userSlice = createSlice({
                 state.isAuthPending = false;
                 state.isLoggedIn = true;
                 state.user.name = action.payload.user.name;
-                state.user.accessToken = action.payload.accessToken;
+                /* state.user.accessToken = action.payload.accessToken; */
+                //ъуъа как же стремно с localstorage
+                localStorage.setItem("accessToken", action.payload.accessToken);
             });
     },
 });

@@ -1,6 +1,4 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { CreateAuthDto } from "./dto/create-auth.dto";
-import { UpdateAuthDto } from "./dto/update-auth.dto";
 import { WRONG_USERNAME_OR_PASSWORD_ERROR_MESSAGE } from "../utils/errorConstants";
 import { UsersService } from "../users/users.service";
 import { HashService } from "../hash/hash.service";
@@ -59,21 +57,5 @@ export class AuthService {
       expiresIn: "7d",
     });
     return refreshToken;
-  }
-
-  findAll() {
-    return `This action returns all auth`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
-
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
   }
 }

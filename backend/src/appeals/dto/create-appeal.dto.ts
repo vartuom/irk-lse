@@ -1,4 +1,10 @@
-import { IsEmail, Length, IsOptional, IsString } from "class-validator";
+import {
+  IsEmail,
+  Length,
+  IsOptional,
+  IsString,
+  ValidateIf,
+} from "class-validator";
 
 export class CreateAppealDto {
   @IsString()
@@ -9,7 +15,15 @@ export class CreateAppealDto {
   @Length(2, 250)
   lastName: string;
 
+  /**
+   * IsOptinal игнорирует следующие валидаторы
+   * только если выполняется условие на === null или === undefined
+   * т.е в нашем случае для пустой строки, валидаторы не будут игнорироваться
+   * поэтому добавил ValidateIf
+   */
+
   @IsOptional()
+  @ValidateIf((e) => e !== "")
   @IsString()
   @Length(2, 250)
   middleName: string;
@@ -18,6 +32,7 @@ export class CreateAppealDto {
   email: string;
 
   @IsOptional()
+  @ValidateIf((e) => e !== "")
   @IsString()
   @Length(2, 250)
   extraContacts: string;

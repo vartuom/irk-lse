@@ -11,7 +11,6 @@ export default class AppealDocxCreator {
     static init(): AppealDocxCreator {
         if (!AppealDocxCreator.instance) {
             this.instance = new this();
-            console.log("AppealDocxCreater Singleton created!");
         }
         return this.instance;
     }

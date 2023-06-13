@@ -45,8 +45,8 @@ function Appeals({ isProcessed }: { isProcessed?: boolean }) {
                     startDate: filterOptions.fromDate
                         ? filterOptions.fromDate.valueOf()
                         : "",
-                    endDate: filterOptions.fromDate
-                        ? filterOptions.fromDate.valueOf()
+                    toDate: filterOptions.toDate
+                        ? filterOptions.toDate.valueOf()
                         : "",
                 },
                 "/appeals"

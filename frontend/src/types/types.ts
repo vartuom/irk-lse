@@ -32,7 +32,7 @@ export interface IGetAppealsQueryOpts {
 export interface IFilterOptions {
     name: string;
     email: string;
-    fromDate: moment.Moment | null;
-    toDate: moment.Moment | null;
+    fromDate: number | null;
+    toDate: number | null;
     sortOrder: "DATE_UPDATED" | "DATE_CREATED";
 }
