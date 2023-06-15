@@ -1,0 +1,56 @@
+@use "../../utils/mixins";
+.container {
+    height: 100vh;
+    background-color: var(--bg-color-space-around);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formContainer {
+    position: relative;
+    overflow: hidden;
+    padding: 100px 0 0 100px;
+    height: 600px;
+    width: 1000px;
+    background-color: #fff;
+    border-radius: 16px;
+    @include mixins.desktop-small {
+        padding: 64px 0 0 64px;
+        width: 800px;
+        height: 500px;
+    }
+
+    @include mixins.tablets {
+        padding: 0;
+        width: 450px;
+        height: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @include mixins.phones {
+        width: 350px;
+        height: 500px;
+    }
+}
+
+.logo {
+    opacity: 0.5;
+    width: 717px;
+    height: 687px;
+    position: absolute;
+    left: 600px;
+    top: 15px;
+    @include mixins.desktop-small {
+        left: 550px;
+        top: 25px;
+        width: 550px;
+        height: 550px;
+    }
+
+    @include mixins.tablets {
+        display: none;
+    }
+}

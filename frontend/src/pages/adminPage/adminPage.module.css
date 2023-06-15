@@ -1,0 +1,116 @@
+.appeals__tabs {
+  position: absolute;
+  top: -48px;
+  display: flex;
+  gap: 52px;
+  padding: 8px 42px;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0 -0.25px 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
+  border-radius: 99px;
+  height: 70px;
+  width: 572px;
+  color: var(--text-color-primary);
+}
+.appeals__tabs * {
+  z-index: 2;
+}
+@media screen and (max-width: 1280px) {
+  .appeals__tabs {
+    top: -36px;
+    left: 12px;
+    height: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .appeals__tabs {
+    top: 24px;
+    left: -16px;
+    height: 50px;
+    width: 340px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .appeals__tabs {
+    width: 300px;
+    top: 24px;
+    left: -12px;
+    height: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .appeals {
+    margin-top: 80px;
+  }
+}
+
+.tab {
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 260px;
+  height: 54px;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: color 0.15s ease-in-out;
+  text-decoration: none;
+  color: inherit;
+  font: 18px/1.5 var(--font-golos-demibold);
+}
+@media screen and (max-width: 480px) {
+  .tab {
+    font: 16px/1.5 var(--font-golos-demibold);
+  }
+}
+
+.active {
+  color: #185ee0;
+}
+
+.active_unprocessed ~ .glider {
+  transform: translateX(0);
+}
+
+.active_processed ~ .glider {
+  transform: translateX(310px);
+}
+@media screen and (max-width: 768px) {
+  .active_processed ~ .glider {
+    transform: translate(195px);
+  }
+}
+@media screen and (max-width: 480px) {
+  .active_processed ~ .glider {
+    transform: translate(180px);
+  }
+}
+
+.glider {
+  position: absolute;
+  left: 27px;
+  display: flex;
+  height: 54px;
+  width: 290px;
+  z-index: 2;
+  border-radius: 99px;
+  transition: 0.25s ease-out;
+  background-color: #e6eef9;
+}
+@media screen and (max-width: 1280px) {
+  .glider {
+    height: 44px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .glider {
+    left: 18px;
+    width: 200px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .glider {
+    left: 26px;
+    width: 165px;
+  }
+}

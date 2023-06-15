@@ -1,0 +1,90 @@
+@use "../../utils/mixins";
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 800px;
+  margin: 0 auto;
+  box-sizing: content-box;
+  padding: 36px;
+  @include mixins.desktop-small {
+    width: 500px;
+  }
+
+  @include mixins.tablets {
+    padding: 0px 36px 36px 36px;
+    width: 300px;
+  }
+
+  @include mixins.phones {
+    width: 240px;
+  }
+}
+
+.button {
+  width: 100%;
+  min-height: 60px;
+  font: 18px/1.5 var(--font-golos-regular);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--opacity-transition);
+  &_type {
+    &_primary {
+      color: var(--text-color-secondary);
+      background: var(--bg-color-secondary);
+    }
+    &_secondary {
+      background: none;
+      border: 2px solid var(--bg-color-secondary);
+    }
+    &_inactive {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+  }
+  &__loader {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+  }
+  &:hover {
+    opacity: var(--hover-opacity);
+  }
+}
+
+.lead {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  &_title {
+    margin: 0;
+    font: 22px/1.5 var(--font-golos-bold);
+    @include mixins.phones {
+      font: 18px/1.4 var(--font-golos-bold);
+    }
+  }
+  &_paragraph {
+    margin: 0;
+    font: 18px/1.5 var(--font-golos-regular);
+
+    @include mixins.phones {
+      font: 16px/1.4 var(--font-golos-regular);
+    }
+  }
+}
+
+.formLabel {
+  margin: 0;
+  font: 18px/1.5 var(--font-golos-regular);
+  @include mixins.phones {
+    font: 16px/1.5 var(--font-golos-regular);
+  }
+}
+
+@include mixins.phones {
+  .MuiTextField-root {
+    font: 16px/1.5 var(--font-golos-regular);
+  }
+}

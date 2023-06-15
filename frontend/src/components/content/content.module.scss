@@ -1,0 +1,47 @@
+@use "../../utils/mixins";
+.main {
+    width: 100%;
+    background-color: var(--bg-color-space-around);
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 1280px;
+    border-radius: 12px;
+    position: relative;
+    margin: -112px 0;
+    background-color: var(--bg-color-primary);
+    padding: 44px;
+    box-sizing: border-box;
+    z-index: 2;
+
+    @media print {
+        margin: 0 0;
+    }
+
+    @include mixins.desktop-small {
+        width: 768px;
+    }
+
+    @media screen and (max-width: 720px) {
+        margin: 0 0;
+        border-radius: 0;
+    }
+
+    @include mixins.tablets {
+        width: 480px;
+    }
+
+    @include mixins.phones {
+        width: 360px;
+    }
+}
+
+.container.historyContainer {
+    border-radius: 12px;
+}
+
+.historyPageOverride {
+    background-color: var(--bg-color-secondary);
+}

@@ -1,0 +1,46 @@
+@use "../../utils/mixins";
+.accordion__row {
+  width: 100%;
+  padding: 12px 0;
+  border-top: 2px solid var(--bg-color-space-around);
+  &_border {
+    &_bottom {
+      border-bottom: 2px solid var(--bg-color-space-around);
+    }
+    &_none {
+      border: none;
+    }
+  }
+}
+
+.accordion__title {
+  width: 100%;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 24px;
+  align-items: center;
+  gap: 12px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font: 18px/1.5 var(--font-golos-regular);
+  color: #0061d9;
+}
+
+.accordion__content {
+  padding-top: 12px;
+}
+
+.accordion__arrow_opened {
+  transform: rotate(180deg);
+}
+
+.accordion__arrow {
+  text-align: center;
+  font-size: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition-duration: 0.1s;
+  transition-property: transform;
+}

@@ -1,0 +1,78 @@
+.container {
+  height: 100%;
+  width: 400px;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 24px;
+}
+@media screen and (max-width: 768px) {
+  .container {
+    justify-content: center;
+    width: 350px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .container {
+    width: 280px;
+  }
+}
+
+.text {
+  margin-top: 0;
+  font: 24px/1.4 var(--font-golos-regular);
+  text-align: center;
+}
+@media screen and (max-width: 480px) {
+  .text {
+    font: 20px/1.4 var(--font-golos-regular);
+  }
+}
+
+.inputs__wrapper {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 32px;
+}
+@media screen and (max-width: 768px) {
+  .inputs__wrapper {
+    gap: 24px;
+  }
+}
+
+.button {
+  width: 100%;
+  min-height: 60px;
+  font: 18px/1.5 var(--font-golos-regular);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--opacity-transition);
+}
+.button_type_primary {
+  color: var(--text-color-secondary);
+  background: var(--bg-color-secondary);
+}
+.button_type_secondary {
+  background: none;
+  border: 2px solid var(--bg-color-secondary);
+}
+.button_type_inactive {
+  opacity: 0.3;
+  pointer-events: none;
+}
+.button__loader {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+.button:hover {
+  opacity: var(--hover-opacity);
+}
+
+.registerLink {
+  margin-bottom: 48px;
+  color: var(--bg-color-blue-accent);
+  font: 18px/1.2 var(--font-golos-regular);
+}

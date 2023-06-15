@@ -1,0 +1,81 @@
+@use "../../utils/_mixins.scss";
+.button {
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    height: 64px;
+    padding: 0 24px;
+    font: 18px/1.5 var(--font-golos-demibold);
+
+    &_type {
+        &_primary {
+            color: var(--text-color-secondary);
+            background: var(--bg-color-secondary);
+        }
+        &_secondary {
+            color: var(--text-color-primary);
+            background: none;
+            border: 1px solid var(--bg-color-secondary);
+        }
+        &_inactive {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+    }
+
+    &:hover {
+        opacity: var(--hover-opacity);
+    }
+}
+
+.filter {
+    padding: 24px 32px;
+    margin-top: 24px;
+    display: grid;
+    gap: 36px;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 0 -0.25px 1px 0 rgba(#185ee0, 0.15), 0 6px 12px 0 rgba(#185ee0, 0.15);
+    @include mixins.desktop-small {
+        grid-template-columns: 1fr;
+    }
+
+    @include mixins.tablets {
+        gap: 16px;
+    }
+}
+
+.printAll {
+    width: 400px;
+    grid-row: 3;
+    grid-column: 1/3;
+    justify-self: end;
+    @include mixins.desktop-small {
+        grid-column: 1/2;
+        grid-row: 5;
+        justify-self: center;
+    }
+    @include mixins.tablets {
+        width: 100%;
+    }
+}
+
+.datePickers {
+    justify-self: end;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+
+    @include mixins.tablets {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 100%;
+    }
+}
+
+.search {
+    &__email {
+    }
+}

@@ -1,0 +1,75 @@
+@use "../../utils/mixins";
+.container {
+    height: 100%;
+    width: 400px;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 24px;
+    @include mixins.tablets {
+        justify-content: center;
+        width: 350px;
+    }
+
+    @include mixins.phones {
+        width: 280px;
+    }
+}
+
+.text {
+    margin-top: 0;
+    font: 24px/1.4 var(--font-golos-regular);
+    text-align: center;
+
+    @include mixins.phones {
+        font: 20px/1.4 var(--font-golos-regular);
+    }
+}
+
+.inputs__wrapper {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 32px;
+    @include mixins.tablets {
+        gap: 24px;
+    }
+}
+
+.button {
+    width: 100%;
+    min-height: 60px;
+    font: 18px/1.5 var(--font-golos-regular);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--opacity-transition);
+    &_type {
+        &_primary {
+            color: var(--text-color-secondary);
+            background: var(--bg-color-secondary);
+        }
+        &_secondary {
+            background: none;
+            border: 2px solid var(--bg-color-secondary);
+        }
+        &_inactive {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+    }
+    &__loader {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+    }
+    &:hover {
+        opacity: var(--hover-opacity);
+    }
+}
+
+.registerLink {
+    margin-bottom: 48px;
+    color: var(--bg-color-blue-accent);
+    font: 18px/1.2 var(--font-golos-regular);
+}

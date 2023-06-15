@@ -1,0 +1,41 @@
+@use "../../utils/mixins";
+.wrapper {
+    background-color: var(--bg-color-primary);
+    font: 18px/1.5 var(--font-golos-regular);
+    color: var(--bg-color-secondary);
+    @include mixins.tablets {
+        width: 410px;
+        font: 14px/1.5 var(--font-golos-regular);
+    }
+
+    @include mixins.phones {
+        width: 300px;
+        font: 14px/1.5 var(--font-golos-regular);
+        margin-left: -14px;
+    }
+}
+
+.title {
+    font: 18px/1.5 var(--font-golos-bold);
+    display: grid;
+    grid-template-columns: 0.4fr repeat(3, 0.2fr);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    text-align: center;
+    @include mixins.tablets {
+        grid-template-columns: repeat(3, 1fr);
+        font: 14px/1.4 var(--font-golos-bold);
+        padding-bottom: 4px;
+    }
+}
+
+.leadColumn {
+    text-align: left;
+    justify-self: center;
+    @include mixins.tablets {
+        padding-bottom: 8px;
+        grid-column: 1/-1;
+    }
+}

@@ -1,0 +1,31 @@
+@use "./media";
+
+@mixin desktop {
+    @media screen and (min-width: media.$desktop) {
+        @content;
+    }
+}
+
+@mixin desktop-small {
+    @media screen and (max-width: media.$desktop-small) {
+        @content;
+    }
+}
+
+@mixin tablets {
+    @media screen and (max-width: media.$tablets) {
+        @content;
+    }
+}
+
+@mixin phones {
+    @media screen and (max-width: media.$phones) {
+        @content;
+    }
+}
+
+@mixin phones-small {
+    @media screen and (max-width: media.$phones-small) {
+        @content;
+    }
+}
