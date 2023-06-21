@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import styles from "./mainPage.module.css";
-import AppAccordion from "../../components/appAccordion/appAccordion";
 import AccordionRow from "../../components/accordionRow/accordionRow";
 
 function MainPage() {
@@ -224,13 +223,19 @@ function MainPage() {
                             ответ о возможности и сроках производства
                             интересующего Вас исследования. Сделать это можно
                             заполнив{" "}
-                            <span className="spanAccent">
+                            <Link
+                                to="/home/appeals"
+                                className={styles.spanAccent}
+                            >
                                 форму обращений граждан &#8594;
-                            </span>{" "}
+                            </Link>{" "}
                             на нашем сайте или отправив нам письмо с запросом по{" "}
-                            <span className="spanAccent">
+                            <Link
+                                to="/home/contacts"
+                                className={styles.spanAccent}
+                            >
                                 электронной почте &#8594;
-                            </span>
+                            </Link>
                             .
                         </p>
                         <p className={styles.section__paragraph}>
@@ -241,9 +246,12 @@ function MainPage() {
                             перед обращением к нам, мы рекомендуем Вам более
                             подробно изучить его особенности. В разделе справки
                             как раз есть{" "}
-                            <span className="spanAccent">
+                            <Link
+                                to="/home/cards"
+                                className={styles.spanAccent}
+                            >
                                 карточка, посвященная этому вопросу &#8594;
-                            </span>
+                            </Link>
                             . Если вы уверены, что экспертное исследование Вам
                             подходит, то{" "}
                             <span className="spanAccent">
@@ -259,22 +267,31 @@ function MainPage() {
                             Мы подготовили справочные карточки по наиболее часто
                             задаваемым вопросам, ознакомится с ними вы можете в
                             разделе{" "}
-                            <span className="spanAccent">
+                            <Link
+                                to="/home/cards"
+                                className={styles.spanAccent}
+                            >
                                 деятельность &#8594;{" "}
-                            </span>
+                            </Link>
                         </p>
                         <p className={styles.section__paragraph}>
                             Если у вас остались вопросы, вы можете заполнить
-                            <span className="spanAccent">
+                            <Link
+                                to="/home/appeals"
+                                className={styles.spanAccent}
+                            >
                                 {" "}
                                 форму обращений граждан &#8594;{" "}
-                            </span>{" "}
+                            </Link>{" "}
                             и получить письменный ответ. Кроме того, эксперты
                             лаборатории проводят устные консультации по
                             телефонам, указным в разделе{" "}
-                            <span className="spanAccent">
+                            <Link
+                                to="/home/contacts"
+                                className={styles.spanAccent}
+                            >
                                 контактов &#8594;{" "}
-                            </span>
+                            </Link>
                         </p>
                         <p className={styles.section__paragraph}>
                             Если ваш вопрос предполагает ознакомление эксперта с
@@ -302,9 +319,12 @@ function MainPage() {
                         <p className={styles.section__paragraph}>
                             Вопросы определения стоимости и оплаты исследований
                             разобраны в{" "}
-                            <span className="spanAccent">
+                            <Link
+                                to="/home/cards"
+                                className={styles.spanAccent}
+                            >
                                 соответствующих карточках &#8594;
-                            </span>{" "}
+                            </Link>{" "}
                             раздела справки. Сроки производства исследований
                             определяются текущей загруженностью экспертов.
                         </p>
@@ -323,33 +343,45 @@ function MainPage() {
                         <p className={styles.section__paragraph}>
                             Полный перечень имеющихся в лаборатории экспертных
                             специальностей и проводимых исследований приведен в
-                            <span className="spanAccent">
+                            <Link
+                                to="/home/prices"
+                                className={styles.spanAccent}
+                            >
                                 {" "}
                                 прейскуранте &#8594;
-                            </span>
+                            </Link>
                             .
                         </p>
                         <p className={styles.section__paragraph}>
                             А по самым популярным направлениям, мы подготовили
                             справочные карточки и памятки в разделе справки:{" "}
-                            <span className="spanAccent">почерковедение</span>,{" "}
-                            <span className="spanAccent">
+                            <Link
+                                to="/home/cards/handwriting"
+                                className={styles.spanAccent}
+                            >
+                                почерковедение
+                            </Link>
+                            ,{" "}
+                            <span className={styles.spanAccent}>
                                 определение давности документов
                             </span>
                             ,{" "}
-                            <span className="spanAccent">
+                            <Link
+                                to="/home/cards/auto"
+                                className={styles.spanAccent}
+                            >
                                 обстоятельства ДТП и восстановительный ремонт
-                            </span>
+                            </Link>
                             ,{" "}
-                            <span className="spanAccent">
+                            <span className={styles.spanAccent}>
                                 оценка стоимости непродовольственных товаров
                             </span>
                             ,{" "}
-                            <span className="spanAccent">
+                            <span className={styles.spanAccent}>
                                 оценочные экспертизы в нотариальных целях
                             </span>
                             ,{" "}
-                            <span className="spanAccent">
+                            <span className={styles.spanAccent}>
                                 строительные экспертизы и оценка недвижимости
                             </span>
                             .
