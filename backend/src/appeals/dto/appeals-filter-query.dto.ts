@@ -1,4 +1,4 @@
-import { Type } from "class-transformer";
+import { Transform, Type } from "class-transformer";
 import {
   IsBoolean,
   IsEmail,
@@ -8,26 +8,37 @@ import {
 } from "class-validator";
 
 export class AppealFilterQueryDto {
-  @Type(() => Boolean)
+  @Transform(({ value }) => {
+    if (typeof value === "string") {
+      return value === "true";
+    }
+    return value;
+  })
   @IsBoolean()
   isProcessed: boolean;
 
+  @Type(() => Number)
   @IsOptional()
   @IsNumber()
-  @Type(() => Number)
   page?: number;
 
   @IsOptional()
   @IsString()
-  @IsEmail()
   email?: string;
 
   @IsOptional()
   @IsString()
   name?: string;
 
+  @Type(() => Number)
+  @IsOptional()
+  @IsNumber()
   startDate?: number;
-  endDate?: number;
+
+  @Type(() => Number)
+  @IsOptional()
+  @IsNumber()
+  toDate?: number;
 
   @IsOptional()
   @IsString()

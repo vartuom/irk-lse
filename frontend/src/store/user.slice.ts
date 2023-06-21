@@ -79,9 +79,8 @@ const userSlice = createSlice({
                 state.isLoggedIn = true;
                 state.user.name = action.payload.user.name;
                 /* state.user.accessToken = action.payload.accessToken; */
-                // ъуъа как же стремно с localstorage
                 setAccessToken(action.payload.accessToken);
-                localStorage.setItem("accessToken", action.payload.accessToken);
+                /* localStorage.setItem("accessToken", action.payload.accessToken); */
             });
     },
 });

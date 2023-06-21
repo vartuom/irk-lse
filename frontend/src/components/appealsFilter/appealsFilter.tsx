@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { SearchOutlined, SortOutlined } from "@mui/icons-material";
-import { InputAdornment, MenuItem, TextField } from "@mui/material";
+import { InputAdornment, MenuItem } from "@mui/material";
 import moment from "moment";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,7 +10,6 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { ruRU } from "@mui/x-date-pickers/locales";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import style from "./appealsFilter.module.css";
-import { useAppDispatch, useAppSelector } from "../../store/store";
 import ResponsiveTextField from "../responsiveTextField/responsiveTextField";
 import { IFilterOptions } from "../../types/types";
 
@@ -26,6 +25,14 @@ interface IAppealsFilterProps {
     generateAllAppeals: () => void;
     filterOptions: IFilterOptions;
     setFilterOptions: (options: IFilterOptions) => void;
+}
+
+interface IAppealFilterData {
+    name: string;
+    email: string;
+    sortOrder: "DATE_UPDATED" | "DATE_CREATED";
+    fromDate: moment.Moment | null;
+    toDate: moment.Moment | null;
 }
 
 function AppealsFilter({
@@ -46,7 +53,7 @@ function AppealsFilter({
         handleSubmit,
         formState: { errors, isValid },
         watch,
-    } = useForm({
+    } = useForm<IAppealFilterData>({
         defaultValues: {
             name: filterOptions.name,
             email: filterOptions.email,
@@ -66,12 +73,11 @@ function AppealsFilter({
         })
     }, [watch])
  */
-    const onSubmit = (data: any) => {
-        console.log(data);
+    const onSubmit = (data: IAppealFilterData) => {
         setFilterOptions({
             ...data,
-            toDate: data.toDate,
-            fromDate: data.fromDate,
+            toDate: data.toDate ? data.toDate.valueOf() : null,
+            fromDate: data.fromDate ? data.fromDate.valueOf() : null,
         });
     };
 
