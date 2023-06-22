@@ -259,3 +259,14 @@ button:hover {
     background-image: url(../../images/russia-colored.svg);
     background-size: contain;
 }
+
+.spanAccent {
+    text-decoration: none;
+    display: inline;
+    &:visited {
+        color: var(--text-color-accent);
+    }
+    &:hover {
+        text-decoration: underline;
+    }
+}
