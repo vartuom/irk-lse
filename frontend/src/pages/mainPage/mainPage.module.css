@@ -189,6 +189,9 @@
   cursor: pointer;
   transition: var(--opacity-transition);
 }
+.button:hover {
+  opacity: var(--hover-opacity);
+}
 @media screen and (max-width: 1280px) {
   .button {
     min-width: 170px;
@@ -211,19 +214,6 @@
     height: 50px;
     font: 16px/1.5 var(--font-golos-regular);
   }
-}
-
-button:hover {
-  opacity: var(--hover-opacity);
-}
-
-.button_accent {
-  color: var(--text-color-primary);
-  background-color: var(--bg-color-primary);
-}
-
-button:hover {
-  opacity: var(--hover-opacity);
 }
 
 .button_accent {
@@ -286,3 +276,16 @@ button:hover {
 .spanAccent:hover {
   text-decoration: underline;
 }
+
+.link {
+  text-decoration: none;
+  display: inline;
+}
+.link:visited {
+  color: var(--text-color-accent);
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+/*# sourceMappingURL=mainPage.module.css.map */
