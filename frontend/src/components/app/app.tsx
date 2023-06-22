@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { Navigate } from "react-router";
 import Layout from "../layout/layout";
@@ -14,11 +14,12 @@ import AppealsPage from "../../pages/appealsPage/appealsPage";
 import AppealDetails from "../appealDetails/appealDetails";
 import { resetForm } from "../../store/appealForm.slice";
 import { useAppDispatch } from "../../store/store";
-import AdminPage from "../../pages/adminPage/adminPage";
-import PrintAppeal from "../printAppeal/PrintAppeal";
 import ProtectedRoutes from "../protectedRoutes/protectedRoutes";
 import AuthPage from "../../pages/authPage/authPage";
 import LoginForm from "../loginForm/loginForm";
+
+const AdminPage = lazy(() => import("../../pages/adminPage/adminPage"));
+const PrintAppeal = lazy(() => import("../printAppeal/PrintAppeal"));
 
 function App() {
     const location = useLocation();
@@ -47,10 +48,21 @@ function App() {
                     <Route path="history" element={<HistoryPage />} />
                     {/* Protected Route */}
                     <Route element={<ProtectedRoutes />}>
-                        <Route path="admin/*" element={<AdminPage />} />
+                        <Route
+                            path="admin/*"
+                            element={
+                                <Suspense fallback={<p>Загрузка...</p>}>
+                                    <AdminPage />
+                                </Suspense>
+                            }
+                        />
                         <Route
                             path="printAppeal/:id"
-                            element={<PrintAppeal />}
+                            element={
+                                <Suspense fallback={<p>Загрузка...</p>}>
+                                    <PrintAppeal />
+                                </Suspense>
+                            }
                         />
                     </Route>
                 </Route>
