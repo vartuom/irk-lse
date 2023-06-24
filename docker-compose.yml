@@ -12,7 +12,7 @@ services:
     image: postgres:12-alpine
     env_file:
       - .env
-    container_name: irklse-database
+    container_name: irlse-database
     volumes:
       - database:/var/lib/postgresql/data
     networks:
@@ -29,7 +29,7 @@ services:
       - .env
     depends_on:
       - database
-    container_name: irklse-backend
+    container_name: irlse-backend
     networks:
       - db-network
       - http-network
@@ -43,7 +43,7 @@ services:
     image: frontend
     depends_on:
       - backend
-    container_name: irklse-frontend
+    container_name: irlse-frontend
     networks:
       - http-network
     ports:
