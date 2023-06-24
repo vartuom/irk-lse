@@ -12,7 +12,7 @@ services:
     image: postgres:12-alpine
     env_file:
       - .env
-    container_name: kupipodariday-database
+    container_name: irklse-database
     volumes:
       - database:/var/lib/postgresql/data
     networks:
@@ -29,12 +29,12 @@ services:
       - .env
     depends_on:
       - database
-    container_name: kupipodariday-backend
+    container_name: irklse-backend
     networks:
       - db-network
       - http-network
     ports:
-      - '4000:3000'
+      - '3000:3000'
     restart: on-failure
   frontend:
     build:
@@ -43,10 +43,10 @@ services:
     image: frontend
     depends_on:
       - backend
-    container_name: kupipodariday-frontend
+    container_name: irklse-frontend
     networks:
       - http-network
     ports:
-      - '8081:80'
+      - '80:80'
     restart: on-failure
 
