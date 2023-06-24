@@ -47,6 +47,12 @@ services:
     networks:
       - http-network
     ports:
-      - '8080:80'
+      - '8081:80'
     restart: on-failure
+  adminer:
+    image: adminer
+    ports:
+      - '8888:8080'
+    networks:
+      - db-network
 
