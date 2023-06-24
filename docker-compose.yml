@@ -10,8 +10,6 @@ volumes:
 services:
   database:
     image: postgres:12-alpine
-    env_file:
-      - .env
     container_name: irlse-database
     volumes:
       - database:/var/lib/postgresql/data
@@ -20,13 +18,23 @@ services:
     ports:
       - '5432:5432'
     restart: on-failure
+    environment:
+      POSTGRES_HOST: irlse-database
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: demoAdm
+      POSTGRES_PASSWORD: demoPass
+      POSTGRES_DB: irlse
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     image: backend
-    env_file:
-      - .env
+    environment:
+      PORT: 3000
+      JWT_SECRET: demo1
+      JWT_REFRESH_SECRET: demo2
+      JWT_EXPIRESIN: 1d
+      DATABASE_URL: postgresql://demoAdm:demoPass@irlse-database/irlse?schema=public
     depends_on:
       - database
     container_name: irlse-backend
@@ -55,4 +63,5 @@ services:
       - '8888:8080'
     networks:
       - db-network
+      - http-network
 
