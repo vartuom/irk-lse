@@ -58,6 +58,20 @@
   }
 }
 
+.vacancies {
+  padding-left: 24px;
+  font: 18px/1.5 var(--font-golos-regular);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 440px;
+}
+@media screen and (max-width: 768px) {
+  .vacancies {
+    font: 16px/1.5 var(--font-golos-regular);
+  }
+}
+
 .contacts__title {
   margin: 0;
   font: 24px/1.5 var(--font-golos-regular);
@@ -99,6 +113,14 @@
 
 .contacts__number:last-child {
   border-bottom: #cecece 1px solid;
+}
+
+.bankReq {
+  font: 14px/1.5 var(--font-golos-regular);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 440px;
 }
 
 .map {

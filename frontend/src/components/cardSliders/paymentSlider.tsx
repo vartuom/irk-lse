@@ -1,23 +1,16 @@
 import React from "react";
 import { Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import LooksOneRoundedIcon from "@mui/icons-material/LooksOneRounded";
-import Looks3RoundedIcon from "@mui/icons-material/Looks3Rounded";
+import {
+    Filter1Rounded,
+    Filter2Rounded,
+    Filter3Rounded,
+} from "@mui/icons-material";
 import s from "./cardSlider.module.css";
 
 function PaymentSlider() {
     return (
         <div>
-            {/* <h2 className={s.swiper__title}>В первую очередь</h2>
-            <div className={s.swiper__nav}>
-                <div>
-                    <ArrowBackRoundedIcon sx={{ fontSize: 48, opacity: 0.5 }} />
-                </div>
-                <div className={s.swiperLink}>
-                    <p className={s.arrowText}>Автотехника и ДТП</p>
-                    <ArrowForwardRoundedIcon sx={{ fontSize: 48 }} />
-                </div>
-            </div> */}
             <Swiper
                 slidesPerView="auto"
                 spaceBetween={8}
@@ -31,8 +24,8 @@ function PaymentSlider() {
                         <p className={s.card__type}>Оплата исследований</p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksOneRoundedIcon
-                                    sx={{ fontSize: "60px", color: "#409E60" }}
+                                <Filter1Rounded
+                                    sx={{ fontSize: "60px", color: "#bb8db9" }}
                                 />
                                 <h3 className={s.card__heading}>
                                     Вопросы оплаты исследований
@@ -67,8 +60,8 @@ function PaymentSlider() {
                         <p className={s.card__type}>Оплата исследований</p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksOneRoundedIcon
-                                    sx={{ fontSize: "60px", color: "#409E60" }}
+                                <Filter2Rounded
+                                    sx={{ fontSize: "60px", color: "#cc363c" }}
                                 />
                                 <h3 className={s.card__heading}>
                                     Стоимость исследований
@@ -112,8 +105,8 @@ function PaymentSlider() {
                         <p className={s.card__type}>Оплата исследований</p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksOneRoundedIcon
-                                    sx={{ fontSize: "60px", color: "#409E60" }}
+                                <Filter3Rounded
+                                    sx={{ fontSize: "60px", color: "#99dac5" }}
                                 />
                                 <h3 className={s.card__heading}>
                                     Реквизиты и контакты
