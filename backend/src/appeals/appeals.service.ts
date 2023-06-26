@@ -6,11 +6,6 @@ import { Prisma } from "@prisma/client";
 import { UpdateProcessedStatusDto } from "./dto/update-processed-status.dto";
 import { AppealFilterQueryDto } from "./dto/appeals-filter-query.dto";
 
-interface AppealsWhereInputCombineOperators {
-  OR?: Array<Prisma.AppealsWhereInput>;
-  AND?: Array<Prisma.AppealsWhereInput>;
-}
-
 @Injectable()
 export class AppealsService {
   pageAppealAmount: number;
@@ -89,7 +84,7 @@ export class AppealsService {
   async findMany(appealFilterQueryDto: AppealFilterQueryDto) {
     const { name, email, startDate, toDate, page, sort, isProcessed } =
       appealFilterQueryDto;
-    const searchParams: AppealsWhereInputCombineOperators = {
+    const searchParams: any = {
       AND: [{ isProcessed: isProcessed }],
     };
 
@@ -97,7 +92,7 @@ export class AppealsService {
       //оказывается Date.toISOString для даты сформированной из строки
       // с unix форматом ("number") дает ошибку преобразования
       //нужно явное приведение к number
-      const dateRangeOpts: Prisma.DateTimeFilter = {};
+      const dateRangeOpts: any = {};
       if (startDate) {
         dateRangeOpts.gte = new Date(+startDate);
       }
@@ -115,7 +110,7 @@ export class AppealsService {
       });
     }
     if (name) {
-      let appealsORParams: Array<Prisma.AppealsWhereInput> = [];
+      let appealsORParams = [];
       const nameParts = name.split(" ");
       if (nameParts.length > 3)
         throw new BadRequestException(
