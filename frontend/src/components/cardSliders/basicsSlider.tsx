@@ -1,26 +1,18 @@
 import React from "react";
 import { Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import LooksOneRoundedIcon from "@mui/icons-material/LooksOneRounded";
-import LooksTwoRoundedIcon from "@mui/icons-material/LooksTwoRounded";
-import Looks4RoundedIcon from "@mui/icons-material/Looks4Rounded";
-import Looks5RoundedIcon from "@mui/icons-material/Looks5Rounded";
+import {
+    Filter1Rounded,
+    Filter2Rounded,
+    Filter3Rounded,
+    Filter4Rounded,
+} from "@mui/icons-material";
 import s from "./cardSlider.module.css";
 import AccordionRow from "../accordionRow/accordionRow";
 
 function BasicsSlider() {
     return (
         <div>
-            {/* <h2 className={s.swiper__title}>В первую очередь</h2>
-            <div className={s.swiper__nav}>
-                <div>
-                    <ArrowBackRoundedIcon sx={{ fontSize: 48, opacity: 0.5 }} />
-                </div>
-                <div className={s.swiperLink}>
-                    <p className={s.arrowText}>Автотехника и ДТП</p>
-                    <ArrowForwardRoundedIcon sx={{ fontSize: 48 }} />
-                </div>
-            </div> */}
             <Swiper
                 slidesPerView="auto"
                 spaceBetween={8}
@@ -34,7 +26,7 @@ function BasicsSlider() {
                         <p className={s.card__type}>Основные моменты</p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksOneRoundedIcon
+                                <Filter1Rounded
                                     sx={{ fontSize: "60px", color: "#1B89EF" }}
                                 />
                                 <h3 className={s.card__heading}>
@@ -107,7 +99,7 @@ function BasicsSlider() {
                         <p className={s.card__type}>Основные моменты</p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksTwoRoundedIcon
+                                <Filter2Rounded
                                     sx={{ fontSize: "60px", color: "#EF851B" }}
                                 />
                                 <h3 className={s.card__heading}>
@@ -172,7 +164,7 @@ function BasicsSlider() {
                         <p className={s.card__type}>Основные моменты</p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <Looks4RoundedIcon
+                                <Filter3Rounded
                                     sx={{ fontSize: "60px", color: "#9e4046" }}
                                 />
                                 <h3 className={s.card__heading}>
@@ -202,14 +194,8 @@ function BasicsSlider() {
                                 экспертных исследований есть такие же карточки,
                                 которые помогут вам понять специфику
                                 исследований и познакомят вас с типовыми
-                                вопросами. Для вашего удобства мы их собрали вот
-                                тут:
+                                вопросами.
                             </div>
-                            <AccordionRow title="Карточки по направлениям">
-                                <div className={s.card__paragraph}>
-                                    1. Линк на автотехнику и прочее.
-                                </div>
-                            </AccordionRow>
                         </div>
                     </div>
                 </SwiperSlide>
@@ -218,7 +204,7 @@ function BasicsSlider() {
                         <p className={s.card__type}>Основные моменты</p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <Looks5RoundedIcon
+                                <Filter4Rounded
                                     sx={{ fontSize: "60px", color: "#404f9e" }}
                                 />
                                 <h3 className={s.card__heading}>

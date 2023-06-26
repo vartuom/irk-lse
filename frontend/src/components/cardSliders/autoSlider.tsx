@@ -1,23 +1,20 @@
 import React from "react";
 import { Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import LooksOneRoundedIcon from "@mui/icons-material/LooksOneRounded";
-import Looks3RoundedIcon from "@mui/icons-material/Looks3Rounded";
+import {
+    Filter1Rounded,
+    Filter2Rounded,
+    Filter3Rounded,
+    Filter4Rounded,
+    Filter5Rounded,
+    Filter6Rounded,
+    Filter7Rounded,
+} from "@mui/icons-material";
 import s from "./cardSlider.module.css";
 
 function AutoSlider() {
     return (
         <div>
-            {/* <h2 className={s.swiper__title}>В первую очередь</h2>
-            <div className={s.swiper__nav}>
-                <div>
-                    <ArrowBackRoundedIcon sx={{ fontSize: 48, opacity: 0.5 }} />
-                </div>
-                <div className={s.swiperLink}>
-                    <p className={s.arrowText}>Автотехника и ДТП</p>
-                    <ArrowForwardRoundedIcon sx={{ fontSize: 48 }} />
-                </div>
-            </div> */}
             <Swiper
                 slidesPerView="auto"
                 spaceBetween={8}
@@ -33,8 +30,8 @@ function AutoSlider() {
                         </p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksOneRoundedIcon
-                                    sx={{ fontSize: "60px", color: "#409E60" }}
+                                <Filter1Rounded
+                                    sx={{ fontSize: "60px", color: "#80ad17" }}
                                 />
                                 <h3 className={s.card__heading}>
                                     Автотехнические исследования (ч.1)
@@ -86,8 +83,8 @@ function AutoSlider() {
                         </p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksOneRoundedIcon
-                                    sx={{ fontSize: "60px", color: "#409E60" }}
+                                <Filter2Rounded
+                                    sx={{ fontSize: "60px", color: "#2aa4db" }}
                                 />
                                 <h3 className={s.card__heading}>
                                     Автотехнические исследования (ч. 2)
@@ -132,8 +129,8 @@ function AutoSlider() {
                         </p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksOneRoundedIcon
-                                    sx={{ fontSize: "60px", color: "#409E60" }}
+                                <Filter3Rounded
+                                    sx={{ fontSize: "60px", color: "#b62980" }}
                                 />
                                 <h3 className={s.card__heading}>
                                     Как проходит осмотр ТС?
@@ -179,8 +176,8 @@ function AutoSlider() {
                         </p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksOneRoundedIcon
-                                    sx={{ fontSize: "60px", color: "#409E60" }}
+                                <Filter4Rounded
+                                    sx={{ fontSize: "60px", color: "#8138f6" }}
                                 />
                                 <h3 className={s.card__heading}>
                                     Как согласовать осмотр?
@@ -217,7 +214,7 @@ function AutoSlider() {
                         </p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksOneRoundedIcon
+                                <Filter5Rounded
                                     sx={{ fontSize: "60px", color: "#409E60" }}
                                 />
                                 <h3 className={s.card__heading}>
@@ -259,8 +256,8 @@ function AutoSlider() {
                         </p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksOneRoundedIcon
-                                    sx={{ fontSize: "60px", color: "#409E60" }}
+                                <Filter6Rounded
+                                    sx={{ fontSize: "60px", color: "#8138f6" }}
                                 />
                                 <h3 className={s.card__heading}>
                                     А если осматривать нечего?
@@ -300,8 +297,8 @@ function AutoSlider() {
                         </p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksOneRoundedIcon
-                                    sx={{ fontSize: "60px", color: "#409E60" }}
+                                <Filter7Rounded
+                                    sx={{ fontSize: "60px", color: "#1bd3c7" }}
                                 />
                                 <h3 className={s.card__heading}>
                                     А если ремонт уже произведен?

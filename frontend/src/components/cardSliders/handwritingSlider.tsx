@@ -1,23 +1,17 @@
 import React from "react";
 import { Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import LooksOneRoundedIcon from "@mui/icons-material/LooksOneRounded";
-import Looks3RoundedIcon from "@mui/icons-material/Looks3Rounded";
+import {
+    Filter1Rounded,
+    Filter2Rounded,
+    Filter3Rounded,
+    Filter4Rounded,
+} from "@mui/icons-material";
 import s from "./cardSlider.module.css";
 
 function PaymentSlider() {
     return (
         <div>
-            {/* <h2 className={s.swiper__title}>В первую очередь</h2>
-            <div className={s.swiper__nav}>
-                <div>
-                    <ArrowBackRoundedIcon sx={{ fontSize: 48, opacity: 0.5 }} />
-                </div>
-                <div className={s.swiperLink}>
-                    <p className={s.arrowText}>Автотехника и ДТП</p>
-                    <ArrowForwardRoundedIcon sx={{ fontSize: 48 }} />
-                </div>
-            </div> */}
             <Swiper
                 slidesPerView="auto"
                 spaceBetween={8}
@@ -33,8 +27,8 @@ function PaymentSlider() {
                         </p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksOneRoundedIcon
-                                    sx={{ fontSize: "60px", color: "#409E60" }}
+                                <Filter1Rounded
+                                    sx={{ fontSize: "60px", color: "#8889b4" }}
                                 />
                                 <h3 className={s.card__heading}>
                                     Почерковедческие исследования
@@ -85,8 +79,8 @@ function PaymentSlider() {
                         </p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksOneRoundedIcon
-                                    sx={{ fontSize: "60px", color: "#409E60" }}
+                                <Filter2Rounded
+                                    sx={{ fontSize: "60px", color: "#fea89c" }}
                                 />
                                 <h3 className={s.card__heading}>
                                     Образцы в порядке значимости:
@@ -133,7 +127,7 @@ function PaymentSlider() {
                         </p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksOneRoundedIcon
+                                <Filter3Rounded
                                     sx={{ fontSize: "60px", color: "#409E60" }}
                                 />
                                 <h3 className={s.card__heading}>
@@ -175,8 +169,8 @@ function PaymentSlider() {
                         </p>
                         <div className={s.card__content}>
                             <div className={s.card__title}>
-                                <LooksOneRoundedIcon
-                                    sx={{ fontSize: "60px", color: "#409E60" }}
+                                <Filter4Rounded
+                                    sx={{ fontSize: "60px", color: "#9949f0" }}
                                 />
                                 <h3 className={s.card__heading}>
                                     Типовые вопросы (продолжение)
