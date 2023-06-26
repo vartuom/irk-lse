@@ -63,6 +63,9 @@ function HistoryPage() {
                         Текст постановления от 29 сентября 2022 г. № 1720 &quotО
                         дне судебного эксперта&quot.
                     </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
+                    </p>
                 </div>
                 <p className={styles.paragraph}>
                     Дата выбрана не случайно, именно в этот день, 28 июня 1912
@@ -90,6 +93,9 @@ function HistoryPage() {
                         Старый Арсенал - Окружной суд и Судебная палата. г.
                         Санкт-Петербург, 1865 г. Место расположения первого
                         кабинета научно-судебной экспертизы.
+                    </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
                     </p>
                 </div>
                 <p className={styles.paragraph}>
@@ -120,6 +126,9 @@ function HistoryPage() {
                         28 июня 1912 г. «Об учреждении кабинета научно-судебной
                         экспертизы».
                     </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
+                    </p>
                 </div>
                 <p className={styles.paragraph}>
                     Необходимость появления специальных криминалистических
@@ -145,6 +154,9 @@ function HistoryPage() {
                     <p className={styles.illustration__caption}>
                         Дактилоскопическая карта Гершеля, 1859-1860 г.
                     </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
+                    </p>
                 </div>
                 <p className={styles.paragraph}>
                     При этом, накопленные криминалистические знания не были
@@ -168,6 +180,9 @@ function HistoryPage() {
                     <p className={styles.illustration__caption}>
                         Ганс Гросс. Руководство для судебных следователей как
                         система криминалистики. 1908 г.
+                    </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
                     </p>
                 </div>
                 <p className={styles.paragraph}>
@@ -232,6 +247,9 @@ function HistoryPage() {
                         Первый пункт закона от 28 июня 1912 г. «Об учреждении
                         кабинета научно-судебной экспертизы».
                     </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
+                    </p>
                 </div>
                 <p className={styles.paragraph}>
                     Основное содержание принятых законов:
@@ -287,6 +305,9 @@ function HistoryPage() {
                         закону от 28 июня 1912 г. «Об учреждении кабинета
                         научно-судебной экспертизы».
                     </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
+                    </p>
                 </div>
                 <p className={styles.paragraph}>
                     Квалифицированные сотрудники и новейшее по тому времени
@@ -329,6 +350,9 @@ function HistoryPage() {
                         Обгорелый остов здания Окружного суда простоял до конца
                         1920-х годов, был снесен, а на его месте в начале 1930-х
                         построили «Большой дом».
+                    </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
                     </p>
                 </div>
                 <p className={styles.paragraph}>
@@ -380,6 +404,9 @@ function HistoryPage() {
                     <p className={styles.illustration__caption}>
                         Портрет Герберта Юлиановича Манса.
                     </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
+                    </p>
                 </div>
                 <p className={styles.paragraph}>
                     Г. Ю. Маннс родился 1 ноября 1884 г. в г. Вендеме (Цесис)
@@ -419,6 +446,9 @@ function HistoryPage() {
                         «Конгресс криминалистов» за достижения в области
                         криминалистики.
                     </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
+                    </p>
                 </div>
                 <p className={styles.paragraph}>
                     Современный облик системы судебно-экспертных учреждений
@@ -444,6 +474,9 @@ function HistoryPage() {
                         Федеральное бюджетное учреждение Северо-Западный
                         региональный центр судебной экспертизы находится по
                         адресу: г. Санкт-Петербург, ул. Некрасова, 8.
+                    </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
                     </p>
                 </div>
                 <p className={styles.paragraph}>
@@ -489,6 +522,9 @@ function HistoryPage() {
                         центр судебной экспертизы находится по адресу: г.
                         Москва, Большой Спасоглинищевский переулок, 4.
                     </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
+                    </p>
                 </div>
                 <p className={styles.paragraph}>
                     Иркутская научно-исследовательская лаборатория судебной
@@ -517,6 +553,9 @@ function HistoryPage() {
                         научно-исследовательской криминалистической лаборатории
                         ПОПОВА Валентина Андреевича.
                     </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
+                    </p>
                 </div>
                 <p className={styles.paragraph}>
                     25 июля 1956 г. первым экспертом в лабораторию был принят
@@ -537,6 +576,9 @@ function HistoryPage() {
                     <p className={styles.illustration__caption}>
                         Общее фото. Первые эксперты иркутской лаборатории.
                         Сверху вниз, слева на право:
+                    </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
                     </p>
                 </div>
                 <p className={styles.paragraph}>
@@ -572,6 +614,9 @@ function HistoryPage() {
                         Первый эксперт Иркутской лаборатории - Михаил Иванович
                         Сидоров за работой.
                     </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
+                    </p>
                 </div>
                 <p className={styles.paragraph}>
                     В 1958 году штат лаборатории пополнился новыми экспертами:
@@ -591,6 +636,9 @@ function HistoryPage() {
                     <p className={styles.illustration__caption}>
                         Эксперты лаборатории, 70-е годы. Верхний ряд слева
                         направо: .... .
+                    </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
                     </p>
                 </div>
                 <div className={styles.illustration}>
@@ -665,6 +713,9 @@ function HistoryPage() {
                     <p className={styles.illustration__caption}>
                         Бережнова Галина Филипповна за своим рабочим столом.
                     </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
+                    </p>
                 </div>
                 <p className={styles.paragraph}>
                     По сути дела, все сотрудники лаборатории — это ученые,
@@ -717,6 +768,9 @@ function HistoryPage() {
                     </Zoom>
                     <p className={styles.illustration__caption}>
                         Лунева Вера Михайловна за работой.
+                    </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
                     </p>
                 </div>
                 <p className={styles.paragraph}>
@@ -774,6 +828,9 @@ function HistoryPage() {
                     <p className={styles.illustration__caption}>
                         Акварель «Вид Крестовоздвиженской церкви в Иркутске». П.
                         Пежемский.
+                    </p>
+                    <p className={styles.illustration__source}>
+                        Источник: какой-нибудь источник 26.06.2023
                     </p>
                 </div>
                 <p className={styles.paragraph}>
