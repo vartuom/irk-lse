@@ -23,7 +23,7 @@ export class CreateAppealDto {
    */
 
   @IsOptional()
-  @ValidateIf((e) => e !== "")
+  @ValidateIf((e) => e.middleName !== "")
   @IsString()
   @Length(2, 250)
   middleName: string;
@@ -32,7 +32,7 @@ export class CreateAppealDto {
   email: string;
 
   @IsOptional()
-  @ValidateIf((e) => e !== "")
+  @ValidateIf((e) => e.extraContacts !== "")
   @IsString()
   @Length(2, 250)
   extraContacts: string;

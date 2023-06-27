@@ -109,14 +109,14 @@ export default function Appeal({
                     >
                         {isProcessed ? "Вернуть" : "В обработанные"}
                     </button>
-                    <button
+                    {/* <button
                         className={`${style.appeal__button} ${
                             style.appeal__button_type_primary
                         } ${isFetching && style.appeal__button_type_inactive}`}
                         type="button"
                     >
                         Дать ответ
-                    </button>
+                    </button> */}
                     <button
                         onClick={() => {
                             saveDocx();
