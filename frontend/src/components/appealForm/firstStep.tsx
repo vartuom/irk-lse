@@ -68,14 +68,14 @@ function FirstStep() {
 
     useEffect(() => {
         const subscription = watch((value) => {
-            console.log(value);
+            // console.log(value);
             dispatch(setFirstStep(value as IFirstStep));
         });
         return () => subscription.unsubscribe();
     }, [watch, dispatch]);
 
     const onSubmit: SubmitHandler<IFirstStep> = (data) => {
-        console.log(data);
+        // console.log(data);
         navigate("stepTwo", { state: "noScroll" });
     };
 

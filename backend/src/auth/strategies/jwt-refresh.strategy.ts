@@ -26,7 +26,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
         if (request && request.cookies && request.cookies["refreshToken"]) {
           token = request.cookies["refreshToken"];
         }
-        console.log(token);
+        // console.log(token);
         return token;
       },
       passReqToCallback: true,

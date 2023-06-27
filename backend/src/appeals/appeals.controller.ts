@@ -35,7 +35,7 @@ export class AppealsController {
     appealFilterQueryDto: AppealFilterQueryDto,
   ) {
     //поправить потом
-    console.log(appealFilterQueryDto);
+    //console.log(appealFilterQueryDto);
     return this.appealsService.findMany(appealFilterQueryDto);
   }
 

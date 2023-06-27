@@ -50,7 +50,7 @@ function LoginForm() {
     }, [isLoggedIn]);
 
     const onSubmit = (data: any) => {
-        console.log(data);
+        // console.log(data);
         dispatch(
             fetchLogIn({ username: data.username, password: data.password })
         );
