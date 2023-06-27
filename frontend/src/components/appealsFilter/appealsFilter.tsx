@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SearchOutlined, SortOutlined } from "@mui/icons-material";
 import { InputAdornment, MenuItem } from "@mui/material";
 import moment from "moment";
@@ -12,6 +12,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import style from "./appealsFilter.module.css";
 import ResponsiveTextField from "../responsiveTextField/responsiveTextField";
 import { IFilterOptions } from "../../types/types";
+import { debounce } from "../../utils/utils";
 
 const sortOptions = [
     { value: "DATE_UPDATED", label: "Дата изменения" },
@@ -65,24 +66,31 @@ function AppealsFilter({
         mode: "onBlur",
     });
 
-    // const debouncedSetFilterOptions= debounce(setFilterOptions, 300);
+    const debouncedSetFilterOptions = debounce(setFilterOptions, 750);
 
-    /* useEffect(()=>{
+    useEffect(() => {
         const subscription = watch((value) => {
-            debouncedSetFilterOptions(value)
-        })
-    }, [watch])
- */
-    const onSubmit = (data: IAppealFilterData) => {
+            const data = value as IAppealFilterData;
+            debouncedSetFilterOptions({
+                ...data,
+                toDate: data.toDate ? data.toDate.valueOf() : null,
+                fromDate: data.fromDate ? data.fromDate.valueOf() : null,
+            });
+        });
+        return () => subscription.unsubscribe();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [watch]);
+
+    /* const onSubmit = (data: IAppealFilterData) => {
         setFilterOptions({
             ...data,
             toDate: data.toDate ? data.toDate.valueOf() : null,
             fromDate: data.fromDate ? data.fromDate.valueOf() : null,
         });
-    };
+    }; */
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className={style.filter}>
+        <form /* onSubmit={handleSubmit(onSubmit)} */ className={style.filter}>
             <Controller
                 name="sortOrder"
                 control={control}
@@ -195,19 +203,19 @@ function AppealsFilter({
                     />
                 )}
             />
-            <button
+            {/* <button
                 type="submit"
                 className={`${style.button} ${style.button_type_primary} ${style.printAll}`}
             >
                 Применить
-            </button>
-            {/* <button
+            </button> */}
+            <button
                 type="button"
                 className={`${style.button} ${style.button_type_primary} ${style.printAll}`}
                 onClick={() => generateAllAppeals()}
             >
                 Скачать все обращения
-            </button> */}
+            </button>
         </form>
     );
 }
