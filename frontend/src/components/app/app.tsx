@@ -29,7 +29,7 @@ function App() {
 
     const handleAppealFormClose = () => {
         dispatch(resetForm());
-        navigate("/appeals");
+        navigate("/home/appeals");
     };
     return (
         <div>
