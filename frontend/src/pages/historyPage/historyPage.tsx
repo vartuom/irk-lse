@@ -550,7 +550,6 @@ function HistoryPage() {
                     </Zoom>
                     <p className={styles.illustration__caption}>
                         Общее фото. Первые эксперты иркутской лаборатории.
-                        Сверху вниз, слева на право:
                     </p>
                 </div>
                 <p className={styles.paragraph}>
@@ -603,8 +602,7 @@ function HistoryPage() {
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
-                        Эксперты лаборатории, 70-е годы. Верхний ряд слева
-                        направо: .... .
+                        Эксперты лаборатории, 70-е годы.
                     </p>
                 </div>
                 <div className={styles.illustration}>
@@ -616,8 +614,7 @@ function HistoryPage() {
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
-                        Эксперты лаборатории, 70-е годы. Верхний ряд слева
-                        направо: .... .
+                        Эксперты лаборатории, 70-е годы.
                     </p>
                 </div>
                 <p className={styles.paragraph}>
