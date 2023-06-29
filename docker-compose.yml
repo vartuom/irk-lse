@@ -16,25 +16,25 @@ services:
     networks:
       - db-network
     ports:
-      - '5432:5432'
+      - ''
     restart: on-failure
     environment:
-      POSTGRES_HOST: irlse-database
-      POSTGRES_PORT: 5432
-      POSTGRES_USER: demoAdm
-      POSTGRES_PASSWORD: demoPass
-      POSTGRES_DB: irlse
+      POSTGRES_HOST: 
+      POSTGRES_PORT: 
+      POSTGRES_USER: 
+      POSTGRES_PASSWORD: 
+      POSTGRES_DB: 
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     image: backend
     environment:
-      PORT: 3000
-      JWT_SECRET: demo1
-      JWT_REFRESH_SECRET: demo2
+      PORT: 
+      JWT_SECRET: 
+      JWT_REFRESH_SECRET: 
       JWT_EXPIRESIN: 1d
-      DATABASE_URL: postgresql://demoAdm:demoPass@irlse-database/irlse?schema=public
+      DATABASE_URL: ''
     depends_on:
       - database
     container_name: irlse-backend
@@ -42,7 +42,7 @@ services:
       - db-network
       - http-network
     ports:
-      - '3000:3000'
+      - ''
     restart: on-failure
   frontend:
     build:
@@ -55,12 +55,12 @@ services:
     networks:
       - http-network
     ports:
-      - '8081:80'
+      - ''
     restart: on-failure
   adminer:
     image: adminer
     ports:
-      - '8888:8080'
+      - ''
     networks:
       - db-network
       - http-network
