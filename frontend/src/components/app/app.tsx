@@ -65,6 +65,8 @@ function App() {
                             }
                         />
                     </Route>
+                    {/* 404 redirect */}
+                    <Route path="*" element={<Navigate to="/home" replace />} />
                 </Route>
             </Routes>
             {background && (

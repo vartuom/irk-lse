@@ -123,6 +123,16 @@
   }
 }
 
+.footerLink {
+  color: #ffffff;
+  transition: var(--opacity-transition);
+  opacity: 1;
+  text-decoration: none;
+}
+.footerLink:hover {
+  opacity: 0.5;
+}
+
 .navList {
   max-width: 180px;
 }

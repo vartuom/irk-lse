@@ -27,23 +27,67 @@ function Footer() {
                             <p className={s.listTitle}>Система учреждений</p>
                             <ul className={s.navLinks}>
                                 <li>
-                                    Российский федеральный центр судебной
-                                    экспертизы
+                                    <a
+                                        href="http://sudexpert.ru/"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className={s.footerLink}
+                                    >
+                                        Российский федеральный центр судебной
+                                        экспертизы
+                                    </a>
                                 </li>
                                 <li>
-                                    Сибирский Региональный центр Судебной
-                                    Экспертизы
+                                    <a
+                                        href="https://sibrcse.ru/"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className={s.footerLink}
+                                    >
+                                        Сибирский Региональный центр Судебной
+                                        Экспертизы
+                                    </a>
                                 </li>
                             </ul>
                         </div>
                         <div className={s.navList}>
                             <p className={s.listTitle}>Ссылки</p>
                             <ul className={s.navLinks}>
-                                <li>Нормативная база</li>
-                                <li>Журнал "ТиПСЭ"</li>
-                                <li>#СТОПВИЧСПИД</li>
                                 <li>
-                                    <Link to="/home/admin">
+                                    <a
+                                        href="http://sudexpert.ru/norms/"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className={s.footerLink}
+                                    >
+                                        Нормативная база
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://www.tipse.ru/jour"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className={s.footerLink}
+                                    >
+                                        Журнал "ТиПСЭ"
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://стопвичспид.рф/"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className={s.footerLink}
+                                    >
+                                        #СТОПВИЧСПИД
+                                    </a>
+                                </li>
+                                <li>
+                                    <Link
+                                        to="/home/admin"
+                                        className={s.footerLink}
+                                    >
                                         Вход для сотрудников
                                     </Link>
                                 </li>
