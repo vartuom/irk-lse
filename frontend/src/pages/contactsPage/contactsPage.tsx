@@ -1,11 +1,19 @@
 import React from "react";
 import BusinessIcon from "@mui/icons-material/Business";
+import { Helmet } from "react-helmet";
 import s from "./contactsPage.module.css";
 import AccordionRow from "../../components/accordionRow/accordionRow";
 
 function ContactsPage() {
     return (
         <main className={s.main}>
+            <Helmet>
+                <title>Контакты | Иркутская ЛСЭ</title>
+                <meta
+                    name="description"
+                    content="Контакты, вакансии и реквизиты ФБУ Иркутская ЛСЭ."
+                />
+            </Helmet>
             <section className={s.heading}>
                 <BusinessIcon sx={{ fontSize: 80 }} />
                 <h1 className={s.heading__title}>Контакты</h1>

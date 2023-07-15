@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import styles from "./mainPage.module.css";
 import AccordionRow from "../../components/accordionRow/accordionRow";
 
@@ -9,6 +10,13 @@ function MainPage() {
 
     return (
         <main className={styles.main}>
+            <Helmet>
+                <title>Главная | Иркутская ЛСЭ</title>
+                <meta
+                    name="description"
+                    content="Государственное судебно-экспертное учреждение. Производство судебных экспертиз по гражданским и арбитражным делам, делам об административных правонарушениях, а так же любых исследований по заявлениям граждан и юридических лиц."
+                />
+            </Helmet>
             <section className={styles.section_grid}>
                 <div>
                     <h2 className={styles.section__title}>

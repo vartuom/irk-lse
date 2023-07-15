@@ -5,6 +5,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import CurrencyRubleIcon from "@mui/icons-material/CurrencyRuble";
 import { Link, Route, Routes } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import s from "./pricesPage.module.css";
 import BasicsSlider from "../../components/cardSliders/basicsSlider";
 import PaymentSlider from "../../components/cardSliders/paymentSlider";
@@ -13,6 +14,13 @@ import PricesTable from "../../components/pricesTable/pricesTable";
 function PricesPage() {
     return (
         <main className={s.main}>
+            <Helmet>
+                <title>Услуги | Иркутская ЛСЭ</title>
+                <meta
+                    name="description"
+                    content="Стоимость производства судебных экспертиз и исследований в Иркутской ЛСЭ."
+                />
+            </Helmet>
             <section className={s.lead}>
                 <div>
                     <h1 className={s.lead__title}>Прейскурант</h1>

@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import {
-    Stepper,
-    MobileStepper,
-    useMediaQuery,
-    Step,
-    StepLabel,
-} from "@mui/material";
+import { Stepper, useMediaQuery, Step, StepLabel } from "@mui/material";
 import StepConnector, {
     stepConnectorClasses,
 } from "@mui/material/StepConnector";
 import { styled } from "@mui/material/styles";
 
+import { Helmet } from "react-helmet";
+import { Navigate } from "react-router";
 import s from "./appealsPage.module.css";
 import FirstStep from "../../components/appealForm/firstStep";
 import SecondStep from "../../components/appealForm/secondStep";
@@ -47,6 +43,13 @@ function AppealsPage() {
 
     return (
         <main className={s.main}>
+            <Helmet>
+                <title>Обращения | Иркутская ЛСЭ</title>
+                <meta
+                    name="description"
+                    content="Форма обращений граждан по вопросам производства экспертиз, исследований и деятельности ФБУ Иркутской ЛСЭ."
+                />
+            </Helmet>
             <div className={s.lead}>
                 <div>
                     <h1 className={s.lead__title}>Обращения граждан</h1>
@@ -101,6 +104,10 @@ function AppealsPage() {
                     <Route path="stepTwo" element={<SecondStep />} />
                     <Route path="stepThree" element={<ThirdStep />} />
                     <Route path="confirm" element={<ConfirmStep />} />
+                    <Route
+                        path="*"
+                        element={<Navigate to="/home/appeals" replace />}
+                    />
                 </Routes>
             </div>
         </main>

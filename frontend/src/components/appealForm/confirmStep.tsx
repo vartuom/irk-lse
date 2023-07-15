@@ -117,7 +117,14 @@ function ConfirmStep() {
                                 Нажимая кнопку «Отправить» я даю согласие на
                                 обработку своих персональных данных в
                                 соответствии с{" "}
-                                <span className="spanAccent"> Условиями.</span>
+                                <a
+                                    className="link"
+                                    href="https://disk.yandex.ru/i/OVeR49sRUN2pmw"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    Условиями &#8594;
+                                </a>
                             </p>
                         }
                     />

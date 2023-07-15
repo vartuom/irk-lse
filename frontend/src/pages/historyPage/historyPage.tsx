@@ -2,6 +2,7 @@ import React from "react";
 import Zoom from "react-medium-image-zoom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
+import { Helmet } from "react-helmet";
 import AppConfetti from "../../components/appConfetti/appConfetti";
 import "react-medium-image-zoom/dist/styles.css";
 import styles from "./historyPage.module.css";
@@ -30,6 +31,13 @@ function HistoryPage() {
     return (
         <main className={styles.main}>
             <AppConfetti />
+            <Helmet>
+                <title>История | Иркутская ЛСЭ</title>
+                <meta
+                    name="description"
+                    content="История становления и развития судебной экспертизы в России."
+                />
+            </Helmet>
             <section className={styles.lead}>
                 <h1 className={styles.lead__title}>
                     К первому профессиональному празднику «День судебного
