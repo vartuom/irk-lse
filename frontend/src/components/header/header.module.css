@@ -1,6 +1,6 @@
 .header {
   width: 100%;
-  min-height: 560px;
+  min-height: 520px;
   background-color: var(--bg-color-secondary);
   color: var(--text-color-secondary);
 }
@@ -14,7 +14,7 @@
 
 .logo {
   width: 280px;
-  background: radial-gradient(circle closest-side, rgba(255, 255, 255, 0.5) 0%, #003049 100%);
+  background: radial-gradient(circle closest-side, rgba(255, 255, 255, 0.5) 0%, #010b23 100%);
 }
 
 .wrapper {
