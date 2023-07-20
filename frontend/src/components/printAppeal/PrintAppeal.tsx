@@ -27,7 +27,7 @@ function PrintAppeal() {
             if (_id) {
                 const res = await fetch(`http://localhost:3000/appeals/${id}`);
                 const appealData = await res.json();
-                console.log(appealData);
+                // console.log(appealData);
                 if (active) {
                     setAppeal(appealData);
                 }

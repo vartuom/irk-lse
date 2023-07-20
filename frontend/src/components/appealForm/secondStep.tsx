@@ -56,14 +56,14 @@ function SecondStep() {
 
     useEffect(() => {
         const subscription = watch((value) => {
-            console.log(value);
+            // console.log(value);
             dispatch(setSecondStep(value as ISecondStep));
         });
         return () => subscription.unsubscribe();
     }, [watch, dispatch]);
 
     const onSubmit: SubmitHandler<ISecondStep> = (data) => {
-        console.log(data);
+        // console.log(data);
         navigate("/home/appeals/stepThree", { state: "noScroll" });
     };
 

@@ -1,11 +1,19 @@
 import React from "react";
 import BusinessIcon from "@mui/icons-material/Business";
+import { Helmet } from "react-helmet";
 import s from "./contactsPage.module.css";
 import AccordionRow from "../../components/accordionRow/accordionRow";
 
 function ContactsPage() {
     return (
         <main className={s.main}>
+            <Helmet>
+                <title>Контакты | Иркутская ЛСЭ</title>
+                <meta
+                    name="description"
+                    content="Контакты, вакансии и реквизиты ФБУ Иркутская ЛСЭ."
+                />
+            </Helmet>
             <section className={s.heading}>
                 <BusinessIcon sx={{ fontSize: 80 }} />
                 <h1 className={s.heading__title}>Контакты</h1>
@@ -109,73 +117,96 @@ function ContactsPage() {
                         title="Карточка сведений о контрагенте и банковские реквизиты"
                         borders="none"
                     >
-                        <div className={s.contacts}>
+                        <div className={s.bankReq}>
                             <div>
-                                <p
-                                    className={`${s.contacts__paragraph} ${s.contacts__paragraph_type_accent}`}
-                                >
-                                    Отдел исследования почерка и документов:
+                                <p className={`${s.contacts__paragraph}`}>
+                                    Федеральное бюджетное учреждение Иркутская
+                                    лаборатория судебной экспертизы Министерства
+                                    юстиции Российской Федерации
                                 </p>
-                                <p className={s.contacts__paragraph}>
-                                    т. 8 (3952) 70-23-52
+                                <p className={`${s.contacts__paragraph}`}>
+                                    Сокращенное наименование: ФБУ Иркутская ЛСЭ
+                                    Минюста России
                                 </p>
                             </div>
                             <div>
-                                <p
-                                    className={`${s.contacts__paragraph} ${s.contacts__paragraph_type_accent}`}
-                                >
-                                    Отдел экономических и
-                                    строительно-технических исследований:
+                                <p className={`${s.contacts__paragraph}`}>
+                                    ИНН 3808041927 КПП 381101001
                                 </p>
                                 <p className={s.contacts__paragraph}>
-                                    т. 8 (3952) 70-23-20
+                                    ОГРН 1033801538165
+                                </p>
+                                <p className={s.contacts__paragraph}>
+                                    ОКпО 02844729 ОКОГУ 13170
+                                </p>
+                                <p className={s.contacts__paragraph}>
+                                    ОКТМО 25701000 ОКВЭД 71.20.2
+                                </p>
+                                <p className={s.contacts__paragraph}>
+                                    ОКФС 12 ОКОПФ 75103
                                 </p>
                             </div>
                             <div>
-                                <p
-                                    className={`${s.contacts__paragraph} ${s.contacts__paragraph_type_accent}`}
-                                >
-                                    Отдел автотехнических исследований:
+                                <p className={`${s.contacts__paragraph}`}>
+                                    Банковские реквизиты:
+                                </p>
+                                <p className={`${s.contacts__paragraph}`}>
+                                    УФК по Иркутской области (ФБУ Иркутская ЛСЭ
+                                    Минюста России л/с 20346Ц16480)
                                 </p>
                                 <p className={s.contacts__paragraph}>
-                                    т. 8 (3952) 70-23-22
+                                    Банк получателя: ОТДЕЛЕНИЕ ИРКУТСК БАНКА
+                                    РОССИИ//УФК по Иркутской области г. Иркутск
+                                </p>
+                                <p className={s.contacts__paragraph}>
+                                    БИК 012520101
+                                </p>
+                                <p className={s.contacts__paragraph}>
+                                    Единый казначейский счет Управления
+                                    40102810145370000026
+                                </p>
+                                <p className={s.contacts__paragraph}>
+                                    Казначейский счет Управления
+                                    03214643000000013400
+                                </p>
+                            </div>
+                            <div>
+                                <p className={`${s.contacts__paragraph}`}>
+                                    Должность и ФИО руководителя:
+                                </p>
+                                <p className={s.contacts__paragraph}>
+                                    Директор Дзюба Геннадий Григорьевич,
+                                    действует на основании Устава
                                 </p>
                             </div>
                         </div>
                     </AccordionRow>
                     <AccordionRow title="Вакансии" borders="none">
-                        <div className={s.contacts}>
-                            <div>
-                                <p
-                                    className={`${s.contacts__paragraph} ${s.contacts__paragraph_type_accent}`}
-                                >
-                                    Отдел исследования почерка и документов:
-                                </p>
-                                <p className={s.contacts__paragraph}>
-                                    т. 8 (3952) 70-23-52
-                                </p>
-                            </div>
-                            <div>
-                                <p
-                                    className={`${s.contacts__paragraph} ${s.contacts__paragraph_type_accent}`}
-                                >
-                                    Отдел экономических и
-                                    строительно-технических исследований:
-                                </p>
-                                <p className={s.contacts__paragraph}>
-                                    т. 8 (3952) 70-23-20
-                                </p>
-                            </div>
-                            <div>
-                                <p
-                                    className={`${s.contacts__paragraph} ${s.contacts__paragraph_type_accent}`}
-                                >
-                                    Отдел автотехнических исследований:
-                                </p>
-                                <p className={s.contacts__paragraph}>
-                                    т. 8 (3952) 70-23-22
-                                </p>
-                            </div>
+                        <div className={s.vacancies}>
+                            <a
+                                href="https://irkutsk.hh.ru/vacancy/81590567"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="link"
+                            >
+                                1. Стажер эксперт-автотехник &#8594;
+                            </a>
+                            <a
+                                href="https://irkutsk.hh.ru/vacancy/81590519"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="link"
+                            >
+                                2. Стажер эксперт-строитель &#8594;
+                            </a>
+                            <a
+                                href="https://irkutsk.hh.ru/vacancy/81590600"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="link"
+                            >
+                                3. Стажер компьютерный криминалист &#8594;
+                            </a>
                         </div>
                     </AccordionRow>
                     <AccordionRow
@@ -187,33 +218,19 @@ function ContactsPage() {
                                 <p
                                     className={`${s.contacts__paragraph} ${s.contacts__paragraph_type_accent}`}
                                 >
-                                    Отдел исследования почерка и документов:
-                                </p>
-                                <p className={s.contacts__paragraph}>
-                                    т. 8 (3952) 70-23-52
-                                </p>
-                            </div>
-                            <div>
-                                <p
-                                    className={`${s.contacts__paragraph} ${s.contacts__paragraph_type_accent}`}
-                                >
-                                    Отдел экономических и
-                                    строительно-технических исследований:
-                                </p>
-                                <p className={s.contacts__paragraph}>
-                                    т. 8 (3952) 70-23-20
+                                    Учетная политика – документ, описывающий
+                                    особенности ведения бухучета в учреждении.
+                                    Доступен по ссылке ниже:
                                 </p>
                             </div>
-                            <div>
-                                <p
-                                    className={`${s.contacts__paragraph} ${s.contacts__paragraph_type_accent}`}
-                                >
-                                    Отдел автотехнических исследований:
-                                </p>
-                                <p className={s.contacts__paragraph}>
-                                    т. 8 (3952) 70-23-22
-                                </p>
-                            </div>
+                            <a
+                                href="http://irksudexpert.ru/?page_id=194"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="link"
+                            >
+                                Учетная политика &#8594;
+                            </a>
                         </div>
                     </AccordionRow>
                 </div>

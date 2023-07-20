@@ -1,5 +1,8 @@
 import React from "react";
 import Zoom from "react-medium-image-zoom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
+import { Helmet } from "react-helmet";
 import AppConfetti from "../../components/appConfetti/appConfetti";
 import "react-medium-image-zoom/dist/styles.css";
 import styles from "./historyPage.module.css";
@@ -28,6 +31,13 @@ function HistoryPage() {
     return (
         <main className={styles.main}>
             <AppConfetti />
+            <Helmet>
+                <title>История | Иркутская ЛСЭ</title>
+                <meta
+                    name="description"
+                    content="История становления и развития судебной экспертизы в России."
+                />
+            </Helmet>
             <section className={styles.lead}>
                 <h1 className={styles.lead__title}>
                     К первому профессиональному празднику «День судебного
@@ -51,15 +61,15 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            width={500}
                             src={imgExpDay}
-                            width="500"
+                            alt="постановление день судебного эксперта"
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
-                        Текст постановления от 29 сентября 2022 г. № 1720 &quotО
-                        дне судебного эксперта&quot.
+                        Текст постановления от 29 сентября 2022 г. № 1720
+                        &#171;О дне судебного эксперта&#187;.
                     </p>
                 </div>
                 <p className={styles.paragraph}>
@@ -78,16 +88,21 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="saint-petersburg court"
+                            width={500}
                             src={imgSpbCourt}
-                            width="500"
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
                         Старый Арсенал - Окружной суд и Судебная палата. г.
                         Санкт-Петербург, 1865 г. Место расположения первого
                         кабинета научно-судебной экспертизы.
+                    </p>
+                    <p className={styles.illustration__source}>
+                        Источник фото:
+                        veteran-fsb.ru/biblio/knigi/bolshoj-dom-bez-grifa-sekretno/arkhitektura-sovremennogo-stilya,
+                        26.06.2023 г.
                     </p>
                 </div>
                 <p className={styles.paragraph}>
@@ -106,10 +121,10 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="об учреждении кабинета научно-судебной экспертизы"
                             src={imgZapiska1}
-                            width="500"
+                            width={500}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
@@ -134,14 +149,17 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="Дактилоскопия карта Гершеля 1859-1860"
                             src={imgFingerPrints}
-                            width="500"
+                            width={500}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
                         Дактилоскопическая карта Гершеля, 1859-1860 г.
+                    </p>
+                    <p className={styles.illustration__source}>
+                        Источник: ru.wikipedia.org, 26.06.2023
                     </p>
                 </div>
                 <p className={styles.paragraph}>
@@ -157,10 +175,10 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="Ганс Гросс. Руководство для судебных следователей как система криминалистики"
                             src={imgGansGrossBook}
-                            width="500"
+                            width={500}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
@@ -220,10 +238,10 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="Первый пункт закона об учреждении кабинета научно-судебной экспертизы"
                             src={imgZakon1}
-                            width="500"
+                            width={500}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
@@ -274,10 +292,10 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="О штате и окладе. Приложение к закону об учреждении кабинета научно-судебной экспертизы"
                             src={imgZakon2}
-                            width="500"
+                            width={500}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
@@ -317,10 +335,10 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="Сгоревшее здание окружного суда"
                             src={imgCourtFire}
-                            width="500"
+                            width={500}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
@@ -369,14 +387,17 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="Герберт Юлианович Манс"
                             src={imgHMans}
-                            width="300"
+                            width={300}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
                         Портрет Герберта Юлиановича Манса.
+                    </p>
+                    <p className={styles.illustration__source}>
+                        Источник: ru.wikipedia.org, 26.06.2023
                     </p>
                 </div>
                 <p className={styles.paragraph}>
@@ -404,10 +425,10 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="Медаль имени Герберта Манса"
                             src={imgHMansMedal}
-                            width="300"
+                            width={300}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
@@ -416,6 +437,9 @@ function HistoryPage() {
                         неправительственной некоммерческой организацией
                         «Конгресс криминалистов» за достижения в области
                         криминалистики.
+                    </p>
+                    <p className={styles.illustration__source}>
+                        Источник: ru.wikipedia.org, 26.06.2023
                     </p>
                 </div>
                 <p className={styles.paragraph}>
@@ -432,10 +456,10 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="ФБУ Северо-Западный региональный центр судебной экспертизы г. Санкт-Петербург"
                             src={imgLeningradLse}
-                            width="500"
+                            width={500}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
@@ -476,10 +500,10 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="ФБУ Российский Федеральный центр судебной экспертизы г. Москва"
                             src={imgRfcse}
-                            width="500"
+                            width={500}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
@@ -502,10 +526,10 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="Приказ о назначении первого заведующего иркутской научно-исследовательнской криминалистической лаборатории"
                             src={imgPrikazIrkLse}
-                            width="500"
+                            width={500}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
@@ -526,15 +550,14 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="Первый эксперты иркутской лаборатории"
                             src={imgFirstExpGroup1}
-                            width="740"
+                            width={740}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
                         Общее фото. Первые эксперты иркутской лаборатории.
-                        Сверху вниз, слева на право:
                     </p>
                 </div>
                 <p className={styles.paragraph}>
@@ -560,10 +583,10 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="Первый эксперт Михаил Иванович Сидоров"
                             src={imgSidorovMI}
-                            width="500"
+                            width={500}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
@@ -580,28 +603,26 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="Эксперты иркутской лаборатории 70-е годы"
                             src={img70GroupPhoto1}
-                            width="740"
+                            width={740}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
-                        Эксперты лаборатории, 70-е годы. Верхний ряд слева
-                        направо: .... .
+                        Эксперты лаборатории, 70-е годы.
                     </p>
                 </div>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="Эксперты иркутской лаборатории 70-е годы"
                             src={img70GroupPhoto2}
-                            width="740"
+                            width={740}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
-                        Эксперты лаборатории, 70-е годы. Верхний ряд слева
-                        направо: .... .
+                        Эксперты лаборатории, 70-е годы.
                     </p>
                 </div>
                 <p className={styles.paragraph}>
@@ -654,10 +675,10 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="Бережнова Галина Филипповна"
                             src={imgBereznovaGF}
-                            width="400"
+                            width={400}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
@@ -707,10 +728,10 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="Лунева Вера Михайловна"
                             src={imgLunevaVM}
-                            width="500"
+                            width={500}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>
@@ -763,10 +784,10 @@ function HistoryPage() {
                 </p>
                 <div className={styles.illustration}>
                     <Zoom>
-                        <img
-                            alt="That Wanaka Tree, New Zealand by Laura Smetsers"
+                        <LazyLoadImage
+                            alt="dид Крестовоздвиженской церкви в Иркутске П. Пежемский"
                             src={imgAkvarel}
-                            width="740"
+                            width={740}
                         />
                     </Zoom>
                     <p className={styles.illustration__caption}>

@@ -49,7 +49,7 @@ function ThirdStep() {
 
     useEffect(() => {
         const subscription = watch((value) => {
-            console.log(value);
+            // console.log(value);
             dispatch(setThirdStep(value as IThirdStep));
         });
         return () => subscription.unsubscribe();

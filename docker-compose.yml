@@ -1,0 +1,67 @@
+version: '3'
+networks:
+  db-network:
+    driver: bridge
+    internal: true
+  http-network:
+    driver: bridge
+volumes:
+  database:
+services:
+  database:
+    image: postgres:12-alpine
+    container_name: irlse-database
+    volumes:
+      - database:/var/lib/postgresql/data
+    networks:
+      - db-network
+    ports:
+      - ''
+    restart: on-failure
+    environment:
+      POSTGRES_HOST: 
+      POSTGRES_PORT: 
+      POSTGRES_USER: 
+      POSTGRES_PASSWORD: 
+      POSTGRES_DB: 
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: backend
+    environment:
+      PORT: 
+      JWT_SECRET: 
+      JWT_REFRESH_SECRET: 
+      JWT_EXPIRESIN: 1d
+      DATABASE_URL: ''
+    depends_on:
+      - database
+    container_name: irlse-backend
+    networks:
+      - db-network
+      - http-network
+    ports:
+      - ''
+    restart: on-failure
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: frontend
+    depends_on:
+      - backend
+    container_name: irlse-frontend
+    networks:
+      - http-network
+    ports:
+      - ''
+    restart: on-failure
+  adminer:
+    image: adminer
+    ports:
+      - ''
+    networks:
+      - db-network
+      - http-network
+

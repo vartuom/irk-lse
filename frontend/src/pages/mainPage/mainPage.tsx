@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import styles from "./mainPage.module.css";
-import AppAccordion from "../../components/appAccordion/appAccordion";
 import AccordionRow from "../../components/accordionRow/accordionRow";
 
 function MainPage() {
@@ -10,6 +10,13 @@ function MainPage() {
 
     return (
         <main className={styles.main}>
+            <Helmet>
+                <title>Главная | Иркутская ЛСЭ</title>
+                <meta
+                    name="description"
+                    content="Государственное судебно-экспертное учреждение. Производство судебных экспертиз по гражданским и арбитражным делам, делам об административных правонарушениях, а так же любых исследований по заявлениям граждан и юридических лиц."
+                />
+            </Helmet>
             <section className={styles.section_grid}>
                 <div>
                     <h2 className={styles.section__title}>
@@ -104,12 +111,13 @@ function MainPage() {
                         Если вы находитесь в другом регионе и не уверены в
                         возможности назначения исследования в нашу лабораторию,
                         воспользуйтесь информацией из раздлеа{" "}
-                        <span className="spanAccent">Контакты &#8594;</span> или
-                        заполните{" "}
-                        <span className="spanAccent">
-                            {" "}
+                        <Link to="/home/contacts" className="link">
+                            Контакты &#8594;{" "}
+                        </Link>{" "}
+                        или заполните{" "}
+                        <Link to="/home/appeals" className="link">
                             форму для обращений граждан &#8594;{" "}
-                        </span>
+                        </Link>
                     </p>
                 </div>
                 <div className={`${styles.section__image} ${styles.mapImg}`} />
@@ -158,54 +166,6 @@ function MainPage() {
             <section className={styles.section_flat}>
                 <h2 className={styles.section__title_big}>Частые вопросы</h2>
                 <div className={styles.section__container}>
-                    {/* <AppAccordion title="Как назначить экспертизу?!">
-                        <p className={styles.section__paragraph}>
-                            Для начала определимся с понятиями. Вы являетесь
-                            судом, следователем или дознавателем? Если нет, то к
-                            сожалению «судебную экспертизу» назначить вы не в
-                            праве.
-                        </p>
-                        <p className={styles.section__paragraph}>
-                            Что делать в таком случае? У вас несколько
-                            вариантов:
-                        </p>
-                        <p className={styles.section__paragraph}>
-                            1. Ходатайствовать перед указанными лицами о
-                            назначении экспертизы в наше учреждение. Но перед
-                            этим, мы рекомендуем получить от нас письменный
-                            ответ о возможности и сроках производства
-                            интересующего Вас исследования. Сделать это можно
-                            заполнив{" "}
-                            <span className="spanAccent">
-                                форму обращений граждан &#8594;
-                            </span>{" "}
-                            на нашем сайте или отправив нам письмо с запросом по{" "}
-                            <span className="spanAccent">
-                                электронной почте &#8594;
-                            </span>
-                            .
-                        </p>
-                        <p className={styles.section__paragraph}>
-                            2. Вы можете самостоятельно заказать внесудебное
-                            исследование, по результатам которого, вам будет
-                            выдан «Акт экспертного исследования». Указанный
-                            документ не носит юридического статуса экспертизы и
-                            перед обращением к нам, мы рекомендуем Вам более
-                            подробно изучить его особенности. В разделе справки
-                            как раз есть{" "}
-                            <span className="spanAccent">
-                                карточка, посвященная этому вопросу &#8594;
-                            </span>
-                            . Если вы уверены, что экспертное исследование Вам
-                            подходит, то{" "}
-                            <span className="spanAccent">
-                                {" "}
-                                вот образец заявления для физических лиц
-                            </span>
-                            . Ждем вас в канцелярии в рабочее время (не забудьте
-                            захватить паспорт!).
-                        </p>
-                    </AppAccordion> */}
                     <AccordionRow title="Как назначить экспертизу?">
                         <p className={styles.section__paragraph}>
                             Для начала определимся с понятиями. Вы являетесь
@@ -224,13 +184,13 @@ function MainPage() {
                             ответ о возможности и сроках производства
                             интересующего Вас исследования. Сделать это можно
                             заполнив{" "}
-                            <span className="spanAccent">
+                            <Link to="/home/appeals" className="link">
                                 форму обращений граждан &#8594;
-                            </span>{" "}
+                            </Link>{" "}
                             на нашем сайте или отправив нам письмо с запросом по{" "}
-                            <span className="spanAccent">
+                            <Link to="/home/contacts" className="link">
                                 электронной почте &#8594;
-                            </span>
+                            </Link>
                             .
                         </p>
                         <p className={styles.section__paragraph}>
@@ -241,14 +201,22 @@ function MainPage() {
                             перед обращением к нам, мы рекомендуем Вам более
                             подробно изучить его особенности. В разделе справки
                             как раз есть{" "}
-                            <span className="spanAccent">
+                            <Link to="/home/cards" className="link">
                                 карточка, посвященная этому вопросу &#8594;
-                            </span>
+                            </Link>
                             . Если вы уверены, что экспертное исследование Вам
                             подходит, то{" "}
                             <span className="spanAccent">
                                 {" "}
-                                вот образец заявления для физических лиц
+                                <a
+                                    href="https://disk.yandex.ru/i/mKERf54IJLE0LQ"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="link"
+                                >
+                                    вот образец заявления для физических лиц
+                                    &#8594;
+                                </a>
                             </span>
                             . Ждем вас в канцелярии в рабочее время (не забудьте
                             захватить паспорт!).
@@ -259,22 +227,22 @@ function MainPage() {
                             Мы подготовили справочные карточки по наиболее часто
                             задаваемым вопросам, ознакомится с ними вы можете в
                             разделе{" "}
-                            <span className="spanAccent">
+                            <Link to="/home/cards" className="link">
                                 деятельность &#8594;{" "}
-                            </span>
+                            </Link>
                         </p>
                         <p className={styles.section__paragraph}>
                             Если у вас остались вопросы, вы можете заполнить
-                            <span className="spanAccent">
+                            <Link to="/home/appeals" className="link">
                                 {" "}
                                 форму обращений граждан &#8594;{" "}
-                            </span>{" "}
+                            </Link>{" "}
                             и получить письменный ответ. Кроме того, эксперты
                             лаборатории проводят устные консультации по
                             телефонам, указным в разделе{" "}
-                            <span className="spanAccent">
+                            <Link to="/home/contacts" className="link">
                                 контактов &#8594;{" "}
-                            </span>
+                            </Link>
                         </p>
                         <p className={styles.section__paragraph}>
                             Если ваш вопрос предполагает ознакомление эксперта с
@@ -290,7 +258,7 @@ function MainPage() {
                             Если вам необходимо направить нам обращение или
                             документы в электронной форме — воспользуйтесь нашим
                             адресом электронной почты:{" "}
-                            <span className="spanAccent">
+                            <span className="spanBold">
                                 irksudexpert@ya.ru{" "}
                             </span>
                             . Не забудьте в теле письма указать краткие сведения
@@ -302,9 +270,9 @@ function MainPage() {
                         <p className={styles.section__paragraph}>
                             Вопросы определения стоимости и оплаты исследований
                             разобраны в{" "}
-                            <span className="spanAccent">
+                            <Link to="/home/cards" className="link">
                                 соответствующих карточках &#8594;
-                            </span>{" "}
+                            </Link>{" "}
                             раздела справки. Сроки производства исследований
                             определяются текущей загруженностью экспертов.
                         </p>
@@ -323,35 +291,22 @@ function MainPage() {
                         <p className={styles.section__paragraph}>
                             Полный перечень имеющихся в лаборатории экспертных
                             специальностей и проводимых исследований приведен в
-                            <span className="spanAccent">
+                            <Link to="/home/prices" className="link">
                                 {" "}
                                 прейскуранте &#8594;
-                            </span>
+                            </Link>
                             .
                         </p>
                         <p className={styles.section__paragraph}>
                             А по самым популярным направлениям, мы подготовили
                             справочные карточки и памятки в разделе справки:{" "}
-                            <span className="spanAccent">почерковедение</span>,{" "}
-                            <span className="spanAccent">
-                                определение давности документов
-                            </span>
+                            <Link to="/home/cards/handwriting" className="link">
+                                почерковедение
+                            </Link>
                             ,{" "}
-                            <span className="spanAccent">
+                            <Link to="/home/cards/auto" className="link">
                                 обстоятельства ДТП и восстановительный ремонт
-                            </span>
-                            ,{" "}
-                            <span className="spanAccent">
-                                оценка стоимости непродовольственных товаров
-                            </span>
-                            ,{" "}
-                            <span className="spanAccent">
-                                оценочные экспертизы в нотариальных целях
-                            </span>
-                            ,{" "}
-                            <span className="spanAccent">
-                                строительные экспертизы и оценка недвижимости
-                            </span>
+                            </Link>
                             .
                         </p>
                     </AccordionRow>

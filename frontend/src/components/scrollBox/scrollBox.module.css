@@ -5,16 +5,40 @@
     overscroll-behavior: contain;
 }
 
-.scrollBox::-webkit-scrollbar-track {
-    background-color: #2f2f37;
-    border-radius: 10px;
+@media screen and (max-width: 768px) {
+    .scrollBox {
+        display: flex;
+        justify-content: center;
+    }
+
+    .scrollBox::-webkit-scrollbar-track {
+        background-color: #2f2f37;
+        border-radius: 4px;
+    }
+
+    .scrollBox::-webkit-scrollbar-thumb {
+        background-color: #8585ad;
+        border-radius: 4px;
+    }
+
+    .scrollBox::-webkit-scrollbar {
+        width: 8px;
+    }
+    
 }
 
-.scrollBox::-webkit-scrollbar {
-    width: 12px;
-}
-
-.scrollBox::-webkit-scrollbar-thumb {
-    background-color: #8585ad;
-    border-radius: 10px;
+@media screen and (min-width: 769px) {
+    .scrollBox::-webkit-scrollbar-track {
+        background-color: #2f2f37;
+        border-radius: 10px;
+    }
+    
+    .scrollBox::-webkit-scrollbar {
+        width: 12px;
+    }
+    
+    .scrollBox::-webkit-scrollbar-thumb {
+        background-color: #8585ad;
+        border-radius: 10px;
+    }
 }

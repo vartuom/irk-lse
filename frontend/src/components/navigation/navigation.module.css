@@ -6,7 +6,7 @@
 }
 
 .link {
-    font: 22px/1.5 var(--font-golos-regular);
+    font: 22px/1.5 var(--font-golos-bold);
     padding-bottom: 4px;
     box-sizing: border-box;
     transition: var(--opacity-transition);
@@ -21,7 +21,6 @@
 }
 
 .link_active {
-    font-family: var(--font-golos-bold);
     border-bottom: 2px white solid;
     opacity: 1;
 }

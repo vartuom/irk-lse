@@ -3,7 +3,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import s from "./appealForm.module.css";
 import AccordionRow from "../accordionRow/accordionRow";
 import { useAppDispatch, useAppSelector } from "../../store/store";
@@ -68,14 +68,14 @@ function FirstStep() {
 
     useEffect(() => {
         const subscription = watch((value) => {
-            console.log(value);
+            // console.log(value);
             dispatch(setFirstStep(value as IFirstStep));
         });
         return () => subscription.unsubscribe();
     }, [watch, dispatch]);
 
     const onSubmit: SubmitHandler<IFirstStep> = (data) => {
-        console.log(data);
+        // console.log(data);
         navigate("stepTwo", { state: "noScroll" });
     };
 
@@ -142,7 +142,15 @@ function FirstStep() {
             />
             <p className={s.lead_paragraph}>
                 Подробнее с политикой обработки персональных данных вы можете
-                ознакомиться <span className="spanAccent"> по ссылке.</span>
+                ознакомиться{" "}
+                <a
+                    className="link"
+                    href="https://disk.yandex.ru/i/OVeR49sRUN2pmw"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    по ссылке &#8594;
+                </a>
             </p>
             <button
                 type="submit"

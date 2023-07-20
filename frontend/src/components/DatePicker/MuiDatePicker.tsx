@@ -22,10 +22,7 @@ const MuiDatePicker = function CustomDatePicker({
                 ruRU.components.MuiLocalizationProvider.defaultProps.localeText
             }
         >
-            {/* value может принимать MomentInput, что работает как задумано,
-             однако в интерфейсах такого типа по понятным причинам нет
-             TODO: переопределить глобальные типы для компонента DatePicker */}
-            <DatePicker value={value} onChange={onChange} />
+            <DatePicker value={value?.toString()} onChange={onChange} />
         </LocalizationProvider>
     );
 };

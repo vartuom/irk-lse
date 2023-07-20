@@ -4,6 +4,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Link, Route, Routes } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { Navigate } from "react-router";
 import s from "./cardsPage.module.css";
 import BasicsSlider from "../../components/cardSliders/basicsSlider";
 import PaymentSlider from "../../components/cardSliders/paymentSlider";
@@ -13,6 +15,13 @@ import AutoSlider from "../../components/cardSliders/autoSlider";
 function CardsPage() {
     return (
         <main className={s.main}>
+            <Helmet>
+                <title>Деятельность | Иркутская ЛСЭ</title>
+                <meta
+                    name="description"
+                    content="Справочные материалы о судебной экспертизе и ответы на самые частые вопросы."
+                />
+            </Helmet>
             <div className={s.lead}>
                 <div>
                     <h1 className={s.lead__title}>Коротко о главном</h1>
@@ -75,6 +84,10 @@ function CardsPage() {
                     <Route path="payment" element={<PaymentSlider />} />
                     <Route path="handwriting" element={<HandwritingSlider />} />
                     <Route path="auto" element={<AutoSlider />} />
+                    <Route
+                        path="*"
+                        element={<Navigate to="/home/cards" replace />}
+                    />
                 </Routes>
             </div>
         </main>
