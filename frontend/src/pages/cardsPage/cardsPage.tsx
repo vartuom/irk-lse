@@ -11,6 +11,7 @@ import BasicsSlider from "../../components/cardSliders/basicsSlider";
 import PaymentSlider from "../../components/cardSliders/paymentSlider";
 import HandwritingSlider from "../../components/cardSliders/handwritingSlider";
 import AutoSlider from "../../components/cardSliders/autoSlider";
+import BuildingSlider from "../../components/cardSliders/buildingSlider";
 
 function CardsPage() {
     return (
@@ -65,6 +66,14 @@ function CardsPage() {
                             <Link className="link" to="auto" state="noScroll">
                                 автотехнические исследования
                             </Link>
+                            {", "}
+                            <Link
+                                className="link"
+                                to="building"
+                                state="noScroll"
+                            >
+                                строительно-технические исследования
+                            </Link>
                             .
                         </p>
                     </div>
@@ -84,6 +93,7 @@ function CardsPage() {
                     <Route path="payment" element={<PaymentSlider />} />
                     <Route path="handwriting" element={<HandwritingSlider />} />
                     <Route path="auto" element={<AutoSlider />} />
+                    <Route path="building" element={<BuildingSlider />} />
                     <Route
                         path="*"
                         element={<Navigate to="/home/cards" replace />}
