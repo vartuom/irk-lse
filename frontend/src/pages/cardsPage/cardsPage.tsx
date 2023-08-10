@@ -12,6 +12,7 @@ import PaymentSlider from "../../components/cardSliders/paymentSlider";
 import HandwritingSlider from "../../components/cardSliders/handwritingSlider";
 import AutoSlider from "../../components/cardSliders/autoSlider";
 import BuildingSlider from "../../components/cardSliders/buildingSlider";
+import CadastralSlider from "../../components/cardSliders/cadastralSlider";
 
 function CardsPage() {
     return (
@@ -74,6 +75,14 @@ function CardsPage() {
                             >
                                 строительно-технические исследования
                             </Link>
+                            {", "}
+                            <Link
+                                className="link"
+                                to="cadastral"
+                                state="noScroll"
+                            >
+                                землеустроительные исследования
+                            </Link>
                             .
                         </p>
                     </div>
@@ -94,6 +103,7 @@ function CardsPage() {
                     <Route path="handwriting" element={<HandwritingSlider />} />
                     <Route path="auto" element={<AutoSlider />} />
                     <Route path="building" element={<BuildingSlider />} />
+                    <Route path="cadastral" element={<CadastralSlider />} />
                     <Route
                         path="*"
                         element={<Navigate to="/home/cards" replace />}

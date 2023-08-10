@@ -1,5 +1,5 @@
 import React from "react";
-import { Pagination, Navigation } from "swiper";
+import { Pagination, Navigation, Mousewheel } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
     Filter1Rounded,
@@ -18,7 +18,8 @@ function BasicsSlider() {
                 spaceBetween={8}
                 pagination
                 navigation
-                modules={[Pagination, Navigation]}
+                mousewheel
+                modules={[Pagination, Navigation, Mousewheel]}
                 className="mySwiper"
             >
                 <SwiperSlide className={s.swiper__slide}>
