@@ -13,6 +13,7 @@ import HandwritingSlider from "../../components/cardSliders/handwritingSlider";
 import AutoSlider from "../../components/cardSliders/autoSlider";
 import BuildingSlider from "../../components/cardSliders/buildingSlider";
 import CadastralSlider from "../../components/cardSliders/cadastralSlider";
+import CommoditiesSlider from "../../components/cardSliders/commoditiesSlider";
 
 function CardsPage() {
     return (
@@ -39,52 +40,77 @@ function CardsPage() {
                         <p className={s.lead__paragraph}>
                             Что нужно знать перед обращением в лабораторию? Мы
                             подготовили небольшой набор карточек с ответами на
-                            самые важные вопросы:{" "}
-                            <Link
-                                className="link"
-                                to="/home/cards"
-                                state="noScroll"
-                            >
-                                основные понятия
-                            </Link>
-                            {", "}
-                            <Link
-                                className="link"
-                                to="payment"
-                                state="noScroll"
-                            >
-                                оплата исследований
-                            </Link>
-                            {", "}
-                            <Link
-                                className="link"
-                                to="handwriting"
-                                state="noScroll"
-                            >
-                                почерковедческие исследования
-                            </Link>
-                            {", "}
-                            <Link className="link" to="auto" state="noScroll">
-                                автотехнические исследования
-                            </Link>
-                            {", "}
-                            <Link
-                                className="link"
-                                to="building"
-                                state="noScroll"
-                            >
-                                строительно-технические исследования
-                            </Link>
-                            {", "}
-                            <Link
-                                className="link"
-                                to="cadastral"
-                                state="noScroll"
-                            >
-                                землеустроительные исследования
-                            </Link>
-                            .
+                            самые важные вопросы:
                         </p>
+                        <ul className={s.lead__navigationList}>
+                            <li className={s.lead__navigationListItem}>
+                                !
+                                <Link
+                                    className="link"
+                                    to="/home/cards"
+                                    state="noScroll"
+                                >
+                                    - основные понятия
+                                </Link>
+                                <Link
+                                    className="link"
+                                    to="payment"
+                                    state="noScroll"
+                                >
+                                    - оплата исследований
+                                </Link>
+                            </li>
+                            <li className={s.lead__navigationListItem}>
+                                А:
+                                <Link
+                                    className="link"
+                                    to="auto"
+                                    state="noScroll"
+                                >
+                                    - автотехнические исследования
+                                </Link>
+                            </li>
+                            <li className={s.lead__navigationListItem}>
+                                З:
+                                <Link
+                                    className="link"
+                                    to="cadastral"
+                                    state="noScroll"
+                                >
+                                    -&nbsp;землеустроительные исследования
+                                </Link>
+                            </li>
+                            <li className={s.lead__navigationListItem}>
+                                П:
+                                <Link
+                                    className="link"
+                                    to="handwriting"
+                                    state="noScroll"
+                                >
+                                    - почерковедческие исследования
+                                </Link>
+                            </li>
+                            <li className={s.lead__navigationListItem}>
+                                С:
+                                <Link
+                                    className="link"
+                                    to="building"
+                                    state="noScroll"
+                                >
+                                    - строительно-технические исследования
+                                </Link>
+                            </li>
+                            <li className={s.lead__navigationListItem}>
+                                Т:
+                                <Link
+                                    className="link"
+                                    to="commodities"
+                                    state="noScroll"
+                                >
+                                    - товароведческие исследования
+                                </Link>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <QuizOutlinedIcon
@@ -104,6 +130,7 @@ function CardsPage() {
                     <Route path="auto" element={<AutoSlider />} />
                     <Route path="building" element={<BuildingSlider />} />
                     <Route path="cadastral" element={<CadastralSlider />} />
+                    <Route path="commodities" element={<CommoditiesSlider />} />
                     <Route
                         path="*"
                         element={<Navigate to="/home/cards" replace />}

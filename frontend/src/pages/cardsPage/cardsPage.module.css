@@ -22,6 +22,29 @@
   }
 }
 
+.lead__navigationList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  list-style: none;
+  padding: 0;
+  column-gap: 8px;
+}
+
+.lead__navigationListItem {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (max-width: 768px) {
+  .lead__navigationListItem {
+    font: 14px/1.5 var(--font-golos-regular);
+  }
+}
+@media screen and (max-width: 480px) {
+  .lead__navigationListItem {
+    font: 12px/1.5 var(--font-golos-regular);
+  }
+}
+
 .lead__title {
   margin: 0;
   font: 36px/1.5 var(--font-golos-bold);

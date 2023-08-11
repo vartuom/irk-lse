@@ -5,10 +5,6 @@ import {
     Filter1Rounded,
     Filter2Rounded,
     Filter3Rounded,
-    Filter4Rounded,
-    Filter5Rounded,
-    Filter6Rounded,
-    Filter7Rounded,
 } from "@mui/icons-material";
 import s from "./cardSlider.module.css";
 
